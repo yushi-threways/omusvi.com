@@ -154,10 +154,16 @@ class MyEvent
      */
     private $woman_price;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="myEvents")
+     */
+    private $favorites;
+
     public function __construct()
     {
         $this->flow = new ArrayCollection();
         $this->accepts = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -537,6 +543,37 @@ class MyEvent
     public function setWomanPrice(int $woman_price): self
     {
         $this->woman_price = $woman_price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setMyEvents($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->contains($favorite)) {
+            $this->favorites->removeElement($favorite);
+            // set the owning side to null (unless already changed)
+            if ($favorite->getMyEvents() === $this) {
+                $favorite->setMyEvents(null);
+            }
+        }
 
         return $this;
     }

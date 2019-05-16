@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/my/event")
+ * @Route("/event")
  */
 class MyEventController extends AbstractController
 {
     /**
-     * @Route("/", name="my_event_index", methods={"GET"})
+     * @Route("/", name="event_index", methods={"GET"})
      */
     public function index(MyEventRepository $myEventRepository): Response
     {
@@ -26,7 +26,7 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="my_event_new", methods={"GET","POST"})
+     * @Route("/new", name="event_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="my_event_show", methods={"GET"})
+     * @Route("/{id}", name="event_show", methods={"GET"})
      */
     public function show(MyEvent $myEvent): Response
     {
@@ -59,7 +59,7 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="my_event_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, MyEvent $myEvent): Response
     {
@@ -69,7 +69,7 @@ class MyEventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('my_event_index', [
+            return $this->redirectToRoute('event_index', [
                 'id' => $myEvent->getId(),
             ]);
         }
@@ -81,7 +81,7 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="my_event_delete", methods={"DELETE"})
+     * @Route("/{id}", name="event_delete", methods={"DELETE"})
      */
     public function delete(Request $request, MyEvent $myEvent): Response
     {
@@ -91,6 +91,6 @@ class MyEventController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('my_event_index');
+        return $this->redirectToRoute('event_index');
     }
 }
