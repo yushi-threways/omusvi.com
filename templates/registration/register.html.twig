@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<body class="bg-dark">
+
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+        <div class="card-header">新規管理者登録</div>
+        <div class="card-body">
+    {#<h1>Register</h1>#}
+
+            {{ form_start(registrationForm) }}
+            {{ form_errors(registrationForm) }}
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                {#<input type="text" value="{{ lastname }}" id="inputEmail" class="form-control" placeholder="メールアドレス" required="required" autofocus="autofocus">#}
+                                {{ form_label(registrationForm.lastname) }}
+                                {{ form_widget(registrationForm.lastname) }}
+                                {#<label for="lastName">姓</label>#}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                {#<input type="text" id="firstName" class="form-control" placeholder="名" required="required" autofocus="autofocus">#}
+                                {#<label for="firstName">名</label>#}
+                                {{ form_label(registrationForm.firstname) }}
+                                {{ form_widget(registrationForm.firstname) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        {{ form_label(registrationForm.sex) }}
+                        {{ form_widget(registrationForm.sex) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        {#<input type="email" id="inputEmail" class="form-control" placeholder="メールアドレス" required="required">#}
+                        {#<label for="inputEmail">メールアドレス</label>#}
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        {#<input type="password" id="inputPassword" class="form-control" placeholder="パスワード" required="required">#}
+                        {#<label for="inputPassword">パースワード</label>#}
+                        {{ form_label(registrationForm.plainPassword) }}
+                        {{ form_widget(registrationForm.plainPassword) }}
+                    </div>
+                </div>
+               
+                <button type="submit" class="btn btn-primary btn-block">登録</button>
+
+            {{ form_end(registrationForm) }}
+
+
+            <div class="text-center">
+                <a class="d-block small mt-3" href="{{ asset('/login') }}">ログインページ</a>
+                {# <a class="d-block small" href="{{ asset('/changePassword') }}">パスワードを忘れた</a> #}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+    {#{{ form_start(registrationForm) }}#}
+        {#{{ form_row(registrationForm.lastname) }}#}
+        {#{{ form_row(registrationForm.firstname) }}#}
+        {#{{ form_row(registrationForm.sex) }}#}
+        {#{{ form_row(registrationForm.email) }}#}
+        {#{{ form_row(registrationForm.plainPassword) }}#}
+
+        {#<button class="btn">Register</button>#}
+    {#{{ form_end(registrationForm) }}#}
+{% endblock %}

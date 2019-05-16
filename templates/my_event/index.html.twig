@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyEvent index{% endblock %}
+
+{% block body %}
+    <h1>MyEvent index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start_date</th>
+                <th>Start_time</th>
+                <th>End_date</th>
+                <th>End_time</th>
+                <th>Content</th>
+                <th>Address</th>
+                <th>Traffic</th>
+                <th>Contact</th>
+                <th>Tel</th>
+                <th>Shop_name</th>
+                <th>Men_old</th>
+                <th>Woman_old</th>
+                <th>CreatedAt</th>
+                <th>ModifiedAt</th>
+                <th>Image</th>
+                <th>ImageSize</th>
+                <th>Men_remit</th>
+                <th>Woman_remit</th>
+                <th>Men_price</th>
+                <th>Woman_price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for my_event in my_events %}
+            <tr>
+                <td>{{ my_event.id }}</td>
+                <td>{{ my_event.name }}</td>
+                <td>{{ my_event.description }}</td>
+                <td>{{ my_event.startDate ? my_event.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ my_event.startTime ? my_event.startTime|date('H:i:s') : '' }}</td>
+                <td>{{ my_event.endDate ? my_event.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ my_event.endTime ? my_event.endTime|date('H:i:s') : '' }}</td>
+                <td>{{ my_event.content }}</td>
+                <td>{{ my_event.address }}</td>
+                <td>{{ my_event.traffic }}</td>
+                <td>{{ my_event.contact }}</td>
+                <td>{{ my_event.tel }}</td>
+                <td>{{ my_event.shopName }}</td>
+                <td>{{ my_event.menOld }}</td>
+                <td>{{ my_event.womanOld }}</td>
+                <td>{{ my_event.createdAt ? my_event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ my_event.modifiedAt ? my_event.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ my_event.image }}</td>
+                <td>{{ my_event.imageSize }}</td>
+                <td>{{ my_event.menRemit }}</td>
+                <td>{{ my_event.womanRemit }}</td>
+                <td>{{ my_event.menPrice }}</td>
+                <td>{{ my_event.womanPrice }}</td>
+                <td>
+                    <a href="{{ path('my_event_show', {'id': my_event.id}) }}">show</a>
+                    <a href="{{ path('my_event_edit', {'id': my_event.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="24">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_event_new') }}">Create new</a>
+{% endblock %}

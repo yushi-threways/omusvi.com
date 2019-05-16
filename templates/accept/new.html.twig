@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Accept{% endblock %}
+
+{% block body %}
+    <h1>Create new Accept</h1>
+
+    {{ include('accept/_form.html.twig') }}
+
+    <a href="{{ path('accept_index') }}">back to list</a>
+{% endblock %}
