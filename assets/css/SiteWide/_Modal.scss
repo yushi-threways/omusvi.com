@@ -1,0 +1,96 @@
+
+.sw-Modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: white;
+}
+
+.sw-Modal_Inner {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sw-Modal_UserState {
+  width: 100%;
+  margin: 0 auto 10px;
+}
+.sw-Modal_UserState-list {
+  width: 100%;
+  @include clearfix();
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+  li {
+    width: 40%;
+    margin: 0 auto;
+    float: left;
+    text-align: center;
+    a {
+      margin: 0 auto;
+    }
+  }
+}
+
+.sw-Modal_Search {
+
+}
+.sw-Modal_SearchInner {
+  margin: 0;
+  padding: 25px 5px 0;
+  select {
+    @include font-size(14/16);
+  }
+  button {
+    background-color: $color__citron_green;
+    i {
+      color: #fff;
+    }
+  }
+}
+
+.sw-Modal_CloseBtn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  color: $color__citron_green;
+  @include font-size(16/16);
+}
+
+.sw-Modal_CategoryMenu {
+  padding: 10px;
+}
+
+.sw-Modal_OpenBtn {
+  position: absolute;
+  top: 38px;
+  right: 5px;
+  display: none;
+  color: $color__citron_green;
+  @include media-breakpoint-down(sm) {
+    display: block;
+  }
+}
+
+.sw-Modal_SearchShop {
+  width: 50%;
+  margin: 0 0 5px;
+  padding: 0 5px 0 0;
+}
+
+.sw-Modal_SearchLanguage {
+  width: 50%;
+  margin: 0 0 5px;
+  padding: 0 0 0 5px;
+}
+.sw-Modal_SearchQuery {
+  width: calc(100% - 42px);
+}

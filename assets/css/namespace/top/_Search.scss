@@ -1,0 +1,116 @@
+.top-Search {
+  position: relative;
+  margin: 0 0 30px;
+  @include media-breakpoint-down(sm) {
+    padding: 0;
+  }
+}
+.top-Search_Title {
+  margin: 0 0 30px;
+  padding: 0 0 10px;
+  @include font-size(24/16);
+  font-weight: bold;
+  border-bottom: 3px solid #cccccd;
+  @include media-breakpoint-down(sm) {
+    @include font-size(16/16);
+  }
+}
+
+.top-Search_Note {
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: -10px;
+  width: 230px;
+  padding: 10px 50px;
+  color: #ffffff;
+  background: $color__citron_green;
+  border-radius: 60%;
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+.top-Search_Form {
+  border: 3px solid $color__orange;
+  border-radius: 6px;
+  overflow: hidden;
+  .custom-select {
+    -webkit-appearance: none;
+    height: 48px;
+    @include font-size(16/16);
+    padding-left: .5em;
+    //background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#ffffff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    border: none;
+    border-right: 3px solid $color__orange;
+    border-radius: 0;
+  }
+}
+.top-Search_Fields{
+
+}
+.top-Search_Field-shop{
+  .custom-select {
+    border-radius: 6px 0 0 6px;
+  }
+  @include media-breakpoint-down(md) {
+    width: 50%;
+  }
+}
+.top-Search_Field-language{
+  @include media-breakpoint-down(md) {
+    width: 50%;
+    .custom-select {
+      border-right: none;
+    }
+  }
+}
+.top-Search_Field-category{
+  .custom-select {
+    width: 15em;
+    padding-right: 1.8em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @include media-breakpoint-down(lg) {
+      width: 100%;
+      border: none;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    flex-grow: 1;
+  }
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    border-top: 2px solid $color__orange;
+  }
+}
+.top-Search_Field-query {
+  flex-grow: 1;
+  input {
+    height: 48px;
+    @include font-size(16/16);
+    @include border-radius(0, 0);
+    border: none;
+  }
+  @include media-breakpoint-down(lg) {
+    width: calc(100% - 120px);
+    border-top: 2px solid $color__orange;
+  }
+}
+.top-Search_Field-btn{
+  .btn {
+    //height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+    @include font-size(22/16);
+    color: #ffffff;
+    background-color: $color__orange;
+    border: 2px solid $color__orange;
+    border-left: none;
+    border-radius: 0;
+    @include media-breakpoint-down(sm) {
+      @include font-size(16/16);
+    }
+  }
+
+}

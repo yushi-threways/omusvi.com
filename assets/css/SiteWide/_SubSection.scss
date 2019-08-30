@@ -1,0 +1,32 @@
+.sw-SubSection {
+  margin: 20px 0;
+}
+.sw-SubSection_Title {
+  position: relative;
+  margin: 20px 0 30px;
+  padding: 10px;
+  @include font-size(30/16);
+  border-bottom: 1px solid $color__text-main;
+  @include media-breakpoint-down(sm) {
+    @include font-size(24/16);
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 160px;
+    height: 0;
+    border-bottom: 3px solid $color__citron_green;
+  }
+}
+
+.sw-SubSection_SubTitle {
+  margin: 0 0 20px;
+  @include font-size(26/16);
+  color: $color__citron_green;
+  @include media-breakpoint-down(sm) {
+    @include font-size(20/16);
+  }
+}

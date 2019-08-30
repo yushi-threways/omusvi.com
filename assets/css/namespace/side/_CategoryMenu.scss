@@ -1,0 +1,34 @@
+.side-CategoryMenu {
+  position: relative;
+  list-style: none;
+  margin: 17px 0 0;
+  padding: 0;
+  //background: #fcfcfc;
+}
+
+
+.side-CategoryMenu_Item {
+  margin: 0;
+  padding: 0;
+  & > a {
+    display: block;
+    border-bottom: solid 1px #f2f2f2;
+    padding: 10px 0 8px 5px;
+    color: $color__text-main;
+    @include font-size(13/16);
+    &:hover {
+      text-decoration: none;
+      @include transition(background .6s ease);
+    }
+    & > i {
+
+    }
+  }
+  &:hover {
+    background: #efefef;
+    .side-CategoryMegaMenu {
+      display: block;
+    }
+
+  }
+}

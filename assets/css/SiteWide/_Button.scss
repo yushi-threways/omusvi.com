@@ -1,0 +1,88 @@
+.sw-Button {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.sw-Button-Primary {
+  @include button-variant(#ffffff, $color__orange, darken($color__orange, 10%), darken($color__orange, 10%), rgba(255, 255, 255, 0.9));
+  color: $color__orange;
+  font-weight: bold;
+}
+.sw-Button-Secondary {
+  @include button-variant(#ffffff, $color__citron_green, darken($color__citron_green, 10%), darken($color__citron_green, 10%), rgba(255, 255, 255, 0.9));
+  color: $color__citron_green;
+  font-weight: bold;
+}
+
+.sw-ButtonGroup {
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: center;
+  a, input, button {
+    text-decoration: none;
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.btn-primary {
+  @include button-variant($color__citron_green, $color__citron_green, darken($color__citron_green, 10%), darken($color__citron_green, 10%), rgba(255, 255, 255, 0.9));
+  color: #fff;
+}
+.btn-danger {
+  @include button-variant($color__poppy_red, $color__poppy_red, darken($color__poppy_red, 10%), darken($color__poppy_red, 10%), rgba(255, 255, 255, 0.9));
+  color: #fff;
+}
+
+.btn-xs {
+  //@include button-size(.25rem, 05rem, .875rem, 1.5, .2rem);
+  padding: .1rem .4rem;
+  @include font-size(13/16);
+  line-height: 1;
+  // Manually declare to provide an override to the browser default
+  @include border-radius(.3rem, 0);
+}
+
+.btn-cart {
+  @include button-variant($color__orange, $color__orange, darken($color__orange, 10%), darken($color__orange, 10%), rgba(255, 255, 255, 0.9));
+  color: #fff;
+  i {
+    wdith: 1.5em;
+  }
+}
+
+.btn-fav {
+  @include button-variant(#ffffff, $color__favarite, $color__favarite, $color__favarite);
+  color:  $color__favarite;
+  i {
+    width: 1em;
+  }
+}
+.btn-fav-registered {
+  @include button-variant($color__favarite, $color__favarite, $color__favarite, $color__favarite);
+  color: #ffffff;
+  i {
+    width: 1em;
+  }
+}
+
+//.btn-primary {
+//  @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+//}
+//
+//.btn-outline-primary {
+//  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+//}
+//
+

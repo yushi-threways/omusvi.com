@@ -1,0 +1,123 @@
+.top-MainVisual {
+  margin: 0 0 30px;
+  padding: 40px;
+  border: 1px solid #f3f3f3;
+  border-radius: 3px;
+  background-color: #fafafa;
+  strong {
+    color: $color__red;
+    font-size: 120%;
+  }
+  @include media-breakpoint-down(xs) {
+    padding: 20px 10px;
+  }
+}
+.top-MainVisual_Inner {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  @include media-breakpoint-down(sm) {
+  }
+}
+
+.top-MainVisual_Title {
+  width: 60%;
+  margin: 0 0 20px;
+  text-align: left;
+  @include font-size(32/16);
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    @include font-size(24/16);
+  }
+  @include media-breakpoint-down(sm) {
+    width: unset;
+    text-align: center;
+  }
+  @include media-breakpoint-down(xs) {
+    font-size: 5.2vw;
+  }
+  span {
+    font-size: 120%;
+    font-weight: bold;
+  }
+}
+
+.top-MainVisual_Lead {
+  width: 60%;
+  margin: 0 0 30px;
+  @include font-size(18/16);
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    @include font-size(15/16);
+  }
+  @include media-breakpoint-down(xs) {
+    font-size: 4vw;
+  }
+}
+
+.top-MainVisual_Btn {
+  width: 60%;
+  a {
+    position: relative;
+    margin: 0 auto;
+    padding: 10px 60px 10px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    background-color: $color__orange;
+    @include font-size(20/16);
+    color: #ffffff;
+    &:after {
+      content: '\232a';
+      position: absolute;
+      color: #fff;
+      right: 12px;
+    }
+    &:hover {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: darken($color__orange, 10%);
+      @include transition();
+      &:after {
+        right: 8px;
+        @include transition();
+      }
+    }
+    @include media-breakpoint-down(sm) {
+    }
+    @include media-breakpoint-down(xs) {
+      font-size: 5.5vw;
+      padding: .5em 2em .5em 1em;
+    }
+  }
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+
+}
+
+
+.top-MainVisual_CatchCopy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  margin: 0;
+  img {
+    max-width: 100%;
+  }
+  @include media-breakpoint-down(lg) {
+    top: auto;
+    bottom: 0;
+  }
+  @include media-breakpoint-down(md) {
+    position: static;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

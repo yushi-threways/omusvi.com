@@ -1,0 +1,193 @@
+// Rem output with px fallback
+@mixin font-size($sizeValue: 1) {
+  font-size: ($sizeValue * 16) * 1px;
+  font-size:$sizeValue * 1rem;
+}
+
+// Center block
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Clearfix
+@mixin clearfix() {
+  content: "";
+  display: table;
+  table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+  clear: both;
+}
+
+// Column width with margin
+@mixin column-width($numberColumns: 3) {
+  width: map-get( $columns, $numberColumns ) - ( ( $columns__margin * ( $numberColumns - 1 ) ) / $numberColumns );
+}
+
+
+
+
+@mixin font-main() {
+  font-family: $font__main;
+  @media screen {
+    font-family: $font__main-win;
+  }
+}
+
+@mixin font-mincho() {
+  font-family: $font__mincho;
+  @media screen {
+    font-family: $font__mincho-win;
+  }
+}
+
+
+//今回使用するフォントファミリのmixin
+
+@mixin font-mplus() {
+  font-family: $font-mplus;
+  font-display: swap;
+  font-weight: 400;
+}
+
+@mixin font-mplus-semibold() {
+  font-family: $font-mplus;
+  font-display: swap;
+  font-weight: 500;
+}
+
+@mixin font-mplus-bold() {
+  font-family: $font-mplus;
+  font-display: swap;
+  font-weight: 600;
+}
+
+@mixin font-noto-serif() {
+  font-family: $font-noto-serif;
+  font-display: swap;
+  font-weight: 400;
+}
+
+@mixin font-noto-serif-semibold() {
+  font-family: $font-noto-serif;
+  font-display: swap;
+  font-weight: 500;
+}
+
+@mixin font-noto-serif-bold() {
+  font-family: $font-noto-serif;
+  font-display: swap;
+  font-weight: 600;
+}
+
+//@mixin font-awesome($content) {
+//  content: $content;
+//  font-family: Font Awesome\ 5 Free;
+//  font-weight: bold;
+//}
+//@mixin fa-angle-left {
+//  @include font-awesome("\f104");
+//}
+//@mixin fa-angle-right {
+//  @include font-awesome("\f105");
+//}
+//@mixin fa-angle-up {
+//  @include font-awesome("\f106");
+//}
+//@mixin fa-angle-down {
+//  @include font-awesome("\f107");
+//}
+//@mixin fa-cart {
+//  @include font-awesome("\f07a");
+//}
+//@mixin fa-email {
+//  @include font-awesome("\f0e0");
+//}
+
+
+
+@mixin trans($time: .2s) {
+  -webkit-transition: all $time ease;
+  -moz-transition: all $time ease;
+  -ms-transition: all $time ease;
+  -o-transition: all $time ease;
+  transition: all $time ease;
+}
+@mixin rollover() {
+  &:hover {
+    opacity: 0.85;
+    @include trans(.4s);
+  }
+}
+
+$breakpoints: (
+        'iphone5': 'screen and (max-width: 374px)',
+        'sp': 'screen and (max-width: 767px)',
+        'pc': 'screen and (min-width: 768px)',
+) !default;
+
+
+@mixin media-query($bp: sp) {
+  @media #{map-get($breakpoints, $bp)} {
+    @content;
+  }
+}
+
+@mixin unserline-title($color: #FFF100) {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  @include font-smart;
+  border-bottom: 5px solid;
+  color: #fff;
+  @include font-size(24/16);
+  line-height: 12px;
+  border-color: $color;
+  @include media-query('pc') {
+    @include font-size(32/16);
+    line-height: 17px;
+  }
+}
+
+
+
+
+@mixin block-whole {
+  width: 100%;
+  min-width: $size__site-content;
+  margin: 0;
+  @include media-query('sp') {
+    min-width: 100%;
+  }
+}
+@mixin block-main {
+  max-width: $size__site-main;
+  min-width: 768px;
+  margin: 0 auto;
+  @include media-query('sp') {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+@mixin block-content {
+  max-width: $size__site-content;
+  min-width: 768px;
+  margin: 0 auto;
+  @include media-query('sp') {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+@mixin block-content-inner {
+  max-width: $size__site-content-inner;
+  min-width: 768px;
+  margin: 0 auto;
+  @include media-query('sp') {
+    width: 100%;
+    min-width: 100%;
+  }
+}

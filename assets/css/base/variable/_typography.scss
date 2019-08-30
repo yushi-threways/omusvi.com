@@ -1,0 +1,39 @@
+//$font__main: sans-serif;
+
+$font__main:
+        -apple-system, blinkMacSystemFont, // Macの欧文はSan Francisco (OS X 10.11以降)
+        'Helvetica Neue',             // Macの欧文 (OS X 10.10以前)
+        'Segoe UI',                   // Windowsの欧文
+        //YuGothicM,                    // Windows8.1以上は游ゴシック
+        //YuGothic,                     // Macの游ゴシック
+        'Hiragino Kaku Gothic ProN',  // 游ゴシックがないMac
+        Meiryo,                       // 游ゴシックがないWindows
+        sans-serif;
+// Windows8.0以前用の設定
+$font__main-win:
+        'Segoe UI', // Windowsの欧文
+        Meiryo,     // メイリオ
+        sans-serif;
+
+
+$font__mincho:
+  //YuMincho,               // Macの游明朝
+  //'Yu Mincho',            // Windowsの游明朝
+  //'Hiragino Mincho ProN', // 游明朝がないMac
+  //'MS Mincho',            // 游明朝がないWindows
+        serif;
+// Windows8.0以前用の設定
+$font__mincho-win:
+        'MS Mincho',
+        serif;
+
+$font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+$font__pre: "Courier 10 Pitch", Courier, monospace;
+$font__line-height-body: 1.5;
+$font__line-height-pre: 1.6;
+
+
+//今回使用するフォント
+$font-mplus: "M PLUS Rounded 1c", sans-serif;
+$font-noto-serif: 'Noto Serif JP', sans-serif;
+$font-poppins: 'Poppins', sans-serif;

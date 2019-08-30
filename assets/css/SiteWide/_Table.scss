@@ -1,0 +1,8 @@
+.sw-Table_Responsive {
+  th, td {
+    @include media-breakpoint-down(sm) {
+      display: block;
+      width: 100%;
+    }
+  }
+}

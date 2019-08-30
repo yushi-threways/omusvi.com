@@ -1,0 +1,20 @@
+.sw-Content {
+
+}
+
+.sw-Content_1Column {
+  @include make-container-max-widths();
+  margin: auto;
+}
+
+.sw-Content_2Column {
+  @include make-container-max-widths();
+  display: flex;
+  flex-wrap: nowrap;
+  //flex-direction: column-reverse;
+  //margin: 40px auto;
+  margin: 30px auto;
+  @include media-breakpoint-down(sm) {
+    display: block;
+  }
+}

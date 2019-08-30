@@ -1,0 +1,136 @@
+.top-ItemList {
+  margin: 0 0 30px;
+}
+
+.top-ItemList_Title {
+  @include font-size(20/16);
+  @include media-breakpoint-down(sm) {
+    @include font-size(18/16);
+  }
+  .top-ItemList_Title-goldCrown {
+    @include font-size(24/16);
+    color: gold;
+    @include media-breakpoint-down(sm) {
+      @include font-size(22/16);
+    }
+  }
+  .top-ItemList_Title-silverCrown {
+    @include font-size(24/16);
+    color: silver;
+    @include media-breakpoint-down(sm) {
+      @include font-size(22/16);
+    }
+  }
+}
+
+.top-ItemList_ItemsContainer {
+  max-width: 1040px;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+}
+
+.top-ItemList_Items {
+  display: flex;
+  align-items: center;
+  margin: 0 auto 30px;
+  list-style: none;
+  padding: 0;
+  @include media-breakpoint-down(sm) {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+    flex-basis: auto;
+  }
+}
+
+.top-ItemList_ItemsLoading {
+  align-self: center;
+}
+
+.top-ItemList_Item {
+  width: 216px;
+  height: 300px;
+  margin: 10px;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.20);
+  a {
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: inherit;
+    width: 216px;
+  }
+}
+
+.top-ItemList_ItemImage {
+  width: 100%;
+  height: 216px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+    &:hover {
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
+    }
+  }
+}
+
+.top-ItemList_ItemTitle {
+  @include font-size(13/16);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  min-height: 3.5em;
+  margin: 0;
+  padding: 5px;
+  line-height: 1.25;
+  span {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+
+    color: #333;
+    overflow: hidden;
+
+    flex-direction: column;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+
+    word-break: break-all;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+  }
+}
+.top-ItemList_ItemAside {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 0;
+  padding: 2px 8px;
+  background: $color__citron_green;
+  color: #fff;
+}
+.top-ItemList_ItemPrice {
+  @include font-size(24/16);
+  line-height: 32px;
+  span {
+    @include font-size(16/16);
+  }
+}

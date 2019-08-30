@@ -1,0 +1,36 @@
+.top-Content {
+  margin-bottom: 50px;
+  @include media-breakpoint-down(sm) {
+    padding: 0;
+  }
+}
+
+.top-Content_Title {
+  @include font-size(24/16);
+  padding: 10px 0;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #d2d2d3;
+  font-weight: bold;
+  @include media-breakpoint-down(sm) {
+    @include font-size(20/16);
+  }
+}
+
+.top-Content_Balloon {
+  padding: 3px 15px;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 50px;
+  font-size: 15px;
+  color: #fff;
+  background: $color__citron_green;
+  display: inline-block;
+  &::before{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    border: 4px solid transparent;
+    border-top: 8px solid $color__citron_green;
+  }
+}

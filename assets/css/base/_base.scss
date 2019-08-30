@@ -1,0 +1,11 @@
+@import "function/function";
+@import "mixin/mixin";
+@import "variable/variables";
+@import "font/font";
+
+* {
+  box-sizing: border-box;
+}
+.custom-select {
+  -webkit-appearance: none;
+}

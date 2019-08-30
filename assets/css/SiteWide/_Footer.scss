@@ -1,0 +1,162 @@
+.sw-Footer {
+  padding: 50px 0 20px;
+  background: #f0f0f0;
+  @include media-breakpoint-down(sm) {
+  }
+}
+.sw-Footer_Inner {
+  @include make-container-max-widths();
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  a {
+    color: $color__text-main;
+    &:hover {
+      color: lighten($color__text-main, 50);
+      @include transition();
+    }
+  }
+}
+.sw-Footer_Logo {
+  width: 300px;
+  @include media-breakpoint-down(sm) {
+    padding: 0 0 0 20px;
+  }
+  img {
+    height: 40px;
+    @include media-breakpoint-down(sm) {
+      max-height: 25px;
+    }
+    }
+}
+.sw-Footer_MainNav {
+  margin: 10px 0 0 40px;
+  max-width: 1000px;
+  width: 100%;
+  @include media-breakpoint-down(sm) {
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  //ul {
+  //  width: 100%;
+  //  display: flex;
+  //  justify-content: space-around;
+  //  list-style: none;
+  //  margin: 0;
+  //  padding: 0;
+  //}
+  li {
+    //display: inline-block;
+    //margin: 0 20px;
+  }
+}
+
+.sw-Footer_MainNav-inner {
+  width: 100%;
+  margin: 20px auto 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  @include media-breakpoint-down(sm) {
+    display: block;
+  }
+}
+
+.sw-Footer_MainNavList {
+  width: 25%;
+  border-right: 1px solid #e5e5e5;
+  padding: 0 35px;
+  margin: 0 auto;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    padding: 0;
+    color: #888;
+    @include font-size(13/16);
+    border-top: 1px solid #e3e3e3;
+    border-right: none;
+  }
+  dt {
+    @include font-size(16/16);
+    font-weight: 500;
+    margin: 0 auto 10px;
+    @include media-breakpoint-down(sm) {
+      margin: 0 auto;
+      padding: 10px 0;
+      @include font-size(14/16);
+    }
+  }
+}
+
+.sw-Footer_MainNavList-description {
+  @include media-breakpoint-down(sm) {
+    margin: 0 auto;
+    background-color: #e3e3e3;
+  }
+  ul {
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+    list-style-type: none;
+    @include media-breakpoint-down(sm) {
+      padding: 0 0 2px 12px;
+    }
+    li {
+      a {
+        @include font-size(12/16);
+        padding: 0 0 5px 0;
+        @include media-breakpoint-down(sm) {
+          padding: 10px 0;
+          border-top: 1px solid #ebebeb;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.sw-Footer_SubNav {
+  width: 100%;
+  margin: 30px 0 0;
+  padding: 40px 0;
+  border-top: 1px solid #ffffff;
+  ul {
+    list-style: none;
+    text-align: center;
+  }
+  li {
+    display: inline-block;
+    margin: 0 2em;
+    @include font-size(14/16);
+  }
+}
+.sw-Footer_Copyright {
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.sw-Footer_Accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.sw-Footer_Accordion:hover {
+  background-color: #ccc;
+}
+
+.sw-Footer_Accordion-area {
+  @include media-breakpoint-down(sm) {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+}
+
+

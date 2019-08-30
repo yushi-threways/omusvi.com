@@ -1,0 +1,40 @@
+.sw-ContentHeader {
+  padding: .5em 0;
+  border-bottom: 1px solid #ddd;
+  @include media-breakpoint-up(lg) {
+    height: 100px;
+    padding: 2.5em 0 0;
+  }
+}
+.sw-ContentHeader_Inner {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  @include make-container();
+  @include make-container-max-widths();
+  @include media-breakpoint-up(lg) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.sw-ContentHeader_Title {
+  margin: 0;
+  padding: 0;
+  @include font-mplus-semibold;
+  @include media-breakpoint-down(xs) {
+    @include font-size(24/16);
+  }
+  //&:before {
+  //  content: '';
+  //  display: inline-block;
+  //  width: 80px;
+  //  height: 30px;
+  //  background: url(../../images/logo-mark.png) no-repeat;
+  //  background-size: contain;
+  //}
+}
+.sw-ContentHeader_Lead {
+  margin: 5px 0 0;
+  padding: 0;
+  align-self: flex-end;
+}

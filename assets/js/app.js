@@ -14,3 +14,26 @@ const $ = require('jquery');
 global.$ = global.jQuery = $;
 
 require('bootstrap');
+
+
+var accordion = document.getElementsByClassName("footer-accordion");
+var i;
+
+for (i = 0; i < accordion.length; i++) {
+  accordion[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
+$("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $(".sw-Wrapper").toggleClass("toggled");
+  $(".sw-Wrapper_Inner").toggleClass("sw-Wrapper_MenuView");
+  $('body').toggleClass("sw-Wrapper_MenuOpen");
+});

@@ -1,0 +1,33 @@
+.top-ServiceFlow {
+  margin-bottom: 30px;
+  @include media-breakpoint-down(sm) {
+    padding: 0;
+  }
+}
+
+.top-ServiceFlow_Title {
+  @include font-size(24/16);
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid $color__citron_green;
+  color: $color__citron_green;
+  font-weight: bold;
+  span {
+    @include font-size(16/16);
+    font-weight: normal;
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.top-ServiceFlow_Text {}
+
+.top-ServiceFlow_Detail {
+  img {
+    max-width: 100%;
+    vertical-align: bottom;
+    margin: 0 auto;
+  }
+}

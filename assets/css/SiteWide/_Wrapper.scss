@@ -1,0 +1,14 @@
+.sw-Wrapper {
+  .sw-Wrapper_Inner {
+    @include transition();
+  }
+}
+
+.sw-Wrapper_MenuOpen {
+  overflow: hidden;
+  .sw-Wrapper_MenuView{
+    position: relative;
+    left: 266px;
+    @include transition();
+  }
+}
