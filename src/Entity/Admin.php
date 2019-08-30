@@ -7,10 +7,10 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser
+class Admin extends BaseUser
 {
     /**
      * @ORM\Id
@@ -30,7 +30,9 @@ class User extends BaseUser
 
     public function __construct()
     {
-      $this->setRoles(['ROLE_USER']);
+      $this->setRoles(['ROLE_ADMIN']);
+      $this->createdAt = new \DateTime();
+      $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -56,15 +58,6 @@ class User extends BaseUser
         return $this;
     }
    
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist() {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
-      }
-
     /**
      * @ORM\PostUpdate()
      */
