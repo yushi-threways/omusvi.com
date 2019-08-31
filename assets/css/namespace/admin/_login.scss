@@ -1,0 +1,27 @@
+.admin-Login {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto 30px;
+    padding: 15px;
+}
+.admin-Login_Title {
+    @include font-size(30px);
+    font-weight: bold;
+    margin: 0 auto 10px;
+}
+
+.admin-Login_Form {
+    label {
+        @include font-size(14px);
+    }
+}
+.admin-Login_Header {
+    padding: 14px 15px 10px;
+    border-bottom: 2px solid #ccc;
+    margin: 0 auto 20px;
+}
+.admin-Login_HaederText {
+    @include font-size(14px);
+    font-weight: bold;
+    margin: 0 auto;
+}

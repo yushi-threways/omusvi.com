@@ -30,7 +30,7 @@ class User extends BaseUser
 
     public function __construct()
     {
-      $this->setRoles(['ROLE_USER']);
+        $this->setRoles(['ROLE_USER']);
     }
 
     public function getId(): ?int
@@ -39,16 +39,16 @@ class User extends BaseUser
     }
     public function getCreatedAt(): ?\DateTimeInterface
     {
-      return $this->createdAt;
+        return $this->createdAt;
     }
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-      return $this;
+        return $this;
     }
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-      return $this->updatedAt;
+        return $this->updatedAt;
     }
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
@@ -59,18 +59,19 @@ class User extends BaseUser
     /**
      * @ORM\PrePersist()
      */
-    public function onPrePersist() {
+    public function onPrePersist()
+    {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         return $this;
-      }
+    }
 
     /**
      * @ORM\PostUpdate()
      */
     public function onPostUpdate()
     {
-      $this->updatedAt = new \DateTime();
-      return $this;
+        $this->updatedAt = new \DateTime();
+        return $this;
     }
 }
