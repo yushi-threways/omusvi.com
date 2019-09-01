@@ -19,7 +19,7 @@ class AdminController extends AbstractController
      * @param Request $request
      * @return Response
      *
-     * @Route("/dashboard", name="admin_index")
+     * @Route("/", name="admin_index")
      */
     public function index(Request $request): Response
     {
