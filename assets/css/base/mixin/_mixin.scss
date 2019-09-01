@@ -1,0 +1,26 @@
+// Center block
+@mixin center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  // Clearfix
+  @mixin clearfix() {
+    content: "";
+    display: table;
+    table-layout: fixed;
+  }
+  
+  // Clear after (not all clearfix need this also)
+  @mixin clearfix-after() {
+    clear: both;
+  }
+  
+  @mixin trans($time: .2s) {
+    -webkit-transition: all $time ease;
+    -moz-transition: all $time ease;
+    -ms-transition: all $time ease;
+    -o-transition: all $time ease;
+    transition: all $time ease;
+  }
