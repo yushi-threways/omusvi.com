@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Tag
 {
@@ -39,14 +40,9 @@ class Tag
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTag", mappedBy="tagId")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MyEvent", inversedBy="tags")
      */
-    private $myEventTags;
-
-    public function __construct()
-    {
-        $this->myEventTags = new ArrayCollection();
-    }
+    private $myEvent;
 
     public function getId(): ?int
     {
@@ -102,33 +98,26 @@ class Tag
     }
 
     /**
-     * @return Collection|MyEventTag[]
+     * @ORM\PrePersist()
      */
-    public function getMyEventTags(): Collection
+    public function onPrePersist()
     {
-        return $this->myEventTags;
-    }
-
-    public function addMyEventTag(MyEventTag $myEventTag): self
-    {
-        if (!$this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags[] = $myEventTag;
-            $myEventTag->setTagId($this);
-        }
-
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         return $this;
     }
 
-    public function removeMyEventTag(MyEventTag $myEventTag): self
+    /**
+     * @ORM\PostUpdate()
+     */
+    public function onPostUpdate()
     {
-        if ($this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags->removeElement($myEventTag);
-            // set the owning side to null (unless already changed)
-            if ($myEventTag->getTagId() === $this) {
-                $myEventTag->setTagId(null);
-            }
-        }
-
+        $this->updatedAt = new \DateTime();
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

@@ -57,17 +57,11 @@ class MyEvent
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\MyEventFlow", mappedBy="myEvent")
      */
-    private $myEventFllows;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTag", mappedBy="eventId")
-     */
-    private $myEventTags;
+    private $myEventFlows;
 
     public function __construct()
     {
         $this->myEventFlows = new ArrayCollection();
-        $this->myEventTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,51 +182,20 @@ class MyEvent
     public function addMyEventFlow(MyEventFlow $myEventFlow): self
     {
         if (!$this->myEventFlows->contains($myEventFlow)) {
-            $this->myEventFlows[] = $myEventFllow;
-            $myEventFllow->setMyEvent($this);
+            $this->myEventFlows[] = $myEventFlow;
+            $myEventFlow->setMyEvent($this);
         }
 
         return $this;
     }
 
-    public function removeMyEventFlow(MyEventFllow $myEventFlow): self
+    public function removeMyEventFlow(MyEventFlow $myEventFlow): self
     {
-        if ($this->myEventFllows->contains($myEventFlow)) {
+        if ($this->myEventFlows->contains($myEventFlow)) {
             $this->myEventFlows->removeElement($myEventFlow);
             // set the owning side to null (unless already changed)
             if ($myEventFlow->getMyEvent() === $this) {
                 $myEventFlow->setMyEvent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|MyEventTag[]
-     */
-    public function getMyEventTags(): Collection
-    {
-        return $this->myEventTags;
-    }
-
-    public function addMyEventTag(MyEventTag $myEventTag): self
-    {
-        if (!$this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags[] = $myEventTag;
-            $myEventTag->setEventId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMyEventTag(MyEventTag $myEventTag): self
-    {
-        if ($this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags->removeElement($myEventTag);
-            // set the owning side to null (unless already changed)
-            if ($myEventTag->getEventId() === $this) {
-                $myEventTag->setEventId(null);
             }
         }
 

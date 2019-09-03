@@ -1,0 +1,55 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}イベント詳細 | {{ admin_name }}{% endblock %}
+
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント詳細</li>
+ {% endblock %}
+
+{% block content %}
+    <h1>MyEvent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ my_event.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ my_event.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ my_event.description }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ my_event.content }}</td>
+            </tr>
+            <tr>
+                <th>MenPrice</th>
+                <td>{{ my_event.menPrice }}</td>
+            </tr>
+            <tr>
+                <th>WomanPrice</th>
+                <td>{{ my_event.womanPrice }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ my_event.createdAt ? my_event.createdAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ my_event.updatedAt ? my_event.updatedAt|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_my_event_index') }}">back to list</a>
+
+    <a href="{{ path('admin_my_event_edit', {'id': my_event.id}) }}">編集</a>
+
+    {{ include('admin/my_event/_delete_form.html.twig') }}
+{% endblock %}

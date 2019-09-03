@@ -26,6 +26,7 @@ class MyEventTag
      */
     private $eventId;
 
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyEventFlow{% endblock %}
+
+{% block body %}
+    <h1>MyEventFlow</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ my_event_flow.id }}</td>
+            </tr>
+            <tr>
+                <th>StartTime</th>
+                <td>{{ my_event_flow.startTime ? my_event_flow.startTime|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndTime</th>
+                <td>{{ my_event_flow.endTime ? my_event_flow.endTime|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ my_event_flow.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ my_event_flow.content }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ my_event_flow.createdAt ? my_event_flow.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ my_event_flow.updatedAt ? my_event_flow.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_event_flow_index') }}">back to list</a>
+
+    <a href="{{ path('my_event_flow_edit', {'id': my_event_flow.id}) }}">edit</a>
+
+    {{ include('my_event_flow/_delete_form.html.twig') }}
+{% endblock %}
