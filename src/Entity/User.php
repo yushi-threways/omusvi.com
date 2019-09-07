@@ -35,6 +35,16 @@ class User extends BaseUser
      */
     private $myEventApplications;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserDetail", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userDetail;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\BankAccount", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $bankAccount;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_USER']);
@@ -113,4 +123,39 @@ class User extends BaseUser
 
         return $this;
     }
+
+    public function getUserInit(): ?UserInit
+    {
+        return $this->userInit;
+    }
+
+    public function setUserInit(UserInit $userInit): self
+    {
+        $this->userInit = $userInit;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $userInit->getUser()) {
+            $userInit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getBankAccount(): ?BankAccount
+    {
+        return $this->bankAccount;
+    }
+
+    public function setBankAccount(BankAccount $bankAccount): self
+    {
+        $this->bankAccount = $bankAccount;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $bankAccount->getUser()) {
+            $bankAccount->setUser($this);
+        }
+
+        return $this;
+    }
+
 }

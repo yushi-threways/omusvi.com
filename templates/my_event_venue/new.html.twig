@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MyEventVenue{% endblock %}
+
+{% block body %}
+    <h1>Create new MyEventVenue</h1>
+
+    {{ include('my_event_venue/_form.html.twig') }}
+
+    <a href="{{ path('my_event_venue_index') }}">back to list</a>
+{% endblock %}

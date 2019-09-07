@@ -111,6 +111,11 @@ class MyEvent
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MyEventVenue", inversedBy="myEvents")
+     */
+    private $myEventVenue;
+
     public function __construct()
     {
         $this->myEventFlows = new ArrayCollection();
@@ -315,6 +320,18 @@ class MyEvent
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getMyEventVenue(): ?MyEventVenue
+    {
+        return $this->myEventVenue;
+    }
+
+    public function setMyEventVenue(?MyEventVenue $myEventVenue): self
+    {
+        $this->myEventVenue = $myEventVenue;
+
+        return $this;
     }
 
 
