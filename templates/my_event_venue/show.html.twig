@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyEventVenue{% endblock %}
+
+{% block body %}
+    <h1>MyEventVenue</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ my_event_venue.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ my_event_venue.name }}</td>
+            </tr>
+            <tr>
+                <th>Map</th>
+                <td>{{ my_event_venue.map }}</td>
+            </tr>
+            <tr>
+                <th>Traffic</th>
+                <td>{{ my_event_venue.traffic }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ my_event_venue.createdAt ? my_event_venue.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ my_event_venue.updatedAt ? my_event_venue.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ my_event_venue.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_event_venue_index') }}">back to list</a>
+
+    <a href="{{ path('my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
+
+    {{ include('my_event_venue/_delete_form.html.twig') }}
+{% endblock %}

@@ -32,20 +32,30 @@ class MyEventType extends AbstractType
               'image_uri' => true,
               // 'asset_helper' => true,
             ])
+            ->add('myEventFlows', CollectionType::class, [
+              'entry_type' => MyEventFlowType::class,
+              'entry_options' => [
+                'attr' => ['class' => 'flows'],
+              ],
+              'entry_options' => ['label' => false],
+              'allow_add' => true,
+              'allow_delete' => true,
+              'by_reference' => false,
+            ])
         ;
 
-        $builder
-        ->add('myEventFlows', CollectionType::class, [
-          'entry_type' => MyEventFlowType::class,
-          'entry_options' => [
-            'attr' => ['class' => 'flows'],
-          ],
-          'entry_options' => ['label' => false],
-          'allow_add' => true,
-          'allow_delete' => true,
-          'by_reference' => false,
-        ])
-      ;
+      //   $builder
+      //   ->add('myEventFlows', CollectionType::class, [
+      //     'entry_type' => MyEventFlowType::class,
+      //     'entry_options' => [
+      //       'attr' => ['class' => 'flows'],
+      //     ],
+      //     'entry_options' => ['label' => false],
+      //     'allow_add' => true,
+      //     'allow_delete' => true,
+      //     'by_reference' => false,
+      //   ])
+      // ;
     }
 
     /**

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserDetail index{% endblock %}
+
+{% block body %}
+    <h1>UserDetail index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>FirstKana</th>
+                <th>LastKana</th>
+                <th>Sex</th>
+                <th>TelNumber</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_detail in user_details %}
+            <tr>
+                <td>{{ user_detail.id }}</td>
+                <td>{{ user_detail.firstName }}</td>
+                <td>{{ user_detail.lastName }}</td>
+                <td>{{ user_detail.firstKana }}</td>
+                <td>{{ user_detail.lastKana }}</td>
+                <td>{{ user_detail.sex }}</td>
+                <td>{{ user_detail.telNumber }}</td>
+                <td>
+                    <a href="{{ path('user_detail_show', {'id': user_detail.id}) }}">show</a>
+                    <a href="{{ path('user_detail_edit', {'id': user_detail.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_detail_new') }}">Create new</a>
+{% endblock %}
