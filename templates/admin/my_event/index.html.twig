@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}イベント一覧 | {{ admin_name }}{% endblock %}
+
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント一覧</li>
+ {% endblock %}
+
+{% block content %}
+    <h1>イベント一覧</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>イベント名</th>
+                <th>イベント説明</th>
+                <th>イベント内容</th>
+                <th>男性金額</th>
+                <th>女性金額</th>
+                <th>作成日</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for my_event in my_events %}
+            <tr>
+                <td>{{ my_event.id }}</td>
+                <td>{{ my_event.name }}</td>
+                <td>{{ my_event.description }}</td>
+                <td>{{ my_event.content }}</td>
+                <td>{{ my_event.menPrice }}</td>
+                <td>{{ my_event.womanPrice }}</td>
+                <td>{{ my_event.createdAt ? my_event.createdAt|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_my_event_show', {'id': my_event.id}) }}">show</a>
+                    <a href="{{ path('admin_my_event_edit', {'id': my_event.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_my_event_new') }}">作成</a>
+{% endblock %}

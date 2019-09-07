@@ -24,3 +24,5 @@ $(document).ready(function() {
 });
 
 import './sb-admin';
+import './flowForm';
+import './admin';

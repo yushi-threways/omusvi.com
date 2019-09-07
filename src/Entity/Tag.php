@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Tag
 {
@@ -17,11 +18,6 @@ class Tag
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,31 +34,10 @@ class Tag
      */
     private $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTag", mappedBy="tagId")
-     */
-    private $myEventTags;
-
-    public function __construct()
-    {
-        $this->myEventTags = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -102,33 +77,37 @@ class Tag
     }
 
     /**
-     * @return Collection|MyEventTag[]
+     * @ORM\PrePersist()
      */
-    public function getMyEventTags(): Collection
+    public function onPrePersist()
     {
-        return $this->myEventTags;
-    }
-
-    public function addMyEventTag(MyEventTag $myEventTag): self
-    {
-        if (!$this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags[] = $myEventTag;
-            $myEventTag->setTagId($this);
-        }
-
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         return $this;
     }
 
-    public function removeMyEventTag(MyEventTag $myEventTag): self
+    /**
+     * @ORM\PostUpdate()
+     */
+    public function onPostUpdate()
     {
-        if ($this->myEventTags->contains($myEventTag)) {
-            $this->myEventTags->removeElement($myEventTag);
-            // set the owning side to null (unless already changed)
-            if ($myEventTag->getTagId() === $this) {
-                $myEventTag->setTagId(null);
-            }
-        }
-
+        $this->updatedAt = new \DateTime();
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize(): string
+    {
+        // This entity implements JsonSerializable (http://php.net/manual/en/class.jsonserializable.php)
+        // so this method is used to customize its JSON representation when json_encode()
+        // is called, for example in tags|json_encode (app/Resources/views/form/fields.html.twig)
+        return $this->name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
