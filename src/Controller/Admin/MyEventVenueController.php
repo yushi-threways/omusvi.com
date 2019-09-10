@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MyEventVenue;
-use App\Form\MyEventVenueType;
+use App\Form\Type\MyEventVenueType;
 use App\Repository\MyEventVenueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/my/event/venue")
+ * @Route("/admin/venue")
  */
 class MyEventVenueController extends AbstractController
 {

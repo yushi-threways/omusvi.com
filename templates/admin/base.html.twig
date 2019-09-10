@@ -107,6 +107,16 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
+          <span>イベント会場</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="{{ path('admin_my_event_venue_index') }}">イベント会場一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_venue_new') }}">イベント会場作成</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
           <span>ユーザー</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">

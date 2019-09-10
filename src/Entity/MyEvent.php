@@ -52,14 +52,12 @@ class MyEvent
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
-     * @Assert\Positive
      */
     private $menPrice;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
-     * @Assert\Positive
      */
     private $womanPrice;
 
@@ -112,14 +110,15 @@ class MyEvent
     private $tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MyEventVenue", inversedBy="myEvents")
+     * @ORM\OneToMany(targetEntity="App\Entity\MyEventVenue", mappedBy="myEvent")
      */
-    private $myEventVenue;
+    private $myEventVenues;
 
     public function __construct()
     {
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->myEventVenues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -322,17 +321,35 @@ class MyEvent
         return $this->imageSize;
     }
 
-    public function getMyEventVenue(): ?MyEventVenue
+    /**
+     * @return Collection|MyEventVenue[]
+     */
+    public function getMyEventVenues(): Collection
     {
-        return $this->myEventVenue;
+        return $this->myEventVenues;
     }
 
-    public function setMyEventVenue(?MyEventVenue $myEventVenue): self
+    public function addMyEventVenue(MyEventVenue $myEventVenue): self
     {
-        $this->myEventVenue = $myEventVenue;
+        if (!$this->myEventVenues->contains($myEventVenue)) {
+            $this->myEventVenues[] = $myEventVenue;
+            $myEventVenue->setMyEvent($this);
+        }
 
         return $this;
     }
 
+    public function removeMyEventVenue(MyEventVenue $myEventVenue): self
+    {
+        if ($this->myEventVenues->contains($myEventVenue)) {
+            $this->myEventVenues->removeElement($myEventVenue);
+            // set the owning side to null (unless already changed)
+            if ($myEventVenue->getMyEvent() === $this) {
+                $myEventVenue->setMyEvent(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
