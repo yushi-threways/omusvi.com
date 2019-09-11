@@ -53,6 +53,11 @@ class MyEventFlow
      */
     private $myEvent;
 
+    public function __construct() {
+        $this->startTime = new \DateTime();
+        $this->endTime = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

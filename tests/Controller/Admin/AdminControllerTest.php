@@ -3,30 +3,48 @@
 namespace App\Tests\Controller\Admin;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use App\Tests\Controller\Admin\AbstractControllerTest;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 
-class AdminController extends WebTestCase
-
+class AdminControllerTest extends WebTestCase
 {
-    public function testNotLoginRedirect()
+    use FixturesTrait;
+
+    public function setUp()
     {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/admin');
-        $this->assertStatusCode(200, $client);
-
-        $form = $crawler->selectButton('Submit')->form();
-        $crawler = $client->submit($form);
-
-        // We should get a validation error for the empty fields.
-        $this->assertStatusCode(200, $client);
-        $this->assertValidationErrors(['data.email', 'data.message'], $client->getContainer());
-
-        // Try again with with the fields filled out.
-        $form = $crawler->selectButton('Submit')->form();
-        $form->setValues(['contact[email]' => 'nobody@example.com', 'contact[message]' => 'Hello']);
-        $client->submit($form);
-        $this->assertStatusCode(302, $client);
+        parent::setUp();
+        $fixtureDir = __DIR__.'/../../fixtures';
+        $this->fixtures = $this->loadFixtureFiles([
+            $fixtureDir . '/admin.yaml',
+        ]);
     }
 
+    public function testLoginFail()
+    {
+        $client = $this->makeClient();
+        $client->followRedirects(true);
+        $crawler = $client->request('GET', '/admin/login');
+        $this->assertStatusCode(200, $client);
+        $form = $crawler->selectButton('送信')->form();
+        $form['admin_login[username]'] = '_';
+        $form['admin_login[password]'] = '_';
+        $client->submit($form);
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals('/admin/login', $client->getRequest()->getPathInfo());
+    }
 
+    public function testLoginSuccess()
+    {
+        $client = $this->makeClient();
+        $client->followRedirects(true);
+        $client->getKernel()->boot();
+        $crawler = $client->request('GET', '/admin/login');
+        $this->assertStatusCode(200, $client);
+        $form = $crawler->selectButton('送信')->form();
+        $form['admin_login[username]'] = 'admin1';
+        $form['admin_login[password]'] = 1234;
+        $client->submit($form);
+        $this->assertStatusCode(200, $client);
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals('/', $client->getRequest()->getPathInfo());
+    }
 }

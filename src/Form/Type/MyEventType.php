@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\MyEventVenue;
 
 class MyEventType extends AbstractType
@@ -23,35 +24,31 @@ class MyEventType extends AbstractType
             ->add('content')
             ->add('menPrice')
             ->add('womanPrice')
-            // ->add('tags', TagsInputType::class, [
-            //     'label' => 'label.tags',
-            //     'required' => false,
-            // ])
-            // ->add('imageFile', VichImageType::class, [
-            //   'required' => true,
-            //   'allow_delete' => true,
-            //   'download_uri' => true,
-            //   'image_uri' => true,
-            //   // 'asset_helper' => true,
-            // ])
-            // ->add('myEventFlows', CollectionType::class, [
-            //   'entry_type' => MyEventFlowType::class,
-            //   'entry_options' => [
-            //     'attr' => ['class' => 'flows'],
-            //   ],
-            //   'entry_options' => ['label' => false],
-            //   'allow_add' => true,
-            //   'allow_delete' => true,
-            //   'by_reference' => false,
-            // ])
-            // ->add('myEventVenues', EntityType::class, [
-            //   'class' => MyEventVenue::class,
-            //   'choice_label' => 'name',
-            //   'query_builder' => function (EntityRepository $er) {
-            //       return $er->createQueryBuilder('me')
-            //         ->orderBy('me.name', 'ASC');
-            //   },
-            // ])
+            ->add('tags', TagsInputType::class, [
+                'label' => 'label.tags',
+                'required' => false,
+            ])
+            ->add('imageFile', VichImageType::class, [
+              'required' => true,
+              'allow_delete' => true,
+              'download_uri' => true,
+              'image_uri' => true,
+              // 'asset_helper' => true,
+            ])
+            ->add('myEventFlows', CollectionType::class, [
+              'entry_type' => MyEventFlowType::class,
+              'entry_options' => [
+                'attr' => ['class' => 'flows'],
+              ],
+              'entry_options' => ['label' => false],
+              'allow_add' => true,
+              'allow_delete' => true,
+              'by_reference' => false,
+            ])
+            ->add('myEventVenue', EntityType::class, [
+                'class' => MyEventVenue::class,
+                'choice_label' => 'name',
+            ])
         ;
 
         //   $builder
