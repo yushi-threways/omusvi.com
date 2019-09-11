@@ -1,0 +1,14 @@
+App\Entity\Admin:
+  admin1:
+    username: "admin1"
+    email: "admin1@example.com"
+    plainPassword: "1234"
+    enabled: true
+    roles: ['ROLE_ADMIN']
+
+  admin2:
+    username: "admin2"
+    email: "admin2@example.com"
+    plainpassword: "1234"
+    enabled: false
+    roles: ['ROLE_ADMIN']

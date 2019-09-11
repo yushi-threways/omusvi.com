@@ -34,14 +34,12 @@ class MyEventController extends AbstractController
     {
         $myEvent = new MyEvent();
         
-        // $flows = new MyEventFlow();
-        // $venue = new MyEventVenue();
-        // $myEvent->addMyEventFlow($flows);
-        // $myEvent->addMyEventVenue($venue);
-
+        $flows = new MyEventFlow();
+        $myEvent->addMyEventFlow($flows);
 
         $form = $this->createForm(MyEventType::class, $myEvent);
-        
+        $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

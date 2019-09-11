@@ -72,7 +72,7 @@ class MyEvent
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventFlow", mappedBy="myEvent")
+     * @ORM\OneToMany(targetEntity="App\Entity\MyEventFlow", mappedBy="myEvent", cascade={"persist"})
      */
     private $myEventFlows;
 
@@ -110,15 +110,14 @@ class MyEvent
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventVenue", mappedBy="myEvent")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MyEventVenue", inversedBy="myEvents")
      */
-    private $myEventVenues;
+    private $myEventVenue;
 
     public function __construct()
     {
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->myEventVenues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -321,33 +320,14 @@ class MyEvent
         return $this->imageSize;
     }
 
-    /**
-     * @return Collection|MyEventVenue[]
-     */
-    public function getMyEventVenues(): Collection
+    public function getMyEventVenue(): ?MyEventVenue
     {
-        return $this->myEventVenues;
+        return $this->myEventVenue;
     }
 
-    public function addMyEventVenue(MyEventVenue $myEventVenue): self
+    public function setMyEventVenue(?MyEventVenue $myEventVenue): self
     {
-        if (!$this->myEventVenues->contains($myEventVenue)) {
-            $this->myEventVenues[] = $myEventVenue;
-            $myEventVenue->setMyEvent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMyEventVenue(MyEventVenue $myEventVenue): self
-    {
-        if ($this->myEventVenues->contains($myEventVenue)) {
-            $this->myEventVenues->removeElement($myEventVenue);
-            // set the owning side to null (unless already changed)
-            if ($myEventVenue->getMyEvent() === $this) {
-                $myEventVenue->setMyEvent(null);
-            }
-        }
+        $this->myEventVenue = $myEventVenue;
 
         return $this;
     }

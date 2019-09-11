@@ -55,9 +55,14 @@ class MyEventVenue
     private $prefecture;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\MyEvent", inversedBy="myEventVenues")
+     * @ORM\OneToMany(targetEntity="App\Entity\MyEvent", mappedBy="myEventVenue")
      */
-    private $myEvent;
+    private $myEvents;
+
+    public function __construct()
+    {
+        $this->myEvents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,15 +172,35 @@ class MyEventVenue
         return $this;
     }
 
-    public function getMyEvent(): ?MyEvent
+    /**
+     * @return Collection|MyEvent[]
+     */
+    public function getMyEvents(): Collection
     {
-        return $this->myEvent;
+        return $this->myEvents;
     }
 
-    public function setMyEvent(?MyEvent $myEvent): self
+    public function addMyEvent(MyEvent $myEvent): self
     {
-        $this->myEvent = $myEvent;
+        if (!$this->myEvents->contains($myEvent)) {
+            $this->myEvents[] = $myEvent;
+            $myEvent->setMyEventVenue($this);
+        }
 
         return $this;
     }
+
+    public function removeMyEvent(MyEvent $myEvent): self
+    {
+        if ($this->myEvents->contains($myEvent)) {
+            $this->myEvents->removeElement($myEvent);
+            // set the owning side to null (unless already changed)
+            if ($myEvent->getMyEventVenue() === $this) {
+                $myEvent->setMyEventVenue(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

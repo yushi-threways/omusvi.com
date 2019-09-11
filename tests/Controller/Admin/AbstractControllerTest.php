@@ -2,47 +2,48 @@
 
 namespace App\Tests\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Entity\Admin;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
+use Symfony\Bundle\FrameworkBundle\Client;
 
 abstract class AbstractControllerTest extends WebTestCase
 {
-    /**
-    * @var Client
-    */
-    protected $client = null;
+    use FixturesTrait;
 
+    /**
+     * @var array
+     */
+    protected $fixtures;
+
+    /**
+     * @var array
+     */
+    protected $additionalFixtureFiles = [];
+
+    /**
+     * @var Admin
+     */
+    protected $admin1;
 
     public function setUp()
     {
-        $this->client = $this->createAuthorizedClient();
+        parent::setUp();
+        $fixtureDir = __DIR__.'/../../fixtures';
+        $this->fixtures = $this->loadFixtureFiles([
+            $fixtureDir . '/admin.yaml',
+        ]);
+        $this->admin1 = $this->fixtures['admin1'];
     }
 
-    /**
-     * @return Client
-     */
-    protected function createAuthorizedClient()
+    protected function createLoginClient(): Client
     {
-        $client = static::createClient();
-        $container = $client->getContainer();
-
-        $session = $container->get('session');
-        /** @var $userManager \FOS\UserBundle\Doctrine\UserManager */
-        $userManager = $container->get('fos_user.user_manager');
-        /** @var $loginManager \FOS\UserBundle\Security\LoginManager */
-        $loginManager = $container->get('security.csrf.token_manager');
-        $firewallName = $container->getParameter('fos_user.firewall_name');
-
-        $user = $userManager->findUserBy(array('username' => 'admin'));
-        $loginManager->loginUser($firewallName, $user);
-
-        // save the login token into the session and put it in a cookie
-        $container->get('session')->set(
-            '_security_' . $firewallName,
-            serialize($container->get('security.context')->getToken())
-        );
-        $container->get('session')->save();
-        $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
-
-        return $client;
+        $this->loginAs($this->admin1, 'admin');
+        return $this->makeClient();
+    }
+    
+    protected function createNoLoginClient(): Client
+    {
+        return static::createClient(['environment' => $this->environment]);
     }
 }
