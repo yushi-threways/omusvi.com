@@ -1,58 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
 
-        {% set title = 'オミパリ' %}
-        {% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
-        {% set canonical = 'canonical' %}
-        <title>{{ title }}</title>
-        <meta name="description" content="{{ description }}">
-        <link rel="canonical" href="{{ canonical }}">
+    {% set title = 'オミパリ' %}
+    {% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+    {% set canonical = 'canonical' %}
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="{{ canonical }}">
 
-        <meta property="og:site_name" content="オミパリ">
-        <meta property="og:title" content="{{ title }}">
-        <meta property="og:description" content="{{ description }}">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="サイトのURL貼る">
-        <meta property="og:image" content="ogpのURL貼る">
-        <meta property="fb:app_id" content="App-ID（15文字の半角数字）" />
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="サイトのURL貼る">
-        <meta name="twitter:image" content="ogpのURL貼る">
+    {% block og %}
+    <meta property="og:site_name" content="オミパリ">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="サイトのURL貼る">
+    <meta property="og:image" content="ogpのURL貼る">
+    {% endblock %}
+    
+    {% block twitter %}
+    <meta property="fb:app_id" content="App-ID（15文字の半角数字）" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:image" content="ogpのURL貼る">
+    {% endblock %}
 
-        {% block stylesheets %}
-            {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-            {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+        {{ encore_entry_link_tags('app') }}
 
-            <!-- Renders a link tag (if your module requires any CSS)
-                 <link rel="stylesheet" href="/build/app.css"> -->
-        {% endblock %}
+        <!-- Renders a link tag (if your module requires any CSS)
+            <link rel="stylesheet" href="/build/app.css"> -->
+    {% endblock %}
     </head>
     <body>
-        {% if form is defined %}
-            {% form_theme form "form/layout.html.twig" %}
-        {% endif %}
-        {% block header %}
-            <div class="jumbotron text-center">
-                <h1>Work Matching</h1>
-                <p>Resize this responsive page to see the effect!</p>
+        <div class="sw-Body">
+            {% block alert %}
+                    <div class="sw-Alert">
+                        {% for key, messages in app.session.flashBag.all %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ key }}">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+            {% endblock %}
+
+            <div class="sw-Body_Inner">
+
+                {% block body %}
+                    {% if form is defined %}
+                        {% form_theme form "form/layout.html.twig" %}
+                    {% endif %}
+                    <header class="sw-Header">
+                        {% block header %}
+                        <div class="sw-Header_Inner">
+                            <div class="sw-Header_Branding">
+                                <div class="sw-Header_CatchCopy">
+                                    <p>
+                                    <strong>名古屋</strong>中心に<strong>街コン</strong>を運営する</strong><span>オミパリ</span>
+                                    </p>
+                                </div>
+                                <div class="sw-Header_Logo">
+                                <a href="{{ path('default_index') }}">
+                                オミパリ
+                                </a>
+                                </div>
+                                <div class="sw-Header_MainNavOuter">
+                                    <nav class="sw-Header_MainNav">
+                                        <div class="sw-Header_MainNavInner">
+                                            <ul class="sw-Header_MainNavItems">
+                                                {% if is_granted('ROLE_USER') %}
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('default_index') }}"><i class="fa fa-user"></i> マイページ</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-unlock-alt"></i> ログアウト</a></li>
+                                                {% else %}
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user"></i> 会員登録</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i> ログイン</a></li>
+                                                {% endif %}
+
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        {% endblock %}
+                    </header>
+
+                    <main class="sw-Main">
+                        <div class="sw-Main_Inner">
+                            {% block main %}
+                            {% endblock %}
+                        </div>
+                    </main>
+
+                    <footer class="sw-Footer">
+                        {% block footer %}
+
+                        {% endblock %}
+                    </footer>
+
+                    {% block javascripts %}
+                        {{ encore_entry_script_tags('app') }}
+
+                        <!-- Renders app.js & a webpack runtime.js file
+                            <script src="/build/runtime.js"></script>
+                            <script src="/build/app.js"></script> -->
+                    {% endblock %}
+                {% endblock %}
             </div>
-        {% endblock %}
-        <div class="container">
-        {% block body %}
-
-        {% endblock %}
         </div>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-
-            <!-- Renders app.js & a webpack runtime.js file
-                <script src="/build/runtime.js"></script>
-                <script src="/build/app.js"></script> -->
-        {% endblock %}
     </body>
 </html>
