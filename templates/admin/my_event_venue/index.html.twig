@@ -1,9 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}MyEventVenue index{% endblock %}
+{% block title %}イベント会場一覧 | {{ admin_name }}{% endblock %}
 
-{% block body %}
-    <h1>MyEventVenue index</h1>
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント会場一覧</li>
+ {% endblock %}
+
+
+{% block content %}
+    <h1>イベント会場一覧</h1>
 
     <table class="table">
         <thead>
@@ -12,8 +18,6 @@
                 <th>Name</th>
                 <th>Map</th>
                 <th>Traffic</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
                 <th>Address</th>
                 <th>actions</th>
             </tr>
@@ -25,12 +29,10 @@
                 <td>{{ my_event_venue.name }}</td>
                 <td>{{ my_event_venue.map }}</td>
                 <td>{{ my_event_venue.traffic }}</td>
-                <td>{{ my_event_venue.createdAt ? my_event_venue.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ my_event_venue.updatedAt ? my_event_venue.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ my_event_venue.address }}</td>
                 <td>
-                    <a href="{{ path('my_event_venue_show', {'id': my_event_venue.id}) }}">show</a>
-                    <a href="{{ path('my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
+                    <a href="{{ path('admin_my_event_venue_show', {'id': my_event_venue.id}) }}">show</a>
+                    <a href="{{ path('admin_my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('my_event_venue_new') }}">Create new</a>
+    <a href="{{ path('admin_my_event_venue_new') }}">Create new</a>
 {% endblock %}

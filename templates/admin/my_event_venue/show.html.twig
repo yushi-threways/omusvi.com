@@ -1,9 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}MyEventVenue{% endblock %}
+{% block title %}イベント会場詳細 | {{ admin_name }}{% endblock %}
 
-{% block body %}
-    <h1>MyEventVenue</h1>
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント会場詳細</li>
+ {% endblock %}
+
+{% block content %}
+    <h1>イベント会場詳細</h1>
 
     <table class="table">
         <tbody>
@@ -38,9 +43,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('my_event_venue_index') }}">back to list</a>
+    <a href="{{ path('admin_my_event_venue_index') }}">back to list</a>
 
-    <a href="{{ path('my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
+    <a href="{{ path('admin_my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
 
-    {{ include('my_event_venue/_delete_form.html.twig') }}
+    {{ include('admin_my_event_venue/_delete_form.html.twig') }}
 {% endblock %}

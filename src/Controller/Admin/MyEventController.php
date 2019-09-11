@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\MyEventVenue;
 
 /**
  * @Route("admin/my/event")
@@ -31,12 +32,14 @@ class MyEventController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $flows = new MyEventFlow();
         $myEvent = new MyEvent();
+        
+        // $flows = new MyEventFlow();
+        // $venue = new MyEventVenue();
+        // $myEvent->addMyEventFlow($flows);
+        // $myEvent->addMyEventVenue($venue);
 
-        $myEvent->addMyEventFlow($flows);
 
-    
         $form = $this->createForm(MyEventType::class, $myEvent);
         
 
@@ -44,6 +47,8 @@ class MyEventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($myEvent);
             $entityManager->flush();
+
+            $this->addFlash('success', 'イベントを登録しました');
 
             return $this->redirectToRoute('admin_my_event_index');
         }

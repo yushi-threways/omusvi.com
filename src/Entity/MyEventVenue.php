@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventVenueRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class MyEventVenue
 {
@@ -54,14 +55,9 @@ class MyEventVenue
     private $prefecture;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEvent", mappedBy="myEventVenue")
+     * @ORM\ManyToOne(targetEntity="App\Entity\MyEvent", inversedBy="myEventVenues")
      */
-    private $myEvents;
-
-    public function __construct()
-    {
-        $this->myEvents = new ArrayCollection();
-    }
+    private $myEvent;
 
     public function getId(): ?int
     {
@@ -153,32 +149,32 @@ class MyEventVenue
     }
 
     /**
-     * @return Collection|MyEvent[]
+     * @ORM\PrePersist()
      */
-    public function getMyEvents(): Collection
+    public function onPrePersist()
     {
-        return $this->myEvents;
-    }
-
-    public function addMyEvent(MyEvent $myEvent): self
-    {
-        if (!$this->myEvents->contains($myEvent)) {
-            $this->myEvents[] = $myEvent;
-            $myEvent->setMyEventVenue($this);
-        }
-
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         return $this;
     }
 
-    public function removeMyEvent(MyEvent $myEvent): self
+    /**
+     * @ORM\PostUpdate()
+     */
+    public function onPostUpdate()
     {
-        if ($this->myEvents->contains($myEvent)) {
-            $this->myEvents->removeElement($myEvent);
-            // set the owning side to null (unless already changed)
-            if ($myEvent->getMyEventVenue() === $this) {
-                $myEvent->setMyEventVenue(null);
-            }
-        }
+        $this->updatedAt = new \DateTime();
+        return $this;
+    }
+
+    public function getMyEvent(): ?MyEvent
+    {
+        return $this->myEvent;
+    }
+
+    public function setMyEvent(?MyEvent $myEvent): self
+    {
+        $this->myEvent = $myEvent;
 
         return $this;
     }

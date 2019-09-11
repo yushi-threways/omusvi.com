@@ -1,11 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}New MyEventVenue{% endblock %}
+{% block title %}イベント会場作成 | {{ admin_name }}{% endblock %}
 
-{% block body %}
-    <h1>Create new MyEventVenue</h1>
 
-    {{ include('my_event_venue/_form.html.twig') }}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント会場作成</li>
+ {% endblock %}
 
-    <a href="{{ path('my_event_venue_index') }}">back to list</a>
+{% block content %}
+    <h1>イベント会場作成</h1>
+
+    {{ include('admin/my_event_venue/_form.html.twig') }}
+
+    <a href="{{ path('admin_my_event_venue_index') }}">back to list</a>
 {% endblock %}
