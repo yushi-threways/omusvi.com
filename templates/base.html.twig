@@ -64,28 +64,27 @@
                         {% block header %}
                         <div class="sw-Header_Inner">
                             <div class="sw-Header_Branding">
-                                <div class="sw-Header_CatchCopy">
-                                    <p>
-                                    <strong>名古屋</strong>中心に<strong>街コン</strong>を運営する</strong><span>オミパリ</span>
-                                    </p>
-                                </div>
                                 <div class="sw-Header_Logo">
-                                <a href="{{ path('default_index') }}">
-                                オミパリ
-                                </a>
+                                    <p class="sw-Header_Lead">
+                                        <strong>名古屋</strong>中心に<strong>街コン</strong>を運営する</strong><span>オミパリ</span>
+                                    </p>
+                                    <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
+                                    オミパリ
+                                    </a>
                                 </div>
+                                
                                 <div class="sw-Header_MainNavOuter">
                                     <nav class="sw-Header_MainNav">
                                         <div class="sw-Header_MainNavInner">
                                             <ul class="sw-Header_MainNavItems">
                                                 {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('default_index') }}"><i class="fa fa-user"></i> マイページ</a></li>
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-unlock-alt"></i> ログアウト</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('default_index') }}"><i class="fa fa-address-card"></i><br>マイページ</a></li>
                                                 {% else %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user"></i> 会員登録</a></li>
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i> ログイン</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-address-card"></i><br>会員登録</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i><br>ログイン</a></li>
                                                 {% endif %}
-
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "about"}) }}"><i class="fas fa-leaf"></i><br>ガイド</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "qa"}) }}"><i class="far fa-question-circle"></i><br>ヘルプ</a></li>
                                             </ul>
                                         </div>
                                     </nav>
@@ -97,14 +96,96 @@
 
                     <main class="sw-Main">
                         <div class="sw-Main_Inner">
-                            {% block main %}
-                            {% endblock %}
-                        </div>
+                            <div class="sw-Content">
+                                {% block main %}
+                                {% endblock %}
+                            </div>
+                            <aside class="sw-Side">
+                                {% block side %}
+                                    <div class="sw-Side_Inner">
+                                        <div class="sw-Side_Keyword">
+                                            <h2 class="sw-Side_KeywordTitle">オミパリの街コン・イベントを探す</h2>
+                                            <ul class="sw-Side_KeywordItems">
+                                                <li class="sw-Side_KeywordItem">
+                                                    <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-hashtag"></i> イベントタグから探す</h3>
+                                                    <ul class="sw-Side_KeywordLists">
+                                                    </ul>
+                                                </li>
+                                                <li class="sw-Side_KeywordItem">
+                                                    <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-search"></i> キーワードで探す</h3>
+                                                    <ul class="sw-Side_KeywordLists">
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <ul class="sw-Side_Items">
+                                            <li class="sw-Side_Item">
+                                                <h3 class="sw-Side_ItemTitle"><i class="fas fa-sign-in-alt"></i> ログイン</h3>
+                                                <ul class="sw-Side_ItemLists">
+                                                    {% if is_granted('ROLE_USER') %}
+                                                        <li class="sw-Side_ItemList"><a href="{{ path('default_index') }}">マイページ</a></li>
+                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_security_logout') }}">ログアウト</a></li>
+                                                    {% else %}
+                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_registration_register') }}">会員登録</a></li>
+                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_security_login') }}">ログイン</a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </li>
+                                            <li class="sw-Side_Item">
+                                                <h3 class="sw-Side_ItemTitle"><i class="fas fa-bars"></i> コンテンツ</h3>
+                                                <ul class="sw-Side_ItemLists">
+                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li>
+                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a></li>  
+                                                </ul>
+                                            </li>
+                                            <li class="sw-Side_Item">
+                                                <h3 class="sw-Side_ItemTitle">オミパリとは</h3>
+                                                <ul class="sw-Side_ItemLists">
+                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">オミパリについて</a></li>
+                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li> 
+                                                </ul>
+                                            </li>
+                                        </ul>                  
+                                    </div>
+                                
+                                {% endblock %}
+                            </div>
+                        </aside>
                     </main>
 
                     <footer class="sw-Footer">
                         {% block footer %}
-
+                            <div class="sw-Footer_Inner">
+                                <ul class="sw-Footer_Items">
+                                    <li class="sw-Footer_Item">
+                                        <p class="sw-Footer_ItemTitle">オミパリコンテンツ</p>
+                                        <ul class="sw-Footer_ItemLists">
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('default_index') }}">トップ</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場募集</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sw-Footer_Item">
+                                        <p class="sw-Footer_ItemTitle">利用規約とプライバシー</p>
+                                        <ul class="sw-Footer_ItemLists">
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "agree"}) }}">利用規約</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法に基づく表記</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sw-Footer_Item">
+                                        <p class="sw-Footer_ItemTitle">お困りの時は</p>
+                                        <ul class="sw-Footer_ItemLists">
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">オミパリについて</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "guide"}) }}">ご利用ガイド</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="sw-Footer_Copy"><small>
+                                Copyright © 2019 OMIPARI Inc. All Rights Reserved.
+                            </small></div>
+                            </div>
                         {% endblock %}
                     </footer>
 

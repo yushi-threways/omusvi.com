@@ -1,0 +1,29 @@
+include:
+  - myEventVenue.yaml
+
+App\Entity\Admin:
+  admin1:
+    username: "admin1"
+    email: "admin1@example.com"
+    plainPassword: "1234"
+    enabled: true
+    roles: ['ROLE_ADMIN']
+    
+App\Entity\Tag:
+  tag1:
+    name: 'tag_1'
+  tag2:
+    name: 'tag_2'
+  tag3:
+    name: 'tag_3'
+
+App\Entity\MyEvent:
+  event{1..10}:
+    name: "イベント１"
+    description: "ディスクリプション"
+    content: "こんてんつ"
+    men_price: '<randomFloat(2, 10.00, 1000.00)>'
+    woman_price: '<randomFloat(2, 10.00, 1000.00)>'
+    image_name: "image_name.jpg"
+    image_size: "1787410"    
+    myEventVenue: '@venue1'

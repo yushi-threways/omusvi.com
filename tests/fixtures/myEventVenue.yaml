@@ -1,0 +1,8 @@
+App\Entity\MyEventVenue:
+  venue1:
+    name: event_venue
+    map: "マップ情報が入ります"
+    traffic: "アクセス方法が入ります"
+    address: "住所がはいります"
+
+  

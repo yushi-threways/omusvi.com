@@ -6,6 +6,15 @@ use App\Tests\Controller\Admin\AbstractControllerTest;
 
 class MyEventControllerTest extends AbstractControllerTest
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $fixtureDir = __DIR__.'/../../fixtures';
+        $this->fixtures = $this->loadFixtureFiles([
+            $fixtureDir . '/myEventVenue.yaml',
+            $fixtureDir . '/myEvent.yaml',
+        ]);
+    }
     
     public function testIndexWithNoLogin()
     {
