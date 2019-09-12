@@ -1,0 +1,56 @@
+.sw-Header {
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto 15px;
+}
+.sw-Header_Inner {
+    width: $size__site-content;
+    margin: 0 auto;
+    padding: 0 5px;
+}
+.sw-Header_Lead {
+    @include font-size(12px);
+    margin: 0 auto;
+    padding: 0;
+    letter-spacing: 2px;
+}
+.sw-Header_Branding {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0 10px;
+    align-items: center;
+}
+.sw-Header_MainNavOuter {
+
+}
+.sw-Header_MainNav {
+
+}
+.sw-Header_MainNavInner {
+
+}
+.sw-Header_Logo {
+
+}
+.sw-Header_LogoMark {
+    @include font-size(20px);
+    color: #333;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.sw-Header_MainNavItems {
+    display: flex;
+    margin: 0 auto;
+    list-style-type: none;
+    align-items: center;
+}
+.sw-Header_MainNavItem {
+    a {
+        display: block;
+        margin: 0 0 0 15px;
+        text-align: center;
+        @include font-size(12px);
+        i {
+            @include font-size(16px);
+        }
+    }
+}

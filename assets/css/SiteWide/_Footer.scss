@@ -1,0 +1,37 @@
+.sw-Footer {
+
+}
+.sw-Footer_Inner {
+    width: $size__site-content;
+    padding: 50px 0 30px;
+    margin: 0 auto;
+}
+.sw-Footer_Items {
+    list-style-type: none;
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: space-between;
+}
+.sw-Footer_Item {
+    a {
+        @include font-size(14px);
+    }
+}
+.sw-Footer_ItemTitle {
+    @include font-size(18px);
+}
+.sw-Footer_ItemLists {
+    padding: 0 0 0 20px;
+}
+.sw-Footer_ItemList {
+    
+}
+.sw-Footer_Copy {
+    margin: 30px auto 0;
+    padding: 10px 0 0;
+    border-top: 1px solid #ccc;
+    small {
+
+    }
+}
