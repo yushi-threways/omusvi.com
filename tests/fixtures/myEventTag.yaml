@@ -1,0 +1,8 @@
+include:
+  - myEvent.yaml
+  - tag.yaml
+App\Entity\MyEventTag:
+  eventtag{1..10}:
+    myEvent: '<random(@myEvent)>'
+    tag: '<random(@tag)>'
+

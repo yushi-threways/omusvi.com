@@ -1,0 +1,8 @@
+App\Entity\Tag:
+  tag1:
+    name: tag_1
+  tag2:
+    name: tag_2
+  tag3:
+    name: tag_3
+    
