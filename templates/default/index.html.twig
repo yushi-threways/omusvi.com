@@ -1,10 +1,35 @@
 {% extends "base.html.twig" %}
 
-{% set title = 'オミパリ' %}
+{% set title = 'オミパリトップページ' %}
 {% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
 {% set canonical = 'canonical' %}
 
 
 {% block main %}
-
+<section class="sw-Section">
+    {% for myEvent in myEvents %}
+        <div class="sw-Event">
+            <div class="sw-Event_Inner">
+                <div class="sw-Event_Img"><img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}"></div>
+                <h1 class="sw-Event_Title">{{ myEvent.name }}</h1>
+                <p class="sw-Event_Desc">{{ myEvent.description }}</p>
+                <p class="sw^Event_Title">{{ myEvent.content }}</p>
+                <div class="sw-Event_Place"><span>名駅</span>開催日時</div>
+                <div class="sw-Event_Price">{{ myEvent.menPrice|number_format }}円</div>
+                <div class="sw-Event_Price">{{ myEvent.womanPrice|number_format }}円</div>
+                {% if not myEvent.tags.empty %}
+                <ul class="sw-Event_TagItems">
+                {% for myEventTag in myEvent.tags %}
+                    <li class="w-Event_TagItem">
+                        <a href="{{ path('default_index', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+                            <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %} 
+            </div>
+        </div>
+    {% endfor %}
+</section>
 {% endblock %}

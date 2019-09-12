@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MyEvent;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -17,6 +18,26 @@ class MyEventRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, MyEvent::class);
+    }
+
+    public function findTagEvent(Tag $tag = null)
+    {
+
+        $qb = $this->createQueryBuilder('mt')
+            ->addSelect('t')
+            ->leftJoin('mt.tags', 't')
+            ->where('mt.createdAt <= :now')
+            ->orderBy('mt.createdAt', 'DESC')
+            ->setParameter('now', new \Datetime())
+            // ->setParameter('now', $data->modify('-2 months'))
+        ;
+
+        if (null !== $tag) {
+            $qb->andWhere(':tag MEMBER OF mt.tags')
+                ->setParameter('tag', $tag);
+        }
+    
+        return $qb->getQuery()->getResult();
     }
 
     // /**

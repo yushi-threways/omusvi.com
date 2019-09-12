@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventScheduleRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class MyEventSchedule
 {
@@ -59,6 +60,7 @@ class MyEventSchedule
     public function __construct()
     {
         $this->myEventApplications = new ArrayCollection();
+        $this->eventDay = new \Datetime();
     }
 
     public function getId(): ?int
@@ -166,6 +168,24 @@ class MyEventSchedule
             }
         }
 
+        return $this;
+    }
+     /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+        return $this;
+    }
+
+    /**
+     * @ORM\PostUpdate()
+     */
+    public function onPostUpdate()
+    {
+        $this->updatedAt = new \DateTime();
         return $this;
     }
 }
