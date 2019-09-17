@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\MyEvent;
 use App\Entity\MyEventFlow;
+use App\Entity\MyEventSchedule;
 use App\Form\Type\MyEventType;
 use App\Repository\MyEventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,8 +34,9 @@ class MyEventController extends AbstractController
     public function new(Request $request): Response
     {
         $myEvent = new MyEvent();
-        
         $flows = new MyEventFlow();
+        $schedule = new MyEventSchedule();
+        $schedule->setMyEvent($myEvent);
         $myEvent->addMyEventFlow($flows);
 
         $form = $this->createForm(MyEventType::class, $myEvent);

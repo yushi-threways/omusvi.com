@@ -23,7 +23,6 @@ class MyEventSchedule
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\MyEvent", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $myEvent;
 

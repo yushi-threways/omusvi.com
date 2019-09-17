@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MyEvent;
+use App\Entity\MyEventSchedule;
 use App\Form\MyEventType;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
@@ -38,13 +39,10 @@ class MyEventController extends AbstractController
     public function new(Request $request): Response
     {
 
-        $myEventFlows = new MyEventFlow();
-        $myEventSchedule = new MyEventSchedule();
         $myEvent = new MyEvent();
+
         $form = $this->createForm(MyEventType::class, $myEvent);
 
-        $myEvent->addMyEventFlow($myEventFlows);
-        $myEvent->setMyEventSchedule($myEventSchedule);
         
         $form->handleRequest($request);
 

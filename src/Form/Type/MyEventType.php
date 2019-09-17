@@ -13,9 +13,12 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\MyEventVenue;
+use App\Entity\MyEventSchedule;
+use Symfony\Component\Form\FormInterface;
 
 class MyEventType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -35,7 +38,9 @@ class MyEventType extends AbstractType
               'label' => 'label.tags',
               'required' => false,
             ])
-            ->add('myEventSchedule', MyEventScheduleType::class)
+            ->add('myEventSchedule', MyEventScheduleType::class, [
+             
+            ])
             ->add('myEventVenue', EntityType::class, [
                 'class' => MyEventVenue::class,
                 'choice_label' => 'name',
@@ -59,7 +64,7 @@ class MyEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MyEvent::class,
+          'data_class' => MyEvent::class,
         ]);
     }
 }

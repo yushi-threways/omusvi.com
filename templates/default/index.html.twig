@@ -17,6 +17,7 @@
                 <div class="sw-Event_Place"><span>名駅</span>開催日時</div>
                 <div class="sw-Event_Price">{{ myEvent.menPrice|number_format }}円</div>
                 <div class="sw-Event_Price">{{ myEvent.womanPrice|number_format }}円</div>
+                <div class="sw-Event_Limit-man">{{ myEvent.myEventSchedule.eventDay|date("m月j日 A n:i w") }}</div>
                 {% if not myEvent.tags.empty %}
                 <ul class="sw-Event_TagItems">
                 {% for myEventTag in myEvent.tags %}

@@ -123,6 +123,8 @@ class MyEvent
     {
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->setMyEventSchedule(new MyEventSchedule());
+
     }
 
     public function getId(): ?int
@@ -342,10 +344,16 @@ class MyEvent
         return $this->myEventSchedule;
     }
 
-    public function setMyEventSchedule(?MyEventSchedule $myEventSchedule): self
+    /**
+     * Undocumented function
+     *
+     * @param MyEventSchedule $myEventSchedule
+     * @return self
+     */
+    public function setMyEventSchedule(MyEventSchedule $myEventSchedule): self
     {
         $this->myEventSchedule = $myEventSchedule;
-
+        $this->myEventSchedule->setMyEvent($this);
         return $this;
     }
 
