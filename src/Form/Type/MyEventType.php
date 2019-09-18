@@ -13,9 +13,12 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\MyEventVenue;
+use App\Entity\MyEventSchedule;
+use Symfony\Component\Form\FormInterface;
 
 class MyEventType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -24,16 +27,23 @@ class MyEventType extends AbstractType
             ->add('content')
             ->add('menPrice')
             ->add('womanPrice')
-            ->add('tags', TagsInputType::class, [
-                'label' => 'label.tags',
-                'required' => false,
-            ])
             ->add('imageFile', VichImageType::class, [
               'required' => true,
               'allow_delete' => true,
               'download_uri' => true,
               'image_uri' => true,
               // 'asset_helper' => true,
+            ])
+            ->add('tags', TagsInputType::class, [
+              'label' => 'label.tags',
+              'required' => false,
+            ])
+            ->add('myEventSchedule', MyEventScheduleType::class, [
+             
+            ])
+            ->add('myEventVenue', EntityType::class, [
+                'class' => MyEventVenue::class,
+                'choice_label' => 'name',
             ])
             ->add('myEventFlows', CollectionType::class, [
               'entry_type' => MyEventFlowType::class,
@@ -45,24 +55,7 @@ class MyEventType extends AbstractType
               'allow_delete' => true,
               'by_reference' => false,
             ])
-            ->add('myEventVenue', EntityType::class, [
-                'class' => MyEventVenue::class,
-                'choice_label' => 'name',
-            ])
         ;
-
-        //   $builder
-      //   ->add('myEventFlows', CollectionType::class, [
-      //     'entry_type' => MyEventFlowType::class,
-      //     'entry_options' => [
-      //       'attr' => ['class' => 'flows'],
-      //     ],
-      //     'entry_options' => ['label' => false],
-      //     'allow_add' => true,
-      //     'allow_delete' => true,
-      //     'by_reference' => false,
-      //   ])
-      // ;
     }
 
     /**
@@ -71,7 +64,7 @@ class MyEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MyEvent::class,
+          'data_class' => MyEvent::class,
         ]);
     }
 }

@@ -114,10 +114,17 @@ class MyEvent
      */
     private $myEventVenue;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\MyEventSchedule", cascade={"persist", "remove"})
+     */
+    private $myEventSchedule;
+
     public function __construct()
     {
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->setMyEventSchedule(new MyEventSchedule());
+
     }
 
     public function getId(): ?int
@@ -329,6 +336,24 @@ class MyEvent
     {
         $this->myEventVenue = $myEventVenue;
 
+        return $this;
+    }
+
+    public function getMyEventSchedule(): ?MyEventSchedule
+    {
+        return $this->myEventSchedule;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param MyEventSchedule $myEventSchedule
+     * @return self
+     */
+    public function setMyEventSchedule(MyEventSchedule $myEventSchedule): self
+    {
+        $this->myEventSchedule = $myEventSchedule;
+        $this->myEventSchedule->setMyEvent($this);
         return $this;
     }
 

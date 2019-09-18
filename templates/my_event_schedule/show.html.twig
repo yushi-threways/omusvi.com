@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyEventSchedule{% endblock %}
+
+{% block body %}
+    <h1>MyEventSchedule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ my_event_schedule.id }}</td>
+            </tr>
+            <tr>
+                <th>WomanLimit</th>
+                <td>{{ my_event_schedule.womanLimit }}</td>
+            </tr>
+            <tr>
+                <th>ManLimit</th>
+                <td>{{ my_event_schedule.manLimit }}</td>
+            </tr>
+            <tr>
+                <th>EventDay</th>
+                <td>{{ my_event_schedule.eventDay ? my_event_schedule.eventDay|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ my_event_schedule.createdAt ? my_event_schedule.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ my_event_schedule.updatedAt ? my_event_schedule.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_event_schedule_index') }}">back to list</a>
+
+    <a href="{{ path('my_event_schedule_edit', {'id': my_event_schedule.id}) }}">edit</a>
+
+    {{ include('my_event_schedule/_delete_form.html.twig') }}
+{% endblock %}
