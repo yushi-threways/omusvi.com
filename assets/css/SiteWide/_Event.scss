@@ -1,0 +1,148 @@
+.sw-Event {
+    margin: 15px auto 0;
+    &:first-child {
+        margin: 0 auto;
+    }
+}
+.sw-Event_Inner {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.sw-Event_Img {
+    margin: 0 auto 3px;
+    a {
+        color: #58595B;
+        display: block;
+        max-width: 640px;
+        text-align: center;
+        background-color: rgb(236, 236, 236);
+        img {
+            margin: 0 auto;
+            vertical-align: bottom;
+        }
+    }
+}
+.sw-Event_Title {
+    @include font-size(20px);
+    margin: 0 auto 5px;
+    a {
+        color: #58595B;
+        display: block;
+        &:hover {
+            opacity: 0.8;
+        }
+        &:visited {
+            color: #58595B;
+        }
+    }
+}
+.sw-Event_Desc {
+    @include font-size(12px);
+    margin: 0 auto 5px;
+    padding: 0 0 5px;
+    border-bottom: 1px solid #ccc;
+    color: #ccc;
+}
+.sw-Event_Info {
+    display: -webkit-flex;
+    display: flex;
+    margin: 0 auto 5px;
+    @include font-size(14px);
+}
+.sw-Event_Info-place {
+    display: inline-block;
+    padding: 0 10px 0 0;
+}
+.sw-Event_Info-date {
+    display: inline-block;
+}
+.sw-Event_Person {
+    display: -webkit-flex;
+    display: flex;
+    margin: 0 auto 5px;
+
+}
+.sw-Event_Person-woman {
+    width: 49%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 2px solid $color__sex-woman;
+    border-radius: 5px;
+
+}
+.sw-Event_WomanUnit {
+    display: flex;
+   
+}
+.sw-Event_WomanIcon {
+    padding: 0 10px 0 0;
+    i {
+        @include font-size(24px);
+        color: $color__sex-woman;
+    }
+}
+.sw-Event_WomanInfo {
+    @include font-size(14px);
+    &-limit {
+
+    }
+    &-pice {
+
+    }
+}
+.sw-Event_Person-man {
+    width: 49%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 2px solid $color__sex-man;
+    border-radius: 5px;
+}
+.sw-Event_ManUnit {
+    display: flex;
+
+}
+.sw-Event_ManIcon {
+    padding: 0 10px 0 0;
+    i {
+        @include font-size(24px);
+        color: $color__sex-man;
+    }
+}
+.sw-Event_ManInfo {
+    @include font-size(14px);
+    &-limit {
+
+    }
+    &-pice {
+
+    }
+}
+.sw-Event_TagItems {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.sw-Event_TagItem {
+    a {
+        margin: 0 auto 3px;
+        padding: 0 8px 0 0;
+        display: block;
+        @include font-size(12px);
+        i {
+
+        }
+    }
+}
+.sw-Event_Btn {
+    margin: 5px auto 0;
+    a {
+        padding: 5px 0;
+        margin: 0 auto;
+        text-align: center;
+        display: block;
+    }
+}

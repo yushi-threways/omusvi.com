@@ -53,7 +53,8 @@ class MyEventFlow
      */
     private $myEvent;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->startTime = new \DateTime();
         $this->endTime = new \DateTime();
     }
