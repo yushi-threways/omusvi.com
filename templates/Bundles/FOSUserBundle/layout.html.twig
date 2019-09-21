@@ -9,30 +9,47 @@
         {% set title = 'オミパリIDログイン | オミパリ' %}
         <title>{{ title }}</title>
        
+        {% block stylesheets %}
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
         {{ encore_entry_link_tags('app') }}
+
+        <!-- Renders a link tag (if your module requires any CSS)
+            <link rel="stylesheet" href="/build/app.css"> -->
+    {% endblock %}
     </head>
     <body>
-         {% if form is defined %}
-            {% form_theme form "form/layout.html.twig" %}
-        {% endif %}
-        <header>
-        <div class="container login-Header">
-            <div class="row">
-                <div class="col-6">
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                    <a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                {% endif %}
-                </div>
-                <div class="col-6 text-right">
-                    <div class="">オミパリ</div>
-                </div>
-            </div>
-        </div>
+        <header class="sw-Header">
+                        {% block header %}
+                        <div class="sw-Header_Inner">
+                            <div class="sw-Header_Branding">
+                                <div class="sw-Header_Logo">
+                                    <p class="sw-Header_Lead">
+                                        <strong>名古屋</strong>中心に<strong>街コン</strong>を運営する</strong><span>オミパリ</span>
+                                    </p>
+                                    <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
+                                    オミパリ
+                                    </a>
+                                </div>
+                                
+                                <div class="sw-Header_MainNavOuter">
+                                    <nav class="sw-Header_MainNav">
+                                        <div class="sw-Header_MainNavInner">
+                                            <ul class="sw-Header_MainNavItems">
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "about"}) }}"><i class="fas fa-leaf"></i><br>ガイド</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "qa"}) }}"><i class="far fa-question-circle"></i><br>ヘルプ</a></li>
+                                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('user_detail_index') }}"><i class="fa fa-address-card"></i><br>会員情報</a></li>
+                                                {% else %}
+                                                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                                {% endif %}
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        {% endblock %}
         </header>
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
