@@ -1,0 +1,16 @@
+.me-Terms {
+
+}
+.me-Terms_Inner {
+
+}
+.me-Terms_Text {
+    padding: 5px;
+    p {
+        small {
+            display: block;
+            line-height: 1.6;
+            @include font-size(12px);
+        }
+    }
+}
