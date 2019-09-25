@@ -1,0 +1,140 @@
+.me-Detail {
+    margin: 15px auto 0;
+    &:first-child {
+        margin: 0 auto;
+    }
+}
+.me-Detail_Inner {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.me-Detail_Img {
+    margin: 0 auto 3px;
+    a {
+        color: #58595B;
+        display: block;
+        max-width: 640px;
+        text-align: center;
+        background-color: rgb(236, 236, 236);
+        img {
+            margin: 0 auto;
+            vertical-align: bottom;
+        }
+    }
+}
+.me-Detail_Title {
+    @include font-size(22px);
+    margin: 0 auto 5px;
+    a {
+        color: #58595B;
+        display: block;
+        &:hover {
+            opacity: 0.8;
+        }
+        &:visited {
+            color: #58595B;
+        }
+    }
+}
+.me-Detail_Info {
+    display: -webkit-flex;
+    display: flex;
+    margin: 0 auto 5px;
+    @include font-size(16px);
+}
+.me-Detail_Info-place {
+    display: inline-block;
+    padding: 0 10px 0 0;
+}
+.me-Detail_Info-date {
+    display: inline-block;
+}
+.me-Detail_Person {
+    margin: 0 auto 5px;
+
+}
+.me-Detail_Person-woman {
+    width: 100%;
+    margin: 0 auto 5px;
+    padding: 5px;
+    border: 2px solid $color__sex-woman;
+    border-radius: 5px;
+
+}
+.me-Detail_WomanUnit {
+    display: flex;
+    align-items: center;
+
+}
+.me-Detail_WomanIcon {
+    padding: 0 10px 0 0;
+    i {
+        @include font-size(30px);
+        color: $color__sex-woman;
+    }
+}
+.me-Detail_WomanInfo {
+    @include font-size(14px);
+    &-limit {
+
+    }
+    &-pice {
+
+    }
+}
+.me-Detail_Person-man {
+    width: 100%;
+    margin: 0 auto 5px;
+    padding: 5px;
+    border: 2px solid $color__sex-man;
+    border-radius: 5px;
+}
+.me-Detail_ManUnit {
+    display: flex;
+    align-items: center;
+}
+.me-Detail_ManIcon {
+    padding: 0 10px 0 0;
+    i {
+        @include font-size(30px);
+        color: $color__sex-man;
+    }
+}
+.me-Detail_ManInfo {
+    @include font-size(14px);
+    &-limit {
+
+    }
+    &-pice {
+
+    }
+}
+.me-Detail_TagItems {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.me-Detail_TagItem {
+    a {
+        margin: 0 auto 3px;
+        padding: 0 8px 0 0;
+        display: block;
+        @include font-size(12px);
+        i {
+
+        }
+    }
+}
+.me-Detail_Btn {
+    margin: 5px auto 0;
+    a {
+        padding: 5px 0;
+        margin: 0 auto;
+        text-align: center;
+        display: block;
+    }
+}

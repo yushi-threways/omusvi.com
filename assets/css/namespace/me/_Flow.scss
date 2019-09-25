@@ -1,0 +1,34 @@
+.me-Flow {
+
+}
+.me-Flow_Inner {
+
+}
+.me-Flow_List {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+}
+.me-Flow_Item {
+    display: flex;
+    padding: 10px;
+    &:nth-child(odd) {
+        background-color: rgb(255, 246, 235);
+    }
+    &-date {
+        font-weight: bold;
+        @include font-size(14px);
+    }   
+    &-title {
+        @include font-size(16px);
+        margin: 0 auto;
+    }
+    &-content {
+        padding: 0 0 0 20px;
+    }
+    &-desc {
+        @include font-size(14px);
+        color: rgb(151, 151, 151);
+        margin: 0 auto;
+    }
+}

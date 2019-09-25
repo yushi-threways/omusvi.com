@@ -40,15 +40,10 @@ class User extends BaseUser
      */
     private $userDetail;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\BankAccount", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $bankAccount;
-
     public function __construct()
     {
-        $this->setRoles(['ROLE_USER']);
         $this->myEventApplications = new ArrayCollection();
+        parent::__construct();
     }
 
     public function getId(): ?int
@@ -124,38 +119,20 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getUserInit(): ?UserInit
+    public function getUserInit(): ?UserDetail
     {
-        return $this->userInit;
+        return $this->userDetail;
     }
 
-    public function setUserInit(UserInit $userInit): self
+    public function setUserInit(UserDetail $userDetail): self
     {
-        $this->userInit = $userInit;
+        $this->userDetail = $userDetail;
 
         // set the owning side of the relation if necessary
-        if ($this !== $userInit->getUser()) {
-            $userInit->setUser($this);
+        if ($this !== $userDetail->getUser()) {
+            $userDetail->setUser($this);
         }
 
         return $this;
     }
-
-    public function getBankAccount(): ?BankAccount
-    {
-        return $this->bankAccount;
-    }
-
-    public function setBankAccount(BankAccount $bankAccount): self
-    {
-        $this->bankAccount = $bankAccount;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $bankAccount->getUser()) {
-            $bankAccount->setUser($this);
-        }
-
-        return $this;
-    }
-
 }

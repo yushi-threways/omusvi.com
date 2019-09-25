@@ -1,0 +1,28 @@
+.me-TagItems {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.me-TagItem {
+    a {
+        margin: 0 5px 3px 0;
+        padding: 3px 5px;
+        text-align: center;
+        display: block;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        @include font-size(14px);
+        color: #58595B;
+        &:hover {
+            opacity: 0.8;
+        }
+        &:visited {
+            color: #58595B;
+        }
+        i {
+
+        }
+    }
+}
