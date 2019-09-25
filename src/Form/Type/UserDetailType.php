@@ -12,13 +12,29 @@ class UserDetailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('firstKana')
-            ->add('lastKana')
-            ->add('sex')
-            ->add('telNumber')
-            ->add('user')
+            ->add('firstName', null, [
+                'label' => '氏名(性)',
+            ])
+            ->add('lastName', null, [
+                'label' => '氏名（名）',
+            ])
+            ->add('firstKana', null, [
+                'label' => '氏名カナ（姓）',
+            ])
+            ->add('lastKana', null, [
+                'label' => '氏名カナ（名）',
+            ])
+            ->add('sex', null, [
+                'label' => '性別',
+                'choices' => [
+                    // :todo 値とラベルのマッピング
+                    "男性" => 0,
+                    "女性" => 1,
+                ],
+            ])
+            ->add('telNumber', null, [
+                'label' => '電話番号',
+            ])
         ;
     }
 

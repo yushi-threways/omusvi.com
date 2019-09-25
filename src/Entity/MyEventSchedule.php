@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventScheduleRepository")
  * @ORM\HasLifecycleCallbacks
@@ -37,7 +36,27 @@ class MyEventSchedule
     private $manLimit;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
+     */
+    private $manTerms;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $womanTerms;
+
+     /**
+     * @ORM\Column(type="text")
+     */
+    private $textTerms;
+
+    /**
+     * @ORM\Column(type="date_immutable")
+     */
+    private $startTime;
+
+    /**
+     * @ORM\Column(type="date_immutable")
      */
     private $eventDay;
 
@@ -59,6 +78,7 @@ class MyEventSchedule
     public function __construct()
     {
         $this->myEventApplications = new ArrayCollection();
+        $this->startTime = new \Datetime();
         $this->eventDay = new \Datetime();
     }
 
@@ -99,6 +119,52 @@ class MyEventSchedule
     public function setManLimit(int $manLimit): self
     {
         $this->manLimit = $manLimit;
+
+        return $this;
+    }
+    public function getManTerms(): ?string
+    {
+        return $this->manTerms;
+    }
+
+    public function setManTerms(string $manTerms): self
+    {
+        $this->manTerms = $manTerms;
+
+        return $this;
+    }
+    public function getWomanTerms(): ?string
+    {
+        return $this->womanTerms;
+    }
+
+    public function setWomanTerms(string $womanTerms): self
+    {
+        $this->womanTerms = $womanTerms;
+
+        return $this;
+    }
+
+    public function getTextTerms(): ?string
+    {
+        return $this->textTerms;
+    }
+
+    public function setTextTerms(string $textTerms): self
+    {
+        $this->textTerms = $textTerms;
+
+        return $this;
+    }
+   
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
 
         return $this;
     }
@@ -169,9 +235,9 @@ class MyEventSchedule
 
         return $this;
     }
-     /**
-     * @ORM\PrePersist()
-     */
+    /**
+    * @ORM\PrePersist()
+    */
     public function onPrePersist()
     {
         $this->createdAt = new \DateTime();

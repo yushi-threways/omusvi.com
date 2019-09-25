@@ -18,12 +18,12 @@ class MyEventFlow
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $startTime;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $endTime;
 

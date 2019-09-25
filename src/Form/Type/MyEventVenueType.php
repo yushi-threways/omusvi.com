@@ -12,11 +12,21 @@ class MyEventVenueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('map')
-            ->add('traffic')
-            ->add('address')
-            ->add('prefecture')
+            ->add('name', null, [
+                'label' => '受付会場',
+            ])
+            ->add('map', null, [
+                'label' => 'マップ共有',
+            ])
+            ->add('traffic', null, [
+                'label' => 'アクセス',
+            ])
+            ->add('address', null, [
+                'label' => '住所',
+            ])
+            ->add('prefecture', null, [
+                'label' => '地域',
+            ])
         ;
     }
 

@@ -1,0 +1,9 @@
+App\Entity\MyEventSchedule:
+  schedule{1..3}:
+    womanLimit: '20'
+    manlimit: '20'
+    womanTerms: '20〜29'
+    manTerms: '20〜29'
+    textTerms: '条件内容が入ります条件内容が入ります条件内容が入ります条件内容が入ります条件内容が入ります'
+
+  
