@@ -45,9 +45,9 @@ class MyEventSchedule
      */
     private $womanTerms;
 
-     /**
-     * @ORM\Column(type="text")
-     */
+    /**
+    * @ORM\Column(type="text")
+    */
     private $textTerms;
 
     /**
@@ -78,8 +78,8 @@ class MyEventSchedule
     public function __construct()
     {
         $this->myEventApplications = new ArrayCollection();
-        $this->startTime = new \Datetime();
-        $this->eventDay = new \Datetime();
+        $this->startTime = new \DateTimeImmutable();
+        $this->eventDay = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
