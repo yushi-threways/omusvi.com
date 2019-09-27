@@ -6,28 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
 
-    {% set title = 'オミパリ' %}
-    {% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
-    {% set canonical = 'canonical' %}
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}">
-    <link rel="canonical" href="{{ canonical }}">
-
-    {% block og %}
-    <meta property="og:site_name" content="オミパリ">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="サイトのURL貼る">
-    <meta property="og:image" content="ogpのURL貼る">
-    {% endblock %}
     
-    {% block twitter %}
-    <meta property="fb:app_id" content="App-ID（15文字の半角数字）" />
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="サイトのURL貼る">
-    <meta name="twitter:image" content="ogpのURL貼る">
-    {% endblock %}
+    <title>{% block title %}オミパリ{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}{% endblock %}">
 
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
