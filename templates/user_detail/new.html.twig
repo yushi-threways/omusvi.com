@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}New UserDetail{% endblock %}
+{% set title = 'オミパリトップページ' %}
+{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+{% set canonical = 'canonical' %}
 
-{% block body %}
-    <h1>Create new UserDetail</h1>
+
+{% block main %}
+    <h1 class="myde-Main_Title">ユーザー情報入力</h1>
 
     {{ include('user_detail/_form.html.twig') }}
-
-    <a href="{{ path('user_detail_index') }}">back to list</a>
 {% endblock %}

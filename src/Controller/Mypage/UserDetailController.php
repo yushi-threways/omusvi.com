@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Mypage;
 
 use App\Entity\UserDetail;
+use App\Entity\User;
 use App\Form\Type\UserDetailType;
 use App\Repository\UserDetailRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/detail")
+ * @Route("/mypage/detail")
  */
 class UserDetailController extends AbstractController
 {
@@ -25,7 +26,32 @@ class UserDetailController extends AbstractController
         ]);
     }
 
-   
+    /**
+     * @Route("/new", name="user_detail_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, User $user): Response
+    {
+        $userDetail = new UserDetail();
+        $userDetail->serUser($use);
+        $form = $this->createForm(UserDetailType::class, $userDetail);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($userDetail);
+            $entityManager->flush();
+
+            $this->addFlash('success', '登録が完了しました。');
+
+            return $this->redirectToRoute('user_detail_index');
+        }
+
+        return $this->render('user_detail/new.html.twig', [
+            'user_detail' => $userDetail,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/{id}", name="user_detail_show", methods={"GET"})
      */

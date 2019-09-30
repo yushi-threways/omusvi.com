@@ -40,7 +40,7 @@
                                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                                     <li class="sw-Header_MainNavItem"><a href="{{ path('user_detail_index') }}"><i class="fa fa-address-card"></i><br>会員情報</a></li>
                                                 {% else %}
-                                                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i><br>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
                                                 {% endif %}
                                                 </div>
                                             </ul>

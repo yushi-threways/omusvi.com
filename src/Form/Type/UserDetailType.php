@@ -6,6 +6,8 @@ use App\Entity\UserDetail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class UserDetailType extends AbstractType
 {
@@ -24,10 +26,9 @@ class UserDetailType extends AbstractType
             ->add('lastKana', null, [
                 'label' => '氏名カナ（名）',
             ])
-            ->add('sex', null, [
+            ->add('sex', ChoiceType::class, [
                 'label' => '性別',
                 'choices' => [
-                    // :todo 値とラベルのマッピング
                     "男性" => 0,
                     "女性" => 1,
                 ],

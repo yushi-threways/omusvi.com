@@ -5,6 +5,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+        form:
+            type: App\Form\Type\RegistrationFormType
     from_email:
         address: "test@test.com"
         sender_name: "test@test.com"

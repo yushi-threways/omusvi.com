@@ -50,6 +50,12 @@ class User extends BaseUser
     {
         return $this->id;
     }
+    public function setEmail($email) 
+    {
+    $email = is_null($email) ? '' : $email;
+    parent::setEmail($email);
+    $this->setUsername($email);
+    }
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -119,12 +125,12 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getUserInit(): ?UserDetail
+    public function getUserDetail(): ?UserDetail
     {
         return $this->userDetail;
     }
 
-    public function setUserInit(UserDetail $userDetail): self
+    public function setUserDetail(UserDetail $userDetail): self
     {
         $this->userDetail = $userDetail;
 
