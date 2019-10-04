@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% set title = 'オミパリトップページ' %}
+{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+{% set canonical = 'canonical' %}
+
+
+{% block main %}
+    <div class="myde-Content">
+    <h1 class="myde-Content_Title">ユーザー情報の登録</h1>
+
+    {{ include('my_page/user_detail/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+{% endblock %}

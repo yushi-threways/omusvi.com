@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\UserDetail;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -17,6 +18,18 @@ class UserDetailRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserDetail::class);
+    }
+
+    public function findOrCreateByUser(User $user)
+    {
+        $detail = $this->findOneBy(['user' => $user]);
+        
+        if (!$detail) {
+            $detail = new UserDetail();
+            $detail->setUser($user);
+        }
+        
+        return $detail;
     }
 
     // /**

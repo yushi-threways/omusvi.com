@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form.error) }} #}
+    
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.firstKana) }}
+    {{ form_row(form.lastKana) }}
+    {{ form_row(form.sex) }}
+    {{ form_row(form.birthday) }}
+    {{ form_row(form.telNumber) }}
+
+    <button class="btn btn-block btn-primary">{{ button_label|default('登録') }}</button>
+{{ form_end(form) }}

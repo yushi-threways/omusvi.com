@@ -1,0 +1,18 @@
+.myde-Content {
+    table {
+        tr {
+            @include font-size(14px);
+            th {
+                font-weight: normal;
+            }
+            td {
+
+            }
+        }
+    }
+}
+.myde-Content_Title {
+    @include font-size(24px);
+    margin: 0 auto 20px;
+    padding: 0;
+}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserDetailRepository")
@@ -17,22 +18,60 @@ class UserDetail
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message="姓を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 50,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message="名を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 50,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message="姓（カナ）を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 50,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
+     * @Assert\Regex(
+     *      pattern="/^[ァ-ヴー\s]+$/u",
+     *      match=false,
+     *      message="半角ｶﾀｶﾅで入力してください。"
+     * )
      */
     private $firstKana;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message="名（カナ）を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 50,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
+     * @Assert\Regex(
+     *      pattern="/^[ァ-ヴー\s]+$/u",
+     *      match=false,
+     *      message="半角ｶﾀｶﾅで入力してください。"
+     * )
      */
     private $lastKana;
 
@@ -42,9 +81,20 @@ class UserDetail
     private $sex;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *     message="電話番号を入力してください。"
+     * )
      */
     private $telNumber;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\NotBlank(
+     *     message="生年月日を入力してください。"
+     * )
+     */
+    private $birthday;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="userDetail", cascade={"persist", "remove"})
@@ -117,12 +167,12 @@ class UserDetail
         return $this;
     }
 
-    public function getTelNumber(): ?int
+    public function getTelNumber(): ?string
     {
         return $this->telNumber;
     }
 
-    public function setTelNumber(int $telNumber): self
+    public function setTelNumber(?string $telNumber): self
     {
         $this->telNumber = $telNumber;
 
@@ -137,6 +187,17 @@ class UserDetail
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
 
         return $this;
     }

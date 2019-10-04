@@ -25,3 +25,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Controller\Mypage\ProfileController:
+        arguments:
+            $formFactory: '@fos_user.profile.form.factory'
+
+    App\Controller\Mypage\ChangePasswordController:
+        arguments:
+            $formFactory: '@fos_user.change_password.form.factory'

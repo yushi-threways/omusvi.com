@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BankAccount;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -18,6 +19,19 @@ class BankAccountRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, BankAccount::class);
     }
+
+    public function findOrCreateByUser(User $user)
+    {
+        $account = $this->findOneBy(['user' => $user]);
+        
+        if (!$account) {
+            $account = new BankAccount();
+            $account->setUser($user);
+        }
+        
+        return $account;
+    }
+
 
     // /**
     //  * @return BankAccount[] Returns an array of BankAccount objects

@@ -34,73 +34,15 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="my_event_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-
-        $myEvent = new MyEvent();
-
-        $form = $this->createForm(MyEventType::class, $myEvent);
-
-        
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($myEvent);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('my_event_index');
-        }
-
-        return $this->render('my_event/new.html.twig', [
-            'my_event' => $myEvent,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="my_event_show", methods={"GET"})
      */
     public function show(MyEvent $myEvent): Response
     {
+
+        
+
         return $this->render('my_event/show.html.twig', [
             'my_event' => $myEvent,
         ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="my_event_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, MyEvent $myEvent): Response
-    {
-        $form = $this->createForm(MyEventType::class, $myEvent);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('my_event_index');
-        }
-
-        return $this->render('my_event/edit.html.twig', [
-            'my_event' => $myEvent,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="my_event_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, MyEvent $myEvent): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$myEvent->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($myEvent);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('my_event_index');
     }
 }

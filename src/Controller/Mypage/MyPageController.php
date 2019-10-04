@@ -23,7 +23,7 @@ class MyPageController extends AbstractController
         if (empty($detail)) {
 
             $this->addFlash('warning', '詳細情報の登録してください。');
-            return $this->redirectToRoute('user_detail_new');
+            return $this->redirectToRoute('mypage_detail_edit');
         }
 
         return $this->render('my_page/index.html.twig', [

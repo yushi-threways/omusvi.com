@@ -17,82 +17,43 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserDetailController extends AbstractController
 {
     /**
-     * @Route("/", name="user_detail_index", methods={"GET"})
+     * @Route("/", name="mypage_detail_index", methods={"GET"})
      */
-    public function index(UserDetailRepository $userDetailRepository): Response
+    public function index(): Response
     {
-        return $this->render('user_detail/index.html.twig', [
-            'user_details' => $userDetailRepository->findAll(),
+        /** @var User $user */
+        $user = $this->getUser();
+        $detail = $user->getUserDetail();
+
+        return $this->render('my_page/user_detail/index.html.twig', [
+            'detail' => $detail,
         ]);
     }
 
     /**
-     * @Route("/new", name="user_detail_new", methods={"GET","POST"})
+     * @Route("/edit", name="mypage_detail_edit")
      */
-    public function new(Request $request, User $user): Response
+    public function edit(Request $request): Response
     {
-        $userDetail = new UserDetail();
-        $userDetail->serUser($use);
-        $form = $this->createForm(UserDetailType::class, $userDetail);
+        /** @var BankAccountRepository $repo */
+        $repo = $this->getDoctrine()->getRepository(UserDetail::class);
+        $detail = $repo->findOrCreateByUser($this->getUser());
+
+        $form = $this->createForm(UserDetailType::class, $detail);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userDetail);
+            $entityManager->persist($detail);
             $entityManager->flush();
+            
+            $this->addFlash('success', 'ユーザー情報を更新しました。');
 
-            $this->addFlash('success', '登録が完了しました。');
-
-            return $this->redirectToRoute('user_detail_index');
+            return $this->redirectToRoute('mypage_detail_index');
         }
 
-        return $this->render('user_detail/new.html.twig', [
-            'user_detail' => $userDetail,
+        return $this->render('my_page/user_detail/edit.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="user_detail_show", methods={"GET"})
-     */
-    public function show(UserDetail $userDetail): Response
-    {
-        return $this->render('user_detail/show.html.twig', [
-            'user_detail' => $userDetail,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="user_detail_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, UserDetail $userDetail): Response
-    {
-        $form = $this->createForm(UserDetailType::class, $userDetail);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('user_detail_index');
-        }
-
-        return $this->render('user_detail/edit.html.twig', [
-            'user_detail' => $userDetail,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="user_detail_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserDetail $userDetail): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$userDetail->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userDetail);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('user_detail_index');
     }
 }
