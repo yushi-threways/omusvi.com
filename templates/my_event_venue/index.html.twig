@@ -1,45 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}MyEventVenue index{% endblock %}
+{% set title = "{{ my_event.name }}" %}
+{% set description = "{{ my_event.description }}" %}
+{% set canonical = 'canonical' %}
 
-{% block body %}
-    <h1>MyEventVenue index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Map</th>
-                <th>Traffic</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>Address</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for my_event_venue in my_event_venues %}
-            <tr>
-                <td>{{ my_event_venue.id }}</td>
-                <td>{{ my_event_venue.name }}</td>
-                <td>{{ my_event_venue.map }}</td>
-                <td>{{ my_event_venue.traffic }}</td>
-                <td>{{ my_event_venue.createdAt ? my_event_venue.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ my_event_venue.updatedAt ? my_event_venue.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ my_event_venue.address }}</td>
-                <td>
-                    <a href="{{ path('my_event_venue_show', {'id': my_event_venue.id}) }}">show</a>
-                    <a href="{{ path('my_event_venue_edit', {'id': my_event_venue.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('my_event_venue_new') }}">Create new</a>
+{% block main %}
+<section class="sw-Section">
+    <div class="venue-Content">
+        <div class="venue-Content_Inner">
+            <h1 class="venue-Content_Title">イベント会場一覧</h1>
+            <p class="venue-Content_Desc">
+                オミパリのイベント会場に登録いただいている飲食店一覧です。<br>
+            </p>
+            {% for my_event_venue in my_event_venues %}
+                <div class="venue-Area">
+                    <h2 class="venue-Area_Name">{{ my_event_venue.name }}</h2>
+                    <p class="venue-Area_Address">{{ my_event_venue.address }}</p>
+                    {% if my_event_venue.map %}
+                        <div class="venue-Area_Map"><iframe src={{ my_event_venue.map|raw }}></iframe></div>
+                    {% endif %}                
+                    <div class="venue-Area_Access">
+                        <p>
+                        アクセス<br>
+                        {{ my_event_venue.traffic }}
+                        </p>
+                    </div>
+                    <div class="venue-Area_Url">
+                        <p>
+                        URL：<a href="{{ my_event_venue.traffic }}">{{ my_event_venue.traffic }}</a>
+                        </p>
+                    </div>
+                </div>
+                {% else %}
+            {% endfor %}
+        </div>
+    </div>  
+</section>
 {% endblock %}

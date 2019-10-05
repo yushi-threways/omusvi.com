@@ -6,6 +6,10 @@ use App\Entity\UserDetail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+
+
 
 class UserDetailType extends AbstractType
 {
@@ -19,21 +23,26 @@ class UserDetailType extends AbstractType
                 'label' => '氏名（名）',
             ])
             ->add('firstKana', null, [
-                'label' => '氏名カナ（姓）',
+                'label' => '氏名ｶﾅ（姓）',
+                'help' => '半角ｶﾀｶﾅで入力してください',
             ])
             ->add('lastKana', null, [
-                'label' => '氏名カナ（名）',
+                'label' => '氏名ｶﾅ（名）',
+                'help' => '半角ｶﾀｶﾅで入力してください',
             ])
-            ->add('sex', null, [
+            ->add('sex', ChoiceType::class, [
                 'label' => '性別',
                 'choices' => [
-                    // :todo 値とラベルのマッピング
                     "男性" => 0,
                     "女性" => 1,
                 ],
             ])
+            ->add('birthday', BirthdayType::class, [
+                'label' => '生年月日',
+            ])
             ->add('telNumber', null, [
                 'label' => '電話番号',
+                'help' => 'ハイフンなしで入力してください',
             ])
         ;
     }

@@ -60,7 +60,7 @@
                                         <div class="sw-Header_MainNavInner">
                                             <ul class="sw-Header_MainNavItems">
                                                 {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('default_index') }}"><i class="fa fa-address-card"></i><br>マイページ</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fa fa-address-card"></i><br>マイページ</a></li>
                                                 {% else %}
                                                     <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-address-card"></i><br>会員登録</a></li>
                                                     <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i><br>ログイン</a></li>

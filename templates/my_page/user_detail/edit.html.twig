@@ -6,7 +6,9 @@
 
 
 {% block main %}
-    <h1 class="myde-Main_Title">ユーザー情報入力</h1>
+    <div class="myde-Content">
+    <h1 class="myde-Content_Title">ユーザー情報の登録</h1>
 
-    {{ include('user_detail/_form.html.twig') }}
+    {{ include('my_page/user_detail/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
 {% endblock %}
