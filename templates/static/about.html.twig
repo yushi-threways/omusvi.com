@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% set title = "{{ my_event.name }}" %}
+{% set description = "{{ my_event.description }}" %}
+{% set canonical = 'canonical' %}
+
+{% set static_title = "オミパリについて" %}
+{% set static_description = "オミパリとは何かについて詳しく記載したページです。" %}
+
+
+{% block main %}
+<section class="sw-Section">
+    <div class="static-Content">
+        <div class="static-Content_Inner">
+            <h1 class="static-Content_Title">{{ static_title }}</h1>
+            <p class="static-Content_Desc">
+                {{ static_description }}}
+            </p>
+           
+        </div>
+    </div>  
+</section>
+{% endblock %}
