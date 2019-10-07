@@ -1,0 +1,15 @@
+.static-Content {
+
+}
+.static-Content_Inner {
+    padding: 0 5px;
+}
+.static-Content_Title {
+    font-weight: bold;
+    @include font-size(24px);
+    margin: 0 auto 10px;
+}
+.static-Content_Desc {
+    @include font-size(14px);
+    margin: 0 auto 30px;
+}

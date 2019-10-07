@@ -12,11 +12,14 @@ class MyEventApplicationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('user')
-            ->add('myEventSchedule')
+            ->add('menCount', null, [
+                'label' => '人数',
+                'empty_data' => 0,
+            ])
+            ->add('womanCount', null, [
+                'label' => '人数',
+                'empty_data' => 0,
+            ])
         ;
     }
 

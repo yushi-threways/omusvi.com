@@ -42,6 +42,15 @@
                             </div>
                         </div>    
                     </div>
+                    {% if is_granted('ROLE_USER') %}
+                    <button type="button" class="btn btn-success me-Applicatin_Btn" data-toggle="modal" data-target="#meModalApplication">
+                        イベントに申し込む
+                    </button>
+                    {% else %}
+                    <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_LoginLink">
+                        イベントに申し込むにはログインしてください
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -171,6 +180,7 @@
                 </div>
             </div>
         </div>
+        <button class="me-Detail_Application">イベントに申し込む</button>
     </div>
 </section>
 <section class="sw-Section">
@@ -186,4 +196,18 @@
                 </ul>
                 {% endif %} 
 </section>
+
+<div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">人数を選択する</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
+    </div>
+  </div>
+  </div>
 {% endblock %}
