@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% set title = 'オミパリトップページ' %}
+{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+{% set canonical = 'canonical' %}
+
+
+{% block main %}
+    <section class="sw-Section">
+        <div class="myapp-Content">
+            <div class="myapp-Complete">
+                <h1 class="myapp-Complete_Title">イベント申し込み申請ありがとうございます。</h1>
+                <p class="myapp-Complete_Text">
+                    まだイベントの申し込みは完了していません。<br>
+                    登録されたメールアドレスにメールをお送りしたので、メールの内容を確認してイベント料金の支払いを完了させてください。
+                </p>
+               <p class="myapp-Complete_Caption">
+                    もしメール届かない方はこちらからお問い合わせお願いいたします。
+               </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\MyEvent;
 use App\Entity\MyEventSchedule;
-use App\Form\MyEventType;
+use App\Entity\User;
+use App\Entity\MyEventApplication;
+use App\Form\Type\MyEventApplicationType;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,15 +36,33 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="my_event_show", methods={"GET"})
+     * @Route("/{id}", name="my_event_show", methods={"GET", "POST"})
      */
-    public function show(MyEvent $myEvent): Response
+    public function show(Request $request, MyEvent $myEvent): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
 
-        
+        $myEventApplication = new MyEventApplication();
+        $myEventApplication->setStatus(1);
+        $myEventApplication->setUser($user);
+        $myEventApplication->setMyEventSchedule($myEvent->getMyEventSchedule());
+
+        $form = $this->createForm(MyEventApplicationType::class, $myEventApplication);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($myEventApplication);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+        }    
 
         return $this->render('my_event/show.html.twig', [
             'my_event' => $myEvent,
-        ]);
+            'user' => $user,
+            'form' => $form->createView(),
+         ]);
     }
 }

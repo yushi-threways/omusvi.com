@@ -42,6 +42,21 @@ class MyEventApplication
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $menCount;
+
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $womanCount;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $cancelled;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +136,42 @@ class MyEventApplication
     public function onPostUpdate()
     {
         $this->updatedAt = new \DateTime();
+        return $this;
+    }
+
+    public function getMenCount(): ?int
+    {
+        return $this->menCount;
+    }
+
+    public function setMenCount(int $menCount): self
+    {
+        $this->menCount = $menCount;
+
+        return $this;
+    }
+
+    public function getWomanCount(): ?int
+    {
+        return $this->womanCount;
+    }
+
+    public function setWomanCount(int $womanCount): self
+    {
+        $this->womanCount = $womanCount;
+
+        return $this;
+    }
+
+    public function getCancelled(): ?\DateTimeInterface
+    {
+        return $this->cancelled;
+    }
+
+    public function setCancelled(?\DateTimeInterface $cancelled): self
+    {
+        $this->cancelled = $cancelled;
+
         return $this;
     }
 }

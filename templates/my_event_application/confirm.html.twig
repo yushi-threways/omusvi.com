@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% set title = 'オミパリトップページ' %}
+{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+{% set canonical = 'canonical' %}
+
+
+{% block main %}
+    <section class="sw-Section">
+        <div class="myapp-Content">
+            <div class="myapp-Confirm">
+                <h1 class="myapp-Confirm_Title">申し込み確認画面</h1>
+                <div class="myapp-Confirm_Inner">
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント名</p>
+                        <p class="myapp-Confirm_Name">{{ schedule.myEvent.name }}</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント概要</p>
+                        <p class="myapp-Confirm_Desc">{{ schedule.myEvent.description }}</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント開催日時</p>
+                        <p class="myapp-Confirm_Deta">{{ schedule.eventDay|date("n月j日 A g:i") }}〜</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント料金</p>
+                        {% if not (user.userDetail.sex) %}
+                        <p class="myapp-Confirm_Men">{{ schedule.myEvent.menPrice }}</p>
+                        {% else %}
+                        <p class="myapp-Confirm_Woamn">{{ schedule.myEvent.womanPrice }}</p>
+                        {% endif %}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
