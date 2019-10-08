@@ -30,4 +30,17 @@ class MyPageController extends AbstractController
             $user = 'user',
         ]); 
     }
+
+     /**
+     * @Route("/event", name="mypage_event", methods={"GET"})
+     */
+    public function event(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('my_page/event.html.twig', [
+
+        ]);
+    }
 }

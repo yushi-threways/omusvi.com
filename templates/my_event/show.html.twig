@@ -42,15 +42,6 @@
                             </div>
                         </div>    
                     </div>
-                    {% if is_granted('ROLE_USER') %}
-                    <button type="button" class="btn btn-success me-Applicatin_Btn" data-toggle="modal" data-target="#meModalApplication">
-                        イベントに申し込む
-                    </button>
-                    {% else %}
-                    <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_LoginLink">
-                        イベントに申し込むにはログインしてください
-                    </a>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -180,7 +171,6 @@
                 </div>
             </div>
         </div>
-        <button class="me-Detail_Application">イベントに申し込む</button>
     </div>
 </section>
 <section class="sw-Section">
@@ -203,11 +193,32 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">人数を選択する</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-        {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
+        </div>
+            {% if is_granted('ROLE_USER') %}
+            {% if user.userDetail %}
+            {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
+            {% endif %}
+            {% endif %}
+        </div>
     </div>
-  </div>
-  </div>
+</div>
+<div class="me-Applicatin_Btn">
+{% if is_granted('ROLE_USER') %}
+    {% if user.userDetail %}
+    <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
+        イベントに申し込む
+    </button>
+    {% else %}
+    <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
+        申し込むには詳細情報を登録してください
+    </a>
+    {% endif %}
+{% else %}
+    <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_Btn-login">
+        申し込むにはログインしてください
+    </a>
+{% endif %}
+</div>
 {% endblock %}

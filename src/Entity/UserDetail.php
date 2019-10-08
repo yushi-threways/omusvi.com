@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\Gender;
 use Symfony\Component\Validator\Constraints as Assert;
+use Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserDetailRepository")
@@ -75,10 +77,12 @@ class UserDetail
      */
     private $lastKana;
 
-    /**
-     * @ORM\Column(type="integer")
+   /**
+     * @var Gender | null
+     * @ORM\Column(type="GenderEnumType", nullable=true)
+     * @Constraints\Enum(entity="App\DBAL\Types\GenderEnumType")
      */
-    private $sex;
+    private $gender;
 
     /**
      * @ORM\Column(type="string")
@@ -155,14 +159,14 @@ class UserDetail
         return $this;
     }
 
-    public function getSex(): ?int
+    public function getGender(): ?string
     {
-        return $this->sex;
+        return $this->gender;
     }
 
-    public function setSex(int $sex): self
+    public function setGender(?string $gender): self
     {
-        $this->sex = $sex;
+        $this->gender = $gender;
 
         return $this;
     }

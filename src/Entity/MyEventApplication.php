@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventApplicationRepository")
@@ -28,7 +30,9 @@ class MyEventApplication
     private $myEventSchedule;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     * @ORM\Column(type="MyEventApplicationStatusEnumType", nullable=false)
+     * @Constraints\Enum(entity="App\DBAL\Types\MyEventApplicationStatusEnumType")
      */
     private $status;
 
@@ -43,19 +47,19 @@ class MyEventApplication
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="integer", options={"default" : 0})
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $menCount;
 
     /**
-     * @ORM\Column(type="integer", options={"default" : 0})
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $womanCount;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $cancelled;
+    public function __construct()
+    {
+        $this->status = MyEventApplicationStatusEnumType::APPLIED;
+    }
 
     public function getId(): ?int
     {
@@ -91,7 +95,7 @@ class MyEventApplication
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 
