@@ -9,6 +9,11 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
         url: '%env(resolve:DATABASE_URL)%'
+
+        types:
+            GenderEnumType: App\DBAL\Types\GenderEnumType
+            MyEventApplicationStatusEnumType: App\DBAL\Types\MyEventApplicationStatusEnumType
+        
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore

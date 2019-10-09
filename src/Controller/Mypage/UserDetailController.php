@@ -5,6 +5,7 @@ namespace App\Controller\Mypage;
 use App\Entity\UserDetail;
 use App\Entity\User;
 use App\Form\Type\UserDetailType;
+use App\DBAL\Types\GenderEnumType;
 use App\Repository\UserDetailRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,7 @@ class UserDetailController extends AbstractController
      */
     public function edit(Request $request): Response
     {
-        /** @var BankAccountRepository $repo */
+        /** @var UserDetailRepository $repo */
         $repo = $this->getDoctrine()->getRepository(UserDetail::class);
         $detail = $repo->findOrCreateByUser($this->getUser());
 
@@ -54,6 +55,19 @@ class UserDetailController extends AbstractController
 
         return $this->render('my_page/user_detail/edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/event", name="mypage_detail_event", methods={"GET"})
+     */
+    public function event(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('my_page/user_detail/event.html.twig', [
+
         ]);
     }
 }

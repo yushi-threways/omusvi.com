@@ -44,7 +44,6 @@ class MyEventApplicationController extends AbstractController
         }
         
         $myEventApplication = new MyEventApplication();
-        $myEventApplication->setStatus(1);
         $myEventApplication->setUser($user);
         $myEventApplication->setMyEventSchedule($schedule);
 

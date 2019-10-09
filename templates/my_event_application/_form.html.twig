@@ -1,11 +1,12 @@
 {{ form_start(form) }}
 <div class="modal-body">
-    {% if not (user.userDetail.sex == 0) %}
+    {% if (user.userDetail.gender == 'male') %}
     {{ form_row(form.menCount) }}
-    {% else %}
+    {% elseif ((user.userDetail.gender == 'female') ) %}
     {{ form_row(form.womanCount) }}
     {% endif %}
 </div>
+{{ form_rest(form) }}
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
     <button class="btn">{{ button_label|default('Confirm') }}</button>

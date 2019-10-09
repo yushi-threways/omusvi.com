@@ -3,6 +3,7 @@
 namespace App\Form\Type;
 
 use App\Entity\UserDetail;
+use App\DBAL\Types\GenderEnumType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,12 +31,9 @@ class UserDetailType extends AbstractType
                 'label' => '氏名ｶﾅ（名）',
                 'help' => '半角ｶﾀｶﾅで入力してください',
             ])
-            ->add('sex', ChoiceType::class, [
+            ->add('gender', ChoiceType::class, [
                 'label' => '性別',
-                'choices' => [
-                    "男性" => 0,
-                    "女性" => 1,
-                ],
+                'choices' => GenderEnumType::getChoices(),
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => '生年月日',
