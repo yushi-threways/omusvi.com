@@ -9,6 +9,7 @@ use App\Entity\UserDetail;
 use App\Entity\MyEventApplication;
 use App\Form\Type\MyEventApplicationMenType;
 use App\Form\Type\MyEventApplicationWomanType;
+use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,9 @@ use App\DBAL\Types\GenderEnumType;
  */
 class MyEventController extends AbstractController
 {
+
+    const SESSION_KEY = 'op_my_event'; 
+
     /**
      * @Route("/", name="my_event_index", methods={"GET"})
      */
@@ -48,25 +52,34 @@ class MyEventController extends AbstractController
         /** @var UserDetailRepository $repo */
         $repo = $this->getDoctrine()->getRepository(UserDetail::class);
         $detail = $repo->findOneBy(['user' => $user]);
-        $myEventApplication = new MyEventApplication();
-        $myEventApplication->setUser($user);
-        $myEventApplication->setMyEventSchedule($myEvent->getMyEventSchedule());
-
-        if (!$detail == null) {
-            if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
-                $form = $this->createForm(MyEventApplicationMenType::class, $myEventApplication);
-            } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
-                $form = $this->createForm(MyEventApplicationWomanType::class, $myEventApplication);
-            }
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($myEventApplication);
-                $entityManager->flush();
         
-                return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+        if (!$detail == null) {
+        $session = $request->getSession();
+        $data = $session->get(self::SESSION_KEY);
+        $data = new MyEventApplication();
+        $data->setUser($user);
+        $data->setMyEventSchedule($myEvent->getMyEventSchedule());
+        
+        if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
+            $form = $this->createForm(MyEventApplicationMenType::class, $data);
+        } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
+            $form = $this->createForm(MyEventApplicationWomanType::class, $data);
+        }
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $session->set(self::SESSION_KEY, $form->getData());
+                return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
             }
+        }
+            // if ($form->isSubmitted() && $form->isValid()) {
+            //     $entityManager = $this->getDoctrine()->getManager();
+            //     $entityManager->persist($myEventApplication);
+            //     $entityManager->flush();
+        
+            //     return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+            // }
 
             return $this->render('my_event/show.html.twig', [
                 'my_event' => $myEvent,
@@ -81,4 +94,36 @@ class MyEventController extends AbstractController
              ]);
         }
     }
+
+    /**
+     * @Route("/{id}", name="my_event_confirm", methods={"GET", "POST"})
+     */
+    public function confirm(Request $request, MyEvent $myEvent): Response
+    {
+        $session = $request->getSession();
+        $data = $session->get(self::SESSION_KEY);
+        
+        if (!$data) {
+            return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
+        }
+        
+        $form = $this->createForm(ConfirmFormType::class, $data);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($data);
+                $entityManager->flush();
+//                $templateSender->send('contact.txt.twig', array('data' => $data));
+                $session->remove(self::SESSION_KEY);
+               //return $this->render('front/contact/contact.txt.twig' , array('data' => $data));
+               return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+            }
+        }
+        return $this->render('my_event_application/confirm.html.twig', [
+            'form' => $form->createView(),
+            'myEvent' => $myEvent,
+         ]);
+    }    
 }
