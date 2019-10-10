@@ -10,14 +10,37 @@
         <div class="myapp-Content">
             <div class="myapp-Confirm">
                 <h1 class="myapp-Confirm_Title">申し込み確認画面</h1>
-                {{ form_start(form, {'method': 'post', 'action': path('my_event_application_confirm', { 'id': my_event.schedule.id }), 'attr': {'class': 'my_event_application_confirm'}}) }}
-               
-            {{ form_rest(form) }}
+                {{ data }}
+                {# {{ form_start(form, {'method': 'post', 'action': path('my_event_application_confirm', { 'id': my_event.schedule.id }), 'attr': {'class': 'my_event_application_confirm'}}) }} #}
+                {# <div class="myapp-Confirm_Inner">
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント名</p>
+                        <p class="myapp-Confirm_Name">{{ my_event.name }}</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント概要</p>
+                        <p class="myapp-Confirm_Desc">{{ my_event.description }}</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント開催日時</p>
+                        <p class="myapp-Confirm_Deta">{{ my_event.schedule.eventDay|date("n月j日 A g:i") }}〜</p>
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">イベント料金</p>
+                        {% if (user.userDetail.gender == 'male') %}
+                        <p class="myapp-Confirm_Men">{{ my_event.menPrice }}</p>
+                        {% elseif ((user.userDetail.gender == 'female')) %}
+                        <p class="myapp-Confirm_Woamn">{{ my_event.womanPrice }}</p>
+                        {% endif %}
+                    </div>    
+                </div>
+            </div> #}
+            {# {{ form_rest(form) }}
             <p class="text-center">
                     <a class="btn contact-Form_ButtonBack" href="{{ path('my_event_show', { 'id': my_event.id }) }}">戻って修正</a>
                     <button class="btn-primary btn contact-Form_ButtonCkeck" type="submit">送信する</button>
                 </p>
-            {{ form_end(form) }}
+            {{ form_end(form) }} #}
         </div>
     </section>
 {% endblock %}

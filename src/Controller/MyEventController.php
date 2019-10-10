@@ -102,7 +102,7 @@ class MyEventController extends AbstractController
     {
         $session = $request->getSession();
         $data = $session->get(self::SESSION_KEY);
-        
+
         if (!$data) {
             return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
         }
@@ -115,15 +115,16 @@ class MyEventController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($data);
                 $entityManager->flush();
-//                $templateSender->send('contact.txt.twig', array('data' => $data));
+
                 $session->remove(self::SESSION_KEY);
-               //return $this->render('front/contact/contact.txt.twig' , array('data' => $data));
+
                return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
             }
         }
         return $this->render('my_event_application/confirm.html.twig', [
             'form' => $form->createView(),
             'myEvent' => $myEvent,
+            'data' => $data,
          ]);
     }    
 }
