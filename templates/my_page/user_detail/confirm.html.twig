@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% set title = 'オミパリトップページ' %}
+{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
+{% set canonical = 'canonical' %}
+
+{% block main %}
+    <div class="myde-Content">
+    <h1 class="myde-Content_Title">ユーザー情報登録確認画面</h1>
+    {{ form_start(form, {'method': 'post', 'action': path('mypage_detail_confirm'), 'attr': {'class': 'mypage_detail_confirm'}}) }}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>氏名</th>
+                    <td>{{ detail.firstName }}　{{ detail.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>氏名カナ</th>
+                    <td>{{ detail.firstKana }}　{{ detail.lastKana }}</td>
+                </tr>
+                <tr>
+                    <th>性別</th>
+                    <td>{{ gender }}</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>{{ detail.telNumber }}</td>
+                </tr>
+            </tbody>
+        </table>
+       {{ form_rest(form) }}
+       <p class="text-center">
+            <a class="btn-lg contact-Form_ButtonBack" href="{{ path('mypage_detail_edit') }}">戻って修正</a>
+            <button class="btn-primary btn contact-Form_ButtonCkeck" type="submit">送信する</button>
+        </p>
+       {{ form_end(form) }}
+
+    </div>
+{% endblock %}

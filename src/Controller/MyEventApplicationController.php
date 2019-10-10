@@ -18,6 +18,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class MyEventApplicationController extends AbstractController
 {
+
+    const SESSION_KEY = 'op_my_event'; 
+
+
     /**
      * @param MyEventSchedule $schedule
      * @Route("/", name="my_event_application_index", methods={"GET"})
@@ -36,34 +40,33 @@ class MyEventApplicationController extends AbstractController
      */
     public function confirm(Request $request, MyEventSchedule $schedule): Response
     {
+        $session = $request->getSession();
+        $data = $session->get(self::SESSION_KEY);
 
-        /** @var User $user */
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
+        if (!$data) {
+            return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
         }
         
-        $myEventApplication = new MyEventApplication();
-        $myEventApplication->setUser($user);
-        $myEventApplication->setMyEventSchedule($schedule);
+        $form = $this->createForm(ConfirmFormType::class, $data);
 
-        $form = $this->createForm(MyEventApplicationType::class, $myEventApplication);
-        $form->handleRequest($request);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($data);
+                $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($myEventApplication);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('my_event_application_complete', ['id' => $schedule->getId()]);
-        }    
+                $session->remove(self::SESSION_KEY);
 
+               return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+            }
+        }
         return $this->render('my_event_application/confirm.html.twig', [
-            'schedule' => $schedule,
-            'user' => $user,
             'form' => $form->createView(),
-        ]);
-    }
+            'myEvent' => $myEvent,
+            'data' => $data,
+         ]);
+    }    
 
        /**
      * @param Request $request
