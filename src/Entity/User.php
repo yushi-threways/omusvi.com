@@ -36,6 +36,7 @@ class User extends BaseUser
     private $myEventApplications;
 
     /**
+     * @var UserDetail
      * @ORM\OneToOne(targetEntity="App\Entity\UserDetail", mappedBy="user", cascade={"persist", "remove"})
      */
     private $userDetail;
@@ -50,11 +51,11 @@ class User extends BaseUser
     {
         return $this->id;
     }
-    public function setEmail($email) 
+    public function setEmail($email)
     {
-    $email = is_null($email) ? '' : $email;
-    parent::setEmail($email);
-    $this->setUsername($email);
+        $email = is_null($email) ? '' : $email;
+        parent::setEmail($email);
+        $this->setUsername($email);
     }
     public function getCreatedAt(): ?\DateTimeInterface
     {

@@ -57,8 +57,8 @@ class MyEventController extends AbstractController
         $session = $request->getSession();
         $data = $session->get(self::SESSION_KEY);
         $data = new MyEventApplication();
-        $data->setUser($user);
-        $data->setMyEventSchedule($myEvent->getMyEventSchedule());
+        // $data->setUser($user);
+        // $data->setMyEventSchedule($myEvent->getMyEventSchedule());
         
         if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
             $form = $this->createForm(MyEventApplicationMenType::class, $data);
@@ -68,18 +68,11 @@ class MyEventController extends AbstractController
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $session->set(self::SESSION_KEY, $form->getData());
                 return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
             }
         }
-            // if ($form->isSubmitted() && $form->isValid()) {
-            //     $entityManager = $this->getDoctrine()->getManager();
-            //     $entityManager->persist($myEventApplication);
-            //     $entityManager->flush();
-        
-            //     return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
-            // }
 
             return $this->render('my_event/show.html.twig', [
                 'my_event' => $myEvent,
