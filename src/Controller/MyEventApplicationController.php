@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\MyEventApplication;
 use App\Entity\MyEventSchedule;
+use App\Entity\UserDetail;
 use App\Form\Type\MyEventApplicationType;
+use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventApplicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +20,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class MyEventApplicationController extends AbstractController
 {
-
-    const SESSION_KEY = 'op_my_event'; 
-
+    const SESSION_KEY = 'op_my_event';
 
     /**
      * @param MyEventSchedule $schedule
@@ -44,31 +44,36 @@ class MyEventApplicationController extends AbstractController
         $data = $session->get(self::SESSION_KEY);
 
         if (!$data) {
-            return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
+            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getMyEvent->getId()]);
         }
-        
+
+        $user = $this->getUser();
+
         $form = $this->createForm(ConfirmFormType::class, $data);
+        $form->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($data);
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var User $user */
+            $data->setUser($user);
+            $data->setMyEventSchedule($schedule);
+        
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($data);
+            $entityManager->flush();
 
-                $session->remove(self::SESSION_KEY);
-
-               return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
-            }
+            $session->set(self::SESSION_KEY, $form->getData());
+            return $this->redirectToRoute('my_event_application_complete', ['id' => $schedule->getId()]);
         }
+
         return $this->render('my_event_application/confirm.html.twig', [
             'form' => $form->createView(),
-            'myEvent' => $myEvent,
+            'schedule' => $schedule,
             'data' => $data,
+            'detail' => $user->getUserDetail(),
          ]);
-    }    
+    }
 
-       /**
+    /**
      * @param Request $request
      * @param MyEventSchedule $schedule
      *
@@ -76,14 +81,16 @@ class MyEventApplicationController extends AbstractController
      */
     public function complete(Request $request, MyEventSchedule $schedule)
     {
-         /** @var User $user */
-         $user = $this->getUser();
-         if (!is_object($user) || !$user instanceof UserInterface) {
-             throw new AccessDeniedException('This user does not have access to this section.');
-         }
+        $session = $request->getSession();
+        $data = $session->get(self::SESSION_KEY);
 
+        if (!$data) {
+            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getId()]);
+        }
+
+        $session->remove(self::SESSION_KEY);
         return $this->render('my_event_application/complete.html.twig', [
-            'schedule' => $schedule,
-        ]);   
+            'schedule' => $schedule
+        ]);
     }
 }

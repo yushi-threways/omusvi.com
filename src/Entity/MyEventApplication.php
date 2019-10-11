@@ -20,7 +20,7 @@ class MyEventApplication
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="myEventApplications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="myEventApplications", cascade={"persist"})
      */
     private $user;
 
