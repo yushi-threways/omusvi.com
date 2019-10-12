@@ -1,0 +1,15 @@
+{% use '_email/base.txt.twig' %}
+
+{% block subject %}イベント申し込み確認メール{% endblock %}
+{% block from %}noreplay@example.com{% endblock %}
+{% block to %}{{ data.user.email }}{% endblock %}
+{% block bcc %}{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+
+イベントお申し込みありがとうございます。
+
+
+{% endautoescape %}
+{% endblock %}

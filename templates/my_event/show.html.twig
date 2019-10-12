@@ -10,7 +10,6 @@
         <div class="me-Detail">
             <div class="me-Detail_Inner">
                 <div class="me-Detail_Img">
-                {{ user }}
                 <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
                 </div>
                 <h1 class="me-Detail_Title">
@@ -207,6 +206,11 @@
 </div>
 <div class="me-Applicatin_Btn">
 {% if is_granted('ROLE_USER') %}
+    {% if my_event.isApplied(user) %}
+     <a href="{{ path('mypage_detail_edit') }}" class="btn btn-dark">
+        すでに申込み済です
+    </a>
+    {% else %}
     {% if user.userDetail %}
     <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
         イベントに申し込む
@@ -215,6 +219,7 @@
     <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
         申し込むには詳細情報を登録してください
     </a>
+    {% endif %}
     {% endif %}
 {% else %}
     <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_Btn-login">

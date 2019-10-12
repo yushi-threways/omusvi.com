@@ -357,4 +357,20 @@ class MyEvent
         return $this;
     }
 
+     /**
+     * @param User $user
+     * @return bool
+     */
+    public function isApplied(User $user)
+    {
+        $schedule = $this->getMyEventSchedule();
+        foreach ($schedule->getMyEventApplications() as $application)
+        {
+            if ($application->getUser() == $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
