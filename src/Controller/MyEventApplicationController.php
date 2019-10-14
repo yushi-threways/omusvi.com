@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\UserBundle\Model\UserInterface;
+use App\Service\Mailer\TwigSwiftMailer;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -38,7 +39,7 @@ class MyEventApplicationController extends AbstractController
      * @param MyEventSchedule $schedule
      * @Route("/confirm", name="my_event_application_confirm")
      */
-    public function confirm(Request $request, MyEventSchedule $schedule): Response
+    public function confirm(Request $request, MyEventSchedule $schedule, TwigSwiftMailer $mailer): Response
     {
         $session = $request->getSession();
         $data = $session->get(self::SESSION_KEY);
@@ -61,6 +62,10 @@ class MyEventApplicationController extends AbstractController
             $entityManager->persist($data);
             $entityManager->flush();
 
+            $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
+                'data' => $data,
+            ]);
+
             $session->set(self::SESSION_KEY, $form->getData());
             return $this->redirectToRoute('my_event_application_complete', ['id' => $schedule->getId()]);
         }
@@ -76,6 +81,7 @@ class MyEventApplicationController extends AbstractController
     /**
      * @param Request $request
      * @param MyEventSchedule $schedule
+     * @param TwigSwiftMailer $mailer
      *
      * @Route("/complete", name="my_event_application_complete")
      */
