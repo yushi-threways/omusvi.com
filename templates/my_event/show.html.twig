@@ -207,7 +207,7 @@
 <div class="me-Applicatin_Btn">
 {% if is_granted('ROLE_USER') %}
     {% if my_event.isApplied(user) %}
-     <a href="{{ path('mypage_detail_edit') }}" class="btn btn-dark">
+     <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
         すでに申込み済です
     </a>
     {% else %}

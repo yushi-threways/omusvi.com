@@ -9,6 +9,65 @@
     <div class="my-Content">
         <div class="my-Content_Inner">
             <div class="">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab">申し込み中イベント</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab">申し込み済イベント</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab">参加したイベント</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                <div id="photo1" class="tab-pane active">
+                    {% set myEvent = "" %}
+                    {% set userDetail = "" %}
+                    {% for appliedEvent in appliedEvents %}
+                    {% set myEvent = appliedEvent.myEventSchedule.myEvent %}
+                    {% set userDetail = appliedEvent.user.userDetail %}
+                        <div class="my-Applied">
+                            <div class="my-Applied_Image">
+                                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
+                            </div>
+                            <div class="my-Applied_Unit">
+                                <p class="my-Applied_Name"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a></p>
+                                <div class="my-Applied_Info">
+                                    {% if userDetail.gender == 'male' %}
+                                    {% set menTotalPay = myEvent.menPrice * appliedEvent.menCount %}
+                                    <div class="my-Applied_InfoInner">
+                                        <div class="my-Applied_Count">参加人数：{{ appliedEvent.menCount }}</div>
+                                        <div class="my-Applied_Price">参加料金：{{ myEvent.menPrice|number_format }}円</div>
+                                    </div>
+                                    <div class="my-Applied_Total">合計料金：{{ menTotalPay|number_format }}円<br>
+                                    <a href=""><small>振込先を表示</small></a></div>
+                                    {% elseif userDetail.gender == 'female' %}
+                                    {% set womanTotalPay = myEvent.womanPrice * appliedEvent.womanCount %}
+                                    <div class="my-Applied_InfoInner">
+                                        <div class="my-Applied_Count">参加人数：{{ appliedEvent.womanCount }}</div>
+                                        <div class="my-Applied_Price">参加料金：{{ myEvent.womanPrice|number_format }}円</div>
+                                    </div>
+                                    <div class="my-Applied_Total">合計料金：{{ womanTotalPay|number_format }}円<br>
+                                    <a href=""><small>振込先を表示</small></a></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="my-Applied_Paied">
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myAppliedModal">
+                                入金報告
+                                </button>                            
+                            </div>
+                        </div>
+                    {% endfor %}   
+                </div>
+                <div id="photo2" class="tab-pane">
+                    <img src="images/photo2.jpg" class="img-fluid" alt="" />
+                </div>
+                <div id="photo3" class="tab-pane">
+                    <img src="images/photo3.jpg" class="img-fluid" alt="" />
+                </div>
+                </div>    
             </div>
             <ul class="my-Content_List">
                 <li class="my-Content_Item">
@@ -32,4 +91,30 @@
         </div>
     </div>
 </secton>
+
+<!-- モーダルの設定 -->
+<div class="modal fade" id="myAppliedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+        イベントの参加料金の支払いが終わりましたら下のボタンから入金報告をお願いいたします。<br>
+        入金が確認できましたらメールでお知らさせていただきますのでしばらくお待ちくださいませ。<br>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm js-application-applied" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn btn-info btn-sm">入金報告をする</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}
