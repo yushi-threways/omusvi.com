@@ -45,6 +45,28 @@ class MyEventApplicationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    /**
+    * @param User $user
+    * @return \Doctrine\ORM\QueryBuilder
+    */
+    public function getAcceptedEventQuery(User $user)
+    {
+        $qb = $this->createQueryBuilder('ma');
+        $qb->where('ma.user = :user')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('ma.status', ':ACCEPTED')
+                )
+            )
+            ->setParameters([
+                'user' => $user,
+                'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
+            ])
+        ;
+        
+        return $qb;
+    }
+
     /*
     public function findOneBySomeField($value): ?MyEventApplication
     {

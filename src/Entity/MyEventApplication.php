@@ -194,26 +194,24 @@ class MyEventApplication
         return $event;
     }
 
-    public function isApplied(): bool 
+    public function isApplied(): bool
     {
-        return $this->status = MyEventApplicationStatusEnumType::APPLIED;
-  
+        return $this->status == MyEventApplicationStatusEnumType::APPLIED;
     }
-    public function isPaied(): bool 
+    public function isPaied(): bool
     {
-        return $this->status == MyEventApplicationStatusEnumType::PAIED;     
+        return $this->status == MyEventApplicationStatusEnumType::PAIED;
     }
-    public function isAccepted(): bool 
+    public function isAccepted(): bool
     {
-        return $this->status = MyEventApplicationStatusEnumType::ACCEPTED;
+        return $this->status == MyEventApplicationStatusEnumType::ACCEPTED;
     }
-    public function isCanceled(): bool 
+    public function isCanceled(): bool
     {
-        return $this->status = MyEventApplicationStatusEnumType::CANCELED;
+        return $this->status == MyEventApplicationStatusEnumType::CANCELED;
     }
-    public function isRejected(): bool 
+    public function isRejected(): bool
     {
-        return $this->status = MyEventApplicationStatusEnumType::REJECTED;
+        return $this->status == MyEventApplicationStatusEnumType::REJECTED;
     }
-
 }

@@ -11,68 +11,23 @@
             <div class="">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab">申し込み中イベント</a>
+                        <a href="#applied" class="nav-link active" data-toggle="tab">申し込み中イベント</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab">申し込み済イベント</a>
+                        <a href="#accepted" class="nav-link" data-toggle="tab">申し込み済イベント</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab">参加したイベント</a>
+                        <a href="#past_event" class="nav-link" data-toggle="tab">参加したイベント</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                <div id="photo1" class="tab-pane active">
-                    {% set myEvent = "" %}
-                    {% set userDetail = "" %}
-                    {% for appliedEvent in appliedEvents %}
-                    {% set myEvent = appliedEvent.myEventSchedule.myEvent %}
-                    {% set userDetail = appliedEvent.user.userDetail %}
-                        <div class="my-Applied">
-                            <div class="my-Applied_Image">
-                                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
-                            </div>
-                            <div class="my-Applied_Unit">
-                                <p class="my-Applied_Name"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a></p>
-                                <div class="my-Applied_Info">
-                                    {% if userDetail.gender == 'male' %}
-                                    {% set menTotalPay = myEvent.menPrice * appliedEvent.menCount %}
-                                    <div class="my-Applied_InfoInner">
-                                        <div class="my-Applied_Count">参加人数：{{ appliedEvent.menCount }}</div>
-                                        <div class="my-Applied_Price">参加料金：{{ myEvent.menPrice|number_format }}円</div>
-                                    </div>
-                                    <div class="my-Applied_Total">合計料金：{{ menTotalPay|number_format }}円<br>
-                                    <a href=""><small>振込先を表示</small></a></div>
-                                    {% elseif userDetail.gender == 'female' %}
-                                    {% set womanTotalPay = myEvent.womanPrice * appliedEvent.womanCount %}
-                                    <div class="my-Applied_InfoInner">
-                                        <div class="my-Applied_Count">参加人数：{{ appliedEvent.womanCount }}</div>
-                                        <div class="my-Applied_Price">参加料金：{{ myEvent.womanPrice|number_format }}円</div>
-                                    </div>
-                                    <div class="my-Applied_Total">合計料金：{{ womanTotalPay|number_format }}円<br>
-                                    <a href=""><small>振込先を表示</small></a></div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="my-Applied_Paied">
-                                {% if isApplied(appliedEvent) %}
-                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myAppliedModal">
-                                入金報告
-                                </button>    
-                                {% elseif isPaied(appliedEvent) %}
-                                <button type="button" class="btn btn-outline-primary btn-sm" disabled data-toggle="modal" data-target="#myAppliedModal">
-                                振込確認中
-                                </button> 
-                                {% endif %}
-                                {{ dump(appliedEvent) }} 
-                            </div>
-                        </div>
-                        {% include 'my_page/my_event_application/_applied_form.html.twig' with {'appliedEvent': appliedEvent} %}
-                    {% endfor %}
+                <div id="applied" class="tab-pane active">
+                    {% include 'my_page/my_event_application/_applied.html.twig' %}                   
                 </div>
-                <div id="photo2" class="tab-pane">
-                    <img src="images/photo2.jpg" class="img-fluid" alt="" />
+                <div id="accepted" class="tab-pane">
+                    {% include 'my_page/my_event_application/_accepted.html.twig' %}
                 </div>
-                <div id="photo3" class="tab-pane">
+                <div id="past_event" class="tab-pane">
                     <img src="images/photo3.jpg" class="img-fluid" alt="" />
                 </div>
                 </div>    

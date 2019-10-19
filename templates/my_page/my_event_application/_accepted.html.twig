@@ -1,0 +1,43 @@
+{% set myEvent = "" %}
+                    {% set userDetail = "" %}
+                    {% for acceptedEvent in acceptedEvents %}
+                    {% set myEvent = acceptedEvent.myEventSchedule.myEvent %}
+                    {% set userDetail = acceptedEvent.user.userDetail %}
+                        <div class="my-Accepted">
+                            <div class="my-Accepted_Image">
+                                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
+                            </div>
+                            <div class="my-Accepted_Unit">
+                                <p class="my-Accepted_Name"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a></p>
+                                <div class="my-Accepted_Info">
+                                    {% if userDetail.gender == 'male' %}
+                                    {% set menTotalPay = myEvent.menPrice * acceptedEvent.menCount %}
+                                    <div class="my-Accepted_InfoInner">
+                                        <div class="my-Accepted_Count">参加人数：{{ acceptedEvent.menCount }}</div>
+                                        <div class="my-Accepted_Price">参加料金：{{ myEvent.menPrice|number_format }}円</div>
+                                    </div>
+                                    <div class="my-Accepted_Total">合計料金：{{ menTotalPay|number_format }}円<br>
+                                    <a href=""><small>振込先を表示</small></a></div>
+                                    {% elseif userDetail.gender == 'female' %}
+                                    {% set womanTotalPay = myEvent.womanPrice * acceptedEvent.womanCount %}
+                                    <div class="my-Accepted_InfoInner">
+                                        <div class="my-Accepted_Count">参加人数：{{ acceptedEvent.womanCount }}</div>
+                                        <div class="my-Accepted_Price">参加料金：{{ myEvent.womanPrice|number_format }}円</div>
+                                    </div>
+                                    <div class="my-Accepted_Total">合計料金：{{ womanTotalPay|number_format }}円<br>
+                                    <a href=""><small>振込先を表示</small></a></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if not isCanceled(acceptedEvent) %}
+                            <div class="my-Accepted_Canceled">
+                                <button type="button" class="btn-outline-danger btn-sm" data-toggle="modal" data-target="#myAcceptedModal-{{ loop.index }}">
+                                申し込みキャンセル
+                                </button>
+                            </div>                                
+                            {% endif %} 
+                        </div>
+                            
+                        {% else %}
+                            <p class="my-Content_Event-none">現在申し込みが完了したイベントがありません。</p>
+                    {% endfor %}

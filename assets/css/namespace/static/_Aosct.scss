@@ -1,0 +1,20 @@
+.static-Aosct_Table {
+    tr {
+        @include font-size(1３３px);
+        &:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+        th {
+            min-width: 6em;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        td {
+            min-width: 6em;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+    }
+}

@@ -32,17 +32,29 @@ class MyPageController extends AbstractController
             return $this->redirectToRoute('mypage_detail_edit');
         }
 
-        $form = $this->createForm(PaiedFormType::class);
-        $form->handleRequest($request);
+        $paiedForm = $this->createForm(PaiedFormType::class);
+        $paiedForm->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($paiedForm->isSubmitted()) {
             return $this->redirectToRoute('mypage_event_application_applied');
         }
 
+        $canceledForm = $this->createForm(CanceledFormType::class);
+        $canceledForm->handleRequest($request);
+
+        if ($canceledForm->isSubmitted()) {
+            return $this->redirectToRoute('mypage_event_application_applied');
+        }
+
+        $this->submitPaiedForm();
+
+
         return $this->render('my_page/index.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'paiedForm' => $paiedForm->createView(),
+            'canceledForm' => $canceledForm->createView(),
             'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
+            'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
         ]);
     }
 
@@ -85,5 +97,32 @@ class MyPageController extends AbstractController
 
             $this->addFlash('success', '入金報告が送信されました。確認しておりますのでしばらくお待ちください。');
             return $this->redirectToRoute('app_mypage_mypage_index');
+    }
+
+    /**
+     * @param Request $request
+     * @param MyEventApplication $application
+     * @Route("/event/application/{id}/applied", name="mypage_event_application_applied", methods={"POST"})
+     */
+    public function eventPaied(Request $request, MyEventApplication $application, TwigSwiftMailer $mailer): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user == $application->getUser()) {
+            $this->addFlash('warning', 'キャンセルができません。お問い合わせから直接ご連絡お願いいたします。');
+            return $this->redirectToRoute('app_mypage_mypage_index');
         }
+
+        $application->setStatus(MyEventApplicationStatusEnumType::CANCELED);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+
+        $mailer->sendMessage('_email/my_event_application/canceled.txt.twig', [
+            'application' => $application,
+        ]);
+
+            $this->addFlash('success', 'イベント参加のキャンセルが送信されました。メールを送信しましたのでご確認お願いいたします。');
+            return $this->redirectToRoute('app_mypage_mypage_index');
+    }
 }
