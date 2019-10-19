@@ -54,12 +54,20 @@
                                 </div>
                             </div>
                             <div class="my-Applied_Paied">
+                                {% if isApplied(appliedEvent) %}
                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myAppliedModal">
                                 入金報告
-                                </button>                            
+                                </button>    
+                                {% elseif isPaied(appliedEvent) %}
+                                <button type="button" class="btn btn-outline-primary btn-sm" disabled data-toggle="modal" data-target="#myAppliedModal">
+                                振込確認中
+                                </button> 
+                                {% endif %}
+                                {{ dump(appliedEvent) }} 
                             </div>
                         </div>
-                    {% endfor %}   
+                        {% include 'my_page/my_event_application/_applied_form.html.twig' with {'appliedEvent': appliedEvent} %}
+                    {% endfor %}
                 </div>
                 <div id="photo2" class="tab-pane">
                     <img src="images/photo2.jpg" class="img-fluid" alt="" />
@@ -91,30 +99,8 @@
         </div>
     </div>
 </secton>
-
-<!-- モーダルの設定 -->
-<div class="modal fade" id="myAppliedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>
-        イベントの参加料金の支払いが終わりましたら下のボタンから入金報告をお願いいたします。<br>
-        入金が確認できましたらメールでお知らさせていただきますのでしばらくお待ちくださいませ。<br>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm js-application-applied" data-dismiss="modal">閉じる</button>
-        <button type="button" class="btn btn btn-info btn-sm">入金報告をする</button>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
 
 {% block javascript %}
+    {{ parent() }}
 {% endblock %}

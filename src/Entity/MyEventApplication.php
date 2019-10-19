@@ -193,4 +193,27 @@ class MyEventApplication
         $event = $this->getMyEventSchedule()->getEvent();
         return $event;
     }
+
+    public function isApplied(): bool 
+    {
+        return $this->status = MyEventApplicationStatusEnumType::APPLIED;
+  
+    }
+    public function isPaied(): bool 
+    {
+        return $this->status == MyEventApplicationStatusEnumType::PAIED;     
+    }
+    public function isAccepted(): bool 
+    {
+        return $this->status = MyEventApplicationStatusEnumType::ACCEPTED;
+    }
+    public function isCanceled(): bool 
+    {
+        return $this->status = MyEventApplicationStatusEnumType::CANCELED;
+    }
+    public function isRejected(): bool 
+    {
+        return $this->status = MyEventApplicationStatusEnumType::REJECTED;
+    }
+
 }

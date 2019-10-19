@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\MyEventApplicationRepository;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use App\Entity\MyEventApplication;
+use App\Service\Mailer\TwigSwiftMailer;
+use App\Form\Type\PaiedFormType;
 
 /**
  * @Route("/mypage")
@@ -19,7 +21,7 @@ class MyPageController extends AbstractController
      * @Route("/")
      * @param MyEventApplicationRepository $myEventApplicationRepository
      */
-    public function index(MyEventApplicationRepository $myEventApplicationRepository)
+    public function index(MyEventApplicationRepository $myEventApplicationRepository, Request $request)
     {
 
         /** @var User $user */
@@ -30,8 +32,16 @@ class MyPageController extends AbstractController
             return $this->redirectToRoute('mypage_detail_edit');
         }
 
+        $form = $this->createForm(PaiedFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            return $this->redirectToRoute('mypage_event_application_applied');
+        }
+
         return $this->render('my_page/index.html.twig', [
             'user' => $user,
+            'form' => $form->createView(),
             'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
         ]);
     }
@@ -54,7 +64,7 @@ class MyPageController extends AbstractController
      * @param MyEventApplication $application
      * @Route("/event/application/{id}/applied", name="mypage_event_application_applied", methods={"POST"})
      */
-    public function eventApplied(Request $request, MyEventApplication $application): Response
+    public function eventApplied(Request $request, MyEventApplication $application, TwigSwiftMailer $mailer): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -64,9 +74,16 @@ class MyPageController extends AbstractController
             return $this->redirectToRoute('app_mypage_mypage_index');
         }
 
-        $application->serStatus(MyEventApplicationStatusEnumType::PAIED);
+        $application->setStatus(MyEventApplicationStatusEnumType::PAIED);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($application);
+        // $entityManager->persist($application);
         $entityManager->flush();
-    }
+
+        $mailer->sendMessage('_email/my_event_application/paied.txt.twig', [
+            'application' => $application,
+        ]);
+
+            $this->addFlash('success', '入金報告が送信されました。確認しておりますのでしばらくお待ちください。');
+            return $this->redirectToRoute('app_mypage_mypage_index');
+        }
 }

@@ -1,0 +1,15 @@
+{% use '_email/base.txt.twig' %}
+
+{% block subject %}イベント申し込み確認メール{% endblock %}
+{% block from %}noreplay@example.com{% endblock %}
+{% block to %}{{ application.user.email }}{% endblock %}
+{% block bcc %}{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+
+参加料金報告受付ました。
+認証には最大2日ほどかかる場合がございますのでしばらくお待ちくださいませ。
+
+{% endautoescape %}
+{% endblock %}

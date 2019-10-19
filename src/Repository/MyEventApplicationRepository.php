@@ -32,13 +32,13 @@ class MyEventApplicationRepository extends ServiceEntityRepository
             ->andWhere(
                 $qb->expr()->orX(
                     $qb->expr()->eq('ma.status', ':APPLIED'),
-                    $qb->expr()->eq('ma.status', ':ACCEPTED')
+                    $qb->expr()->eq('ma.status', ':PAIED')
                 )
             )
             ->setParameters([
                 'user' => $user,
                 'APPLIED' => MyEventApplicationStatusEnumType::APPLIED,
-                'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
+                'PAIED' => MyEventApplicationStatusEnumType::PAIED,
             ])
         ;
         
