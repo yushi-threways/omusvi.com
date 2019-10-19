@@ -25,7 +25,7 @@
                                         <div class="my-Accepted_Price">参加料金：{{ myEvent.womanPrice|number_format }}円</div>
                                     </div>
                                     <div class="my-Accepted_Total">合計料金：{{ womanTotalPay|number_format }}円<br>
-                                    <a href=""><small>振込先を表示</small></a></div>
+                                    <a href=""><small>キャンセル料を確認する</small></a></div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                             </div>                                
                             {% endif %} 
                         </div>
-                            
+                        {% include 'my_page/my_event_application/_accepted_form.html.twig' with {'acceptedEvent': acceptedEvent} %}                            
                         {% else %}
                             <p class="my-Content_Event-none">現在申し込みが完了したイベントがありません。</p>
                     {% endfor %}

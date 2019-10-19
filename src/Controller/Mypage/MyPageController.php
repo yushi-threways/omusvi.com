@@ -11,6 +11,7 @@ use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use App\Entity\MyEventApplication;
 use App\Service\Mailer\TwigSwiftMailer;
 use App\Form\Type\PaiedFormType;
+use App\Form\Type\CanceledFormType;
 
 /**
  * @Route("/mypage")
@@ -43,11 +44,8 @@ class MyPageController extends AbstractController
         $canceledForm->handleRequest($request);
 
         if ($canceledForm->isSubmitted()) {
-            return $this->redirectToRoute('mypage_event_application_applied');
+            return $this->redirectToRoute('mypage_event_application_canceled');
         }
-
-        $this->submitPaiedForm();
-
 
         return $this->render('my_page/index.html.twig', [
             'user' => $user,
@@ -102,7 +100,7 @@ class MyPageController extends AbstractController
     /**
      * @param Request $request
      * @param MyEventApplication $application
-     * @Route("/event/application/{id}/applied", name="mypage_event_application_applied", methods={"POST"})
+     * @Route("/event/application/{id}/canceled", name="mypage_event_application_canceled", methods={"POST"})
      */
     public function eventPaied(Request $request, MyEventApplication $application, TwigSwiftMailer $mailer): Response
     {
@@ -115,6 +113,7 @@ class MyPageController extends AbstractController
         }
 
         $application->setStatus(MyEventApplicationStatusEnumType::CANCELED);
+        $application->setCancelled(new \DateTime());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 

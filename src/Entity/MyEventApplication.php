@@ -56,6 +56,11 @@ class MyEventApplication
      */
     private $womanCount;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $cancelled;
+
     public function __construct()
     {
         $this->status = MyEventApplicationStatusEnumType::APPLIED;
