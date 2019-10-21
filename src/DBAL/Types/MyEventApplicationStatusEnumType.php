@@ -8,12 +8,14 @@ use Fresh\DoctrineEnumBundle\DBAL\Types\AbstractEnumType;
 class MyEventApplicationStatusEnumType extends AbstractEnumType
 {
     public const APPLIED = 'applied';
+    public const PAIED = 'paied';
     public const CANCELED = 'canceled';
     public const ACCEPTED = 'accepted';
     public const REJECTED = 'rejected';
 
     protected static $choices = [
         self::APPLIED => 'ユーザー申し込み',
+        self::PAIED => 'ユーザー支払い完了',
         self::CANCELED => 'キャンセル',
         self::ACCEPTED => '申し込み完了',
         self::REJECTED => '却下',

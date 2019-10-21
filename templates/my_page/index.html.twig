@@ -9,6 +9,28 @@
     <div class="my-Content">
         <div class="my-Content_Inner">
             <div class="">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#applied" class="nav-link active" data-toggle="tab">申し込み中イベント</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#accepted" class="nav-link" data-toggle="tab">申し込み済イベント</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#past_event" class="nav-link" data-toggle="tab">参加したイベント</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                <div id="applied" class="tab-pane active">
+                    {% include 'my_page/my_event_application/_applied.html.twig' %}                   
+                </div>
+                <div id="accepted" class="tab-pane">
+                    {% include 'my_page/my_event_application/_accepted.html.twig' %}
+                </div>
+                <div id="past_event" class="tab-pane">
+                    <img src="images/photo3.jpg" class="img-fluid" alt="" />
+                </div>
+                </div>    
             </div>
             <ul class="my-Content_List">
                 <li class="my-Content_Item">
@@ -32,4 +54,8 @@
         </div>
     </div>
 </secton>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
 {% endblock %}

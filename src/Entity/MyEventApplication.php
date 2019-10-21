@@ -56,6 +56,11 @@ class MyEventApplication
      */
     private $womanCount;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $cancelled;
+
     public function __construct()
     {
         $this->status = MyEventApplicationStatusEnumType::APPLIED;
@@ -177,5 +182,41 @@ class MyEventApplication
         $this->cancelled = $cancelled;
 
         return $this;
+    }
+
+    public function getMenPrice()
+    {
+        $this->getEvent();
+    }
+
+    public function getWomanPrice()
+    {
+    }
+
+    public function getEvent()
+    {
+        $event = $this->getMyEventSchedule()->getEvent();
+        return $event;
+    }
+
+    public function isApplied(): bool
+    {
+        return $this->status == MyEventApplicationStatusEnumType::APPLIED;
+    }
+    public function isPaied(): bool
+    {
+        return $this->status == MyEventApplicationStatusEnumType::PAIED;
+    }
+    public function isAccepted(): bool
+    {
+        return $this->status == MyEventApplicationStatusEnumType::ACCEPTED;
+    }
+    public function isCanceled(): bool
+    {
+        return $this->status == MyEventApplicationStatusEnumType::CANCELED;
+    }
+    public function isRejected(): bool
+    {
+        return $this->status == MyEventApplicationStatusEnumType::REJECTED;
     }
 }

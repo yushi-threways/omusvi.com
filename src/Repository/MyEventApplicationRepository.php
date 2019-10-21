@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\MyEventApplication;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
 
 /**
  * @method MyEventApplication|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +21,51 @@ class MyEventApplicationRepository extends ServiceEntityRepository
         parent::__construct($registry, MyEventApplication::class);
     }
 
-    // /**
-    //  * @return MyEventApplication[] Returns an array of MyEventApplication objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param User $user
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getAppliedEventQuery(User $user)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('ma');
+        $qb->where('ma.user = :user')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('ma.status', ':APPLIED'),
+                    $qb->expr()->eq('ma.status', ':PAIED')
+                )
+            )
+            ->setParameters([
+                'user' => $user,
+                'APPLIED' => MyEventApplicationStatusEnumType::APPLIED,
+                'PAIED' => MyEventApplicationStatusEnumType::PAIED,
+            ])
         ;
+        
+        return $qb;
     }
+
+    /**
+    * @param User $user
+    * @return \Doctrine\ORM\QueryBuilder
     */
+    public function getAcceptedEventQuery(User $user)
+    {
+        $qb = $this->createQueryBuilder('ma');
+        $qb->where('ma.user = :user')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('ma.status', ':ACCEPTED')
+                )
+            )
+            ->setParameters([
+                'user' => $user,
+                'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
+            ])
+        ;
+        
+        return $qb;
+    }
 
     /*
     public function findOneBySomeField($value): ?MyEventApplication

@@ -1,0 +1,41 @@
+.my-Applied {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0 15px;
+    margin: 0 auto 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+.my-Applied_Image { 
+    width: 25%;
+    img {
+        vertical-align: bottom;
+        margin: 0 auto;
+    }
+}
+.my-Applied_Unit {
+    width: 50%;
+    padding: 0 10px;
+}
+.my-Applied_Name {
+    margin: 0 auto;
+    padding: 0 0 5px 0;
+    font-weight: bold;
+    
+}
+.my-Applied_Info {
+    display: flex;
+    align-items: center;
+    @include font-size(14px);
+}
+.my-Applied_InfoInner {
+    padding: 3px 20px 3px 0;
+    border-right:  1px solid #dee2e6;
+}
+.my-Applied_Total {
+    padding: 0 0 0 15px;    
+}
+.my-Applied_Paied {
+    width: 25%;
+    text-align: center;
+}
