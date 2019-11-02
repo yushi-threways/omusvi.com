@@ -51,12 +51,12 @@ class MyEventSchedule
     private $textTerms;
 
     /**
-     * @ORM\Column(type="date_immutable")
+     * @ORM\Column(type="time")
      */
     private $startTime;
 
     /**
-     * @ORM\Column(type="date_immutable")
+     * @ORM\Column(type="date")
      */
     private $eventDay;
 
@@ -78,8 +78,8 @@ class MyEventSchedule
     public function __construct()
     {
         $this->myEventApplications = new ArrayCollection();
-        $this->startTime = new \DateTimeImmutable();
-        $this->eventDay = new \DateTimeImmutable();
+        $this->startTime = new \Time();
+        $this->eventDay = new \Date();
     }
 
     public function getId(): ?int
@@ -157,24 +157,24 @@ class MyEventSchedule
         return $this;
     }
    
-    public function getStartTime(): ?\DateTimeInterface
+    public function getStartTime(): ?\Time
     {
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): self
+    public function setStartTime(\Time $startTime): self
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEventDay(): ?\DateTimeInterface
+    public function getEventDay(): ?\Date
     {
         return $this->eventDay;
     }
 
-    public function setEventDay(\DateTimeInterface $eventDay): self
+    public function setEventDay(\Date $eventDay): self
     {
         $this->eventDay = $eventDay;
 
