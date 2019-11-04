@@ -12,16 +12,10 @@
 }
 .me-Detail_Img {
     margin: 0 auto 3px;
-    a {
-        color: #58595B;
-        display: block;
-        max-width: 640px;
-        text-align: center;
-        background-color: rgb(236, 236, 236);
-        img {
-            margin: 0 auto;
-            vertical-align: bottom;
-        }
+    img {
+        max-width: 100%;
+        margin: 0 auto;
+        vertical-align: bottom;
     }
 }
 .me-Detail_Title {
