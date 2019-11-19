@@ -3,22 +3,24 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Trait Timestampable
  * @package App\Entity
- * @ORM\HasLifecycleCallbacks
  */
 trait Timestampable
 {
     /**
      * @var \DateTimeImmutable | null
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
      */
     protected $createdAt;
 
     /**
      * @var \DateTimeImmutable | null
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
      */
     protected $updatedAt;
@@ -67,24 +69,5 @@ trait Timestampable
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
-        return $this;
-    }
-
-    /**
-     * @ORM\PostUpdate()
-     */
-    public function onPostUpdate()
-    {
-        $this->updatedAt = new \DateTimeImmutable();
-        return $this;
     }
 }

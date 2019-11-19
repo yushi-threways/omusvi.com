@@ -12,8 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Tag
 {
 
-    use Timestampable;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

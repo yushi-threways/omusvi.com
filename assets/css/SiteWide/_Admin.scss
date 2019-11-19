@@ -1,0 +1,73 @@
+.sw-Admin {
+
+}
+
+.sw-Admin_Btn-link {
+  display: inline-block;
+  padding: 8px 10px;
+  text-align: center;
+  background-color: $color__admin-blue;
+  @include font-size(14px);
+  color: #fff;
+  &:hover {
+    opacity: 0.8;
+    color: #fff;
+  }
+}
+
+.sw-Admin_Menu {
+  margin: 0 auto 30px;
+}
+.sw-Admin_List {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+.sw-Admin_ListItem {
+  width: 20%;
+  @include media-breakpoint-down(sm){
+    width: 50%;
+  }
+  a {
+    width: 90%;
+  }
+}
+
+.sw-Admin_TopEvent {
+
+}
+.sw-Admin_TopEvent-inner {
+
+}
+.sw-Admin_TopEvent-content {
+
+}
+.sw-Admin_TopEvent-image {
+  a {
+    img {
+      max-width: 100%;
+      margin: 0 auto;
+      vertical-align: bottom;
+    }
+  }
+}
+.sw-Admin_TopEvent-title {
+  @include font-size(18px);
+  font-weight: bold;
+  margin: 0 auto 10px;
+}
+.sw-Admin_TopEvent-info {
+
+}
+.sw-Admin_TopEvent-desc {
+
+}
+.sw-Admin_TopEvent-date {
+
+}
+.sw-Admin_TopEvent-price {
+
+}

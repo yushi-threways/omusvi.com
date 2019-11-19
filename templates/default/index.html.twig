@@ -61,6 +61,9 @@
                 {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
+    {% else %}
+        <p>現在開催中のイベントはございません。</p>
     {% endfor %}
+
 </section>
 {% endblock %}

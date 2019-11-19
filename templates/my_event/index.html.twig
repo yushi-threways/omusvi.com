@@ -20,7 +20,7 @@
                 </h1>
                 <div class="sw-Event_Info">
                 <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
-                <sapn class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
                 </div>
                 <div class="sw-Event_Person">
                     <div class="sw-Event_Person-woman">
@@ -61,6 +61,8 @@
                 {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
-    {% endfor %}
+    {% else %}
+        <p>現在開催中のイベントはございません。</p>
+        {% endfor %}
 </section>
 {% endblock %}

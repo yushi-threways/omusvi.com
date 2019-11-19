@@ -181,7 +181,7 @@ class MyEventSchedule
      * @return $this
      */
 
-    public function setStartTime(\DateTimeImmutable $startTime): ?\DateTimeImmutable
+    public function setStartTime(\DateTimeImmutable $startTime): self
     {
         $this->startTime = $startTime;
 
@@ -204,7 +204,7 @@ class MyEventSchedule
      * @param  \DateTimeImmutable $eventDay
      * @return $this
      */
-    public function setEventDay(\DateTimeImmutable $eventDay)
+    public function setEventDay(\DateTimeImmutable $eventDay): self
     {
         $this->eventDay = $eventDay;
 

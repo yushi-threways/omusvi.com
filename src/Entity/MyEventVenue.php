@@ -140,6 +140,8 @@ class MyEventVenue
     public function setUrl($url): self
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**

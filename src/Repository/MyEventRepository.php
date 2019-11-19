@@ -40,22 +40,22 @@ class MyEventRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    // /**
-    //  * @return MyEvent[] Returns an array of MyEvent objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return MyEvent[] Returns an array of MyEvent objects
+      */
+    public function findLatestEvent($limit = null)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder("m");
+        $qb->innerJoin('m.myEventSchedule', 'ms')
+            ->where('ms.eventDay >= :now')
+            ->orderBy('ms.eventDay', 'DESC')
+            ->setParameter('now', new \DateTime())
+            ->setMaxResults($limit)
+            ;
+
+
+        return $qb->getQuery()->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?MyEvent
