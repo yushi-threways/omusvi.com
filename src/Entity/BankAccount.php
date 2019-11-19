@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BankAccountRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class BankAccount
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -56,16 +58,6 @@ class BankAccount
      * @ORM\Column(type="string", length=255)
      */
     private $accountName;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -153,47 +145,6 @@ class BankAccount
     {
         $this->accountName = $accountName;
 
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-      return $this->createdAt;
-    }
-    
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-      return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-      return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
-    }
-
-    /**
-     * @ORM\PostUpdate()
-     */
-    public function onPostUpdate()
-    {
-        $this->updatedAt = new \DateTime();
         return $this;
     }
 }

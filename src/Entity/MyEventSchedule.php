@@ -9,10 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventScheduleRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class MyEventSchedule
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -26,12 +28,28 @@ class MyEventSchedule
     private $myEvent;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank(
+     *     message="募集制限を入力してください"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/u",
+     *     message="値が不適切です"
+     * )
+     *
      */
     private $womanLimit;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank(
+     *     message="募集制限を入力してください"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/u",
+     *     message="値が不適切です"
+     * )
+     *
      */
     private $manLimit;
 
@@ -51,24 +69,14 @@ class MyEventSchedule
     private $textTerms;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $startTime;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $eventDay;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\MyEventApplication", mappedBy="myEventSchedule")
@@ -77,9 +85,9 @@ class MyEventSchedule
 
     public function __construct()
     {
+        $this->startTime = new \DateTimeImmutable();
+        $this->eventDay = new \DateTimeImmutable();
         $this->myEventApplications = new ArrayCollection();
-        $this->startTime = new \Time();
-        $this->eventDay = new \Date();
     }
 
     public function getId(): ?int
@@ -156,51 +164,49 @@ class MyEventSchedule
 
         return $this;
     }
-   
-    public function getStartTime(): ?\Time
+
+    /**
+     * Returns $startTime.
+     *
+     * @return \DateTimeImmutable | null
+     */
+    public function getStartTime(): ?\DateTimeImmutable
     {
         return $this->startTime;
     }
+    /**
+     * Sets startTime.
+     *
+     * @param  \DateTimeImmutable $startTime
+     * @return $this
+     */
 
-    public function setStartTime(\Time $startTime): self
+    public function setStartTime(\DateTimeImmutable $startTime): ?\DateTimeImmutable
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEventDay(): ?\Date
+    /**
+     * Returns eventDay.
+     *
+     * @return \DateTimeImmutable | null
+     */
+    public function getEventDay(): ?\DateTimeImmutable
     {
         return $this->eventDay;
     }
 
-    public function setEventDay(\Date $eventDay): self
+    /**
+     * Sets eventDay.
+     *
+     * @param  \DateTimeImmutable $eventDay
+     * @return $this
+     */
+    public function setEventDay(\DateTimeImmutable $eventDay)
     {
         $this->eventDay = $eventDay;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -233,24 +239,6 @@ class MyEventSchedule
             }
         }
 
-        return $this;
-    }
-    /**
-    * @ORM\PrePersist()
-    */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
-    }
-
-    /**
-     * @ORM\PostUpdate()
-     */
-    public function onPostUpdate()
-    {
-        $this->updatedAt = new \DateTime();
         return $this;
     }
 }

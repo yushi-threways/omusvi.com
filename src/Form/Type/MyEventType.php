@@ -75,7 +75,7 @@ class MyEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-          'data_class' => MyEvent::class,
+            'data_class' => MyEvent::class,
         ]);
     }
 }

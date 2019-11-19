@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MyEventVenue
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -35,15 +38,9 @@ class MyEventVenue
     private $traffic;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
+    private $url;
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -69,7 +66,7 @@ class MyEventVenue
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName():?string
     {
         return $this->name;
     }
@@ -105,30 +102,6 @@ class MyEventVenue
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getAddress(): ?string
     {
         return $this->address;
@@ -154,22 +127,19 @@ class MyEventVenue
     }
 
     /**
-     * @ORM\PrePersist()
+     * @return string
      */
-    public function onPrePersist()
+    public function getUrl():?string
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
+        return $this->url;
     }
 
     /**
-     * @ORM\PostUpdate()
+     * @param string $url
      */
-    public function onPostUpdate()
+    public function setUrl($url): self
     {
-        $this->updatedAt = new \DateTime();
-        return $this;
+        $this->url = $url;
     }
 
     /**

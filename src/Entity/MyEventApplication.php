@@ -8,10 +8,12 @@ use App\DBAL\Types\MyEventApplicationStatusEnumType;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventApplicationRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class MyEventApplication
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -35,16 +37,6 @@ class MyEventApplication
      * @Constraints\Enum(entity="App\DBAL\Types\MyEventApplicationStatusEnumType")
      */
     private $status;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
@@ -104,47 +96,6 @@ class MyEventApplication
     {
         $this->status = $status;
 
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
-    }
-    /**
-     * @ORM\PostUpdate()
-     */
-    public function onPostUpdate()
-    {
-        $this->updatedAt = new \DateTime();
         return $this;
     }
 
