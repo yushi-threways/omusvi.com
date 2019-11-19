@@ -13,39 +13,61 @@
                         </div>
                     </div>
                     <div class="col-8">
-                        <h1 class="sw-Admin_TopEvent-title">
-                            <a href="{{ path('my_event_show', {'id': latestEvent.id}) }}">{{ latestEvent.name }}</a>
-                        </h1>
-                        <div class="sw-Admin_TopEvent-info">
-                            <span class="sw-Admin_TopEvent-place"><i class="fas fa-map-marker-alt"></i> {{ latestEvent.myEventVenue.prefecture }}</span>
-                            <span class="sw-Admin_TopEvent-date">{{ latestEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
-                        </div>
-                        <div class="sw-Admin_TopEvent-price">
-                            <div class="sw-Admin_TopEvent-female">
-                                <p>女性料金</p>
-                                <div class="sw-Admin_TopEvent-femaleinner">
-                                    <div class="sw-Event_WomanInfo-limit">{{ latestEvent.myEventSchedule.womanTerms }}</div>
-                                    <span class="sw-Event_WomanInfo-price">{{ latestEvent.womanPrice|number_format }}円</span>
-                                </div>
-                            </div>
-                            <div class="sw-Admin_TopEvent-male">
-                                <p>男性料金</p>
-                                <div class="sw-Admin_TopEvent-maleinner">
-                                    <div class="sw-Event_ManInfo-limit">{{ latestEvent.myEventSchedule.manTerms }}</div>
-                                    <span class="sw-Event_ManInfo-price">{{ latestEvent.menPrice|number_format }}円</span>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="sw-Admin_TopEvent-desc">{{ latestEvent.description }}</p>
                         {% if not latestEvent.tags.empty %}
-                            <ul class="sw-Event_TagItems">
+                            <ul class="sw-Admin_TopEvent-taglist">
                                 {% for myEventTag in latestEvent.tags %}
-                                    <li class="sw-Event_TagItem">
+                                    <li class="sw-Admin_TopEvent-tagitem">
                                         {{ myEventTag.name }}
                                     </li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
+                        <h1 class="sw-Admin_TopEvent-title">
+                            <a href="{{ path('my_event_show', {'id': latestEvent.id}) }}">{{ latestEvent.name }}</a>
+                        </h1>
+                        <div class="sw-Admin_TopEvent-info">
+                            <div class="row">
+                                <div class="col">
+                                    <p>場所・時間</p>
+                                </div>
+                                <div class="col">
+                                    <span class="sw-Admin_TopEvent-place"><i class="fas fa-map-marker-alt"></i> {{ latestEvent.myEventVenue.prefecture }}</span>
+                                    <span class="sw-Admin_TopEvent-date">{{ latestEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sw-Admin_TopEvent-price">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                        <div class="col">
+                                            <p>女性料金</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="sw-Admin_TopEvent-femaleinner">
+                                                <div class="sw-Event_WomanInfo-limit">{{ latestEvent.myEventSchedule.womanTerms }}歳</div>
+                                                <span class="sw-Event_WomanInfo-price">{{ latestEvent.womanPrice|number_format }}円</span>
+                                            </div>
+                                        </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                        <div class="col">
+                                            <p>男性料金</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="sw-Admin_TopEvent-maleinner">
+                                                <div class="sw-Event_ManInfo-limit">{{ latestEvent.myEventSchedule.manTerms }}歳</div>
+                                                <span class="sw-Event_ManInfo-price">{{ latestEvent.menPrice|number_format }}円</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <p class="sw-Admin_TopEvent-desc">{{ latestEvent.description }}</p>
+                    </div>
                     </div>
                 {% else %}
                     <p>開催予定のイベントはございません。</p>
