@@ -2,6 +2,19 @@
 
 }
 
+.sw-Admin_Header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 30px;
+
+  h1 {
+    @include font-size(22px);
+  }
+  a {
+
+  }
+}
+
 .sw-Admin_Btn-link {
   display: inline-block;
   padding: 8px 10px;
@@ -52,19 +65,45 @@
   }
 }
 .sw-Admin_TopEvent-title {
-  @include font-size(18px);
+  @include font-size(14px);
   font-weight: bold;
-  margin: 0 auto 10px;
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
 }
 .sw-Admin_TopEvent-info {
-
+  @include font-size(14px);
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
+  p {
+    margin: 0 auto;
+  }
 }
 .sw-Admin_TopEvent-desc {
-
+  @include font-size(14px);
+  margin: 0 auto 5px;
 }
 .sw-Admin_TopEvent-date {
 
 }
 .sw-Admin_TopEvent-price {
-
+  @include font-size(14px);
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
+  p {
+    margin: 0 auto;
+  }
+}
+.sw-Admin_TopEvent-taglist {
+  padding: 0;
+  margin: 0 auto 5px;
+  list-style-type: none;
+  display: flex;
+  border-bottom: 1px solid $color__border-button;
+}
+.sw-Admin_TopEvent-tagitem {
+  @include font-size(12px);
+  padding: 0 5px 5px 0;
 }

@@ -12,13 +12,13 @@
                 <div class="me-Detail_Img">
                 <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
                 </div>
+                <div class="me-Detail_Info">
+                    <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
+                    <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                </div>
                 <h1 class="me-Detail_Title">
                 {{ my_event.name }}
                 </h1>
-                <div class="me-Detail_Info">
-                <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
-                <sapn class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
-                </div>
                 <div class="me-Detail_Person">
                     <div class="me-Detail_Person-woman">
                         <div class="me-Detail_WomanUnit">

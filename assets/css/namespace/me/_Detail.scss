@@ -12,7 +12,10 @@
 }
 .me-Detail_Img {
     margin: 0 auto 3px;
+    text-align: center;
+    background-color: rgb(236, 236, 236);
     img {
+        max-height:300px;
         max-width: 100%;
         margin: 0 auto;
         vertical-align: bottom;
@@ -71,8 +74,10 @@
 }
 .me-Detail_WomanInfo {
     @include font-size(14px);
+    display: flex;
+    align-items: center;
     &-limit {
-
+        padding: 0 20px 0 0;
     }
     &-pice {
 
@@ -98,8 +103,10 @@
 }
 .me-Detail_ManInfo {
     @include font-size(14px);
+    display: flex;
+    align-items: center;
     &-limit {
-
+        padding: 0 20px 0 0;
     }
     &-pice {
 
