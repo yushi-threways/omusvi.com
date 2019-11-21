@@ -24,7 +24,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">OMPR</a>
+    <a class="navbar-brand mr-1" href="{{ path("admin_index") }}">OMPR</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -141,28 +141,6 @@
         <div class="container-fluid">
 
     <!-- Content -->
-          <div class="sw-Admin_Menu">
-            <ul class="sw-Admin_List">
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">イベント一覧</a>
-              </li>
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">会場一覧</a>
-              </li>
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">申し込み確認</a>
-              </li>
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">ユーザ一覧</a>
-              </li>
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">過去のイベント</a>
-              </li>
-              <li class="sw-Admin_ListItem">
-                <a class="sw-Admin_Btn-link" href="">タグ一覧</a>
-              </li>
-            </ul>
-          </div>
     {% block content  %}
         <!-- Area Chart Example-->
         {#<div class="card mb-3">#}

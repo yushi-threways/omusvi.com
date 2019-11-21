@@ -14,9 +14,9 @@
     </div>
     <div class="sw-Admin_TopEvent">
         <div class="sw-Admin_TopEvent-inner">
-            <div class="row">
-                {% for my_event in my_events %}
-                <div class="col-4">
+            {% for my_event in my_events %}
+                <div class="row mb-3">
+                    <div class="col-4">
                     <div class="sw-Admin_TopEvent-image">
                         <a href="{{ path('my_event_show', {'id': my_event.id}) }}">
                             <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">

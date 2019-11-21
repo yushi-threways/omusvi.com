@@ -83,6 +83,9 @@
 .sw-Admin_TopEvent-desc {
   @include font-size(14px);
   margin: 0 auto 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .sw-Admin_TopEvent-date {
 

@@ -57,6 +57,40 @@ class MyEventRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return MyEvent[] Returns an array of MyEvent objects
+     */
+    public function findLBeforeEvent($limit = null)
+    {
+        $qb = $this->createQueryBuilder("m");
+        $qb->innerJoin('m.myEventSchedule', 'ms')
+            ->where('ms.eventDay >= :now')
+            ->orderBy('ms.eventDay', 'DESC')
+            ->setParameter('now', new \DateTime())
+            ->setMaxResults($limit)
+        ;
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return MyEvent[] Returns an array of MyEvent objects
+     */
+    public function findLAfterEvent($limit = null)
+    {
+        $qb = $this->createQueryBuilder("m");
+        $qb->innerJoin('m.myEventSchedule', 'ms')
+            ->where('ms.eventDay <= :now')
+            ->orderBy('ms.eventDay', 'DESC')
+            ->setParameter('now', new \DateTime())
+            ->setMaxResults($limit)
+        ;
+
+
+        return $qb->getQuery()->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?MyEvent
     {
