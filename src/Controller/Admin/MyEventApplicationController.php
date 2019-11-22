@@ -24,6 +24,5 @@ class MyEventApplicationController extends AbstractController
    public function index()
    {
 
-
    }
 }
