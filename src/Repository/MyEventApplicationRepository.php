@@ -77,12 +77,10 @@ class MyEventApplicationRepository extends ServiceEntityRepository
      * @param User $user
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getAdminAppliedEventQuery(MyEvent $my_event)
+    public function getAdminAppliedEventQuery(MyEventSchedule $my_event_schedule)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->innerJoin('ma.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
-            ->andWhere('ma.user = :user')
+        $qb->where('ma.myEventSchedule = :my_event_schedule')
             ->andWhere(
                 $qb->expr()->orX(
                     $qb->expr()->eq('ma.status', ':APPLIED'),
@@ -91,7 +89,6 @@ class MyEventApplicationRepository extends ServiceEntityRepository
             )
             ->setParameters([
                 'now' => new \DateTime(),
-                'my_page' => $my_event,
                 'APPLIED' => MyEventApplicationStatusEnumType::APPLIED,
                 'PAIED' => MyEventApplicationStatusEnumType::PAIED,
             ])

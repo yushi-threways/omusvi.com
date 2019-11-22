@@ -224,10 +224,12 @@ class MyEvent
             }
         }
     }
+
     public function removeTag(Tag $tag): void
     {
         $this->tags->removeElement($tag);
     }
+
     public function getTags(): Collection
     {
         return $this->tags;
