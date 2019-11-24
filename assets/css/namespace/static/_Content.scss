@@ -5,11 +5,18 @@
     padding: 0 5px;
 }
 .static-Content_Title {
-    font-weight: bold;
-    @include font-size(24px);
+    @include font-size(20px);
     margin: 0 auto 10px;
+    border-bottom: 1px solid $color__border-button;
 }
 .static-Content_Desc {
     @include font-size(14px);
     margin: 0 auto 30px;
+}
+.static-Content_List {
+}
+
+.static-Content_ListItem {
+    margin: 0 auto 20px;
+    @include font-size(15px);
 }

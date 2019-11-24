@@ -5,3 +5,8 @@
     margin: 0;
     order: 1;
 }
+.sw-Content_Title {
+    font-weight: bold;
+    @include font-size(24px);
+    margin: 0 auto 20px;
+}
