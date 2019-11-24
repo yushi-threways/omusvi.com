@@ -1,0 +1,112 @@
+.sw-Admin {
+
+}
+
+.sw-Admin_Header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 30px;
+
+  h1 {
+    @include font-size(22px);
+  }
+  a {
+
+  }
+}
+
+.sw-Admin_Btn-link {
+  display: inline-block;
+  padding: 8px 10px;
+  text-align: center;
+  background-color: $color__admin-blue;
+  @include font-size(14px);
+  color: #fff;
+  &:hover {
+    opacity: 0.8;
+    color: #fff;
+  }
+}
+
+.sw-Admin_Menu {
+  margin: 0 auto 30px;
+}
+.sw-Admin_List {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+.sw-Admin_ListItem {
+  width: 20%;
+  @include media-breakpoint-down(sm){
+    width: 50%;
+  }
+  a {
+    width: 90%;
+  }
+}
+
+.sw-Admin_TopEvent {
+
+}
+.sw-Admin_TopEvent-inner {
+
+}
+.sw-Admin_TopEvent-image {
+  a {
+    img {
+      max-width: 100%;
+      margin: 0 auto;
+      vertical-align: bottom;
+    }
+  }
+}
+.sw-Admin_TopEvent-title {
+  @include font-size(14px);
+  font-weight: bold;
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
+}
+.sw-Admin_TopEvent-info {
+  @include font-size(14px);
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
+  p {
+    margin: 0 auto;
+  }
+}
+.sw-Admin_TopEvent-desc {
+  @include font-size(14px);
+  margin: 0 auto 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sw-Admin_TopEvent-date {
+
+}
+.sw-Admin_TopEvent-price {
+  @include font-size(14px);
+  margin: 0 auto 5px;
+  padding: 0 0 5px;
+  border-bottom: 1px solid $color__border-button;
+  p {
+    margin: 0 auto;
+  }
+}
+.sw-Admin_TopEvent-taglist {
+  padding: 0;
+  margin: 0 auto 5px;
+  list-style-type: none;
+  display: flex;
+  border-bottom: 1px solid $color__border-button;
+}
+.sw-Admin_TopEvent-tagitem {
+  @include font-size(12px);
+  padding: 0 5px 5px 0;
+}

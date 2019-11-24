@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\MyEvent;
 use App\Entity\MyEventApplication;
 use App\Entity\User;
+use App\Entity\MyEventSchedule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
@@ -28,7 +30,9 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     public function getAppliedEventQuery(User $user)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->where('ma.user = :user')
+        $qb->innerJoin('ma.myEventSchedule', 'ms')
+            ->where('ms.eventDay >= :now')
+            ->andWhere('ma.user = :user')
             ->andWhere(
                 $qb->expr()->orX(
                     $qb->expr()->eq('ma.status', ':APPLIED'),
@@ -36,6 +40,7 @@ class MyEventApplicationRepository extends ServiceEntityRepository
                 )
             )
             ->setParameters([
+                'now' => new \DateTime(),
                 'user' => $user,
                 'APPLIED' => MyEventApplicationStatusEnumType::APPLIED,
                 'PAIED' => MyEventApplicationStatusEnumType::PAIED,
@@ -52,13 +57,14 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     public function getAcceptedEventQuery(User $user)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->where('ma.user = :user')
+        $qb->innerJoin('ma.myEventSchedule', 'ms')
+            ->where('ms.eventDay >= :now')
+            ->andWhere('ma.user = :user')
             ->andWhere(
-                $qb->expr()->orX(
-                    $qb->expr()->eq('ma.status', ':ACCEPTED')
-                )
+                $qb->expr()->eq('ma.status', ':ACCEPTED')
             )
             ->setParameters([
+                'now' => new \DateTime(),
                 'user' => $user,
                 'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
             ])
@@ -67,15 +73,27 @@ class MyEventApplicationRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    /*
-    public function findOneBySomeField($value): ?MyEventApplication
+    /**
+     * @param User $user
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getAdminAppliedEventQuery(MyEventSchedule $my_event_schedule)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $qb = $this->createQueryBuilder('ma');
+        $qb->where('ma.myEventSchedule = :my_event_schedule')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('ma.status', ':APPLIED'),
+                    $qb->expr()->eq('ma.status', ':PAIED')
+                )
+            )
+            ->setParameters([
+                'now' => new \DateTime(),
+                'APPLIED' => MyEventApplicationStatusEnumType::APPLIED,
+                'PAIED' => MyEventApplicationStatusEnumType::PAIED,
+            ])
         ;
+
+        return $qb;
     }
-    */
 }

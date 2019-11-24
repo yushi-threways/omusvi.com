@@ -1,5 +1,7 @@
 App\Entity\MyEventSchedule:
   schedule{1..3}:
+    event_day: ''
+    start_time: ''
     womanLimit: '20'
     manlimit: '20'
     womanTerms: '20〜29'

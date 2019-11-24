@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventFlowRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class MyEventFlow
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,16 +40,6 @@ class MyEventFlow
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\MyEvent", inversedBy="myEventFlows")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -55,8 +47,8 @@ class MyEventFlow
 
     public function __construct()
     {
-        $this->startTime = new \DateTime();
-        $this->endTime = new \DateTime();
+        $this->startTime = new \DateTimeImmutable();
+        $this->endTime = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -64,24 +56,24 @@ class MyEventFlow
         return $this->id;
     }
 
-    public function getStartTime(): ?\DateTimeInterface
+    public function getStartTime(): ?\DateTimeImmutable
     {
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): self
+    public function setStartTime(\DateTimeImmutable $startTime): self
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeInterface
+    public function getEndTime(): ?\DateTimeImmutable
     {
         return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeInterface $endTime): self
+    public function setEndTime(\DateTimeImmutable $endTime): self
     {
         $this->endTime = $endTime;
 
@@ -112,30 +104,6 @@ class MyEventFlow
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getMyEvent(): ?MyEvent
     {
         return $this->myEvent;
@@ -145,23 +113,6 @@ class MyEventFlow
     {
         $this->myEvent = $myEvent;
 
-        return $this;
-    }
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-        return $this;
-    }
-    /**
-     * @ORM\PostUpdate()
-     */
-    public function onPostUpdate()
-    {
-        $this->updatedAt = new \DateTime();
         return $this;
     }
 }

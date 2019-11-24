@@ -12,6 +12,9 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints;
  */
 class UserDetail
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

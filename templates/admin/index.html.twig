@@ -1,2 +1,103 @@
 {% extends "admin/base.html.twig" %}
 
+{% block content  %}
+    <div class="sw-Admin_Menu">
+        <ul class="sw-Admin_List">
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">イベント一覧</a>
+            </li>
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">会場一覧</a>
+            </li>
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">申し込み確認</a>
+            </li>
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">ユーザ一覧</a>
+            </li>
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">過去のイベント</a>
+            </li>
+            <li class="sw-Admin_ListItem">
+                <a class="sw-Admin_Btn-link" href="">タグ一覧</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sw-Admin_TopEvent">
+        <div class="sw-Admin_TopEvent-inner">
+                {% for latestEvent in latestEvents %}
+                    <div class="row">
+                    <div class="col-4">
+                        <div class="sw-Admin_TopEvent-image">
+                            <a href="{{ path('my_event_show', {'id': latestEvent.id}) }}">
+                                <img src="{{ vich_uploader_asset(latestEvent, 'imageFile') }}" alt="{{ latestEvent.imageName }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        {% if not latestEvent.tags.empty %}
+                            <ul class="sw-Admin_TopEvent-taglist">
+                                {% for myEventTag in latestEvent.tags %}
+                                    <li class="sw-Admin_TopEvent-tagitem">
+                                        {{ myEventTag.name }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <h1 class="sw-Admin_TopEvent-title">
+                            <a href="{{ path('my_event_show', {'id': latestEvent.id}) }}">{{ latestEvent.name }}</a>
+                        </h1>
+                        <div class="sw-Admin_TopEvent-info">
+                            <div class="row">
+                                <div class="col">
+                                    <p>場所・時間</p>
+                                </div>
+                                <div class="col">
+                                    <span class="sw-Admin_TopEvent-place"><i class="fas fa-map-marker-alt"></i> {{ latestEvent.myEventVenue.prefecture }}</span>
+                                    <span class="sw-Admin_TopEvent-date">{{ latestEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sw-Admin_TopEvent-price">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                        <div class="col">
+                                            <p>女性年齢<br>女性料金</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="sw-Admin_TopEvent-femaleinner">
+                                                <div class="sw-Event_WomanInfo-limit">{{ latestEvent.myEventSchedule.womanTerms }}歳</div>
+                                                <span class="sw-Event_WomanInfo-price">{{ latestEvent.womanPrice|number_format }}円</span>
+                                            </div>
+                                        </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                        <div class="col">
+                                            <p>男性年齢<br>男性料金</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="sw-Admin_TopEvent-maleinner">
+                                                <div class="sw-Event_ManInfo-limit">{{ latestEvent.myEventSchedule.manTerms }}歳</div>
+                                                <span class="sw-Event_ManInfo-price">{{ latestEvent.menPrice|number_format }}円</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <p class="sw-Admin_TopEvent-desc">{{ latestEvent.description }}</p>
+                    </div>
+                        <div class="col-2">
+                            <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_show', {'id': latestEvent.id}) }}">詳細</a>
+                            <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_edit', {'id': latestEvent.id}) }}">編集</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>開催予定のイベントはございません。</p>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock  %}

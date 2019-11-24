@@ -4,6 +4,8 @@ namespace App\Form\Type;
 
 use App\Entity\MyEventVenue;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,10 +17,13 @@ class MyEventVenueType extends AbstractType
             ->add('name', null, [
                 'label' => '受付会場',
             ])
+            ->add('url', UrlType::class, [
+                'label' => '会場URL',
+            ])
             ->add('map', null, [
                 'label' => 'マップ共有',
             ])
-            ->add('traffic', null, [
+            ->add('traffic', TextareaType::class, [
                 'label' => 'アクセス',
             ])
             ->add('address', null, [

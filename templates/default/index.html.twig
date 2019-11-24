@@ -15,13 +15,16 @@
                 <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
                 </a>
                 </div>
+                {#<p class="sw-Event_ScheduleText">#}
+                    {#まだ空きございます！応募締め切りまで00:00時まで！#}
+                {#</p>#}
+                <div class="sw-Event_Info">
+                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
+                    <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                </div>
                 <h1 class="sw-Event_Title">
                 <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a>
                 </h1>
-                <div class="sw-Event_Info">
-                <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
-                <sapn class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
-                </div>
                 <div class="sw-Event_Person">
                     <div class="sw-Event_Person-woman">
                         <div class="sw-Event_WomanUnit">
@@ -29,8 +32,7 @@
                                 <i class="fas fa-ribbon"></i>
                             </div>
                             <div class="sw-Event_WomanInfo">
-                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}</div>
-                                <span class="sw-Event_WomanInfo-price">{{ myEvent.womanPrice|number_format }}円</span>
+                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>{#<span class="sw-Event_WomanInfo-price">{{ myEvent.womanPrice|number_format }}円</span>#}
                             </div>
                         </div>    
                     </div>
@@ -40,10 +42,9 @@
                                 <i class="fab fa-black-tie"></i>
                             </div>
                             <div class="sw-Event_ManInfo">
-                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}</div>
-                                <span class="sw-Event_ManInfo-price">{{ myEvent.menPrice|number_format }}円</span>
+                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>{#<span class="sw-Event_ManInfo-price">{{ myEvent.menPrice|number_format }}円</span>#}
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
                 <p class="sw-Event_Desc">{{ myEvent.description }}</p>
@@ -61,6 +62,9 @@
                 {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
+    {% else %}
+        <p>現在開催中のイベントはございません。</p>
     {% endfor %}
+
 </section>
 {% endblock %}

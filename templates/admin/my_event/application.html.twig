@@ -1,15 +1,15 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}イベント一覧 | {{ admin_name }}{% endblock %}
+{% block title %}イベント申し込み状況 | {{ admin_name }}{% endblock %}
 
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item active">イベント一覧</li>
+    <li class="breadcrumb-item active">イベント申し込み</li>
  {% endblock %}
 
 {% block content %}
     <div class="sw-Admin_Header">
-        <h1>イベント一覧</h1>
+        <h1>イベント申し込み</h1>
         <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_new') }}">新規イベント作成</a>
     </div>
     <div class="sw-Admin_TopEvent">
@@ -82,7 +82,6 @@
                 <div class="col-2">
                     <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_show', {'id': my_event.id}) }}">詳細</a>
                     <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_edit', {'id': my_event.id}) }}">編集</a>
-                    <a class="mt-2 btn btn-block sw-Admin_Btn-link" href="{{ path('admin_my_event_application', {'id': my_event.id}) }}">申し込み状況</a>
                 </div>
             </div>
             {% else %}

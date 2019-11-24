@@ -11,7 +11,7 @@
     cursor: pointer;
 }
 .sw-Event_Img {
-    margin: 0 auto 3px;
+    margin: 0 auto;
     a {
         color: #58595B;
         display: block;
@@ -19,6 +19,7 @@
         text-align: center;
         background-color: rgb(236, 236, 236);
         img {
+            max-height: 300px;
             max-width: 100%;
             margin: 0 auto;
             vertical-align: bottom;
@@ -75,7 +76,8 @@
 }
 .sw-Event_WomanUnit {
     display: flex;
-   
+    align-items: center;
+
 }
 .sw-Event_WomanIcon {
     padding: 0 10px 0 0;
@@ -102,19 +104,20 @@
 }
 .sw-Event_ManUnit {
     display: flex;
+    align-items: center;
 
 }
 .sw-Event_ManIcon {
     padding: 0 10px 0 0;
+    margin: 0;
     i {
         @include font-size(24px);
         color: $color__sex-man;
     }
 }
 .sw-Event_ManInfo {
-    @include font-size(14px);
     &-limit {
-
+        @include font-size(14px);
     }
     &-pice {
 
@@ -146,4 +149,12 @@
         text-align: center;
         display: block;
     }
+}
+
+.sw-Event_ScheduleText {
+    margin: 0 auto 10px;
+    text-align: center;
+    padding: 3px 0;
+    @include font-size(14px);
+    background-color: antiquewhite;
 }
