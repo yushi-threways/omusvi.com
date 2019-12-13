@@ -16,7 +16,7 @@
         <div class="sw-Admin_TopEvent-inner">
             {% for my_event in my_events %}
                 <div class="row mb-3">
-                    <div class="col-4">
+                    <div class="col-3">
                     <div class="sw-Admin_TopEvent-image">
                         <a href="{{ path('my_event_show', {'id': my_event.id}) }}">
                             <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
@@ -79,7 +79,7 @@
                     </div>
                     <p class="sw-Admin_TopEvent-desc">{{ my_event.description }}</p>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_show', {'id': my_event.id}) }}">詳細</a>
                     <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_edit', {'id': my_event.id}) }}">編集</a>
                     <a class="mt-2 btn btn-block sw-Admin_Btn-link" href="{{ path('admin_my_event_application', {'id': my_event.id}) }}">申し込み状況</a>
