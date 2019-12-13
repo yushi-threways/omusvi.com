@@ -63,7 +63,7 @@ class MyEventRepository extends ServiceEntityRepository
     /**
      * @return MyEvent[] Returns an array of MyEvent objects
      */
-    public function findLBeforeEvent($limit = null)
+    public function findBeforeEvent($limit = null)
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
@@ -80,7 +80,7 @@ class MyEventRepository extends ServiceEntityRepository
     /**
      * @return MyEvent[] Returns an array of MyEvent objects
      */
-    public function findLAfterEvent($limit = null)
+    public function findAfterEvent($limit = null)
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')

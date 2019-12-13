@@ -96,17 +96,31 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>イベント</span>
+          <span>イベント管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="{{ path('admin_my_event_index') }}">イベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=before">開催前イベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=after">過去のイベント一覧</a>
           <a class="dropdown-item" href="{{ path('admin_my_event_new') }}">イベント作成</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>イベント会場</span>
+          <span>申込管理</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}">イベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=before">開催前イベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=after">過去のイベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_new') }}">イベント作成</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>会場管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="{{ path('admin_my_event_venue_index') }}">イベント会場一覧</a>
@@ -116,7 +130,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>ユーザー</span>
+          <span>ユーザー管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="{{ path('admin_user_index') }}">ユーザー一覧</a>
@@ -125,7 +139,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>タグ</span>
+          <span>タグ管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="{{ path('admin_tag_index') }}">タグ一覧</a>

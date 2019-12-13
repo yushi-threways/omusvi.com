@@ -21,10 +21,24 @@ class MyEventController extends AbstractController
     /**
      * @Route("/", name="admin_my_event_index", methods={"GET"})
      */
-    public function index(MyEventRepository $myEventRepository): Response
+    public function index(MyEventRepository $myEventRepository, Request $request): Response
     {
+
+        $sort = $request->query->get('sort');
+        if (!$sort) {
+            $sort = 'newest';
+        }
+
+        if ('before' === $sort) {
+            $my_events = $myEventRepository->findBeforeEvent();
+        } elseif ('after' === $sort) {
+            $my_events = $myEventRepository->findAfterEvent();
+        } else {
+            $my_events = $myEventRepository->findAll();
+        }
+
         return $this->render('admin/my_event/index.html.twig', [
-            'my_events' => $myEventRepository->findAll(),
+            'my_events' => $my_events,
         ]);
     }
 
