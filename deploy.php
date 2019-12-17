@@ -25,13 +25,13 @@ set('http_user', 'yljcocpi');
 set('writable_mode', 'chmod');
 
 // Hosts
-host('sekimixhost')
+host('mixhost')
     ->user('yljcocpi')
     ->port(22)
     ->stage('staging')
     ->set('branch', 'master')
-    ->set('deploy_path', '~/public_html/test/{{application}}') // Define the base path to deploy your project to.
     ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader')
+    ->set('deploy_path', '~/public_html/test/{{application}}') // Define the base path to deploy your project to.
     ->add('shared_files', ['.env.local', 'public/.htaccess']);
 
 host('omusvi.com')
@@ -44,6 +44,11 @@ host('omusvi.com')
     ->add('shared_files', ['.env.local', 'public/.htaccess']);
 
 // Tasks
+task('build:assets', function () {
+    runLocally('yarn build');
+    upload('public/build/', '{{release_path}}/public');
+});
+before('deploy:symlink', 'build:assets');
 
 task('build', function () {
     run('cd {{release_path}} && build');
