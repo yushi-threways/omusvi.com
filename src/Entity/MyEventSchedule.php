@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -240,5 +241,47 @@ class MyEventSchedule
         }
 
         return $this;
+    }
+
+    public function getAcceptCount(): ?int
+    {
+        $applications = $this->getMyEventApplications();
+        $acceptCount = 0;
+        $acceptMaleCount = 0;
+        $acceptFemaleCount = 0;
+        foreach($applications as $application) {
+            if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
+                $acceptMaleCount += $application->getMenCount();
+                $acceptFemaleCount += $application->getWomanCount();
+                $acceptCount = $acceptMaleCount + $acceptFemaleCount;
+            }
+        }
+        return $acceptCount;
+    }
+
+    public function getAcceptMaleCount(): ?int
+    {
+        $applications = $this->getMyEventApplications();
+        $maleCount = 0;
+        foreach($applications as $application) {
+            if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
+                $maleCount += $application->getMenCount();
+            }
+        }
+        
+        return $maleCount;
+        }
+
+    public function getAcceptFemaleCount(): ?int
+    {
+        $applications = $this->getMyEventApplications();
+        $femaleCount = 0;
+        foreach($applications as $application) {
+            if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
+                $femaleCount += $application->getWomanCount();
+            }
+        }
+
+        return $femaleCount;
     }
 }

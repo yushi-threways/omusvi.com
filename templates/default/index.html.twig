@@ -15,11 +15,13 @@
                 <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
                 </a>
                 </div>
-                {#<p class="sw-Event_ScheduleText">#}
-                    {#まだ空きございます！応募締め切りまで00:00時まで！#}
-                {#</p>#}
+                {# <p class="sw-Event_ScheduleText">
+                    まだ空きございます！応募締め切りまで00:00時まで！
+                </p> #}
                 <div class="sw-Event_Info">
-                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
+                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> 
+                    {{ myEvent.myEventVenue.prefecture }}
+                    </span>
                     <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
                 </div>
                 <h1 class="sw-Event_Title">
@@ -32,7 +34,15 @@
                                 <i class="fas fa-ribbon"></i>
                             </div>
                             <div class="sw-Event_WomanInfo">
-                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>{#<span class="sw-Event_WomanInfo-price">{{ myEvent.womanPrice|number_format }}円</span>#}
+                            
+                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>
+                                {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit %}
+                                    <span class="sw-Event_WomanInfo-price">完売×</span>
+                                {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit / 2 %}
+                                    <span class="sw-Event_WomanInfo-price">残りわずか△</span>
+                                {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.womanLimit / 2 %}
+                                    <span class="sw-Event_WomanInfo-price">空席あり○</span>
+                                {% endif %}
                             </div>
                         </div>    
                     </div>
@@ -42,7 +52,14 @@
                                 <i class="fab fa-black-tie"></i>
                             </div>
                             <div class="sw-Event_ManInfo">
-                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>{#<span class="sw-Event_ManInfo-price">{{ myEvent.menPrice|number_format }}円</span>#}
+                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>
+                                {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
+                                    <span class="sw-Event_WomanInfo-price">完売×</span>
+                                {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit / 2 %}
+                                    <span class="sw-Event_WomanInfo-price">残りわずか△</span>
+                                {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
+                                    <span class="sw-Event_WomanInfo-price">空席あり○</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

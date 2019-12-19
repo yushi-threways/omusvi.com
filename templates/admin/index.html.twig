@@ -53,7 +53,9 @@
                                     <p>場所・時間</p>
                                 </div>
                                 <div class="col">
-                                    <span class="sw-Admin_TopEvent-place"><i class="fas fa-map-marker-alt"></i> {{ latestEvent.myEventVenue.prefecture }}</span>
+                                    <span class="sw-Admin_TopEvent-place"><i class="fas fa-map-marker-alt"></i>
+                                     {# {{ latestEvent.myEventVenue.prefecture }} #}
+                                     </span>
                                     <span class="sw-Admin_TopEvent-date">{{ latestEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
                                 </div>
                             </div>
