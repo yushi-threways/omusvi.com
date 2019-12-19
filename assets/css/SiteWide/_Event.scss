@@ -87,12 +87,16 @@
     }
 }
 .sw-Event_WomanInfo {
+    display: flex;
     @include font-size(14px);
     &-limit {
-
+        padding: 0 10px 0 0;
     }
     &-pice {
 
+    }
+    &-text {
+        
     }
 }
 .sw-Event_Person-man {
@@ -116,10 +120,15 @@
     }
 }
 .sw-Event_ManInfo {
+    display: flex;
+    @include font-size(14px);
     &-limit {
-        @include font-size(14px);
+        padding: 0 10px 0 0;
     }
     &-pice {
+
+    }
+    &-text {
 
     }
 }

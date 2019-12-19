@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}イベント申し込み詳細 | {{ admin_name }}{% endblock %}
+
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント申し込み詳細</li>
+ {% endblock %}
+
+{% block content %}
+    <h1>申し込み詳細</h1>
+
+     <table class="table">
+        <thead>
+            <tr>
+                <th>イベント</th>
+                <th>女性リミット<br>女性申し込み人数</th>
+                <th>男性リミット<br>男性申し込み人数</th>
+                <th>申し込み数<br>完了数</th>
+                <th>作成日<br>イベント日</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for my_event_schedule in my_event_schedule %}
+            <tr>
+                <td>
+                <img src="{{ vich_uploader_asset(my_event_schedule.myEvent, 'imageFile') }}" alt="{{ my_event_schedule.myEvent.imageName }}" width="150px"><br>
+                <p>{{ my_event_schedule.myEvent.name }}</p>
+                </td>
+                <td>{{ my_event_schedule.womanLimit }}<br>{{ countAcceptFemaleCount(my_event_schedule) }}</td>
+                <td>{{ my_event_schedule.manLimit }}<br>{{ countAcceptMaleCount(my_event_schedule) }}</td>
+                <td>{{ countApplied(my_event_schedule) }}<br>{{ countAccepted(my_event_schedule) }}</td>
+                <td>
+                {{ my_event_schedule.createdAt ? my_event_schedule.createdAt|date('Y-m-d H:i:s') : '' }}<br>
+                {{ my_event_schedule.eventDay ? my_event_schedule.eventDay|date('Y-m-d H:i:s') : '' }}
+                </td>
+                <td>
+                    <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_application_show', {'id': my_event_schedule.id}) }}">申し込み詳細</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

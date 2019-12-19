@@ -84,18 +84,6 @@ class MyEventController extends AbstractController
     }
 
     /**
-     * @Route("/application/{id}", name="admin_my_event_application", methods={"GET"})
-     */
-    public function application(MyEvent $myEvent): Response
-    {
-
-
-        return $this->render('admin/my_event/application.html.twig', [
-            'my_event' => $myEvent,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_my_event_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, MyEvent $myEvent): Response

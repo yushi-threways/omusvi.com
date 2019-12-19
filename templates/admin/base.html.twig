@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
 
@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  {% set admin_name = "オミパリ管理" %}
+  {% set admin_name = "Omusvi管理" %}
   <title>{{ admin_name }}</title>
 
     {% block stylesheets %}
@@ -24,7 +24,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="{{ path("admin_index") }}">OMPR</a>
+    <a class="navbar-brand mr-1" href="{{ path("admin_index") }}">OMSV</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -99,7 +99,7 @@
           <span>イベント管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}">イベント一覧</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}">全てのイベント</a>
           <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=before">開催前イベント一覧</a>
           <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=after">過去のイベント一覧</a>
           <a class="dropdown-item" href="{{ path('admin_my_event_new') }}">イベント作成</a>
@@ -111,10 +111,7 @@
           <span>申込管理</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}">イベント一覧</a>
-          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=before">開催前イベント一覧</a>
-          <a class="dropdown-item" href="{{ path('admin_my_event_index') }}?sort=after">過去のイベント一覧</a>
-          <a class="dropdown-item" href="{{ path('admin_my_event_new') }}">イベント作成</a>
+          <a class="dropdown-item" href="{{ path('admin_my_event_application') }}">イベント一覧</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -152,7 +149,7 @@
     {% endblock %}
 
     <div id="content-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid admin-Content">
 
     <!-- Content -->
     {% block content  %}

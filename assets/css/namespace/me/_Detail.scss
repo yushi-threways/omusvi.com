@@ -79,7 +79,11 @@
     &-limit {
         padding: 0 20px 0 0;
     }
-    &-pice {
+    &-price {
+        display: inline-block;
+        padding: 0 20px 0 0;
+    }
+    &-text {
 
     }
 }
@@ -108,8 +112,12 @@
     &-limit {
         padding: 0 20px 0 0;
     }
-    &-pice {
-
+    &-price {
+        display: inline-block;
+        padding: 0 20px 0 0;
+    }
+    &-text {
+        
     }
 }
 .me-Detail_TagItems {
