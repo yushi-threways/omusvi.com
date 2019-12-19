@@ -36,13 +36,15 @@
                             <div class="sw-Event_WomanInfo">
                             
                                 <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>
-                                {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit %}
-                                    <span class="sw-Event_WomanInfo-price">完売×</span>
-                                {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit / 2 %}
-                                    <span class="sw-Event_WomanInfo-price">残りわずか△</span>
-                                {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.womanLimit / 2 %}
-                                    <span class="sw-Event_WomanInfo-price">空席あり○</span>
-                                {% endif %}
+                                <div class="sw-Event_WomanInfo-text">
+                                    {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit %}
+                                        <span class="">完売×</span>
+                                    {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit / 2 %}
+                                        <span class="">残りわずか△</span>
+                                    {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.womanLimit / 2 %}
+                                        <span class="">空席あり○</span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>    
                     </div>
@@ -53,13 +55,15 @@
                             </div>
                             <div class="sw-Event_ManInfo">
                                 <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>
-                                {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
-                                    <span class="sw-Event_WomanInfo-price">完売×</span>
-                                {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit / 2 %}
-                                    <span class="sw-Event_WomanInfo-price">残りわずか△</span>
-                                {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
-                                    <span class="sw-Event_WomanInfo-price">空席あり○</span>
-                                {% endif %}
+                                <div class="sw-Event_ManInfo-text">
+                                    {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
+                                        <span class="">完売×</span>
+                                    {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit / 2 %}
+                                        <span class="">残りわずか△</span>
+                                    {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
+                                        <span class="">空席あり○</span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>

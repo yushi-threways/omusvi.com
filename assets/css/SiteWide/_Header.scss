@@ -6,7 +6,11 @@
     width: $size__site-content;
     margin: 0 auto;
     padding: 0 5px;
-}
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+    }
+
+    }
 .sw-Header_Lead {
     @include font-size(12px);
     margin: 0 auto;

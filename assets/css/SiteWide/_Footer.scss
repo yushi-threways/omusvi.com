@@ -5,6 +5,10 @@
     width: $size__site-content;
     padding: 50px 0 30px;
     margin: 0 auto;
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+        padding: 0 20px;
+    }
 }
 .sw-Footer_Items {
     list-style-type: none;
@@ -12,6 +16,9 @@
     margin: 0 auto;
     padding: 0;
     justify-content: space-between;
+    @include media-breakpoint-down(sm) {
+        display: block;
+    }
 }
 .sw-Footer_Item {
     a {

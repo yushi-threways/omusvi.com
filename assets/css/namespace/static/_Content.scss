@@ -1,5 +1,26 @@
-.static-Content {
 
+.static-Content {
+    h2 {
+        @include font-size(18px);
+        font-weight: bold;
+    }
+    h3 {
+        @include font-size(17px);
+
+    }
+    ul {
+        li {
+            margin: 5px auto 0;
+            @include font-size(15px);
+        }
+    }
+    ol {
+        li {
+            margin: 5px auto 0;
+            @include font-size(15px);
+
+        }
+    }
 }
 .static-Content_Inner {
     padding: 0 5px;
