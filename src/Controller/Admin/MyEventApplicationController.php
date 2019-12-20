@@ -7,7 +7,7 @@ use App\Entity\MyEventSchedule;
 use App\Entity\UserDetail;
 use App\Form\Type\MyEventApplicationType;
 use App\Form\Type\ConfirmFormType;
-use App\Repository\MyEventApplicationRepository;
+use App\Repository\UserRepository;
 use App\Repository\MyEventScheduleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,12 +32,16 @@ class MyEventApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_my_event_application_show", methods={"GET"})
+     * @Route("/{id}/list", name="admin_my_event_application_list", methods={"GET"})
      */
-    public function show(MyEventSchedule $myEventSchedule)
+    public function show(MyEventSchedule $myEventSchedule, UserRepository $userRepository)
     {
-      return $this->render('admin/my_event_application/show.html.twig', [
+
+      $applicateUser = $userRepository->findByApplicateUser($myEventSchedule);
+
+      return $this->render('admin/my_event_application/list.html.twig', [
         'my_event_schedule' => $myEventSchedule,
+        'applicate_user' => $applicateUser
       ]);
     }
 }

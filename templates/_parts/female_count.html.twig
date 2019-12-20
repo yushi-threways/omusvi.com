@@ -1,0 +1,7 @@
+{% if countAcceptFemaleCount(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit %}
+    <span class="">完売×</span>
+{% elseif countAcceptFemaleCount(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit / 2 %}
+    <span class="">残りわずか△</span>
+{% elseif countAcceptFemaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.womanLimit / 2 %}
+    <span class="">空席あり○</span>
+{% endif %}

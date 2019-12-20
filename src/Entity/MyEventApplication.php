@@ -135,15 +135,6 @@ class MyEventApplication
         return $this;
     }
 
-    public function getMenPrice()
-    {
-        $this->getEvent();
-    }
-
-    public function getWomanPrice()
-    {
-    }
-
     public function getEvent()
     {
         $event = $this->getMyEventSchedule()->getEvent();

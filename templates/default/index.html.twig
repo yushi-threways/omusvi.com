@@ -37,13 +37,7 @@
                             
                                 <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>
                                 <div class="sw-Event_WomanInfo-text">
-                                    {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit %}
-                                        <span class="">完売×</span>
-                                    {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.womanLimit / 2 %}
-                                        <span class="">残りわずか△</span>
-                                    {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.womanLimit / 2 %}
-                                        <span class="">空席あり○</span>
-                                    {% endif %}
+                                    {% include '_parts/female_count.html.twig' %}
                                 </div>
                             </div>
                         </div>    
@@ -56,13 +50,7 @@
                             <div class="sw-Event_ManInfo">
                                 <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>
                                 <div class="sw-Event_ManInfo-text">
-                                    {% if countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
-                                        <span class="">完売×</span>
-                                    {% elseif countApplications(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit / 2 %}
-                                        <span class="">残りわずか△</span>
-                                    {% elseif countApplications(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
-                                        <span class="">空席あり○</span>
-                                    {% endif %}
+                                   {% include '_parts/male_count.html.twig' %}
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use App\DBAL\Tyeps\MyEventApplicationStatusEnumType;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use App\Entity\MyEventSchedule;
 
 class EventApplicationCountExtension extends AbstractExtension
