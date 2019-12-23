@@ -13,33 +13,43 @@
      <table class="table">
         <thead>
             <tr>
-                <th>ユーザー名</th>
-                <th>女性リミット<br>女性申し込み人数</th>
-                <th>男性リミット<br>男性申し込み人数</th>
-                <th>申し込み数<br>完了数</th>
-                <th>作成日<br>イベント日</th>
+                <th>ユーザー名<br>性別</th>
+                <th>ステータス</th>
+                <th>申込日<br>更新日</th>
+                <th>講座情報</th>
                 <th>actions</th>
             </tr>
         </thead>
-        {{ dump(applicate_user) }}
         <tbody>
-        {% for my_event_schedule in my_event_schedule %}
+        {% for applicate_user in applicate_users %}
+        {% set user_detail = applicate_user.user.userDetail %}
             <tr>
                 <td>
-                <img src="{{ vich_uploader_asset(my_event_schedule.myEvent, 'imageFile') }}" alt="{{ my_event_schedule.myEvent.imageName }}" width="150px"><br>
-                <p>{{ my_event_schedule.myEvent.name }}</p>
-                </td>
-                <td>{{ my_event_schedule.womanLimit }}<br>{{ countAcceptFemaleCount(my_event_schedule) }}</td>
-                <td>{{ my_event_schedule.manLimit }}<br>{{ countAcceptMaleCount(my_event_schedule) }}</td>
-                <td>{{ countApplied(my_event_schedule) }}<br>{{ countAccepted(my_event_schedule) }}</td>
-                <td>
-                {{ my_event_schedule.createdAt ? my_event_schedule.createdAt|date('Y-m-d H:i:s') : '' }}<br>
-                {{ my_event_schedule.eventDay ? my_event_schedule.eventDay|date('Y-m-d H:i:s') : '' }}
+                {{ user_detail.firstName }} {{ user_detail.lastName }}<br>
+                {{ user_detail.gender }}
                 </td>
                 <td>
-                    <a class="btn btn-sm sw-Admin_Btn-link" href="{{ path('admin_my_event_application_show', {'id': my_event_schedule.id}) }}">申し込み詳細</a>
+                {{ status_text(applicate_user.status) }}
+                </td>
+                <td>
+                {{ applicate_user.createdAt ? applicate_user.createdAt|date('Y-m-d H:i:s') : '' }}<br>
+                {{ applicate_user.updatedAt ? applicate_user.updatedAt|date('Y-m-d H:i:s') : '' }}
+                </td>
+                <td>
+                   <a href="{{ path("default_index") }}">講座情報</a> 
+                </td>
+                <td>
+                {% if isPaied(applicate_user) %}
+                <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#adminModalPayment-{{ loop.index }}">
+                    入金確認をする
+                </button>
+                {% elseif isAccepted(applicate_user) %}
+                     <button class="mt-2 btn btn-block btn-success">入金済</button>
+                {% endif %}
+                    <a class="mt-2 btn btn-block sw-Admin_Btn-link" href="{{ path('default_index') }}">ユーザー情報</a>
                 </td>
             </tr>
+            {{ include('admin/my_event_application/_accepted_form.html.twig', {'button_label': '入金確認済みにする'} ) }}
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>

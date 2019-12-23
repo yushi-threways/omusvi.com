@@ -8,7 +8,9 @@
 }
 .my-Pasted_Image { 
     width: 25%;
+    text-align: center;
     img {
+        max-height: 100px;
         vertical-align: bottom;
         margin: 0 auto;
     }

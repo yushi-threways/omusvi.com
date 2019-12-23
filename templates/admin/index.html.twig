@@ -27,14 +27,14 @@
         <div class="sw-Admin_TopEvent-inner">
                 {% for latestEvent in latestEvents %}
                     <div class="row">
-                    <div class="col-4">
+                    <div class="col-2">
                         <div class="sw-Admin_TopEvent-image">
                             <a href="{{ path('my_event_show', {'id': latestEvent.id}) }}">
                                 <img src="{{ vich_uploader_asset(latestEvent, 'imageFile') }}" alt="{{ latestEvent.imageName }}">
                             </a>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-8">
                         {% if not latestEvent.tags.empty %}
                             <ul class="sw-Admin_TopEvent-taglist">
                                 {% for myEventTag in latestEvent.tags %}
