@@ -28,6 +28,9 @@
                             <div class="me-Detail_WomanInfo">
                                 <div class="me-Detail_WomanInfo-limit">{{ my_event.myEventSchedule.womanTerms }}歳</div>
                                 <span class="me-Detail_WomanInfo-price">{{ my_event.womanPrice|number_format }}円</span>
+                                <div class="me-Detail_WomanInfo-text">
+                                    {% include '_parts/female_count.html.twig' with {'myEvent': my_event} %}
+                                </div>
                             </div>
                         </div>    
                     </div>
@@ -39,6 +42,9 @@
                             <div class="me-Detail_ManInfo">
                                 <div class="me-Detail_ManInfo-limit">{{ my_event.myEventSchedule.manTerms }}歳</div>
                                 <span class="me-Detail_ManInfo-price">{{ my_event.menPrice|number_format }}円</span>
+                                <div class="me-Detail_ManInfo-text">
+                                    {% include '_parts/male_count.html.twig' with {'myEvent': my_event} %}
+                                </div>
                             </div>
                         </div>    
                     </div>

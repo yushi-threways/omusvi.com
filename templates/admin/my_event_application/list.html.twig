@@ -1,0 +1,61 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}イベント申し込み詳細 | {{ admin_name }}{% endblock %}
+
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">イベント申し込み詳細</li>
+ {% endblock %}
+
+{% block content %}
+    <h1>申し込み詳細</h1>
+
+     <table class="table">
+        <thead>
+            <tr>
+                <th>ユーザー名<br>性別</th>
+                <th>ステータス</th>
+                <th>申込日<br>更新日</th>
+                <th>講座情報</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for applicate_user in applicate_users %}
+        {% set user_detail = applicate_user.user.userDetail %}
+            <tr>
+                <td>
+                {{ user_detail.firstName }} {{ user_detail.lastName }}<br>
+                {{ user_detail.gender }}
+                </td>
+                <td>
+                {{ status_text(applicate_user.status) }}
+                </td>
+                <td>
+                {{ applicate_user.createdAt ? applicate_user.createdAt|date('Y-m-d H:i:s') : '' }}<br>
+                {{ applicate_user.updatedAt ? applicate_user.updatedAt|date('Y-m-d H:i:s') : '' }}
+                </td>
+                <td>
+                   <a href="{{ path("default_index") }}">講座情報</a> 
+                </td>
+                <td>
+                {% if isPaied(applicate_user) %}
+                <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#adminModalPayment-{{ loop.index }}">
+                    入金確認をする
+                </button>
+                {% elseif isAccepted(applicate_user) %}
+                     <button class="mt-2 btn btn-block btn-success">入金済</button>
+                {% endif %}
+                    <a class="mt-2 btn btn-block sw-Admin_Btn-link" href="{{ path('default_index') }}">ユーザー情報</a>
+                </td>
+            </tr>
+            {{ include('admin/my_event_application/_accepted_form.html.twig', {'button_label': '入金確認済みにする'} ) }}
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

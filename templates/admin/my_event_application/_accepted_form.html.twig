@@ -1,0 +1,23 @@
+<div class="modal fade" id="adminModalPayment-{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">入金確認</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                           <div class="modal-body">
+                                入金確認すると申し込みが完了になります。<br>
+                                イベントお客様に完了メールが送信されますので必ず入金確認後に送信してください。
+                            </div>
+                            {{ form_start(form, {'method': 'post', 'action': path('admin_my_event_application_accept', {'id': applicate_user.id}), 'attr': {'class': ''}}) }}
+                            <div class="modal-footer">
+                            {{ dump(applicate_user) }}
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                                <button class="btn btn-info">{{ button_label|default('Save') }}</button>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>

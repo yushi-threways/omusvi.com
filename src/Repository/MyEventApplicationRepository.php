@@ -96,4 +96,15 @@ class MyEventApplicationRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function findByApplicateUser(MyEventSchedule $schedule)
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb->where(
+                $qb->expr()->in('m', ':applications')
+            )
+            ->setParameter('applications', $schedule->getMyEventApplications())
+        ;
+        return $qb->getQuery()->getResult();   
+    }
 }

@@ -135,15 +135,6 @@ class MyEventApplication
         return $this;
     }
 
-    public function getMenPrice()
-    {
-        $this->getEvent();
-    }
-
-    public function getWomanPrice()
-    {
-    }
-
     public function getEvent()
     {
         $event = $this->getMyEventSchedule()->getEvent();
@@ -169,5 +160,28 @@ class MyEventApplication
     public function isRejected(): bool
     {
         return $this->status == MyEventApplicationStatusEnumType::REJECTED;
+    }
+
+    public function getStatusText($status)
+    {
+        switch ($status){
+            case MyEventApplicationStatusEnumType::APPLIED:
+                echo "申込中";
+                break;
+            case MyEventApplicationStatusEnumType::PAIED:
+                echo "支払い確認";
+                break;
+            case MyEventApplicationStatusEnumType::ACCEPTED:
+                echo "申込完了";
+                break;
+            case MyEventApplicationStatusEnumType::CANCELED:
+                echo "キャンセル";
+                break;
+            case MyEventApplicationStatusEnumType::REJECTED:
+                echo "却下済";
+                break;
+            default:
+                echo "";
+        }
     }
 }

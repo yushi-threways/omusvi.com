@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\MyEventSchedule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -44,4 +45,16 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByApplicateUser(MyEventSchedule $schedule)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->innerJoin('u.myEventApplications', 'ua')
+            ->where(
+                $qb->expr()->in('ua', ':applications')
+            )
+            ->setParameter('applications', $schedule->getMyEventApplications())
+        ;
+        return $qb->getQuery()->getResult();   
+    }
 }
