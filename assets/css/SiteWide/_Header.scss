@@ -16,15 +16,23 @@
     margin: 0 auto;
     padding: 0;
     letter-spacing: 2px;
+    @include media-breakpoint-down(sm) {
+        @include font-size(10px);
+    }
 }
 .sw-Header_Branding {
     display: flex;
     justify-content: space-between;
     padding: 8px 0 10px;
     align-items: center;
+    @include media-breakpoint-down(sm) {
+        padding: 5px 0 8px;
+    }
 }
 .sw-Header_MainNavOuter {
-
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
 }
 .sw-Header_MainNav {
 

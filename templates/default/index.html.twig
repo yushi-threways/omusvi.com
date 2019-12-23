@@ -1,9 +1,26 @@
 {% extends "base.html.twig" %}
 
-{% set title = 'オミパリトップページ' %}
-{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
-{% set canonical = 'canonical' %}
+{% block head %}
+<title>OMUSVIトップ</title>
+<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+<link rel="canonical" href="{{ absolute_url(path('default_index')) }}">   
+{% endblock %}
 
+{% block og %}
+    <meta property="og:site_name" content="OMUSVI">
+    <meta property="og:title" content="OMUSVIトップ">
+    <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+    <meta property="og:image" content="">
+    {% endblock %}
+    
+    {% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
+    <meta name="twitter:image" content="ogpのURL貼る">
+    {% endblock %}
 
 {% block main %}
 <section class="sw-Section">
