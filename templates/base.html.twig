@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" prefix="og: http://ogp.me/ns#">
     <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +7,24 @@
     <meta name="format-detection" content="telephone=no">
 
     
-    <title>{% block title %}Omusvi{% endblock %}</title>
-    <meta name="description" content="{% block description %}{% endblock %}">
-    <link rel="canonical" href="{% block canonical %}{% endblock %}">
+    {% block head %}
+    {% endblock %}
+
+    {% block og %}
+    <meta property="og:site_name" content="OMUSVI">
+    <meta property="og:title" content="OMUSVIトップ">
+    <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+    <meta property="og:image" content="">
+    {% endblock %}
+    
+    {% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
+    <meta name="twitter:image" content="ogpのURL貼る">
+    {% endblock %}
 
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
@@ -48,10 +63,10 @@
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
                                     <p class="sw-Header_Lead">
-                                        <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>Omusvi</span>
+                                        <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
                                     </p>
                                     <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                                    Omusvi
+                                    OMUSVI
                                     </a>
                                 </div>
                                 
@@ -86,7 +101,7 @@
                                 {% block side %}
                                     <div class="sw-Side_Inner">
                                         <div class="sw-Side_Keyword">
-                                            <h2 class="sw-Side_KeywordTitle">オミパリの街コン・イベントを探す</h2>
+                                            <h2 class="sw-Side_KeywordTitle">OMUSVIの街コン・イベントを探す</h2>
                                             <ul class="sw-Side_KeywordItems">
                                                 <li class="sw-Side_KeywordItem">
                                                     <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-hashtag"></i> イベントタグから探す</h3>
@@ -121,9 +136,9 @@
                                                 </ul>
                                             </li>
                                             <li class="sw-Side_Item">
-                                                <h3 class="sw-Side_ItemTitle">オミパリとは</h3>
+                                                <h3 class="sw-Side_ItemTitle">OMUSVI(オムスビ)とは</h3>
                                                 <ul class="sw-Side_ItemLists">
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">オミパリについて</a></li>
+                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">OMUSVIについて</a></li>
                                                     <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li> 
                                                 </ul>
                                             </li>
@@ -158,14 +173,14 @@
                                     <li class="sw-Footer_Item">
                                         <p class="sw-Footer_ItemTitle">お困りの時は</p>
                                         <ul class="sw-Footer_ItemLists">
-                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">Omusviについて</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">OMUSVIについて</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "guide"}) }}">ご利用ガイド</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                                 <div class="sw-Footer_Copy"><small>
-                                Copyright © 2019 OMIPARI Inc. All Rights Reserved.
+                                Copyright © 2019 Meetie Inc. All Rights Reserved.
                             </small></div>
                             </div>
                         {% endblock %}
