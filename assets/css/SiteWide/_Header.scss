@@ -1,6 +1,9 @@
 .sw-Header {
     border-bottom: 1px solid #ccc;
     margin: 0 auto 15px;
+    @include media-breakpoint-down(sm) {
+        margin: 0 auto 10px;
+    }
 }
 .sw-Header_Inner {
     width: $size__site-content;
@@ -9,8 +12,8 @@
     @include media-breakpoint-down(sm) {
         width: 100%;
     }
+}
 
-    }
 .sw-Header_Lead {
     @include font-size(12px);
     margin: 0 auto;
@@ -20,19 +23,19 @@
         @include font-size(10px);
     }
 }
+
 .sw-Header_Branding {
     display: flex;
     justify-content: space-between;
     padding: 8px 0 10px;
     align-items: center;
+    position: relative;
     @include media-breakpoint-down(sm) {
-        padding: 5px 0 8px;
+        padding: 5px 0;
     }
 }
+
 .sw-Header_MainNavOuter {
-    @include media-breakpoint-down(sm) {
-        display: none;
-    }
 }
 .sw-Header_MainNav {
 
@@ -54,6 +57,9 @@
     margin: 0 auto;
     list-style-type: none;
     align-items: center;
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
 }
 .sw-Header_MainNavItem {
     a {

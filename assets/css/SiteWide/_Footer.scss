@@ -1,5 +1,7 @@
 .sw-Footer {
-
+    @include media-breakpoint-down(sm) {
+        margin: 0 auto 60px;
+    }
 }
 .sw-Footer_Inner {
     width: $size__site-content;
@@ -17,7 +19,7 @@
     padding: 0;
     justify-content: space-between;
     @include media-breakpoint-down(sm) {
-        display: block;
+        display: none;
     }
 }
 .sw-Footer_Item {
@@ -40,5 +42,8 @@
     border-top: 1px solid #ccc;
     small {
 
+    }
+    @include media-breakpoint-down(sm) {
+        display: none;
     }
 }
