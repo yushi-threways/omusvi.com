@@ -73,6 +73,11 @@
                                 <div class="sw-Header_MainNavOuter">
                                     <nav class="sw-Header_MainNav">
                                         <div class="sw-Header_MainNavInner">
+                                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                            </button>
                                             <ul class="sw-Header_MainNavItems">
                                                 {% if is_granted('ROLE_USER') %}
                                                     <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fa fa-address-card"></i><br>マイページ</a></li>
@@ -185,6 +190,148 @@
                             </div>
                         {% endblock %}
                     </footer>
+
+                    <div class="sw-Nav_Bottom">
+                        <div class="sw-Nav_BottomInner">
+                            <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 175" class="sw-Nav-Bottom_Icon">
+                                    <text transform="translate(70 174)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                        <tspan x="-69.121" y="0"></tspan>
+                                    </text>
+                                </svg>
+                            </a>
+                            <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 177" class="sw-Nav-Bottom_Icon">
+                                <text transform="translate(59 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                    <tspan x="-58.256" y="0"></tspan>
+                                </text>
+                            </svg>
+                            </a>
+                            {% if is_granted('ROLE_USER') %}
+                            <a class="sw-Nav_BottomLink" href="{{ path('app_mypage_mypage_index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 177" class="sw-Nav-Bottom_Icon">
+                                    <text transform="translate(57 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                        <tspan x="-56.232" y="0"></tspan>
+                                    </text>
+                                </svg>
+                            </a>
+                            {% else %}
+                             <a class="sw-Nav_BottomLink" href="{{ path('fos_user_security_login') }}">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 177" class="sw-Nav-Bottom_Icon">
+                                    <text transform="translate(47 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                        <tspan x="-46.904" y="0"></tspan>
+                                    </text>
+                                </svg>
+                             </a>
+                             {% endif %}
+                            <a class="sw-Nav_BottomLink" href="{{ path('my_event_index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 177" class="sw-Nav-Bottom_Icon">
+                                    <text transform="translate(57 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                        <tspan x="-56.232" y="0"></tspan>
+                                    </text>
+                                </svg>
+                            </a>
+                            <button class="sw-Nav_BottomLink sw-Nav_OpenBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 177" class="sw-Nav-Bottom_Icon">
+                                    <text transform="translate(49 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
+                                        <tspan x="-48.4" y="0"></tspan>
+                                    </text>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sw-Nav_Side">
+                        <div class="sw-Nav_SideInner">
+                            <ul class="sw-Nav_SideList">
+                                 {% if is_granted('ROLE_USER') %}
+                                   <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">応募中のイベント</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">プロフィール</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">無料会員登録</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">ログイン</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">会場一覧</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">おすすめイベント</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">初めての方へ</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">よくある質問</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                 {% if is_granted('ROLE_USER') %}
+                                 <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
 
                     {% block javascripts %}
                         {{ encore_entry_script_tags('app') }}

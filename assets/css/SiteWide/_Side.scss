@@ -4,7 +4,11 @@
     margin: 0;
     padding: 0;
     order: 2;
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
 }
+
 .sw-Side_Inner {
 
 }
