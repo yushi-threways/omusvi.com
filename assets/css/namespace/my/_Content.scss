@@ -31,3 +31,18 @@
     padding: 10px 0 0;
     @include font-size(14px);
 }
+.my-Content_TabList {
+    li {
+        a {
+            @include media-breakpoint-down(sm) {
+                @include font-size(13px);
+            }
+        }
+    }
+}
+
+.my-Content_TabContent {
+    @include media-breakpoint-down(sm) {
+        padding: 0 5px;
+    }
+}

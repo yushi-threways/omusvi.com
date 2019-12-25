@@ -6,6 +6,8 @@
     <div class="mypage-Login_Form">
     {{ include('@FOSUser/Security/login_content.html.twig') }}
     </div>
+    <a href="{{ path("fos_user_registration_register") }}" class="mypage-Login_InfoText">無料新規会員登録はこちら</a>
+    <a href="{{ path("fos_user_change_password") }}" class="mypage-Login_InfoText">パスワードをお忘れですか？</a>
 </div>
 {% endblock fos_user_content %}
    

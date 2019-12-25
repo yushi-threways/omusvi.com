@@ -1,4 +1,7 @@
 .myde-Content {
+    @include media-breakpoint-down(sm) {
+        padding: 0 5px;
+    }
     table {
         tr {
             @include font-size(14px);
@@ -15,4 +18,7 @@
     @include font-size(24px);
     margin: 0 auto 20px;
     padding: 0;
+    @include media-breakpoint-down(sm) {
+        @include font-size(20px);
+    }
 }

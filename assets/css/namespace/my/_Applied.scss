@@ -5,6 +5,9 @@
     padding: 20px 0 15px;
     margin: 0 auto 20px;
     border-bottom: 1px solid #dee2e6;
+    @include media-breakpoint-down(sm) {
+        flex-wrap: wrap;
+    }
 }
 .my-Applied_Image { 
     width: 25%;
@@ -13,17 +16,29 @@
         max-height: 100px;
         vertical-align: bottom;
         margin: 0 auto;
+        @include media-breakpoint-down(sm) {
+            max-width: 100%;
+            max-height: 150px;
+        }
     }
-}
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+    }
+}      
 .my-Applied_Unit {
     width: 50%;
     padding: 0 10px;
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+    }
 }
 .my-Applied_Name {
     margin: 0 auto;
     padding: 0 0 5px 0;
     font-weight: bold;
-    
+    @include media-breakpoint-down(sm) {
+        margin: 5px auto 0;
+    }
 }
 .my-Applied_Info {
     display: flex;
@@ -38,6 +53,13 @@
     padding: 0 0 0 15px;    
 }
 .my-Applied_Paied {
-    width: 25%;
     text-align: center;
+    width: 25%;
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+        margin: 10px auto 0;
+        button {
+            width: 100%;
+        }
+    }
 }

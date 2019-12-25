@@ -25,3 +25,9 @@
     font-weight: bold;
     margin: 0 auto;
 }
+
+.mypage-Login_InfoText {
+    display: block;
+    @include font-size(15px);
+    padding: 8px 0 0;
+}

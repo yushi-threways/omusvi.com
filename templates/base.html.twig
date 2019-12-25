@@ -194,49 +194,25 @@
                     <div class="sw-Nav_Bottom">
                         <div class="sw-Nav_BottomInner">
                             <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 175" class="sw-Nav-Bottom_Icon">
-                                    <text transform="translate(70 174)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                        <tspan x="-69.121" y="0"></tspan>
-                                    </text>
-                                </svg>
+                                <i class="fas fa-home"></i>
                             </a>
                             <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 177" class="sw-Nav-Bottom_Icon">
-                                <text transform="translate(59 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                    <tspan x="-58.256" y="0"></tspan>
-                                </text>
-                            </svg>
+                                <i class="fas fa-search"></i>
                             </a>
                             {% if is_granted('ROLE_USER') %}
                             <a class="sw-Nav_BottomLink" href="{{ path('app_mypage_mypage_index') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 177" class="sw-Nav-Bottom_Icon">
-                                    <text transform="translate(57 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                        <tspan x="-56.232" y="0"></tspan>
-                                    </text>
-                                </svg>
+                                <i class="fas fa-user"></i>
                             </a>
                             {% else %}
                              <a class="sw-Nav_BottomLink" href="{{ path('fos_user_security_login') }}">
-                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 177" class="sw-Nav-Bottom_Icon">
-                                    <text transform="translate(47 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                        <tspan x="-46.904" y="0"></tspan>
-                                    </text>
-                                </svg>
+                                <i class="fas fa-user-lock"></i>
                              </a>
                              {% endif %}
                             <a class="sw-Nav_BottomLink" href="{{ path('my_event_index') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 177" class="sw-Nav-Bottom_Icon">
-                                    <text transform="translate(57 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                        <tspan x="-56.232" y="0"></tspan>
-                                    </text>
-                                </svg>
+                                <i class="fas fa-calendar-alt"></i>
                             </a>
                             <button class="sw-Nav_BottomLink sw-Nav_OpenBtn">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 177" class="sw-Nav-Bottom_Icon">
-                                    <text transform="translate(49 176)" font-size="88" font-family="IkonoMiniL-4, Ikono Mini L">
-                                        <tspan x="-48.4" y="0"></tspan>
-                                    </text>
-                                </svg>
+                                <i class="fas fa-bars"></i>
                             </button>
                         </div>
                     </div>
@@ -246,7 +222,7 @@
                             <ul class="sw-Nav_SideList">
                                  {% if is_granted('ROLE_USER') %}
                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
                                             <div class="sw-Nav_SideItemUnit">
                                                 <div class="sw-Nav_SideUnitImg"></div>
                                                 <div class="sw-Nav_SideUnitText">応募中のイベント</div>
@@ -254,7 +230,7 @@
                                         </a>
                                     </li>
                                     <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("mypage_detail_index") }}">
                                             <div class="sw-Nav_SideItemUnit">
                                                 <div class="sw-Nav_SideUnitImg"></div>
                                                 <div class="sw-Nav_SideUnitText">プロフィール</div>
@@ -263,7 +239,7 @@
                                     </li>
                                 {% else %}
                                     <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
                                             <div class="sw-Nav_SideItemUnit">
                                                 <div class="sw-Nav_SideUnitImg"></div>
                                                 <div class="sw-Nav_SideUnitText">無料会員登録</div>
@@ -271,7 +247,7 @@
                                         </a>
                                     </li>
                                     <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
                                             <div class="sw-Nav_SideItemUnit">
                                                 <div class="sw-Nav_SideUnitImg"></div>
                                                 <div class="sw-Nav_SideUnitText">ログイン</div>
@@ -280,7 +256,7 @@
                                     </li>
                                 {% endif %}
                                 <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_venue_index") }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">会場一覧</div>
@@ -288,7 +264,7 @@
                                     </a>
                                 </li>
                                 <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">おすすめイベント</div>
@@ -296,7 +272,7 @@
                                     </a>
                                 </li>
                                 <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
@@ -304,7 +280,7 @@
                                     </a>
                                 </li>
                                 <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "guide"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">初めての方へ</div>
@@ -312,7 +288,7 @@
                                     </a>
                                 </li>
                                 <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">よくある質問</div>
@@ -321,7 +297,7 @@
                                 </li>
                                  {% if is_granted('ROLE_USER') %}
                                  <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
                                             <div class="sw-Nav_SideItemUnit">
                                                 <div class="sw-Nav_SideUnitImg"></div>
                                                 <div class="sw-Nav_SideUnitText">ログアウト</div>
