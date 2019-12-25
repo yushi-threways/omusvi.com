@@ -74,6 +74,29 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     }
 
     /**
+    * @param User $user
+    * @return \Doctrine\ORM\QueryBuilder
+    */
+    public function getPastedEventQuery(User $user)
+    {
+        $qb = $this->createQueryBuilder('ma');
+        $qb->innerJoin('ma.myEventSchedule', 'ms')
+            ->where('ms.eventDay <= :now')
+            ->andWhere('ma.user = :user')
+            ->andWhere(
+                $qb->expr()->eq('ma.status', ':ACCEPTED')
+            )
+            ->setParameters([
+                'now' => new \DateTime(),
+                'user' => $user,
+                'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
+            ])
+        ;
+        
+        return $qb;
+    }
+
+    /**
      * @param User $user
      * @return \Doctrine\ORM\QueryBuilder
      */

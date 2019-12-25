@@ -64,7 +64,9 @@
     display: -webkit-flex;
     display: flex;
     margin: 0 auto 5px;
-
+    @include media-breakpoint-down(sm) {
+        flex-wrap: wrap;
+    }
 }
 .sw-Event_Person-woman {
     width: 49%;
@@ -72,7 +74,9 @@
     padding: 5px;
     border: 2px solid $color__sex-woman;
     border-radius: 5px;
-
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+    }
 }
 .sw-Event_WomanUnit {
     display: flex;
@@ -105,6 +109,10 @@
     padding: 5px;
     border: 2px solid $color__sex-man;
     border-radius: 5px;
+    @include media-breakpoint-down(sm) {
+        margin: 5px auto 0;
+        width: 100%;
+    }
 }
 .sw-Event_ManUnit {
     display: flex;

@@ -9,18 +9,18 @@
     <div class="my-Content">
         <div class="my-Content_Inner">
             <div class="">
-                <ul class="nav nav-tabs">
+                <ul class="my-Content_TabList nav nav-tabs">
                     <li class="nav-item">
-                        <a href="#applied" class="nav-link active" data-toggle="tab">申し込み中イベント</a>
+                        <a href="#applied" class="nav-link active" data-toggle="tab">申込中イベント</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#accepted" class="nav-link" data-toggle="tab">申し込み済イベント</a>
+                        <a href="#accepted" class="nav-link" data-toggle="tab">申込済イベント</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#past_event" class="nav-link" data-toggle="tab">参加したイベント</a>
+                        <a href="#past_event" class="nav-link" data-toggle="tab">過去のイベント</a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content my-Content_TabContent">
                 <div id="applied" class="tab-pane active">
                     {% include 'my_page/my_event_application/_applied.html.twig' %}                   
                 </div>
@@ -32,15 +32,9 @@
                 </div>
                 </div>    
             </div>
-            <ul class="my-Content_List">
+            {# <ul class="my-Content_List">
                 <li class="my-Content_Item">
-                    <a href="{{ path('mypage_detail_index') }}">詳細情報</a>
-                </li>
-                <li class="my-Content_Item">
-                    <a href="">申し込み中のイベント</a>
-                </li>
-                <li class="my-Content_Item">
-                    <a href="">参加したイベント</a>
+                    <a href="{{ path('mypage_detail_index') }}">登録情報</a>
                 </li>
                 <li class="my-Content_Item">
                     <a href="">パスワード変更</a>
@@ -48,12 +42,10 @@
                 <li class="my-Content_Item">
                     <a href="">メールアドレス変更</a>
                 </li>
-                 <li class="my-Content_Item">
-                </li>
-            </ul>
+            </ul> #}
         </div>
     </div>
-</secton>
+</section>
 {% endblock %}
 
 {% block javascript %}

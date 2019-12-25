@@ -1,8 +1,8 @@
 {% set myEvent = "" %}
                     {% set userDetail = "" %}
-                    {% for acceptedEvent in acceptedEvents %}
-                    {% set myEvent = acceptedEvent.myEventSchedule.myEvent %}
-                    {% set userDetail = acceptedEvent.user.userDetail %}
+                    {% for pastedEvent in pastedEvents %}
+                    {% set myEvent = pastedEvent.myEventSchedule.myEvent %}
+                    {% set userDetail = pastedEvent.user.userDetail %}
                         <div class="my-Pasted">
                             <div class="my-Pasted_Image">
                                 <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
@@ -11,17 +11,17 @@
                                 <p class="my-Pasted_Name"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a></p>
                                 <div class="my-Pasted_Info">
                                     {% if userDetail.gender == 'male' %}
-                                    {% set menTotalPay = myEvent.menPrice * acceptedEvent.menCount %}
+                                    {% set menTotalPay = myEvent.menPrice * pastedEvent.menCount %}
                                     <div class="my-Pasted_InfoInner">
-                                        <div class="my-Pasted_Count">参加人数：{{ acceptedEvent.menCount }}</div>
+                                        <div class="my-Pasted_Count">参加人数：{{ pastedEvent.menCount }}</div>
                                         <div class="my-Pasted_Price">参加料金：{{ myEvent.menPrice|number_format }}円</div>
                                     </div>
                                     <div class="my-Pasted_Total">合計料金：{{ menTotalPay|number_format }}円<br>
                                     <a href=""><small>振込先を表示</small></a></div>
                                     {% elseif userDetail.gender == 'female' %}
-                                    {% set womanTotalPay = myEvent.womanPrice * acceptedEvent.womanCount %}
+                                    {% set womanTotalPay = myEvent.womanPrice * pastedEvent.womanCount %}
                                     <div class="my-Pasted_InfoInner">
-                                        <div class="my-Pasted_Count">参加人数：{{ acceptedEvent.womanCount }}</div>
+                                        <div class="my-Pasted_Count">参加人数：{{ pastedEvent.womanCount }}</div>
                                         <div class="my-Pasted_Price">参加料金：{{ myEvent.womanPrice|number_format }}円</div>
                                     </div>
                                     <div class="my-Pasted_Total">合計料金：{{ womanTotalPay|number_format }}円<br>

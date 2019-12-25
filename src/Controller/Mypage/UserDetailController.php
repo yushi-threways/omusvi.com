@@ -32,6 +32,7 @@ class UserDetailController extends AbstractController
         $detail = $user->getUserDetail();
 
         return $this->render('my_page/user_detail/index.html.twig', [
+            'user' => $user,
             'detail' => $detail,
         ]);
     }

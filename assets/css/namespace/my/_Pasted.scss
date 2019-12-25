@@ -7,16 +7,19 @@
     border-bottom: 1px solid #dee2e6;
 }
 .my-Pasted_Image { 
-    width: 25%;
+    width: 30%;
     text-align: center;
     img {
         max-height: 100px;
         vertical-align: bottom;
         margin: 0 auto;
+        @include media-breakpoint-down(sm) {
+            max-width: 100%;
+        }
     }
 }
 .my-Pasted_Unit {
-    width: 50%;
+    width: 70%;
     padding: 0 10px;
 }
 .my-Pasted_Name {
@@ -36,8 +39,4 @@
 }
 .my-Pasted_Total {
     padding: 0 0 0 15px;    
-}
-.my-Pasted_Canceled {
-    width: 25%;
-    text-align: center;
 }

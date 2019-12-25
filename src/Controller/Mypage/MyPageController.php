@@ -53,6 +53,7 @@ class MyPageController extends AbstractController
             'canceledForm' => $canceledForm->createView(),
             'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
             'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
+            'pastedEvents' => $myEventApplicationRepository->getPastedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
         ]);
     }
 
