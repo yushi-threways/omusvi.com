@@ -15,11 +15,13 @@
         @include font-size(14px);
     }
 }
+
 .mypage-Login_Header {
     padding: 14px 15px 10px;
     border-bottom: 2px solid #ccc;
     margin: 0 auto 20px;
 }
+
 .mypage-Login_HaederText {
     @include font-size(14px);
     font-weight: bold;

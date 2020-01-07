@@ -21,32 +21,24 @@ class MyEventScheduleRepository extends ServiceEntityRepository
         parent::__construct($registry, MyEventSchedule::class);
     }
 
-    // /**
-    //  * @return MyEventSchedule[] Returns an array of MyEventSchedule objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilderBySearchFilter(): \Doctrine\ORM\QueryBuilder
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        
+        $qb = $this->createQueryBuilder("schedule")
+            ->leftJoin('schedule.myEvent', 'event');
+        
+        $params = [];
+        
+        if ($searchFilter->getStartDate()) {
+            $qb->andWhere(':startDate < schedule.date');
+            $params["startDate"] = $searchFilter->getStartDate();
+        }
+        
+        $qb->setParameters($params);
+        
+        return $qb;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?MyEventSchedule
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

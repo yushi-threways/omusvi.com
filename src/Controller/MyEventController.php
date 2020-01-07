@@ -17,28 +17,37 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\DBAL\Types\GenderEnumType;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/event")
  */
 class MyEventController extends AbstractController
 {
-
-    const SESSION_KEY = 'op_my_event'; 
+    const SESSION_KEY = 'op_my_event';
 
     /**
      * @Route("/", name="my_event_index", methods={"GET"})
      */
-    public function index(Request $request, MyEventRepository $myEventRepository, TagRepository $tagRepository): Response
+    public function index(Request $request, MyEventRepository $myEventRepository, PaginatorInterface $paginator): Response
     {
 
-        $tag = null;
-        if ($request->query->has('tag')) {
-            $tag = $tagRepository->findOneBy(['name' => $request->query->get('tag')]);
-        }
+        $query = $myEventRepository->findBeforeEvent();
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        $pagination_data = $pagination->getPaginationData();
 
         return $this->render('my_event/index.html.twig', [
-            'my_events' => $myEventRepository->findTagEvent($tag),
+            'pagination' => $pagination,
+            'total' => $pagination->getTotalItemCount(),
+            'start' => $pagination_data['firstItemNumber'],
+            'end' => $pagination_data['lastItemNumber']
         ]);
     }
 
@@ -54,25 +63,25 @@ class MyEventController extends AbstractController
         $detail = $repo->findOneBy(['user' => $user]);
         
         if (!$detail == null) {
-        $session = $request->getSession();
-        $data = $session->get(self::SESSION_KEY);
-        $data = new MyEventApplication();
-        // $data->setUser($user);
-        // $data->setMyEventSchedule($myEvent->getMyEventSchedule());
+            $session = $request->getSession();
+            $data = $session->get(self::SESSION_KEY);
+            $data = new MyEventApplication();
+            // $data->setUser($user);
+            // $data->setMyEventSchedule($myEvent->getMyEventSchedule());
         
-        if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
-            $form = $this->createForm(MyEventApplicationMenType::class, $data);
-        } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
-            $form = $this->createForm(MyEventApplicationWomanType::class, $data);
-        }
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $session->set(self::SESSION_KEY, $form->getData());
-                return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+            if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
+                $form = $this->createForm(MyEventApplicationMenType::class, $data);
+            } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
+                $form = $this->createForm(MyEventApplicationWomanType::class, $data);
             }
-        }
+
+            if ($request->isMethod('POST')) {
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $session->set(self::SESSION_KEY, $form->getData());
+                    return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+                }
+            }
 
             return $this->render('my_event/show.html.twig', [
                 'my_event' => $myEvent,
@@ -111,7 +120,7 @@ class MyEventController extends AbstractController
 
                 $session->remove(self::SESSION_KEY);
 
-               return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+                return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
             }
         }
         return $this->render('my_event_application/confirm.html.twig', [
@@ -119,5 +128,5 @@ class MyEventController extends AbstractController
             'myEvent' => $myEvent,
             'data' => $data,
          ]);
-    }    
+    }
 }

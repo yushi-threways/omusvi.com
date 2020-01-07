@@ -175,3 +175,31 @@
     @include font-size(14px);
     background-color: antiquewhite;
 }
+
+.sw-Event_Pagination {
+    margin: 40px 0;
+    width: 100%;
+}
+
+.omusvi-pagination {
+    .page-link {
+      color: $color__sex-woman;
+    }
+    .page-item.active span {
+      background-color: $color__sex-woman!important;
+      border-color: $color__sex-woman!important;
+    }
+    .justify-content-center {
+        justify-content: center!important;
+    }
+  }
+
+  .sw-Event_Counter {
+    @include font-size(14px);
+    letter-spacing: 2px;
+      span {
+        color: $color__sex-woman;
+        @include font-size(18px);
+        font-weight: bold;
+      }
+  }

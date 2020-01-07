@@ -23,6 +23,13 @@
     {% endblock %}
 
 {% block main %}
+<div class="sw-Section">
+    <h1 class="top-Wide_Title">すぐ行ける</h1>
+    
+</div>
+<section class="sw-Section">
+    <h1 class="top-Wide_Title">おすすめ街コン</h1>
+</section>
 <section class="sw-Section">
     {% for myEvent in myEvents %}
         <div class="sw-Event">
@@ -78,7 +85,7 @@
                 <ul class="sw-Event_TagItems">
                 {% for myEventTag in myEvent.tags %}
                     <li class="sw-Event_TagItem">
-                        <a href="{{ path('default_index', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+                        <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
                             <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
                         </a>
                     </li>
@@ -89,8 +96,7 @@
             </div>
         </div>
     {% else %}
-        <p>現在開催中のイベントはございません。</p>
+        <p style="padding: 0 5px;">現在開催中のイベントはございません。</p>
     {% endfor %}
-
 </section>
 {% endblock %}

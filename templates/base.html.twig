@@ -111,13 +111,20 @@
                                                 <li class="sw-Side_KeywordItem">
                                                     <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-hashtag"></i> イベントタグから探す</h3>
                                                     <ul class="sw-Side_KeywordLists">
+                                                        {% for tag in tag_lists() %}
+                                                            <li class="sw-Side_KeywordListsItem">
+                                                                <a href="{{ path('default_index', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
+                                                                    <i class="fas fa-hashtag"></i>{{ tag.name }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
                                                     </ul>
                                                 </li>
-                                                <li class="sw-Side_KeywordItem">
+                                                {# <li class="sw-Side_KeywordItem">
                                                     <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-search"></i> キーワードで探す</h3>
                                                     <ul class="sw-Side_KeywordLists">
                                                     </ul>
-                                                </li>
+                                                </li> #}
                                             </ul>
                                         </div>
                                         <ul class="sw-Side_Items">
@@ -136,7 +143,7 @@
                                             <li class="sw-Side_Item">
                                                 <h3 class="sw-Side_ItemTitle"><i class="fas fa-bars"></i> コンテンツ</h3>
                                                 <ul class="sw-Side_ItemLists">
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li>
+                                                    {# <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li> #}
                                                     <li class="sw-Side_ItemList"><a href="{{ path('my_event_venue_index') }}">会場一覧</a></li>  
                                                 </ul>
                                             </li>
@@ -261,14 +268,6 @@
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">会場一覧</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">おすすめイベント</div>
                                         </div>
                                     </a>
                                 </li>

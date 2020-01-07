@@ -1,0 +1,31 @@
+{{ form_start(search_form, {attr: {id: 'jobSearchForm'}}) }}
+    <div class="form-row form-group">
+        <div class="col-2">
+            {{ form_label(search_form.startDate) }}
+        </div>
+        <div class="col-10">
+            <span class="side-Search_FormDate">
+                {{ form_widget(search_form.startDate, {attr: {class: "side-Search_FormInput"}}) }}
+                {{ form_help(search_form.startDate) }}
+            </span>
+        </div>
+    </div>
+
+    {# <div class="form-row form-group">
+        <div class="col-12">
+            {{ form_label(search_form.startTime) }}
+        </div>
+        <div class="col-12">
+            <span class="side-Search_FormDate">
+                {{ form_widget(search_form.startTime, {attr: {class: "side-Search_FormInput"}}) }}
+                〜
+                {{ form_widget(search_form.endTime, {attr: {class: "side-Search_FormInput"}}) }}
+                {{ form_help(search_form.startTime) }}
+                {{ form_help(search_form.endTime) }}
+            </span>
+        </div>
+    </div> #}
+
+    {{ form_rest(search_form) }}
+        <button type="submit" class="side-Search_FormBtn">指定した条件で絞り込む</button>
+    {{ form_end(search_form) }}
