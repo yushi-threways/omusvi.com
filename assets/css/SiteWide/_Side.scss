@@ -67,3 +67,12 @@
 
     }
 }
+
+.sw-Side_KeywordListsItem {
+    display: inline-block;
+    a {
+        display: inline-block;
+        padding: 5px 5px 5px 0;
+        @include font-size(11px);
+    }
+}

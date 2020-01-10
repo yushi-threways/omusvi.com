@@ -7,6 +7,8 @@ use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\PersistentCollection;
+use App\Model\SearchFilter\EventSearchFilter;
+
 
 /**
  * @method MyEventSchedule|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,32 +23,61 @@ class MyEventScheduleRepository extends ServiceEntityRepository
         parent::__construct($registry, MyEventSchedule::class);
     }
 
-    // /**
-    //  * @return MyEventSchedule[] Returns an array of MyEventSchedule objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilderBySearchFilter(EventSearchFilter $searchFilter): \Doctrine\ORM\QueryBuilder
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        
+        $qb = $this->createQueryBuilder("schedule")
+            ->leftJoin('schedule.myEvent', 'event');
+        
+        $params = [];
+        
+        if ($searchFilter->getPrefecture()) {
+            $qb->andWhere('event.prefecture = :prefecture');
+            $params["prefecture"] = $searchFilter->getPrefecture();
+        }
+    
+        if ($searchFilter->getStartDate()) {
+            $qb->andWhere(':startDate <= schedule.eventDay');
+            $params["startDate"] = $searchFilter->getStartDate();
+        }
+    
+        if ($searchFilter->getEndDate()) {
+            $qb->andWhere('schedule.eventDay <= :endDate');
+            $params["endDate"] = $searchFilter->getEndDate();
+        }
+    
+        if ($searchFilter->getEventTimeZone() == "day_time") {
+            $start = '10:00:00';
+            $end = '16:00:00';
+            $qb->andWhere(
+                $qb->expr()->andX(
+                    $qb->expr()->gte('schedule.startTime', ':start'),
+                    $qb->expr()->lte('schedule.startTime', ':end')
+                )
+            );
+            $params["start"] = $start;  
+            $params["end"] = $end;  
+        } elseif ($searchFilter->getEventTimeZone() == "night_time") {
+            $start = '16:00:01';
+            $end = '22:00:00';
+            $qb->andWhere(
+                $qb->expr()->andX(
+                    $qb->expr()->gte('schedule.startTime', ':start'),
+                    $qb->expr()->lte('schedule.startTime', ':end')
+                )
+            );
+            $params["start"] = $start;  
+            $params["end"] = $end;  
+        } else {
 
-    /*
-    public function findOneBySomeField($value): ?MyEventSchedule
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        }
+        
+        $qb->orderBy('schedule.eventDay', 'DESC')
+            ->setParameters($params);
+        
+        return $qb;
     }
-    */
 }

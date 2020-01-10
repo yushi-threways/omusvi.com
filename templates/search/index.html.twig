@@ -7,24 +7,26 @@
 
 {% block main %}
 <section class="sw-Section">
+    {% include 'search/_form.html.twig' %}
     <div class="sw-Event_Counter"><span>{{ total }}</span>件中 {{ start }}~{{ end }}件</div>
-    {% for myEvent in pagination %}
+    {% for schedule in pagination %}
+
         <div class="sw-Event">
             <div class="sw-Event_Inner">
                 <div class="sw-Event_Img">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">
-                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
+                <a href="{{ path('my_event_show', {'id': schedule.myEvent.id}) }}">
+                <img src="{{ vich_uploader_asset(schedule.myEvent, 'imageFile') }}" alt="{{ schedule.myEvent.imageName }}">
                 </a>
                 </div>
                 {#<p class="sw-Event_ScheduleText">#}
                 {#まだ空きございます！応募締め切りまで00:00時まで！#}
                 {#</p>#}
                 <div class="sw-Event_Info">
-                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
-                    <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ schedule.myEvent.myEventVenue.prefecture }}</span>
+                    <span class="sw-Event_Info-date">{{ schedule.eventDay|date("n月j日 A g:i") }}〜</span>
                 </div>
                 <h1 class="sw-Event_Title">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a>
+                <a href="{{ path('my_event_show', {'id': schedule.myEvent.id}) }}">{{ schedule.myEvent.name }}</a>
                 </h1>
                 <div class="sw-Event_Person">
                     <div class="sw-Event_Person-woman">
@@ -33,8 +35,8 @@
                                 <i class="fas fa-ribbon"></i>
                             </div>
                             <div class="sw-Event_WomanInfo">
-                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}</div>
-                                <span class="sw-Event_WomanInfo-price">{{ myEvent.womanPrice|number_format }}円</span>
+                                <div class="sw-Event_WomanInfo-limit">{{ schedule.womanTerms }}</div>
+                                <span class="sw-Event_WomanInfo-price">{{ schedule.myEvent.womanPrice|number_format }}円</span>
                             </div>
                         </div>    
                     </div>
@@ -44,16 +46,16 @@
                                 <i class="fab fa-black-tie"></i>
                             </div>
                             <div class="sw-Event_ManInfo">
-                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}</div>
-                                <span class="sw-Event_ManInfo-price">{{ myEvent.menPrice|number_format }}円</span>
+                                <div class="sw-Event_ManInfo-limit">{{ schedule.manTerms }}</div>
+                                <span class="sw-Event_ManInfo-price">{{ schedule.myEvent.menPrice|number_format }}円</span>
                             </div>
                         </div>    
                     </div>
                 </div>
-                <p class="sw-Event_Desc">{{ myEvent.description }}</p>
-                {% if not myEvent.tags.empty %}
+                <p class="sw-Event_Desc">{{ schedule.myEvent.description }}</p>
+                {% if not schedule.myEvent.tags.empty %}
                 <ul class="sw-Event_TagItems">
-                {% for myEventTag in myEvent.tags %}
+                {% for myEventTag in schedule.myEvent.tags %}
                     <li class="sw-Event_TagItem">
                         <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
                             <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
@@ -62,7 +64,7 @@
                 {% endfor %}
                 </ul>
                 {% endif %} 
-                {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
+                {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': schedule.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
 

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
+use App\Form\Type\MyEventSearchType;
 
 /**
  * Class DefaultController
@@ -24,6 +25,13 @@ class DefaultController extends AbstractController
     public function index(Request $request, string $_format, TagRepository $tags): Response
     {
 
+        $form = $this->createForm(MyEventSearchType::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+
         $tag = null;
         if ($request->query->has('tag')) {
             $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
@@ -36,6 +44,7 @@ class DefaultController extends AbstractController
         
         return $this->render('default/index.' . $_format . '.twig', [
             'myEvents' => $myEvents,
+            'search_form' => $form->createView()
         ]);
     }
 }

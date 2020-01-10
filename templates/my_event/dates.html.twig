@@ -7,8 +7,8 @@
 
 {% block main %}
 <section class="sw-Section">
-    <div class="sw-Event_Counter"><span>{{ total }}</span>件中 {{ start }}~{{ end }}件</div>
-    {% for myEvent in pagination %}
+        {{ dump(today) }}
+    {% for myEvent in my_events %}
         <div class="sw-Event">
             <div class="sw-Event_Inner">
                 <div class="sw-Event_Img">
@@ -55,7 +55,7 @@
                 <ul class="sw-Event_TagItems">
                 {% for myEventTag in myEvent.tags %}
                     <li class="sw-Event_TagItem">
-                        <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+                        <a href="{{ path('default_index', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
                             <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
                         </a>
                     </li>
@@ -65,12 +65,7 @@
                 {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
-
-        <div class="sw-Event_Pagination">
-            {{ knp_pagination_render(pagination, null, {}, {align: "center"}) }}
-        </div>
-
-        {% else %}
+    {% else %}
         <p style="padding: 0 5px;">現在開催中のイベントはございません。</p>
         {% endfor %}
 </section>

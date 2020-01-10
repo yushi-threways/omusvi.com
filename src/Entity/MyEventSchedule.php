@@ -70,7 +70,7 @@ class MyEventSchedule
     private $textTerms;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="time")
      */
     private $startTime;
 
@@ -175,6 +175,7 @@ class MyEventSchedule
     {
         return $this->startTime;
     }
+
     /**
      * Sets startTime.
      *
