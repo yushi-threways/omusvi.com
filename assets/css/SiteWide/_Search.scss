@@ -1,0 +1,85 @@
+.sw-Search_Form{
+    padding: 0 30px 15px;
+    @include media-breakpoint-down(sm) {
+        padding: 10px;
+    }
+    label {
+        @include font-size(14px);
+    }
+  }
+  .sw-Search_FormLable{
+    @include font-size(13px);
+    color: $color__text-screen;
+    letter-spacing: -0.06px;
+  }
+  .sw-Search_FormSelect {
+    @include font-size(13px);
+    color: $color__text-screen;
+    border-radius: 3px;
+    letter-spacing: -0.06px;
+    padding: 5px 8px;
+    height: 31px;
+  }
+  .sw-Search_FormInput {
+    @include font-size(11px);
+    color: $color__text-screen;
+    border-radius: 3px;
+    letter-spacing: -0.06px;
+    margin: 0 5px;
+    padding: 5px 8px;
+    width: 44%;
+    height: 31px;
+  }
+  .sw-Search_FormGroup {
+    margin: 0 0 15px;
+  }
+  .sw-Search_FormBtn {
+    width: 98%;
+    img {
+      margin: 0 5px 2px 0;
+    }
+  }
+  .sw-Search_FormDate {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .sw-Search_RadioButton input[type="radio"] {
+      display: none;
+  }
+  .sw-Search_RadioButton {
+      display: flex;
+      flex-wrap: nowrap;
+  }
+  .sw-Search_RadioButton {
+      margin: 0 auto 15px;
+      .form-check {
+          width: 33.3%;
+          padding: 0;
+          text-align: center;
+          
+      }
+  }
+
+  .sw-Search_RadioButton input[type="radio"] + label {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .sw-Search_RadioButton input[type="radio"]:checked + label {
+    background-color: $color__sex-woman;
+    border-color: #605462;
+    color: #fff;
+  }
+  
+  .sw-Search_Submit {
+      display: block;
+      width: 300px;
+      margin: 30px auto;
+    @extend .btn;
+    @include button-variant($color__sex-woman, $color__border-button-hover);
+    color: #fff;
+    &:hover {
+        color: #fff;
+    }
+  }

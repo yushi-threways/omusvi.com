@@ -113,7 +113,7 @@
                                                     <ul class="sw-Side_KeywordLists">
                                                         {% for tag in tag_lists() %}
                                                             <li class="sw-Side_KeywordListsItem">
-                                                                <a href="{{ path('default_index', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
+                                                                <a href="{{ path('my_event_search', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
                                                                     <i class="fas fa-hashtag"></i>{{ tag.name }}
                                                                 </a>
                                                             </li>
