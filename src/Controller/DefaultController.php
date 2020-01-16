@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
+use App\Model\SearchFilter\EventSearchFilter;
 use App\Form\Type\MyEventSearchType;
 
 /**
@@ -22,28 +23,26 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", defaults={"_format"="html"}, methods={"GET"}, name="default_index")
      */
-    public function index(Request $request, string $_format, TagRepository $tags): Response
+    public function index(Request $request, string $_format, MyEventRepository $myEventRepository): Response
     {
 
-        $form = $this->createForm(MyEventSearchType::class);
-        $form->handleRequest($request);
-    
+        $searchFilter = new EventSearchFilter();
+
+        $form = $this->createForm(MyEventSearchType::class, $searchFilter);   
+        $form->remove('tag');     
+        $form->remove('prefecture');     
+        $myEvent = $myEventRepository->findOneByLatestEvent();
+        $myEvents = $myEventRepository->findLatestEvent(2);
+
         if ($form->isSubmitted() && $form->isValid()) {
-
-        }
-
-        $tag = null;
-        if ($request->query->has('tag')) {
-            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
-        }
-
-        /** @var MyEventRepository $repo */
-        $repo = $this->getDoctrine()->getRepository(MyEvent::class);
-        $myEvents = $repo->findTagEvent($tag);
-
+            $form->handleRequest($request);
+            $request->query->set($searchFilter, $form->getData());
+            return $this->redirectToRoute('my_event_search');
+            }
         
         return $this->render('default/index.' . $_format . '.twig', [
-            'myEvents' => $myEvents,
+            'feature_my_event' => $myEvent,
+            'my_events' => $myEvents,
             'search_form' => $form->createView()
         ]);
     }

@@ -6,6 +6,7 @@
 
 
 {% block main %}
+<div class="me-Detail_Content">
 <section class="sw-Section">
         <div class="me-Detail">
             <div class="me-Detail_Inner">
@@ -14,7 +15,7 @@
                 </div>
                 <div class="me-Detail_Info">
                     <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
-                    <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                    <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}〜</span>
                 </div>
                 <h1 class="me-Detail_Title">
                 {{ my_event.name }}
@@ -192,6 +193,7 @@
                 </ul>
                 {% endif %} 
 </section>
+</div>
 
 <div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -233,4 +235,7 @@
     </a>
 {% endif %}
 </div>
+{% endblock %}
+
+{% block spmenu %}
 {% endblock %}

@@ -5,8 +5,18 @@
     }
     label {
         @include font-size(14px);
+        border-left: 5px solid $color__sex-woman;
+        padding: 0 0 0 8px;
+        margin: 0 auto 8px
     }
+    legend {
+        @include font-size(14px);
+        border-left: 5px solid $color__sex-woman;
+        padding: 0 0 0 5px;
+        margin: 0 auto 8px
+      }
   }
+
   .sw-Search_FormLable{
     @include font-size(13px);
     color: $color__text-screen;
@@ -64,6 +74,9 @@
   .sw-Search_RadioButton input[type="radio"] + label {
     width: 100%;
     padding: 10px 0;
+    border-left: none;
+    margin: 0;
+    border-radius: 5px;
   }
 
   .sw-Search_RadioButton input[type="radio"]:checked + label {
@@ -74,7 +87,7 @@
   
   .sw-Search_Submit {
       display: block;
-      width: 300px;
+      width: 98%;
       margin: 30px auto;
     @extend .btn;
     @include button-variant($color__sex-woman, $color__border-button-hover);

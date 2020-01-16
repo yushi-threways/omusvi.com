@@ -198,12 +198,13 @@
                         {% endblock %}
                     </footer>
 
+                {% block spmenu %}
                     <div class="sw-Nav_Bottom">
                         <div class="sw-Nav_BottomInner">
                             <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
                                 <i class="fas fa-home"></i>
                             </a>
-                            <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
+                            <a class="sw-Nav_BottomLink" href="{{ path('my_event_search') }}">
                                 <i class="fas fa-search"></i>
                             </a>
                             {% if is_granted('ROLE_USER') %}
@@ -279,30 +280,30 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="sw-Nav_SideListItem">
+                                {# <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
                                         </div>
                                     </a>
-                                </li>
-                                <li class="sw-Nav_SideListItem">
+                                </li> #}
+                                {# <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "guide"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">初めての方へ</div>
                                         </div>
                                     </a>
-                                </li>
-                                <li class="sw-Nav_SideListItem">
+                                </li> #}
+                                {# <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">よくある質問</div>
                                         </div>
                                     </a>
-                                </li>
+                                </li> #}
                                  {% if is_granted('ROLE_USER') %}
                                  <li class="sw-Nav_SideListItem">
                                         <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
@@ -316,6 +317,7 @@
                             </ul>
                         </div>
                     </div>
+                     {% endblock %}
 
                     {% block javascripts %}
                         {{ encore_entry_script_tags('app') }}
