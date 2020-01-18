@@ -93,7 +93,7 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function createQueryBuilderBySearchRequest($tag = null, $startDate = null, $endDate = null): \Doctrine\ORM\QueryBuilder
+    public function createQueryBuilderBySearchRequest($tag = null, $startDate = null, $endDate = null, $startTime = null): \Doctrine\ORM\QueryBuilder
     {
         $qb = $this->createQueryBuilder("schedule")
             ->leftJoin('schedule.myEvent', 'event');
@@ -114,9 +114,9 @@ class MyEventScheduleRepository extends ServiceEntityRepository
             $params["endDate"] = $endDate;
         }
 
-        if (null == $endDate) {
-            $qb->andWhere('schedule.eventDay <= :endDate');
-            $params["endDate"] = $endDate;
+        if (null !== $startTime) {
+            $qb->andWhere('schedule.startTime > :startTime');
+            $params["startTime"] = $startTime;
         }
                 
         $qb->orderBy('schedule.eventDay', 'ASC')

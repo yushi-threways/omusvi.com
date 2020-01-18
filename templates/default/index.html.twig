@@ -57,7 +57,7 @@
 
 <section class="sw-Section">
     <div class="top-Wide_Inner">
-        <a class="top-Search_Weekend" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun()}) }}">
+        <a class="top-Search_Weekend" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
             今週末行けるイベントを探す
         </a>
     </div>

@@ -2,6 +2,75 @@
     display: none;
 }
 
+.sw-Header_MainNavBtn {
+    display: none;
+}
+// main sp nav
+@include media-breakpoint-down(sm) {
+    .sw-Header_MainNavBtn {
+        display: block;
+        width: 24px;
+        height: 16px;
+        padding: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 100;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        i {
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: $color__sex-woman;
+            -webkit-transition: .35s ease-in-out;
+            -moz-transition: .35s ease-in-out;
+            transition: .35s ease-in-out;
+            &:nth-child(1) {
+                top: 0px;
+            }
+            &:nth-child(2) {
+                top: 8px;
+            }
+            &:nth-child(3) {
+                top: 16px;
+            }
+        }
+    }
+}
+
+
+@include media-breakpoint-down(sm) {
+    .sw-Header_MainNavBtn.open {
+        border-top: none !important;
+        i {
+        }
+        i:nth-child(1) {
+            top:  8px;
+            -webkit-transform: rotate(315deg);
+            -moz-transform: rotate(315deg);
+            transform: rotate(315deg);
+        }
+        i:nth-child(2) {
+            width: 0;
+            left: 50%;
+        }
+        i:nth-child(3) {
+            top: 8px;
+            -webkit-transform: rotate(-315deg);
+            -moz-transform: rotate(-315deg);
+            transform: rotate(-315deg);
+            }
+} 
+}
+
 // bottom-nav
 @include media-breakpoint-down(sm) {
     .sw-Nav_Bottom {
@@ -47,7 +116,6 @@
     width: 100%;
     height: 100vh;
     background-color: #fff;
-    margin: 0;
     -webkit-transform: translateX(110%);
     -moz-transform: translateX(110%);
     -ms-transform: translateX(110%);

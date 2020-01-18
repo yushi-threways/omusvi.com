@@ -60,11 +60,11 @@
                     <header class="sw-Header">
                         {% block header %}
                         <div class="sw-Header_Inner">
+                            <h1 class="sw-Header_Lead">
+                                <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
+                            </h1>
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
-                                    <p class="sw-Header_Lead">
-                                        <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
-                                    </p>
                                     <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
                                     OMUSVI
                                     </a>
@@ -73,20 +73,17 @@
                                 <div class="sw-Header_MainNavOuter">
                                     <nav class="sw-Header_MainNav">
                                         <div class="sw-Header_MainNavInner">
-                                            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                                            {# <button class="menu-toggle sw-Nav_OpenBtn sw-Header_MainNavBtn" aria-controls="primary-menu" aria-expanded="false">
                                                 <i></i>
                                                 <i></i>
                                                 <i></i>
-                                            </button>
-                                            <ul class="sw-Header_MainNavItems">
+                                            </button> #}
+                                            <ul class="sw-Header_MainNavItems sw-Header_MainNavNoneItems">
                                                 {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fa fa-address-card"></i><br>マイページ</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-user"></i></a></li>
                                                 {% else %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-address-card"></i><br>会員登録</a></li>
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"></i><br>ログイン</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
                                                 {% endif %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "about"}) }}"><i class="fas fa-leaf"></i><br>ガイド</a></li>
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('omipari_static', {page: "qa"}) }}"><i class="far fa-question-circle"></i><br>ヘルプ</a></li>
                                             </ul>
                                         </div>
                                     </nav>
@@ -229,6 +226,14 @@
                     <div class="sw-Nav_Side">
                         <div class="sw-Nav_SideInner">
                             <ul class="sw-Nav_SideList">
+                                <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">今週末いけるイベント</div>
+                                            </div>
+                                        </a>
+                                    </li>
                                  {% if is_granted('ROLE_USER') %}
                                    <li class="sw-Nav_SideListItem">
                                         <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
@@ -272,14 +277,14 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
+                                {# <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">おすすめイベント</div>
+                                            <div class="sw-Nav_SideUnitText">イベント一覧</div>
                                         </div>
                                     </a>
-                                </li>
+                                </li> #}
                                 {# <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
                                         <div class="sw-Nav_SideItemUnit">

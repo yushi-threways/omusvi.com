@@ -43,19 +43,21 @@ class MyEventSearchController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $qb = $repo->createQueryBuilderBySearchFilter($searchFilter);
             } else {
-                if ($request->query->has('tag') || $request->query->has('startDate') || $request->query->has('endDate')) {
+                if ($request->query->has('tag') || $request->query->has('startDate') || $request->query->has('endDate') || $request->query->has('startTime')) {
                     $tag = null;
                     $startDate = null;
                     $endDate = null;
+                    $startTime = null;
                     if ($request->query->has('tag')) {
                         $tag = $request->query->get('tag');
                     } elseif ($request->query->has('startDate') && $request->query->has('endDate')) {
                         $startDate = new \DateTimeImmutable($request->query->get('startDate')['date']);
                         $endDate = new \DateTimeImmutable($request->query->get('endDate')['date']);
+                        $startTime = new \DateTimeImmutable($request->query->get('startTime'));
                         $startDate = $startDate->setTime(0, 0);
                         $endDate = $endDate->setTime(23, 59);
                     }
-                    $qb = $repo->createQueryBuilderBySearchRequest($tag, $startDate, $endDate);
+                    $qb = $repo->createQueryBuilderBySearchRequest($tag, $startDate, $endDate, $startTime);
                 } elseif($request->query->has('my_event_search')) {
                     $date = $request->query->get('my_event_search');
                     if ($date["eventTimeZone"]) {
