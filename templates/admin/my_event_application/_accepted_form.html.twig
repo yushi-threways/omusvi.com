@@ -13,7 +13,6 @@
                             </div>
                             {{ form_start(form, {'method': 'post', 'action': path('admin_my_event_application_accept', {'id': applicate_user.id}), 'attr': {'class': ''}}) }}
                             <div class="modal-footer">
-                            {{ dump(applicate_user) }}
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
                                 <button class="btn btn-info">{{ button_label|default('Save') }}</button>
                             </div>

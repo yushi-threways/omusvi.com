@@ -69,7 +69,8 @@ class MyEventSchedule
     */
     private $textTerms;
 
-    /**
+     /**
+     * @Assert\Time
      * @ORM\Column(type="time")
      */
     private $startTime;
@@ -85,8 +86,7 @@ class MyEventSchedule
     private $myEventApplications;
 
     public function __construct()
-    {
-        $this->startTime = new \DateTimeImmutable();
+    {        
         $this->eventDay = new \DateTimeImmutable();
         $this->myEventApplications = new ArrayCollection();
     }
@@ -169,9 +169,9 @@ class MyEventSchedule
     /**
      * Returns $startTime.
      *
-     * @return \DateTimeImmutable | null
+     * @return \DateTime | null
      */
-    public function getStartTime(): ?\DateTimeImmutable
+    public function getStartTime()
     {
         return $this->startTime;
     }
@@ -179,11 +179,11 @@ class MyEventSchedule
     /**
      * Sets startTime.
      *
-     * @param  \DateTimeImmutable $startTime
+     * @param  \DateTime $startTime
      * @return $this
      */
 
-    public function setStartTime(\DateTimeImmutable $startTime): self
+    public function setStartTime(\DateTime $startTime): self
     {
         $this->startTime = $startTime;
 

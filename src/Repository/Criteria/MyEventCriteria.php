@@ -14,11 +14,11 @@ class MyEventCriteria
 {
     public static function eventTag(Tag $tag)
     {
-        return Criteria::create()->where(Criteria::expr()->in($tag, 'myEvent.tags'));
+        return Criteria::create()->where(Criteria::expr()->eq('myEvent.tag', $tag));
     }
     
     public static function prefecture(Prefecture $prefecture)
     {
-        return Criteria::create()->where(Criteria::expr()->eq('myEvent.prefecture', $prefecture));
+        return Criteria::create()->where(Criteria::expr()->eq('job.prefecture', $prefecture));
     }
 }

@@ -42,7 +42,20 @@ class MyEventRepository extends ServiceEntityRepository
     
         return $qb->getQuery()->getResult();
     }
-
+    /**
+      * @return MyEvent[] Returns an array of MyEvent objects
+      */
+      public function findOneByLatestEvent()
+      {
+          $qb = $this->createQueryBuilder("m");
+          $qb->innerJoin('m.myEventSchedule', 'ms')
+              ->where('ms.eventDay >= :now')
+              ->setParameter('now', new \DateTime())
+              ->setMaxResults(1)
+              ;
+  
+          return $qb->getQuery()->getOneOrNullResult();
+      }
      /**
       * @return MyEvent[] Returns an array of MyEvent objects
       */
@@ -51,7 +64,7 @@ class MyEventRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
             ->where('ms.eventDay >= :now')
-            ->orderBy('ms.eventDay', 'DESC')
+            ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
             ;
@@ -68,7 +81,7 @@ class MyEventRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
             ->where('ms.eventDay >= :now')
-            ->orderBy('ms.eventDay', 'DESC')
+            ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
         ;
@@ -85,7 +98,7 @@ class MyEventRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
             ->where('ms.eventDay <= :now')
-            ->orderBy('ms.eventDay', 'DESC')
+            ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
         ;

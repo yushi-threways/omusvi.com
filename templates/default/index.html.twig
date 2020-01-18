@@ -23,33 +23,81 @@
     {% endblock %}
 
 {% block main %}
-<div class="sw-Section">
-    <h1 class="top-Wide_Title">すぐ行ける</h1>
-    
+<div class="top-Search">
+    {% include 'default/_search_form.html.twig' with {'form': search_form} %}
 </div>
+<div class="top-Wide">
+    <div class="top-Wide_Inner">
+        <div class="top-Event">
+        <h3 class="top-Wide_Title">注目のイベント</h3>
+            <div class="top-Event_Inner">
+                <div class="top-Event_Img">
+                <a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">
+                <img src="{{ vich_uploader_asset(feature_my_event, 'imageFile') }}" alt="{{ feature_my_event.imageName }}">
+                </a>
+                </div>
+                {% if not feature_my_event.tags.empty %}
+                <ul class="top-Event_TagItems">
+                {% for myEventTag in feature_my_event.tags %}
+                    <li class="top-Event_TagItem">
+                        <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+                            <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %} 
+                <p class="top-Event_Title">
+                <a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">{{ feature_my_event.name }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="sw-Section">
-    <h1 class="top-Wide_Title">おすすめ街コン</h1>
+    <div class="top-Wide_Inner">
+        <a class="top-Search_Weekend" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
+            今週末行けるイベントを探す
+        </a>
+    </div>
 </section>
+
+<div class="top-Wide top-Wide_Keyword">
+    <div class="top-Wide_Inner">
+        <h3 class="top-Wide_Title">キーワードから探す</h3>
+        <ul class="top-Wide_KeywordLists">
+        {% for tag in tag_lists() %}
+            <li class="top-Wide_KeywordListsItem">
+                <a href="{{ path('my_event_search', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
+                    <i class="fas fa-hashtag"></i>{{ tag.name }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
 <section class="sw-Section">
-    {% for myEvent in myEvents %}
+    <div class="top-Wide_Inner">
+    <h3 class="top-Wide_Title">新着イベント</h3>
+    {% for my_event in my_events %}
         <div class="sw-Event">
             <div class="sw-Event_Inner">
                 <div class="sw-Event_Img">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">
-                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
+                <a href="{{ path('my_event_show', {'id': my_event.id}) }}">
+                <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
                 </a>
                 </div>
-                {# <p class="sw-Event_ScheduleText">
-                    まだ空きございます！応募締め切りまで00:00時まで！
-                </p> #}
+                
                 <div class="sw-Event_Info">
                     <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> 
-                    {{ myEvent.myEventVenue.prefecture }}
+                    {{ my_event.myEventVenue.prefecture }}
                     </span>
-                    <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                    <span class="sw-Event_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}〜</span>
                 </div>
                 <h1 class="sw-Event_Title">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a>
+                <a href="{{ path('my_event_show', {'id': my_event.id}) }}">{{ my_event.name }}</a>
                 </h1>
                 <div class="sw-Event_Person">
                     <div class="sw-Event_Person-woman">
@@ -58,10 +106,9 @@
                                 <i class="fas fa-ribbon"></i>
                             </div>
                             <div class="sw-Event_WomanInfo">
-                            
-                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}歳</div>
+                                <div class="sw-Event_WomanInfo-limit">{{ my_event.myEventSchedule.womanTerms }}歳</div>
                                 <div class="sw-Event_WomanInfo-text">
-                                    {% include '_parts/female_count.html.twig' %}
+                                    {% include '_parts/female_count.html.twig' with {'myEvent': my_event} %}
                                 </div>
                             </div>
                         </div>    
@@ -72,18 +119,18 @@
                                 <i class="fab fa-black-tie"></i>
                             </div>
                             <div class="sw-Event_ManInfo">
-                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}歳</div>
+                                <div class="sw-Event_ManInfo-limit">{{ my_event.myEventSchedule.manTerms }}歳</div>
                                 <div class="sw-Event_ManInfo-text">
-                                   {% include '_parts/male_count.html.twig' %}
+                                   {% include '_parts/male_count.html.twig' with {'myEvent': my_event} %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p class="sw-Event_Desc">{{ myEvent.description }}</p>
-                {% if not myEvent.tags.empty %}
+                <p class="sw-Event_Desc">{{ my_event.description }}</p>
+                {% if not my_event.tags.empty %}
                 <ul class="sw-Event_TagItems">
-                {% for myEventTag in myEvent.tags %}
+                {% for myEventTag in my_event.tags %}
                     <li class="sw-Event_TagItem">
                         <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
                             <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
@@ -92,11 +139,12 @@
                 {% endfor %}
                 </ul>
                 {% endif %} 
-                {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
             </div>
         </div>
     {% else %}
-        <p style="padding: 0 5px;">現在開催中のイベントはございません。</p>
+        <p>現在開催中のイベントはございません。</p>
     {% endfor %}
+    </div>
 </section>
+
 {% endblock %}

@@ -4,6 +4,7 @@
         margin: 0 auto;
     }
 }
+
 .me-Detail_Inner {
     padding: 5px;
     border-radius: 5px;
@@ -15,10 +16,15 @@
     text-align: center;
     background-color: rgb(236, 236, 236);
     img {
-        max-height:300px;
-        max-width: 100%;
+        max-height: 300px;
+        width: 100%;
         margin: 0 auto;
         vertical-align: bottom;
+        object-fit: cover;
+        @include media-breakpoint-down(sm) {
+            max-height: 180px;
+            margin: 0 auto 5px;
+        }
     }
 }
 .me-Detail_Title {

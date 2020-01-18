@@ -23,7 +23,7 @@
                 {#</p>#}
                 <div class="sw-Event_Info">
                     <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ schedule.myEvent.myEventVenue.prefecture }}</span>
-                    <span class="sw-Event_Info-date">{{ schedule.eventDay|date("n月j日 A g:i") }}〜</span>
+                    <span class="sw-Event_Info-date">{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜</span>
                 </div>
                 <h1 class="sw-Event_Title">
                 <a href="{{ path('my_event_show', {'id': schedule.myEvent.id}) }}">{{ schedule.myEvent.name }}</a>

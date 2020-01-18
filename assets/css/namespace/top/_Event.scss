@@ -1,16 +1,15 @@
-.sw-Event {
+.top-Event {
     margin: 15px auto 0;
     &:first-child {
         margin: 0 auto;
     }
 }
-.sw-Event_Inner {
+.top-Event_Inner {
     padding: 5px;
-    border-radius: 5px;
-    background-color: #fff;
     cursor: pointer;
 }
-.sw-Event_Img {
+
+.top-Event_Img {
     margin: 0 auto;
     a {
         color: #58595B;
@@ -31,12 +30,14 @@
         }
     }
 }
-.sw-Event_Title {
-    @include font-size(20px);
+.top-Event_Title {
+    @include font-size(19px);
     margin: 0 auto 5px;
+    font-weight: bold;
     a {
         color: #58595B;
         display: block;
+        text-decoration: none;
         &:hover {
             opacity: 0.8;
         }
@@ -45,35 +46,36 @@
         }
     }
 }
-.sw-Event_Desc {
+.top-Event_Desc {
     @include font-size(12px);
     margin: 0 auto 5px;
     padding: 0 0 5px;
     border-bottom: 1px solid #ccc;
     color: #ccc;
 }
-.sw-Event_Info {
+.top-Event_Info {
     display: -webkit-flex;
     display: flex;
     margin: 0 auto 5px;
     @include font-size(14px);
 }
-.sw-Event_Info-place {
+.top-Event_Info-place {
     display: inline-block;
     padding: 0 10px 0 0;
 }
-.sw-Event_Info-date {
+.top-Event_Info-date {
     display: inline-block;
 }
-.sw-Event_Person {
+.top-Event_Person {
     display: -webkit-flex;
     display: flex;
     margin: 0 auto 5px;
     @include media-breakpoint-down(sm) {
         flex-wrap: wrap;
     }
+    
 }
-.sw-Event_Person-woman {
+.top-Event_Person-woman {
     width: 49%;
     margin: 0 auto;
     padding: 5px;
@@ -83,19 +85,19 @@
         width: 100%;
     }
 }
-.sw-Event_WomanUnit {
+.top-Event_WomanUnit {
     display: flex;
     align-items: center;
 
 }
-.sw-Event_WomanIcon {
+.top-Event_WomanIcon {
     padding: 0 10px 0 0;
     i {
         @include font-size(24px);
         color: $color__sex-woman;
     }
 }
-.sw-Event_WomanInfo {
+.top-Event_WomanInfo {
     display: flex;
     @include font-size(14px);
     &-limit {
@@ -108,7 +110,7 @@
         
     }
 }
-.sw-Event_Person-man {
+.top-Event_Person-man {
     width: 49%;
     margin: 0 auto;
     padding: 5px;
@@ -119,12 +121,12 @@
         width: 100%;
     }
 }
-.sw-Event_ManUnit {
+.top-Event_ManUnit {
     display: flex;
     align-items: center;
 
 }
-.sw-Event_ManIcon {
+.top-Event_ManIcon {
     padding: 0 10px 0 0;
     margin: 0;
     i {
@@ -132,7 +134,7 @@
         color: $color__sex-man;
     }
 }
-.sw-Event_ManInfo {
+.top-Event_ManInfo {
     display: flex;
     @include font-size(14px);
     &-limit {
@@ -145,25 +147,25 @@
 
     }
 }
-.sw-Event_TagItems {
+.top-Event_TagItems {
     list-style-type: none;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 3px;
     display: flex;
     flex-wrap: wrap;
 }
-.sw-Event_TagItem {
+.top-Event_TagItem {
     a {
         margin: 0 auto 3px;
         padding: 0 8px 0 0;
         display: block;
-        @include font-size(12px);
+        @include font-size(14px);
         i {
 
         }
     }
 }
-.sw-Event_Btn {
+.top-Event_Btn {
     margin: 5px auto 0;
     a {
         padding: 5px 0;
@@ -173,42 +175,10 @@
     }
 }
 
-.sw-Event_ScheduleText {
+.top-Event_ScheduleText {
     margin: 0 auto 10px;
     text-align: center;
     padding: 3px 0;
     @include font-size(14px);
     background-color: antiquewhite;
 }
-
-.sw-Event_Pagination {
-    margin: 40px 0;
-    width: 100%;
-}
-
-.omusvi-pagination {
-    .page-link {
-      color: $color__sex-woman;
-    }
-    .page-item.active span {
-      background-color: $color__sex-woman!important;
-      border-color: $color__sex-woman!important;
-    }
-    .justify-content-center {
-        justify-content: center!important;
-    }
-  }
-
-  .sw-Event_Counter {
-    @include font-size(14px);
-    letter-spacing: 2px;
-    text-align: right;
-      span {
-        color: $color__sex-woman;
-        @include font-size(18px);
-        font-weight: bold;
-      }
-      @include media-breakpoint-down(sm) {
-          padding: 0 10px 0 0;
-    }
-  }

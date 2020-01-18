@@ -1,16 +1,17 @@
 {{ form_start(form, {attr: {class: "sw-Search_Form"}}) }}
+    {{ form_label(form.eventTimeZone) }}
     <div class="sw-Search_RadioButton btn-group-toggle">
          {% for child in form.eventTimeZone %}
             {{ form_widget(child, { 'attr': {'class': '', 'name': 'options', 'autocomplete': "off"}}) }}
          {% endfor %}
     </div>
     <div class="form-row form-group">
-        <div class="col-12 col-sm-6">
+        <div class="col-12">
             {{ form_row(form.tag, {attr: {class: "sw-Search_FormSelect"}}) }}
         </div>
-        <div class="col-12 col-sm-6">
+        {# <div class="col-6">
             {{ form_row(form.prefecture, {attr: {class: "sw-Search_FormSelect"}}) }}
-        </div>
+        </div> #}
     </div>
     <div class="form-row form-group">
         <div class="col-12">

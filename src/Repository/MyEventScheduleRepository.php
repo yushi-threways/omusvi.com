@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\PersistentCollection;
 use App\Model\SearchFilter\EventSearchFilter;
 
-
 /**
  * @method MyEventSchedule|null find($id, $lockMode = null, $lockVersion = null)
  * @method MyEventSchedule|null findOneBy(array $criteria, array $orderBy = null)
@@ -26,9 +25,20 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
+    public function findByEventDay()
+    {
+        $qb = $this->createQueryBuilder("sc")
+            ->orderBy('sc.eventDay', 'ASC')
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function createQueryBuilderBySearchFilter(EventSearchFilter $searchFilter): \Doctrine\ORM\QueryBuilder
     {
-        
         $qb = $this->createQueryBuilder("schedule")
             ->leftJoin('schedule.myEvent', 'event');
         
@@ -41,12 +51,12 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     
         if ($searchFilter->getStartDate()) {
             $qb->andWhere(':startDate <= schedule.eventDay');
-            $params["startDate"] = $searchFilter->getStartDate();
+            $params["startDate"] = $searchFilter->getStartDate()->setTime(0,0);
         }
     
         if ($searchFilter->getEndDate()) {
             $qb->andWhere('schedule.eventDay <= :endDate');
-            $params["endDate"] = $searchFilter->getEndDate();
+            $params["endDate"] = $searchFilter->getEndDate()->setTime(23,59);
         }
     
         if ($searchFilter->getEventTimeZone() == "day_time") {
@@ -62,20 +72,54 @@ class MyEventScheduleRepository extends ServiceEntityRepository
             $params["end"] = $end;  
         } elseif ($searchFilter->getEventTimeZone() == "night_time") {
             $start = '16:00:01';
-            $end = '22:00:00';
+            $end = '23:59:59';
             $qb->andWhere(
                 $qb->expr()->andX(
                     $qb->expr()->gte('schedule.startTime', ':start'),
                     $qb->expr()->lte('schedule.startTime', ':end')
                 )
             );
-            $params["start"] = $start;  
-            $params["end"] = $end;  
+            $params["start"] = $start;
+            $params["end"] = $end;
         } else {
-
         }
         
-        $qb->orderBy('schedule.eventDay', 'DESC')
+        $qb->orderBy('schedule.eventDay', 'ASC')
+            ->setParameters($params);
+        
+        return $qb;
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createQueryBuilderBySearchRequest($tag = null, $startDate = null, $endDate = null, $startTime = null): \Doctrine\ORM\QueryBuilder
+    {
+        $qb = $this->createQueryBuilder("schedule")
+            ->leftJoin('schedule.myEvent', 'event');
+        
+        $params = [];
+        
+        if (null !== $tag) {
+            $qb->andWhere(':tag MEMBER OF event.tags');
+            $params["tag"] = $tag;
+        }
+    
+        if (null !== $startDate && null !== $endDate) {
+            $qb->andWhere(
+                $qb->expr()->between('schedule.eventDay', ':startDate', ':endDate')
+            );
+            
+            $params["startDate"] = $startDate;
+            $params["endDate"] = $endDate;
+        }
+
+        if (null !== $startTime) {
+            $qb->andWhere('schedule.startTime > :startTime');
+            $params["startTime"] = $startTime;
+        }
+                
+        $qb->orderBy('schedule.eventDay', 'ASC')
             ->setParameters($params);
         
         return $qb;

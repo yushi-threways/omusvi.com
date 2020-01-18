@@ -33,7 +33,6 @@ class MyEventScheduleType extends AbstractType
             ->add('startTime', TimeType::class, [
                 'label' => 'イベント開始日時',
                 'widget' => 'single_text',
-                'input' => 'datetime_immutable',
             ])
             ->add('eventDay', DateType::class, [
                 'label' => 'イベント開催日',
