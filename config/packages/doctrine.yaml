@@ -13,7 +13,7 @@ doctrine:
         types:
             GenderEnumType: App\DBAL\Types\GenderEnumType
             MyEventApplicationStatusEnumType: App\DBAL\Types\MyEventApplicationStatusEnumType
-        
+            MyEventApplicationPayMentEnumType: App\DBAL\Types\MyEventApplicationPayMentEnumType
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore

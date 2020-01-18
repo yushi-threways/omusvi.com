@@ -12,7 +12,8 @@
                 <h1 class="myapp-Confirm_Title">申し込み確認画面</h1>
                 <div class="myapp-Confirm_Inner">
                     <div class="myapp-Confirm_Unit">
-                        <p class="myapp-Confirm_Label">イベント名</p>
+                        {# <p class="myapp-Confirm_Label">イベント名</p> #}
+                        <p class="myapp-Confirm_Img"><img src="{{ vich_uploader_asset(schedule.myEvent, 'imageFile') }}" alt="{{ schedule.myEvent.imageName }}">
                         <p class="myapp-Confirm_Name">{{ schedule.myEvent.name }}</p>
                     </div>
                     <div class="myapp-Confirm_Unit">
@@ -21,14 +22,34 @@
                     </div>
                     <div class="myapp-Confirm_Unit">
                         <p class="myapp-Confirm_Label">イベント開催日時</p>
-                        <p class="myapp-Confirm_Deta">{{ schedule.eventDay|date("n月j日 A g:i") }}〜</p>
+                        <p class="myapp-Confirm_Dete">
+                        {{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+                        </p>
                     </div>
                     <div class="myapp-Confirm_Unit">
-                        <p class="myapp-Confirm_Label">イベント料金</p>
+                        <p class="myapp-Confirm_Label">イベント料金/人数</p>
                         {% if (detail.gender == 'male') %}
-                        <p class="myapp-Confirm_Men">{{ schedule.myEvent.menPrice }}</p>
+                        <p class="myapp-Confirm_Men">応募人数：{{ data.menCount }}人　{{ schedule.myEvent.menPrice|number_format }}円/人</p>
+                        <p class="myapp-Confirm_Total">合計：{{ schedule.myEvent.menPrice * data.menCount }}円</p>
                         {% elseif (detail.gender == 'female') %}
-                        <p class="myapp-Confirm_Woamn">{{ schedule.myEvent.womanPrice }}</p>
+                        <p class="myapp-Confirm_Woman">応募人数：{{ data.womanCount }}人　{{ schedule.myEvent.womanPrice|number_format }}円/人</p>
+                         <p class="myapp-Confirm_Total">合計：{{ schedule.myEvent.menPrice * data.womanCount }}円</p>
+
+                        {% endif %}
+                    </div>
+                    <div class="myapp-Confirm_Unit">
+                        <p class="myapp-Confirm_Label">支払い方法</p>
+                        {% if (data.paymentType == 'bt') %}
+                        <p class="myapp-Confirm_PayMentType">銀行振込</p>
+                        <p class="myapp-Confirm_PayMentType-text">
+                            申し込み完了メールに振り込み先が記載してありますのでその口座にこの金額をお振り込みお願い致します。<br>
+                            また、振り込み手数料はお客様ご負担でご了承ください。<br>
+                            <br>
+                            振り込みが終わりましたら、マイページから"入金報告"をお願い致します。
+                            入金確認後イベント申し込み完了となります。よろしくお願い致します。 
+                        </p>
+                        {% elseif (data.paymentType == 'lp') %}
+                        <p class="myapp-Confirm_PayMentType">現地払い</p>
                         {% endif %}
                     </div>    
                 </div>

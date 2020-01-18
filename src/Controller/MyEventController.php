@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\DBAL\Types\GenderEnumType;
+use App\DBAL\Types\MyEventApplicationPayMentEnumType;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use Knp\Component\Pager\PaginatorInterface;
 
 
@@ -78,6 +80,9 @@ class MyEventController extends AbstractController
             if ($request->isMethod('POST')) {
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
+                    if ($form->getData()->getPayMentType() == MyEventApplicationPayMentEnumType::LOCALPAYMENT) {
+                        $form->getData()->setStatus(MyEventApplicationStatusEnumType::ACCEPTED);
+                    }
                     $session->set(self::SESSION_KEY, $form->getData());
                     return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
                 }

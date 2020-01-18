@@ -1,0 +1,33 @@
+.myapp-Complete {
+    @include media-breakpoint-down(sm) {
+        padding: 0 10px;
+    }
+}
+.myapp-Complete_Title {
+    @include font-size(20px);
+    margin: 0 auto 10px;
+    font-weight: bold;
+}
+.myapp-Complete_Text {
+
+}
+.myapp-Complete_Caption {
+    @include font-size(14px);
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 10px;
+    margin: 0 auto 15px;
+}
+
+.myapp-Complete_Btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 10px auto 15px;
+    @extend .btn;
+    @include button-variant($color__sex-woman, $color__border-button-hover);
+    color: #fff;
+    &:hover {
+        color: #fff;
+    }
+}

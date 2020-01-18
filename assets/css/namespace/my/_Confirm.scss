@@ -1,0 +1,67 @@
+.myapp-Confirm {
+    @include media-breakpoint-down(sm) {
+        padding: 0 10px;
+    }
+}
+.myapp-Confirm_Title {
+    @include font-size(22px);
+    margin: 0 auto 5px;
+    font-weight: bold;
+}
+.myapp-Confirm_Inner {
+
+}
+.myapp-Confirm_Unit {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+    margin: 0 auto 8px;
+}
+.myapp-Confirm_Label {
+    @include font-size(16px);
+    margin: 0 auto 5px;
+    font-weight: bold;
+}
+.myapp-Confirm_Name {
+    @include font-size(20px);
+    margin: 0 auto 5px;
+    font-weight: bold;
+}
+.myapp-Confirm_Img {
+    img {
+        max-height: 300px;
+        width: 100%;
+        margin: 0 auto;
+        vertical-align: bottom;
+        object-fit: cover;
+        @include media-breakpoint-down(sm) {
+            max-height: 180px;
+            margin: 0 auto 5px;
+        }
+    }
+}
+.myapp-Confirm_Desc {
+    @include font-size(14px);
+    margin: 0 auto 5px;
+}
+.myapp-Confirm_Title {
+
+}
+.myapp-Confirm_Date {
+
+}
+
+.myapp-Confirm_Men {
+
+}
+.myapp-Confirm_Total {
+
+}
+.myapp-Confirm_Woman {
+
+}
+.myapp-Confirm_PayMentType {
+
+}
+.myapp-Confirm_PayMentType-text {
+    @include font-size(14px);
+}

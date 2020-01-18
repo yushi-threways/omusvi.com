@@ -28,7 +28,9 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     public function findByEventDay()
     {
         $qb = $this->createQueryBuilder("sc")
+            ->where('sc.eventDay >= :now')
             ->orderBy('sc.eventDay', 'ASC')
+            ->setParameter('now', new \DateTime())
         ;
 
         return $qb;
@@ -107,11 +109,13 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     
         if (null !== $startDate && null !== $endDate) {
             $qb->andWhere(
-                $qb->expr()->between('schedule.eventDay', ':startDate', ':endDate')
+                $qb->expr()->between('schedule.eventDay', ':startDate', ':endDate'),
+                $qb->expr()->gte('schedule.eventDay', ':now')
             );
             
             $params["startDate"] = $startDate;
             $params["endDate"] = $endDate;
+            $params["now"] = new \DateTime();
         }
 
         if (null !== $startTime) {
