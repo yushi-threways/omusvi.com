@@ -9,4 +9,4 @@ fos_user:
             type: App\Form\Type\RegistrationFormType
     from_email:
         address: "noreply@omusvi.com"
-        sender_name: "noreply@pitacare.com"
+        sender_name: "noreply@omusvi.com"
