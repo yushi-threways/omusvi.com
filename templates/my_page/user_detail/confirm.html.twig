@@ -1,8 +1,22 @@
 {% extends "base.html.twig" %}
 
-{% set title = 'オミパリトップページ' %}
-{% set description = 'オミパリとは街コンイベント運営会社です。愛知県名古屋を' %}
-{% set canonical = 'canonical' %}
+{% block head %}
+    <title>マイページ情報編集確認|OMUSVi</title>
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="マイページ情報編集確認|OMUSVi">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
 
 {% block main %}
     <div class="myde-Content">

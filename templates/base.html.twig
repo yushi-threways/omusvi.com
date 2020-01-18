@@ -8,20 +8,22 @@
 
     
     {% block head %}
+    <title>OMUSViトップ</title>
+    <meta name="description" content="オムスビは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
     {% endblock %}
 
     {% block og %}
-    <meta property="og:site_name" content="OMUSVI">
-    <meta property="og:title" content="OMUSVIトップ">
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="OMUSViトップ">
     <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
     <meta property="og:image" content="">
     {% endblock %}
     
     {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
     <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
     <meta name="twitter:image" content="ogpのURL貼る">
     {% endblock %}
@@ -36,21 +38,6 @@
     </head>
     <body>
         <div class="sw-Body">
-            {% block alert %}
-                    <div class="sw-Alert">
-                        {% for key, messages in app.session.flashBag.all %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ key }}">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
-            {% endblock %}
-
             <div class="sw-Body_Inner">
 
                 {% block body %}
@@ -61,12 +48,12 @@
                         {% block header %}
                         <div class="sw-Header_Inner">
                             <h1 class="sw-Header_Lead">
-                                <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
+                                <strong>名古屋</strong>中心に<strong>出会いイベント</strong>をナビゲートする<span>OMUSVi</span>
                             </h1>
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
                                     <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                                    OMUSVI
+                                    OMUSVi
                                     </a>
                                 </div>
                                 
@@ -92,6 +79,21 @@
                         </div>
                         {% endblock %}
                     </header>
+
+                {% block alert %}
+                    <div class="sw-Alert">
+                        {% for key, messages in app.session.flashBag.all %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ key }}">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endblock %}
 
                     <main class="sw-Main">
                         <div class="sw-Main_Inner">
@@ -144,13 +146,13 @@
                                                     <li class="sw-Side_ItemList"><a href="{{ path('my_event_venue_index') }}">会場一覧</a></li>  
                                                 </ul>
                                             </li>
-                                            <li class="sw-Side_Item">
+                                            {# <li class="sw-Side_Item">
                                                 <h3 class="sw-Side_ItemTitle">OMUSVI(オムスビ)とは</h3>
                                                 <ul class="sw-Side_ItemLists">
                                                     <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">OMUSVIについて</a></li>
                                                     <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li> 
                                                 </ul>
-                                            </li>
+                                            </li> #}
                                         </ul>                  
                                     </div>
                                 
@@ -167,9 +169,9 @@
                                         <p class="sw-Footer_ItemTitle">コンテンツ</p>
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('default_index') }}">トップ</a></li>
-                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li>
+                                            {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li> #}
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a></li>
-                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場募集</a></li>
+                                            {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場募集</a></li> #}
                                         </ul>
                                     </li>
                                     <li class="sw-Footer_Item">
@@ -177,16 +179,17 @@
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "agree"}) }}">利用規約</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法に基づく表記</a></li>
+                                            {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "pp"}) }}">プライバシーポリシー</a></li> #}
                                         </ul>
                                     </li>
-                                    <li class="sw-Footer_Item">
+                                    {# <li class="sw-Footer_Item">
                                         <p class="sw-Footer_ItemTitle">お困りの時は</p>
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">OMUSVIについて</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "guide"}) }}">ご利用ガイド</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li>
                                         </ul>
-                                    </li>
+                                    </li> #}
                                 </ul>
                                 <div class="sw-Footer_Copy"><small>
                                 Copyright © 2019 Meetie Inc. All Rights Reserved.
@@ -277,14 +280,14 @@
                                         </div>
                                     </a>
                                 </li>
-                                {# <li class="sw-Nav_SideListItem">
+                                <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
                                         <div class="sw-Nav_SideItemUnit">
                                             <div class="sw-Nav_SideUnitImg"></div>
                                             <div class="sw-Nav_SideUnitText">イベント一覧</div>
                                         </div>
                                     </a>
-                                </li> #}
+                                </li>
                                 {# <li class="sw-Nav_SideListItem">
                                     <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
                                         <div class="sw-Nav_SideItemUnit">

@@ -1,8 +1,25 @@
 {% extends "base.html.twig" %}
 
-{% set title = "{{ my_event.name }}" %}
-{% set description = "{{ my_event.description }}" %}
-{% set canonical = 'canonical' %}
+{% block head %}
+    <title>イベント会場一覧|OMUSVi</title>
+    <meta name="description" content="オムスビのイベント会場の一覧。名古屋、栄、伏見近辺の会場を利用しています。">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="OMUSViトップ">
+    <meta property="og:description" content="オムスビのイベント会場の一覧。名古屋、栄、伏見近辺の会場を利用しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:description" content="オムスビのイベント会場の一覧。名古屋、栄、伏見近辺の会場を利用しています。"/>
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
 
 
 {% block main %}

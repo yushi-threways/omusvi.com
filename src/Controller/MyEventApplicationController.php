@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\UserBundle\Model\UserInterface;
 use App\Service\Mailer\TwigSwiftMailer;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use App\DBAL\Types\MyEventApplicationPayMentEnumType;
+
 
 /**
  * @Route("/event/schedule/{id}")
@@ -62,9 +64,16 @@ class MyEventApplicationController extends AbstractController
             $entityManager->persist($data);
             $entityManager->flush();
 
-            $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
-                'data' => $data,
-            ]);
+            if ($data->getPayMentType() == MyEventApplicationPayMentEnumType::BANKTRANSFER) {
+                $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
+                    'data' => $data,
+                ]);
+            } elseif ($data->getPayMentType() == MyEventApplicationPayMentEnumType::LOCALPAYMENT) {
+                $mailer->sendMessage('_email/my_event_application/local_payment.txt.twig', [
+                    'data' => $data,
+                ]);
+            }
+            
 
             $session->set(self::SESSION_KEY, $form->getData());
             return $this->redirectToRoute('my_event_application_complete', ['id' => $schedule->getId()]);

@@ -24,12 +24,12 @@ class UserDetailType extends AbstractType
                 'label' => '氏名（名）',
             ])
             ->add('firstKana', null, [
-                'label' => '氏名ｶﾅ（姓）',
-                'help' => '半角ｶﾀｶﾅで入力してください',
+                'label' => '氏名カナ（姓）',
+                'help' => '全角カタカナで入力してください',
             ])
             ->add('lastKana', null, [
-                'label' => '氏名ｶﾅ（名）',
-                'help' => '半角ｶﾀｶﾅで入力してください',
+                'label' => '氏名カナ（名）',
+                'help' => '全角カタカナで入力してください',
             ])
             ->add('gender', ChoiceType::class, [
                 'label' => '性別',

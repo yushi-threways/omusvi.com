@@ -56,9 +56,9 @@ class UserDetail
      *     maxMessage = "{{ limit }}文字以内で入力してください。"
      * )
      * @Assert\Regex(
-     *      pattern="/^[ァ-ヴー\s]+$/u",
+     *      pattern="/^[アーケー]+$/u",
      *      match=false,
-     *      message="半角ｶﾀｶﾅで入力してください。"
+     *      message="全角カタカナで入力してください。"
      * )
      */
     private $firstKana;
@@ -73,9 +73,9 @@ class UserDetail
      *     maxMessage = "{{ limit }}文字以内で入力してください。"
      * )
      * @Assert\Regex(
-     *      pattern="/^[ァ-ヴー\s]+$/u",
+     *      pattern="/^[アーケー]+$/u",
      *      match=false,
-     *      message="半角ｶﾀｶﾅで入力してください。"
+     *      message="全角カタカナで入力してください。"
      * )
      */
     private $lastKana;

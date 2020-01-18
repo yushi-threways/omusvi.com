@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
+use App\DBAL\Types\MyEventApplicationPayMentEnumType;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventApplicationRepository")
@@ -53,9 +54,17 @@ class MyEventApplication
      */
     private $cancelled;
 
+    /**
+     * @var string
+     * @ORM\Column(type="MyEventApplicationPayMentEnumType", nullable=false)
+     * @Constraints\Enum(entity="App\DBAL\Types\MyEventApplicationPayMentEnumType")
+     */
+    private $paymentType;
+
     public function __construct()
     {
         $this->status = MyEventApplicationStatusEnumType::APPLIED;
+        $this->paymentType = MyEventApplicationPayMentEnumType::BANKTRANSFER;
     }
 
     public function getId(): ?int
@@ -135,6 +144,18 @@ class MyEventApplication
         return $this;
     }
 
+    public function getPaymentType(): ?string
+    {
+        return $this->paymentType;
+    }
+
+    public function setPaymentType(?string $paymentType): self
+    {
+        $this->paymentType = $paymentType;
+
+        return $this;
+    }
+
     public function getEvent()
     {
         $event = $this->getMyEventSchedule()->getEvent();
@@ -179,6 +200,29 @@ class MyEventApplication
                 break;
             case MyEventApplicationStatusEnumType::REJECTED:
                 echo "却下済";
+                break;
+            default:
+                echo "";
+        }
+    }
+   
+    public function isBt(): bool
+    {
+        return $this->paymentType == MyEventApplicationPayMentEnumType::BANKTRANSFER;
+    }
+    public function isLp(): bool
+    {
+        return $this->paymentType == MyEventApplicationPayMentEnumType::LOCALPAYMENT;
+    }
+
+    public function getPaymentText($paymentType)
+    {
+        switch ($paymentType){
+            case MyEventApplicationPayMentEnumType::BANKTRANSFER:
+                echo "銀行振込";
+                break;
+            case MyEventApplicationPayMentEnumType::LOCALPAYMENT:
+                echo "現地払い";
                 break;
             default:
                 echo "";
