@@ -1,18 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% set title = "{{ my_event.name }}" %}
-{% set description = "{{ my_event.description }}" %}
-{% set canonical = 'canonical' %}
+{% set static_title = "OMUSViについて" %}
+{% set static_description = 'OMUSViについて記載したページです。' %}
 
 {% block head %}
-    <title>OMUSViについて|OMUSVi</title>
-    <meta name="description" content="オムスビとは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！出会えるイベントを掲載しています。">
+    <title>{{ static_title }}|OMUSVi</title>
+    <meta name="description" content="{{ static_title }}の内容のページです。">
 {% endblock %}
 
 {% block og %}
     <meta property="og:site_name" content="OMUSVi">
-    <meta property="og:title" content="OMUSViトップ">
-    <meta property="og:description" content="オムスビとは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！出会えるイベントを掲載しています。">
+    <meta property="og:title" content="{{ static_title }}|OMUSVi">
+    <meta property="og:description" content="{{ static_title }}の内容のページです">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
     <meta property="og:image" content="">
@@ -21,18 +20,17 @@
 {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ app.request.uri }}">
-    <meta name="twitter:description" content="オムスビとは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！出会えるイベントを掲載しています。" />
+    <meta name="twitter:description" content="{{ static_title }}の内容のページです"/>
     <meta name="twitter:image" content="ogpのURL貼る">
 {% endblock %}
 
 {% block main %}
-{{ app.request.uri }}
 <section class="sw-Section">
     <div class="static-Content">
         <div class="static-Content_Inner">
             <h1 class="static-Content_Title">{{ static_title }}</h1>
             <p class="static-Content_Desc">
-                {{ static_description }}}
+                {{ static_description }}
             </p>
            
         </div>
