@@ -1,14 +1,31 @@
 {% extends "base.html.twig" %}
 
-{% set title = "{{ my_event.name }}" %}
-{% set description = "{{ my_event.description }}" %}
-{% set canonical = 'canonical' %}
+{% block head %}
+    <title>{{ my_event.name }}|OMUSVi</title>
+    <meta name="description" content="{{ my_event.description }}">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="{{ my_event.name }}|OMUSVi">
+    <meta property="og:description" content="{{ my_event.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:description" content="{{ my_event.description }}"/>
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
 
 {% block header %}
                         <div class="sw-Header_Inner">
-                            <h1 class="sw-Header_Lead">
+                            <p class="sw-Header_Lead">
                                 <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
-                            </h1>
+                            </p>
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
                                     <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">

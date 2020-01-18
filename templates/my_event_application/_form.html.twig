@@ -5,6 +5,7 @@
     {% elseif ((user.userDetail.gender == 'female') ) %}
     {{ form_row(form.womanCount) }}
     {% endif %}
+    {{ form_row(form.paymentType) }}
 </div>
 {{ form_rest(form) }}
 <div class="modal-footer">

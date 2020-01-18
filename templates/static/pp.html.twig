@@ -1,12 +1,29 @@
 {% extends "base.html.twig" %}
 
-{% set title = "{{ my_event.name }}" %}
-{% set description = "{{ my_event.description }}" %}
-{% set canonical = 'canonical' %}
 
-{% set static_title = "利用規約" %}
-{% set static_description = "オミパリの利用規約について記載したページです。" %}
+{% set static_title = "プライバシーポリシー" %}
+{% set static_description = "プライバシーポリシーについて記載したページです。" %}
 
+{% block head %}
+    <title>{{ static_title }}|OMUSVi</title>
+    <meta name="description" content="{{ static_title }}についての内容のページです。">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="{{ static_title }}|OMUSVi">
+    <meta property="og:description" content="{{ static_title }}についての内容のページです">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:description" content="{{ static_title }}についての内容のページです"/>
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
 
 {% block main %}
 <h1 class="sw-Content_Title">{{ static_title }}</h1>

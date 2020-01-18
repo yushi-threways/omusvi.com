@@ -5,7 +5,9 @@
 
 }
 .venue-Content_Inner {
-
+    @include media-breakpoint-down(sm) {
+        padding: 0 10px;
+    }
 }
 .venue-Content_Title {
     @include font-size(22px);

@@ -1,5 +1,27 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+{% block head %}
+<title>ログイン|OMUSVi</title>
+<link rel="canonical" href="{{ absolute_url(path('default_index')) }}"> 
+<meta name=”robots” content=”noindex” />
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVI">
+    <meta property="og:title" content="ログイン|OMUSVi">
+    <meta property="og:description" content="オムスビユーザーログインページ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+    <meta property="og:image" content="">
+    {% endblock %}
+    
+    {% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:description" content="オムスビユーザーログインページ" />
+    <meta name="twitter:image" content="ogpのURL貼る">
+    {% endblock %}
+
 {% block fos_user_content %}
 <div class=" mypage-Login">
     <h1 class="mypage-Login_Title">ログイン</h1>
