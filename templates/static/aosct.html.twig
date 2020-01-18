@@ -4,6 +4,27 @@
 {% set description = "{{ my_event.description }}" %}
 {% set canonical = 'canonical' %}
 
+{% block head %}
+    <title>特定商取引法に基づく表記|OMUSVi</title>
+    <meta name="description" content="オムスビの特定商取引法に基づく表記についての内容のページです。">
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="OMUSViトップ">
+    <meta property="og:description" content="オムスビの特定商取引法に基づく表記についての内容のページです">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:description" content="オムスビの特定商取引法に基づく表記についての内容のページです"/>
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
+
 {% set static_title = "特定商取引法に基づく表記" %}
 {% set static_description = "特定商取引法に基づく表記ついて記載したページです。" %}
 
@@ -44,7 +65,7 @@
                 </tr>
                 <tr>
                 <td width="29%">支払方法：</td>
-                <td>ちょコム決済サービス<br> 「ちょコムクレジット支払い」「ちょコムコンビニ支払い」「ちょコムeマネー」</td>
+                <td>・銀行振込<br> ・現地支払い</td>
                 </tr>
                 <tr>
                 <td width="29%">販売数量の制限：</td>

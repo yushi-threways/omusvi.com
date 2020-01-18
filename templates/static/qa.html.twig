@@ -1,12 +1,25 @@
 {% extends "base.html.twig" %}
 
-{% set title = "{{ my_event.name }}" %}
-{% set description = "{{ my_event.description }}" %}
-{% set canonical = 'canonical' %}
+{% block head %}
+    <title>よくある質問|OMUSVi</title>
+    <meta name="description" content="オムスビのよくある質問に基づく表記についての内容のページです。">
+{% endblock %}
 
-{% set static_title = "よくある質問" %}
-{% set static_description = "よくある質問をまとめたページです。" %}
-
+{% block og %}
+    <meta property="og:site_name" content="OMUSVi">
+    <meta property="og:title" content="OMUSViトップ">
+    <meta property="og:description" content="オムスビのよくある質問に基づく表記についての内容のページです">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="">
+{% endblock %}
+    
+{% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ app.request.uri }}">
+    <meta name="twitter:description" content="オムスビのよくある質問に基づく表記についての内容のページです"/>
+    <meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
 
 {% block main %}
 <section class="sw-Section">

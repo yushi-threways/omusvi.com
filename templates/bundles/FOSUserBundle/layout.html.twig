@@ -6,8 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
 
-        {% set title = 'OMUSVIログイン | OMUSVI' %}
-        <title>{{ title }}</title>
+       
+{% block head %}
+<title>OMUSVi</title>
+<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+<link rel="canonical" href="{{ absolute_url(path('default_index')) }}">   
+{% endblock %}
+
+{% block og %}
+    <meta property="og:site_name" content="OMUSVI">
+    <meta property="og:title" content="OMUSVIトップ">
+    <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+    <meta property="og:image" content="">
+    {% endblock %}
+    
+    {% block twitter %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="サイトのURL貼る">
+    <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
+    <meta name="twitter:image" content="ogpのURL貼る">
+    {% endblock %}
        
         {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
@@ -54,16 +74,22 @@
                         </div>
                         {% endblock %}
                     </header>
-
-        {% if app.request.hasPreviousSession %}
-            {% for type, messages in app.session.flashbag.all() %}
-                {% for message in messages %}
-                    <div class="flash-{{ type }}">
-                        {{ message }}
+            {% block alert %}
+                {% if app.request.hasPreviousSession %}
+                    <div class="sw-Alert">
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ type }}">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            {% endfor %}
-        {% endif %}
+                {% endif %}
+            {% endblock %}
 
         <main class="sw-Main">
             <div class="sw-Main_Inner">
