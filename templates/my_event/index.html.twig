@@ -25,63 +25,9 @@
 {% block main %}
 <section class="sw-Section">
     <div class="sw-Event_Counter"><span>{{ total }}</span>件中 {{ start }}~{{ end }}件</div>
-    {% for myEvent in pagination %}
-        <div class="sw-Event">
-            <div class="sw-Event_Inner">
-                <div class="sw-Event_Img">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">
-                <img src="{{ vich_uploader_asset(myEvent, 'imageFile') }}" alt="{{ myEvent.imageName }}">
-                </a>
-                </div>
-                {#<p class="sw-Event_ScheduleText">#}
-                {#まだ空きございます！応募締め切りまで00:00時まで！#}
-                {#</p>#}
-                <div class="sw-Event_Info">
-                    <span class="sw-Event_Info-place"><i class="fas fa-map-marker-alt"></i> {{ myEvent.myEventVenue.prefecture }}</span>
-                    <span class="sw-Event_Info-date">{{ myEvent.myEventSchedule.eventDay|date("n月j日") }} {{ myEvent.myEventSchedule.startTime|date("G:i") }}〜</span>
-                </div>
-                <h1 class="sw-Event_Title">
-                <a href="{{ path('my_event_show', {'id': myEvent.id}) }}">{{ myEvent.name }}</a>
-                </h1>
-                <div class="sw-Event_Person">
-                    <div class="sw-Event_Person-woman">
-                        <div class="sw-Event_WomanUnit">
-                            <div class="sw-Event_WomanIcon">
-                                <i class="fas fa-ribbon"></i>
-                            </div>
-                            <div class="sw-Event_WomanInfo">
-                                <div class="sw-Event_WomanInfo-limit">{{ myEvent.myEventSchedule.womanTerms }}</div>
-                                <span class="sw-Event_WomanInfo-price">{{ myEvent.womanPrice|number_format }}円</span>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="sw-Event_Person-man">
-                        <div class="sw-Event_ManUnit">
-                            <div class="sw-Event_ManIcon">
-                                <i class="fab fa-black-tie"></i>
-                            </div>
-                            <div class="sw-Event_ManInfo">
-                                <div class="sw-Event_ManInfo-limit">{{ myEvent.myEventSchedule.manTerms }}</div>
-                                <span class="sw-Event_ManInfo-price">{{ myEvent.menPrice|number_format }}円</span>
-                            </div>
-                        </div>    
-                    </div>
-                </div>
-                <p class="sw-Event_Desc">{{ myEvent.description }}</p>
-                {% if not myEvent.tags.empty %}
-                <ul class="sw-Event_TagItems">
-                {% for myEventTag in myEvent.tags %}
-                    <li class="sw-Event_TagItem">
-                        <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
-                            <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-                {% endif %} 
-                {# <div class="sw-Event_Btn"><a href="{{ path('my_event_show', {'id': myEvent.id}) }}">詳細をみる</a></div> #}
-            </div>
-        </div>
+    {% for my_event in pagination %}
+        {% include '/_parts/event_list.html.twig' with {myEvent: my_event} %}
+
 
         <div class="sw-Event_Pagination">
             {{ knp_pagination_render(pagination, null, {}, {align: "center"}) }}

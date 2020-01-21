@@ -27,7 +27,7 @@
             <tr>
                 <td>{{ my_event_venue.id }}</td>
                 <td>{{ my_event_venue.name }}</td>
-                <td>{{ my_event_venue.map }}</td>
+                <td>{% if  my_event_venue.map %}マップ登録あり{% endif %}</td>
                 <td>{{ my_event_venue.traffic }}</td>
                 <td>{{ my_event_venue.address }}</td>
                 <td>

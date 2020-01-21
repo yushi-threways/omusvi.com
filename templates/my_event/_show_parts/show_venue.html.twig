@@ -1,0 +1,29 @@
+<section class="sw-Section">
+    <div class="me-Content">
+        <div class="me-Content_Inner">
+            <h1 class="me-Content_Title">当日の会場について</h1>
+            <div class="me-Venue">
+                <div class="me-Venue_Inner">
+                    {% if my_event.myEventVenue.map %}
+                        <div class="me-Venue_Map"><iframe src={{ my_event.myEventVenue.map|raw }}></iframe></div>
+                    {% endif %}
+                    <h2 class="me-Venue_Title">{{ my_event.myEventVenue.name }}</h2>
+                    <div class="me-Venue_Table">
+                        {% if my_event.myEventVenue.address  %}
+                            <div class="me-Venue_TableInner">
+                                <p class="me-Venue_TableTh">住所</p>
+                                <p class="me-Venue_TableTd">{{ my_event.myEventVenue.address }}</p>
+                            </div>
+                        {% endif %}
+                        {% if my_event.myEventVenue.traffic  %}
+                            <div class="me-Venue_TableInner">
+                                <p class="me-Venue_TableTh">交通手段</p>
+                                <p class="me-Venue_TableTd">{{ my_event.myEventVenue.traffic }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
