@@ -182,7 +182,6 @@ class MyEventSchedule
      * @param  \DateTime $startTime
      * @return $this
      */
-
     public function setStartTime(\DateTime $startTime): self
     {
         $this->startTime = $startTime;

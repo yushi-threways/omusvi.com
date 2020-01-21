@@ -14,19 +14,22 @@ class MyEventFlowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startTime', TimeType::class, [
+            ->add('startTime', null, [
                 'label' => '開始時間',
-                'widget' => 'single_text',
-                'input' => 'datetime_immutable',
                 'required' => false,
-                'placeholder' => ''
+                'empty_data' => null,
+                'attr' => [
+                    'placeholder' => '開始時間'
+                ]
+
             ])
-            ->add('endTime', TimeType::class, [
+            ->add('endTime', null, [
                 'label' => '終了時間',
-                'widget' => 'single_text',
-                'input' => 'datetime_immutable',
                 'required' => false,
-                'placeholder' => ''
+                'empty_data' => null,
+                'attr' => [
+                    'placeholder' => '開始時間'
+                ]
             ])
             ->add('title', null, [
                 'label' => '見出し',
