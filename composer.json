@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "fresh/doctrine-enum-bundle": "~6.5",
+        "friendsofsymfony/ckeditor-bundle": "^2.2",
         "friendsofsymfony/jsrouting-bundle": "^2.4",
         "gedmo/doctrine-extensions": "^2.4",
         "knplabs/knp-paginator-bundle": "^5.0",
@@ -75,7 +76,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "ckeditor:install --clear=drop": "symfony-cmd",
+            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

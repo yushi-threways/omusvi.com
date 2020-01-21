@@ -26,6 +26,7 @@
 <div class="top-Search">
     {% include 'default/_search_form.html.twig' with {'form': search_form} %}
 </div>
+{% if feature_my_event %}
 <div class="top-Wide">
     <div class="top-Wide_Inner">
         <div class="top-Event">
@@ -54,6 +55,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <section class="sw-Section">
     <div class="top-Wide_Inner">
@@ -142,7 +144,7 @@
             </div>
         </div>
     {% else %}
-        <p>現在開催中のイベントはございません。</p>
+        <p>新着イベントはございません。</p>
     {% endfor %}
     </div>
 </section>

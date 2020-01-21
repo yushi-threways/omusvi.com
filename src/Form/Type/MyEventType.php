@@ -16,10 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\MyEventVenue;
 use App\Entity\MyEventSchedule;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class MyEventType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,8 +30,9 @@ class MyEventType extends AbstractType
             ->add('description', null, [
               'label' => 'イベント詳細',
           ])
-            ->add('content', null, [
+            ->add('content', CKEditorType::class, [
               'label' => 'イベント内容',
+              'config_name' => 'my_config',
           ])
             ->add('menPrice', null, [
               'label' => '男性料金',
@@ -39,7 +41,7 @@ class MyEventType extends AbstractType
               'label' => '女性料金',
           ])
             ->add('imageFile', FileType::class, [
-              'required' => true,
+              'required' => false,
               'label' => 'イベント画像'
               // 'asset_helper' => true,
             ])
@@ -53,7 +55,8 @@ class MyEventType extends AbstractType
             ->add('myEventVenue', EntityType::class, [
                 'class' => MyEventVenue::class,
                 'choice_label' => 'name',
-                'label' => 'イベント開催場所'
+                'label' => 'イベント開催場所',
+                'required' => false
             ])
             ->add('myEventFlows', CollectionType::class, [
               'entry_type' => MyEventFlowType::class,
