@@ -18,17 +18,20 @@ class MyEventFlowType extends AbstractType
                 'label' => '開始時間',
                 'widget' => 'choice',
                 'input' => 'datetime_immutable',
+                'required' => false,
             ])
             ->add('endTime', TimeType::class, [
                 'label' => '終了時間',
                 'widget' => 'choice',
                 'input' => 'datetime_immutable',
+                'required' => false,
             ])
             ->add('title', null, [
                 'label' => '見出し',
             ])
             ->add('content', null, [
                 'label' => '内容',
+                'required' => false,
             ])
         ;
     }

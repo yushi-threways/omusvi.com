@@ -35,7 +35,7 @@ host('mixhost')
     ->add('shared_files', ['.env.local', 'public/.htaccess']);
 
 host('omusvi.com')
-    ->user('lbqhvbsc')
+    ->user('yljcocpi')
     ->port(22)
     ->stage('prod')
     ->set('branch', 'master')

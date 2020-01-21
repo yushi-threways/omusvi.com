@@ -1,0 +1,6 @@
+fos_ck_editor:
+    configs:
+        my_config:
+            toolbar: 'full'
+            uiColor:  "#e2e2e2"
+            # filebrowserUploadRoute: "myEvent"
