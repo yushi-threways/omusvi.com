@@ -139,9 +139,9 @@
                                 {% for flow in my_event.myEventFlows %}
                                     <li class="me-Flow_Item">
                                         <div class="me-Flow_Item-date">
-                                            <span>{{ flow.startTime|date("A g:i") }}</span>
+                                            <span>{% if flow.startTime %}{{ flow.startTime|date("G:i") }}{% endif %}</span>
                                             <span> 〜 </span>
-                                            <span>{{ flow.endTime|date("A g:i") }}</span>
+                                            <span>{% if flow.endTime %}{{ flow.endTime|date("G:i") }}{% endif %}</span>
                                         </div>
                                         <div class="me-Flow_Item-content">
                                             {% if flow.title %}

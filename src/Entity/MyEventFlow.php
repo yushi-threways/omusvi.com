@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventFlowRepository")
@@ -20,17 +21,19 @@ class MyEventFlow
     private $id;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @Assert\Time
+     * @ORM\Column(type="string", nullable=true)
      */
     private $startTime;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @Assert\Time
+     * @ORM\Column(type="string", nullable=true)
      */
     private $endTime;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
@@ -47,8 +50,6 @@ class MyEventFlow
 
     public function __construct()
     {
-        $this->startTime = new \DateTimeImmutable();
-        $this->endTime = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -56,27 +57,31 @@ class MyEventFlow
         return $this->id;
     }
 
-    public function getStartTime(): ?\DateTimeImmutable
+    
+    public function getStartTime(): ?string
     {
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeImmutable $startTime): self
+    
+    public function setStartTime(?string $startTime): self
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeImmutable
+    
+    public function getEndTime(): ?string
     {
         return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeImmutable $endTime): self
+   
+    public function setEndTime(?string $endTime): self
     {
         $this->endTime = $endTime;
-
+        
         return $this;
     }
 
