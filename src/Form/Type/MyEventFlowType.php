@@ -16,15 +16,17 @@ class MyEventFlowType extends AbstractType
         $builder
             ->add('startTime', TimeType::class, [
                 'label' => '開始時間',
-                'widget' => 'choice',
+                'widget' => 'single_text',
                 'input' => 'datetime_immutable',
                 'required' => false,
+                'placeholder' => ''
             ])
             ->add('endTime', TimeType::class, [
                 'label' => '終了時間',
-                'widget' => 'choice',
+                'widget' => 'single_text',
                 'input' => 'datetime_immutable',
                 'required' => false,
+                'placeholder' => ''
             ])
             ->add('title', null, [
                 'label' => '見出し',

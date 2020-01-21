@@ -84,7 +84,7 @@
   
   .sw-Search_Submit {
       display: block;
-      width: 98%;
+      max-width: 300px;
       margin: 30px auto;
     @extend .btn;
     @include button-variant($color__sex-woman, $color__border-button-hover);

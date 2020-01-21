@@ -13,7 +13,7 @@
     <meta property="og:url" content="{{ app.request.uri }}">
     <meta property="og:image" content="">
 {% endblock %}
-    
+
 {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ app.request.uri }}">
@@ -22,361 +22,345 @@
 {% endblock %}
 
 {% block header %}
-                        <div class="sw-Header_Inner">
-                            <p class="sw-Header_Lead">
-                                <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
-                            </p>
-                            <div class="sw-Header_Branding">
-                                <div class="sw-Header_Logo">
-                                    <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                                    OMUSVI
-                                    </a>
-                                </div>
-                                
-                                <div class="sw-Header_MainNavOuter">
-                                    <nav class="sw-Header_MainNav">
-                                        <div class="sw-Header_MainNavInner">
-                                            <button class="menu-toggle sw-Nav_OpenBtn sw-Header_MainNavBtn" aria-controls="primary-menu" aria-expanded="false">
-                                                <i></i>
-                                                <i></i>
-                                                <i></i>
-                                            </button>
-                                            <ul class="sw-Header_MainNavItems">
-                                                {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-user"></i></a></li>
-                                                {% else %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
-                                                {% endif %}
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
+    <div class="sw-Header_Inner">
+        <p class="sw-Header_Lead">
+            <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
+        </p>
+        <div class="sw-Header_Branding">
+            <div class="sw-Header_Logo">
+                <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
+                    OMUSVI
+                </a>
+            </div>
+
+            <div class="sw-Header_MainNavOuter">
+                <nav class="sw-Header_MainNav">
+                    <div class="sw-Header_MainNavInner">
+                        <button class="menu-toggle sw-Nav_OpenBtn sw-Header_MainNavBtn" aria-controls="primary-menu" aria-expanded="false">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </button>
+                        <ul class="sw-Header_MainNavItems">
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-user"></i></a></li>
+                            {% else %}
+                                <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block main %}
-<div class="me-Detail_Content">
-<section class="sw-Section">
-        <div class="me-Detail">
-            <div class="me-Detail_Inner">
-                <div class="me-Detail_Img">
-                <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
-                </div>
-                <div class="me-Detail_Info">
-                    <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
-                    <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}〜</span>
-                </div>
-                <h1 class="me-Detail_Title">
-                {{ my_event.name }}
-                </h1>
-                <div class="me-Detail_Person">
-                    <div class="me-Detail_Person-woman">
-                        <div class="me-Detail_WomanUnit">
-                            <div class="me-Detail_WomanIcon">
-                                <i class="fas fa-ribbon"></i>
-                            </div>
-                            <div class="me-Detail_WomanInfo">
-                                <div class="me-Detail_WomanInfo-limit">{{ my_event.myEventSchedule.womanTerms }}歳</div>
-                                <span class="me-Detail_WomanInfo-price">{{ my_event.womanPrice|number_format }}円</span>
-                                <div class="me-Detail_WomanInfo-text">
-                                    {% include '_parts/female_count.html.twig' with {'myEvent': my_event} %}
+    <div class="me-Detail_Content">
+        <section class="sw-Section">
+            <div class="me-Detail">
+                <div class="me-Detail_Inner">
+                    <div class="me-Detail_Img">
+                        <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
+                    </div>
+                    <div class="me-Detail_Info">
+                        {% if my_event.myEventVenue %}
+                        <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
+                        {% endif %}
+                        <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}〜</span>
+                    </div>
+                    <h1 class="me-Detail_Title">
+                        {{ my_event.name }}
+                    </h1>
+                    <div class="me-Detail_Person">
+                        <div class="me-Detail_Person-woman">
+                            <div class="me-Detail_WomanUnit">
+                                <div class="me-Detail_WomanIcon">
+                                    <i class="fas fa-ribbon"></i>
+                                </div>
+                                <div class="me-Detail_WomanInfo">
+                                    <div class="me-Detail_WomanInfo-limit">{{ my_event.myEventSchedule.womanTerms }}歳</div>
+                                    <span class="me-Detail_WomanInfo-price">{{ my_event.womanPrice|number_format }}円</span>
+                                    <div class="me-Detail_WomanInfo-text">
+                                        {% include '_parts/female_count.html.twig' with {'myEvent': my_event} %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>    
-                    </div>
-                    <div class="me-Detail_Person-man">
-                        <div class="me-Detail_ManUnit">
-                            <div class="me-Detail_ManIcon">
-                                <i class="fab fa-black-tie"></i>
-                            </div>
-                            <div class="me-Detail_ManInfo">
-                                <div class="me-Detail_ManInfo-limit">{{ my_event.myEventSchedule.manTerms }}歳</div>
-                                <span class="me-Detail_ManInfo-price">{{ my_event.menPrice|number_format }}円</span>
-                                <div class="me-Detail_ManInfo-text">
-                                    {% include '_parts/male_count.html.twig' with {'myEvent': my_event} %}
+                        </div>
+                        <div class="me-Detail_Person-man">
+                            <div class="me-Detail_ManUnit">
+                                <div class="me-Detail_ManIcon">
+                                    <i class="fab fa-black-tie"></i>
+                                </div>
+                                <div class="me-Detail_ManInfo">
+                                    <div class="me-Detail_ManInfo-limit">{{ my_event.myEventSchedule.manTerms }}歳</div>
+                                    <span class="me-Detail_ManInfo-price">{{ my_event.menPrice|number_format }}円</span>
+                                    <div class="me-Detail_ManInfo-text">
+                                        {% include '_parts/male_count.html.twig' with {'myEvent': my_event} %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-</section>
-<section class="sw-Section">
-    <div class="me-Content">
-        <div class="me-Content_Inner">
-            <h1 class="me-Content_Title">参加条件</h1>
-            <div class="me-Terms">
-                <div class="me-Terms_Inner">
-                    <div class="me-Terms_Text">
-                        <p><strong>独身・対象年齢、対象条件であること</strong></p>
-                        <p>
-                        <small>
-                        ※ 全参加者が満年齢であることを当日受付で確認いたします。（ご本人の公的証明書、運転免許証や保険証など）
-                        </small>
-                        <small>
-                        参加条件が確認できない、該当しない場合ご参加をお断りします。その場合参加費のご返金はございません。
-                        </small>
-                        </p>
-                    <div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="sw-Section">
-    <div class="me-Content">
-        <div class="me-Content_Inner">
-            <h1 class="me-Content_Title">イベントの流れ</h1>
-            <div class="me-Flow">
-                <div class="me-Flow_Inner">
-                    <ul class="me-Flow_List">
-                    {% for flow in my_event.myEventFlows %}
-                    <li class="me-Flow_Item">
-                        <div class="me-Flow_Item-date">
-                            <span>{{ flow.startTime|date("A g:i") }}</span>
-                            <span> 〜 </span>
-                            <span>{{ flow.endTime|date("A g:i") }}</span>
+        </section>
+        <section class="sw-Section">
+            <div class="me-Content">
+                <div class="me-Content_Inner">
+                    <h1 class="me-Content_Title">参加条件</h1>
+                    <div class="me-Terms">
+                        <div class="me-Terms_Inner">
+                            <div class="me-Terms_Text">
+                                <p><strong>独身・対象年齢、対象条件であること</strong></p>
+                                <p>
+                                    <small>
+                                        ※ 全参加者が満年齢であることを当日受付で確認いたします。（ご本人の公的証明書、運転免許証や保険証など）
+                                    </small>
+                                    <small>
+                                        参加条件が確認できない、該当しない場合ご参加をお断りします。その場合参加費のご返金はございません。
+                                    </small>
+                                </p>
+                                <div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="me-Flow_Item-content">
-                            {% if flow.title %}  
-                            <p class="me-Flow_Item-title">{{ flow.title }}</p>
-                            {% endif %}
-                            {% if flow.content %}  
-                            <p class="me-Flow_Item-desc">{{ flow.content }}</p>
-                            {% endif %}
-                        </div>
-                    </li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="sw-Section">
-    <div class="me-Content">
-        <div class="me-Content_Inner">
-            <h1 class="me-Content_Title">イベント内容</h1>
-            <div class="me-About">
-                <div class="me-About_Inner">
-                    <div class="me-About_Content">
-                        {{ my_event.content|escape("html") }}
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<section class="sw-Section">
-    <div class="me-Content">
-        <div class="me-Content_Inner">
-            <h1 class="me-Content_Title">当日の会場について</h1>
-            <div class="me-Venue">
-                <div class="me-Venue_Inner">
-                    {% if my_event.myEventVenue.map %}
-                        <div class="me-Venue_Map"><iframe src={{ my_event.myEventVenue.map|raw }}></iframe></div>
-                    {% endif %}
-                    <h2 class="me-Venue_Title">{{ my_event.myEventVenue.name }}</h2>
-                    <div class="me-Venue_Table">
-                    {% if my_event.myEventVenue.address  %}
-                        <div class="me-Venue_TableInner">
-                            <p class="me-Venue_TableTh">住所</p>
-                            <p class="me-Venue_TableTd">{{ my_event.myEventVenue.address }}</p>
-                        </div>
-                    {% endif %}
-                    {% if my_event.myEventVenue.traffic  %}
-                        <div class="me-Venue_TableInner">
-                            <p class="me-Venue_TableTh">交通手段</p>
-                            <p class="me-Venue_TableTd">{{ my_event.myEventVenue.traffic }}</p>
-                        </div>
-                    {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="sw-Section">
-    <div class="me-Content">
-        <div class="me-Content_Inner">
-            <h1 class="me-Content_Title">詳細情報</h1>
-            <div class="me-Info">
-                <div class="me-Info_Inner">
-                    <div class="me-Info_Table">
-                        <div class="me-Info_TableInner">
-                            <p class="me-Info_TableTh">会場</p>
-                            <p class="me-Info_TableTd">
-                            {{ my_event.myEventVenue.name }}<br>
-                            {{ my_event.myEventVenue.address }}
-                            </p>
-                        </div>
-                        <div class="me-Info_TableInner">
-                            <p class="me-Info_TableTh">主催</p>
-                            <p class="me-Info_TableTd">オミパリ</p>
-                        </div>
-                        <div class="me-Info_TableInner">
-                            <p class="me-Info_TableTh">購入締切</p>
-                            <p class="me-Info_TableTd">{{ my_event.myEventSchedule.eventDay|date("n月j日 A g:i") }}</p>
-                        </div>
-                        <div class="me-Info_TableInner">
-                            <p class="me-Info_TableTh">問い合わせ</p>
-                            <p class="me-Info_TableTd"><a href="{{ path('default_index') }}">こちら</a></p>
-                        </div>
-                    </div>                   
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="sw-Section">
-{% if not my_event.tags.empty %}
-                <ul class="me-TagItems">
-                {% for myEventTag in my_event.tags %}
-                    <li class="me-TagItem">
-                        <a href="{{ path('default_index', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
-                            <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-                {% endif %} 
-</section>
-</div>
-
-<div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">人数を選択する</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-            {% if is_granted('ROLE_USER') %}
-            {% if user.userDetail %}
-            {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
-            {% endif %}
-            {% endif %}
-        </div>
-    </div>
-</div>
-<div class="me-Applicatin_Btn">
-{% if is_granted('ROLE_USER') %}
-    {% if my_event.isApplied(user) %}
-     <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
-        すでに申込み済です
-    </a>
-    {% else %}
-    {% if user.userDetail %}
-    <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
-        イベントに申し込む
-    </button>
-    {% else %}
-    <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
-        申し込むには詳細情報を登録してください
-    </a>
-    {% endif %}
-    {% endif %}
-{% else %}
-    <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_Btn-login">
-        申し込むにはログインしてください
-    </a>
-{% endif %}
-</div>
-{% endblock %}
-
-{% block spmenu %}
-<div class="sw-Nav_Side">
-                        <div class="sw-Nav_SideInner">
-                            <ul class="sw-Nav_SideList">
-                                 {% if is_granted('ROLE_USER') %}
-                                   <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">応募中のイベント</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("mypage_detail_index") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">プロフィール</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">無料会員登録</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">ログイン</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_venue_index") }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">会場一覧</div>
+        </section>
+        <section class="sw-Section">
+            <div class="me-Content">
+                <div class="me-Content_Inner">
+                    <h1 class="me-Content_Title">イベントの流れ</h1>
+                    <div class="me-Flow">
+                        <div class="me-Flow_Inner">
+                            <ul class="me-Flow_List">
+                                {% for flow in my_event.myEventFlows %}
+                                    <li class="me-Flow_Item">
+                                        <div class="me-Flow_Item-date">
+                                            <span>{{ flow.startTime|date("A g:i") }}</span>
+                                            <span> 〜 </span>
+                                            <span>{{ flow.endTime|date("A g:i") }}</span>
                                         </div>
-                                    </a>
-                                </li>
-                                <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">イベント一覧</div>
+                                        <div class="me-Flow_Item-content">
+                                            {% if flow.title %}
+                                                <p class="me-Flow_Item-title">{{ flow.title }}</p>
+                                            {% endif %}
+                                            {% if flow.content %}
+                                                <p class="me-Flow_Item-desc">{{ flow.content }}</p>
+                                            {% endif %}
                                         </div>
-                                    </a>
-                                </li>
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "guide"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">初めての方へ</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">よくある質問</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                 {% if is_granted('ROLE_USER') %}
-                                 <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
-                                            </div>
-                                        </a>
                                     </li>
-                                {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-Section">
+            <div class="me-Content">
+                <div class="me-Content_Inner">
+                    <h1 class="me-Content_Title">イベント内容</h1>
+                    <div class="me-About">
+                        <div class="me-About_Inner">
+                            <div class="me-About_Content">
+                                {{ my_event.content|raw }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if my_event.myEventVenue %}
+            {% include "/my_event/_show_parts/show_venue.html.twig" %}
+        {% else %}
+            {% include "/my_event/_show_parts/show_no_venue.html.twig" %}
+        {% endif %}
+        <section class="sw-Section">
+            <div class="me-Content">
+                <div class="me-Content_Inner">
+                    <h1 class="me-Content_Title">詳細情報</h1>
+                    <div class="me-Info">
+                        <div class="me-Info_Inner">
+                            <div class="me-Info_Table">
+                                <div class="me-Info_TableInner">
+                                    <p class="me-Info_TableTh">会場</p>
+                                    <p class="me-Info_TableTd">
+                                        {% if my_event.myEventVenue %}
+                                        {{ my_event.myEventVenue.name }}<br>
+                                        {{ my_event.myEventVenue.address }}
+                                        {% else %}
+                                            イベント会場は現在確認中です。
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="me-Info_TableInner">
+                                    <p class="me-Info_TableTh">主催</p>
+                                    <p class="me-Info_TableTd">OMUSVi</p>
+                                </div>
+                                <div class="me-Info_TableInner">
+                                    <p class="me-Info_TableTh">購入締切</p>
+                                    <p class="me-Info_TableTd">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}</p>
+                                </div>
+                                <div class="me-Info_TableInner">
+                                    <p class="me-Info_TableTh">問い合わせ</p>
+                                    <p class="me-Info_TableTd"><a href="{{ path('default_index') }}">こちら</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-Section">
+            {% if not my_event.tags.empty %}
+                <ul class="me-TagItems">
+                    {% for myEventTag in my_event.tags %}
+                        <li class="me-TagItem">
+                            <a href="{{ path('default_index', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+                                <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </section>
+    </div>
+
+    <div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">人数・支払い方法を選択する</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% if is_granted('ROLE_USER') %}
+                    {% if user.userDetail %}
+                        {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="me-Applicatin_Btn">
+        {% if is_granted('ROLE_USER') %}
+            {% if my_event.isApplied(user) %}
+                <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
+                    すでに申込み済です
+                </a>
+            {% else %}
+                {% if user.userDetail %}
+                    <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
+                        イベントに申し込む
+                    </button>
+                {% else %}
+                    <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
+                        申し込むには詳細情報を登録してください
+                    </a>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_Btn-login">
+                申し込むにはログインしてください
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block spmenu %}
+    <div class="sw-Nav_Side">
+        <div class="sw-Nav_SideInner">
+            <ul class="sw-Nav_SideList">
+                {% if is_granted('ROLE_USER') %}
+                    <li class="sw-Nav_SideListItem">
+                        <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
+                            <div class="sw-Nav_SideItemUnit">
+                                <div class="sw-Nav_SideUnitImg"></div>
+                                <div class="sw-Nav_SideUnitText">応募中のイベント</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sw-Nav_SideListItem">
+                        <a class="sw-Nav_SideItemLink" href="{{ path("mypage_detail_index") }}">
+                            <div class="sw-Nav_SideItemUnit">
+                                <div class="sw-Nav_SideUnitImg"></div>
+                                <div class="sw-Nav_SideUnitText">プロフィール</div>
+                            </div>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="sw-Nav_SideListItem">
+                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
+                            <div class="sw-Nav_SideItemUnit">
+                                <div class="sw-Nav_SideUnitImg"></div>
+                                <div class="sw-Nav_SideUnitText">無料会員登録</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sw-Nav_SideListItem">
+                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
+                            <div class="sw-Nav_SideItemUnit">
+                                <div class="sw-Nav_SideUnitImg"></div>
+                                <div class="sw-Nav_SideUnitText">ログイン</div>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="sw-Nav_SideListItem">
+                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_venue_index") }}">
+                        <div class="sw-Nav_SideItemUnit">
+                            <div class="sw-Nav_SideUnitImg"></div>
+                            <div class="sw-Nav_SideUnitText">会場一覧</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="sw-Nav_SideListItem">
+                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
+                        <div class="sw-Nav_SideItemUnit">
+                            <div class="sw-Nav_SideUnitImg"></div>
+                            <div class="sw-Nav_SideUnitText">イベント一覧</div>
+                        </div>
+                    </a>
+                </li>
+                {# <li class="sw-Nav_SideListItem">
+                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
+                        <div class="sw-Nav_SideItemUnit">
+                            <div class="sw-Nav_SideUnitImg"></div>
+                            <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
+                        </div>
+                    </a>
+                </li> #}
+                {# <li class="sw-Nav_SideListItem">
+                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "guide"}) }}">
+                        <div class="sw-Nav_SideItemUnit">
+                            <div class="sw-Nav_SideUnitImg"></div>
+                            <div class="sw-Nav_SideUnitText">初めての方へ</div>
+                        </div>
+                    </a>
+                </li> #}
+                {# <li class="sw-Nav_SideListItem">
+                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
+                        <div class="sw-Nav_SideItemUnit">
+                            <div class="sw-Nav_SideUnitImg"></div>
+                            <div class="sw-Nav_SideUnitText">よくある質問</div>
+                        </div>
+                    </a>
+                </li> #}
+                {% if is_granted('ROLE_USER') %}
+                    <li class="sw-Nav_SideListItem">
+                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
+                            <div class="sw-Nav_SideItemUnit">
+                                <div class="sw-Nav_SideUnitImg"></div>
+                                <div class="sw-Nav_SideUnitText">ログアウト</div>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
