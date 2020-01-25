@@ -27,3 +27,4 @@ import './sb-admin';
 import './flowForm';
 import './admin';
 import './sp-menu';
+import './myDetail';

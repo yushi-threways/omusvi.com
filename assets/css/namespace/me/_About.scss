@@ -5,5 +5,33 @@
 
 }
 .me-About_Content {
-    
+    position: relative;
+    margin-bottom: 45px;   
 }
+.me-About_ContentText {
+    height: 200px;
+    overflow: hidden;
+}
+
+  .me-About_ContentShow {
+    color: $color__sex-woman;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    padding-top: 60px;
+    text-align: center;
+    line-height: 30px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 70%
+    );
+    cursor: pointer;
+    transition: bottom 0.2s;
+  }
+  .active {
+    background: none;
+    bottom: -30px;
+  }
