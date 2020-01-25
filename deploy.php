@@ -46,7 +46,7 @@ host('omusvi.com')
 // Tasks
 task('build:assets', function () {
     runLocally('yarn build');
-    upload('public/build/', '{{release_path}}/public');
+    upload('public/build', '{{release_path}}/public');
 });
 before('deploy:symlink', 'build:assets');
 
