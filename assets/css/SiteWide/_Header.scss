@@ -52,6 +52,15 @@
     font-weight: bold;
     padding: 3px 0 0;
     display: inline-block;
+    @include media-breakpoint-down(sm) {
+        padding: 5px 0;
+    }
+    img {
+        max-width: 150px;
+        @include media-breakpoint-down(sm) {
+            max-width: 100px;
+        }
+    }
 }
 .sw-Header_MainNavItems {
     display: flex;
