@@ -32,7 +32,7 @@
     align-items: center;
     position: relative;
     @include media-breakpoint-down(sm) {
-        padding: 0 0 5px;
+        padding: 0 5px;
     }
 }
 
@@ -50,6 +50,8 @@
     color: #333;
     letter-spacing: 2px;
     font-weight: bold;
+    padding: 3px 0 0;
+    display: inline-block;
 }
 .sw-Header_MainNavItems {
     display: flex;

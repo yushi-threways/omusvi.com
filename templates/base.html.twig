@@ -18,14 +18,14 @@
     <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ asset('/images/Logo_blue_yoko_black.png') }}">
     {% endblock %}
     
     {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ app.request.uri }}">
     <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
-    <meta name="twitter:image" content="ogpのURL貼る">
+    <meta name="twitter:image" content="{{ asset('/images/Logo_blue_yoko_black.png') }}">
     {% endblock %}
 
     {% block stylesheets %}
@@ -53,7 +53,7 @@
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
                                     <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                                    OMUSVi
+                                        <img src="{{ asset('/images/Logo_blue_yoko_black.png') }}" alt="ロゴ" width="170">
                                     </a>
                                 </div>
                                 
@@ -170,7 +170,7 @@
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('default_index') }}">トップ</a></li>
                                             {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li> #}
-                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('my_event_venue_index')}}">会場一覧</a></li>
                                             {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場募集</a></li> #}
                                         </ul>
                                     </li>
@@ -179,7 +179,7 @@
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "agree"}) }}">利用規約</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法に基づく表記</a></li>
-                                            {# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "pp"}) }}">プライバシーポリシー</a></li> #}
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "pp"}) }}">プライバシーポリシー</a></li>
                                         </ul>
                                     </li>
                                     {# <li class="sw-Footer_Item">

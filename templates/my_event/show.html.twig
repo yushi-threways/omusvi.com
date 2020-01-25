@@ -11,14 +11,14 @@
     <meta property="og:description" content="{{ my_event.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ vich_uploader_asset(my_event, 'imageFile') }}">
 {% endblock %}
 
 {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="{{ app.request.uri }}">
     <meta name="twitter:description" content="{{ my_event.description }}"/>
-    <meta name="twitter:image" content="ogpのURL貼る">
+    <meta name="twitter:image" content="{{ vich_uploader_asset(my_event, 'imageFile') }}">
 {% endblock %}
 
 {% block header %}
@@ -29,7 +29,7 @@
         <div class="sw-Header_Branding">
             <div class="sw-Header_Logo">
                 <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                    OMUSVI
+                    <img src="{{ asset('/images/Logo_blue_yoko_black.png') }}" alt="ロゴ" width="170">
                 </a>
             </div>
 
@@ -166,7 +166,12 @@
                     <div class="me-About">
                         <div class="me-About_Inner">
                             <div class="me-About_Content">
+                                <div class="me-About_ContentText">
                                 {{ my_event.content|raw }}
+                                </div>
+                                <div class="me-About_ContentShow">
+                                    +　続きを読む
+                                </div>
                             </div>
                         </div>
                     </div>
