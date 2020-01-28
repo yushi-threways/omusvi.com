@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MyEventApplication;
 use App\Entity\MyEventSchedule;
+use App\Entity\User;
 use App\Entity\UserDetail;
 use App\Form\Type\MyEventApplicationType;
 use App\Form\Type\ConfirmFormType;
@@ -47,7 +48,7 @@ class MyEventApplicationController extends AbstractController
         $data = $session->get(self::SESSION_KEY);
 
         if (!$data) {
-            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getMyEvent->getId()]);
+            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getMyEvent()->getId()]);
         }
 
         $user = $this->getUser();

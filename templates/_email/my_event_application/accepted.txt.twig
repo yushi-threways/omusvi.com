@@ -1,12 +1,12 @@
 {% use '_email/base.txt.twig' %}
 
-{% block subject %}イベント申し込み確認メール{% endblock %}
+{% block subject %}イベント申込申請ありがとうございます。|OMUSVi運営{% endblock %}
 {% block to %}{{ data.user.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
 
-イベントお申し込みありがとうございます。
+
 
 
 {% endautoescape %}
