@@ -12,6 +12,7 @@ use App\Form\Type\MyEventApplicationWomanType;
 use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventRepository;
 use App\Repository\TagRepository;
+use App\Repository\UserDetailRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,7 +71,8 @@ class MyEventController extends AbstractController
             $data = new MyEventApplication();
             // $data->setUser($user);
             // $data->setMyEventSchedule($myEvent->getMyEventSchedule());
-        
+
+            // 男女でフォームを分ける必要ない
             if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
                 $form = $this->createForm(MyEventApplicationMenType::class, $data);
             } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
