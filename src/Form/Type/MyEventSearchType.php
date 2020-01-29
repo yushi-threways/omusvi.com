@@ -25,12 +25,12 @@ class MyEventSearchType extends AbstractType
                 'placeholder' => '指定なし',
                 'required' => false,
             ])
-            ->add('prefecture', EntityType::class, [
-                'class' => Prefecture::class,
-                'label' => '地域',
-                'placeholder' => '指定なし',
-                'required' => false,
-            ])
+            // ->add('prefecture', EntityType::class, [
+            //     'class' => Prefecture::class,
+            //     'label' => '地域',
+            //     'placeholder' => '指定なし',
+            //     'required' => false,
+            // ])
             ->add('startDate', DateType::class, [
                 'label' => "イベント日",
                 'widget' => 'single_text',

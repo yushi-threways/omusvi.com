@@ -91,7 +91,11 @@ class MyPageController extends AbstractController
         $entityManager->flush();
 
         $mailer->sendMessage('_email/my_event_application/paied.txt.twig', [
-            'application' => $application,
+            'data' => $application,
+            'user' => $application->getUser(),
+            'schedule' => $application->getMyEventSchedule(),
+            'my_event' => $application->getMyEventSchedule()->getMyEvent(),
+            'detail' => $application->getUser()->getUserDetail(),
         ]);
 
             $this->addFlash('success', '入金報告が送信されました。確認しておりますのでしばらくお待ちください。');

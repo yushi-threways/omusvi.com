@@ -1,8 +1,30 @@
-{% block subject %}OMUSVi運営{% endblock %}
+{% block subject %}OMUSVi事務局{% endblock %}
 {% block from %}noreplay@omusvi.com{% endblock %}
 {% block to %}test@example.com{% endblock %}
 {% block bcc %}omipari.info@gmail.com{% endblock %}
 
 
 {% block body_text %}
+{% endblock %}
+
+{% block contact %}
+{% autoescape false %}
+————————————————————————————————————
+お問い合わせ先
+————————————————————————————————————
+OMUSVi事務局 　担当：関
+メール：info@omusvicom
+————————————————————————————————————
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+【OMUSVi営事務局】
+<a href="{{ path('default_index') }}">"{{ path('default_index') }}"</a>
+
+【運営元：Meetie(ミータイ)】
+住所：〒462-0065　愛知県名古屋市北区喜惣治1-275-2
+電話番号：090-9191-7257
+営業時間：10:00時～22:00時
+メール：info@omusvi.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+{% endautoescape %}
 {% endblock %}

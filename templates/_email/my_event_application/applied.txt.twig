@@ -1,13 +1,84 @@
 {% use '_email/base.txt.twig' %}
 
-{% block subject %}イベント申し込み確認メール{% endblock %}
-{% block to %}{{ data.user.email }}{% endblock %}
+{% block subject %}イベント申込申請ありがとうございます|OMUSVi事務局{% endblock %}
+{% block to %}{{ user.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
+{{ detail.firstName }} {{ detail.lastName }} 様
 
-イベントお申し込みありがとうございます。
+この度はお世話になります。
+Omusvi事務局の関でございます。
 
+弊社開催のイベントにお申し込みいただき、誠にありがとうございます。
 
+━━━ お申し込みの情報 ━━━━━━━━━━━━━━━━
+
+【開催日時】　　：{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+【イベント名】　： {{ my_event.name }}
+【イベント概要】：{{ my_event.description }}
+{% if my_event.myEventVenue %}
+{% set venue = my_event.myEventVenue %}
+【開催場所】　　：{{ venue.name }}
+【開催住所】　　：{{ venue.address }}
+【開催アクセス】：{{ venue.traffic }}
+【開催URL】　　：{{ venue.url }}
+{% endif %}
+{% if (detail.gender == 'male') %}
+【参加人数】　　：{{ data.menCount }}人　{{ my_event.menPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.menCount }}円（税込）
+{% elseif (detail.gender == 'female') %}
+【参加人数】　　：{{ data.womanCount }}人　{{ my_event.womanPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.womanCount }}円（税込）
+{% endif %}
+
+{% if (data.paymentType == 'bt') %}
+━━━ 振り込み口座情報 ━━━━━━━━━━━━━━━━
+
+上記金額のお振込みをお願い致します。
+…………………………………………………………
+銀行：　ジャパンネット銀行
+支店：　●●支店
+支店番号：　●●
+種類：　普通口座
+番号：　●●●●●●
+表示：　Meetie（ミータイ）
+…………………………………………………………
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+◆◆　お支払いは、お申込み日より1週間以内にお願いいたします　◆◆
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+お申込み日より1週間以内にお振込みがない場合は、
+こちらからご連絡させて頂く場合がございますのでご了承下さい。
+
+＜お申し込みがセミナー開催日の直前の場合＞
+セミナー開催日前日（土日祝の場合はその前の営業日）の15時までにご入金下さい。
+
+振り込みいただいたらマイページのイベント申込中のイベントの入金報告ボタンから入金報告を行なってください。
+事務局で入金の確認ができましたらメールにて通知いたします。
+入金の確認は最大48時間以内に対応いたします。（土日祝を除く）
+
+＜お申し込みがイベント開催日の直前の場合＞
+イベント開催日前日（土日祝の場合はその前の営業日）の15時までにご入金下さい。
+
+ご都合が合わないまたはお支払い方法を変更したい等は、メールにてご連絡をお願いいたします。
+
+————————————————————————————————————
+お問い合わせ先
+OMUSVi事務局 　担当：関
+メール：info@omusvicom
+————————————————————————————————————
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+【OMUSVi営事務局】
+{{ absolute_url(path('default_index')) }}
+
+【運営元：Meetie(ミータイ)】
+住所：〒462-0065　愛知県名古屋市北区喜惣治1-275-2
+電話番号：090-9191-7257
+営業時間：10:00時～22:00時
+メール：info@omusvi.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+{% endif %}
 {% endautoescape %}
 {% endblock %}
