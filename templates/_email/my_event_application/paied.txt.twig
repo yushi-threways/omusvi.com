@@ -1,19 +1,29 @@
 {% use '_email/base.txt.twig' %}
 
-{% block subject %}イベント料金報告{% endblock %}
+{% block subject %}イベント料金お支払い報告{% endblock %}
 {% block to %}{{ user.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
+{{ detail.firstName }} {{ detail.lastName }} 様
 
-参加料金報告受付ました。
-認証には最大2日ほどかかる場合がございますのでしばらくお待ちくださいませ。
+この度はお世話になります。
+OMUSVi事務局の関です。
 
-————————————————————————————————————
-お問い合わせ先
-OMUSVi事務局 　担当：関
-メール：info@omusvicom
-————————————————————————————————————
+参加料金お支払いの報告、誠にありがとうございます。
+入金が確認できましたらメールにて通知いたします。
+入金の確認は最大48時間以内に対応いたしますのでしばらくお待ちください（土日祝を除く）
+
+【開催日時】　　：{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+【イベント名】　： {{ my_event.name }}
+【イベントURL】　： {{ absolute_url(path('my_event_show', {'id': my_event.id})) }}
+{% if (detail.gender == 'male') %}
+【参加人数/円】　　：{{ data.menCount }}人　{{ my_event.menPrice|number_format }}円/人
+【振込金額】：{{ my_event.menPrice * data.menCount }}円（税込）
+{% elseif (detail.gender == 'female') %}
+【参加人数/円】　　：{{ data.womanCount }}人　{{ my_event.womanPrice|number_format }}円/人
+【振込金額】：{{ my_event.menPrice * data.womanCount }}円（税込）
+{% endif %}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 【OMUSVi営事務局】

@@ -42,10 +42,6 @@ class UserDetailController extends AbstractController
      */
     public function edit(Request $request): Response
     {
-        // /** @var UserDetailRepository $repo */
-        // $repo = $this->getDoctrine()->getRepository(UserDetail::class);
-        // $detail = $repo->findOrCreateByUser($this->getUser());
-
         $session = $request->getSession();
         $data = $session->get(self::SESSION_KEY);
         $form = $this->createForm(UserDetailType::class, $data);
@@ -56,22 +52,6 @@ class UserDetailController extends AbstractController
                 return $this->redirectToRoute('mypage_detail_confirm');
             }
         }
-
-        // $form = $this->createForm(UserDetailType::class, $detail);
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $detail = $form->getData();
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($detail);
-            // $entityManager->flush();
-            
-            // $this->addFlash('success', 'ユーザー情報を更新しました。');
-
-        //     return $this->render('my_page/user_detail/confirm.html.twig', [
-        //         'detail' => $detail, 
-        //     ]);
-        // }
 
         return $this->render('my_page/user_detail/edit.html.twig', [
             'form' => $form->createView(),
@@ -99,10 +79,8 @@ class UserDetailController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($data);
                 $entityManager->flush();
-//                $templateSender->send('contact.txt.twig', array('data' => $data));
                 $session->remove(self::SESSION_KEY);
-               //return $this->render('front/contact/contact.txt.twig' , array('data' => $data));
-               $this->addFlash('success', 'ユーザー情報を更新しました。');               
+               $this->addFlash('success', 'ユーザー情報を更新しました。');
                return $this->redirectToRoute('mypage_detail_index');
             }
         }

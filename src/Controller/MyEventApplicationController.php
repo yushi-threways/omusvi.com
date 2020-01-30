@@ -74,7 +74,7 @@ class MyEventApplicationController extends AbstractController
                     'detail' => $data->getUser()->getUserDetail(),
                 ]);
             } elseif ($data->getPayMentType() == MyEventApplicationPayMentEnumType::LOCALPAYMENT) {
-                $mailer->sendMessage('_email/my_event_application/local_payment.txt.twig', [
+                $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
                     'data' => $data,
                     'user' => $data->getUser(),
                     'schedule' => $data->getMyEventSchedule(),

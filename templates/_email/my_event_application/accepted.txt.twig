@@ -5,15 +5,46 @@
 
 {% block body_text %}
 {% autoescape false %}
-{{ data.user.firstName }} {{ data.user.lastName }} 様
+{{ detail.firstName }} {{ detail.lastName }} 様
 
+この度は弊社開催のイベントにお申し込みいただき、誠にありがとうございます。
+OMUSVi事務局の関です。
 
-————————————————————————————————————
-お問い合わせ先
-OMUSVi事務局 　担当：関
-メール：info@omusvicom
-————————————————————————————————————
+{% if (data.paymentType == 'bt') %}
+イベント料金の入金確認させていただきました。ご対応ありがとうございます。
+これにてイベントの申込は完了となります。
+受付の際に、ご本人様確認をさせていただきますので、お名前とご年齢がわかるもの（運転免許証、パスポートなど）をご持参ください。
+{% endif %}
+{% if (data.paymentType == 'lp') %}
+イベント料金はイベント会場にてお支払いお願いいたします。
+受付の際に、料金のお支払い・ご本人様確認をさせていただきますので、お名前とご年齢がわかるもの（運転免許証、パスポートなど）をご持参ください。
+{% endif %}
+※イベント開始から30分は、受付時間となりますのでお時間までに会場へお入りいただけますようお願い致します。
 
+━━━ お申し込みの情報 ━━━━━━━━━━━━━━━━
+
+【開催日時】　　：{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+【イベント名】　： {{ my_event.name }}
+【イベント概要】：{{ my_event.description }}
+{% if my_event.myEventVenue %}
+{% set venue = my_event.myEventVenue %}
+【開催場所】　　：{{ venue.name }}
+【開催住所】　　：{{ venue.address }}
+【開催アクセス】：{{ venue.traffic }}
+【開催URL】　　：{{ venue.url }}
+{% endif %}
+{% if (detail.gender == 'male') %}
+【参加人数】　　：{{ data.menCount }}人　{{ my_event.menPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.menCount }}円（税込）
+{% elseif (detail.gender == 'female') %}
+【参加人数】　　：{{ data.womanCount }}人　{{ my_event.womanPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.womanCount }}円（税込）
+{% endif %}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+それでは、当日イベント会場にてお会いできるのを楽しみにしております。
+
+また、イベントに関してご質問等ございましたら、事務局までお問い合わせください。
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 【OMUSVi営事務局】
 {{ absolute_url(path('default_index')) }}
@@ -24,5 +55,6 @@ OMUSVi事務局 　担当：関
 営業時間：10:00時～22:00時
 メール：info@omusvi.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 {% endautoescape %}
 {% endblock %}

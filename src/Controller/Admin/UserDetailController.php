@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\UserDetail;
-use App\Form\UserDetailType;
+use App\Form\Type\UserDetailType;
 use App\Repository\UserDetailRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
