@@ -1,7 +1,7 @@
 {% use '_email/base.txt.twig' %}
 
-{% block subject %}イベント申し込み確認メール{% endblock %}
-{% block to %}{{ application.user.email }}{% endblock %}
+{% block subject %}イベント料金報告{% endblock %}
+{% block to %}{{ user.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
@@ -9,5 +9,21 @@
 参加料金報告受付ました。
 認証には最大2日ほどかかる場合がございますのでしばらくお待ちくださいませ。
 
+————————————————————————————————————
+お問い合わせ先
+OMUSVi事務局 　担当：関
+メール：info@omusvicom
+————————————————————————————————————
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+【OMUSVi営事務局】
+{{ absolute_url(path('default_index')) }}
+
+【運営元：Meetie(ミータイ)】
+住所：〒462-0065　愛知県名古屋市北区喜惣治1-275-2
+電話番号：090-9191-7257
+営業時間：10:00時～22:00時
+メール：info@omusvi.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 {% endautoescape %}
 {% endblock %}

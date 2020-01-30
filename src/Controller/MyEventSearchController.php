@@ -37,7 +37,6 @@ class MyEventSearchController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(MyEventSchedule::class);
 
         $form = $this->createForm(MyEventSearchType::class, $searchFilter);
-        $form->remove('prefecture');
         $form->handleRequest($request);
         
             if ($form->isSubmitted() && $form->isValid()) {
@@ -49,7 +48,7 @@ class MyEventSearchController extends AbstractController
                     $endDate = null;
                     $startTime = null;
                     if ($request->query->has('tag')) {
-                        $tag = $request->query->get('tag');
+                        $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
                     } elseif ($request->query->has('startDate') && $request->query->has('endDate')) {
                         $startDate = new \DateTimeImmutable($request->query->get('startDate')['date']);
                         $endDate = new \DateTimeImmutable($request->query->get('endDate')['date']);
@@ -58,6 +57,7 @@ class MyEventSearchController extends AbstractController
                         $endDate = $endDate->setTime(23, 59);
                     }
                     $qb = $repo->createQueryBuilderBySearchRequest($tag, $startDate, $endDate, $startTime);
+
                 } elseif($request->query->has('my_event_search')) {
                     $date = $request->query->get('my_event_search');
                     if ($date["eventTimeZone"]) {

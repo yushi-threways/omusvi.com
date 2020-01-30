@@ -61,6 +61,7 @@ class MyEventController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
+
         /** @var UserDetailRepository $repo */
         $repo = $this->getDoctrine()->getRepository(UserDetail::class);
         $detail = $repo->findOneBy(['user' => $user]);
@@ -69,15 +70,8 @@ class MyEventController extends AbstractController
             $session = $request->getSession();
             $data = $session->get(self::SESSION_KEY);
             $data = new MyEventApplication();
-            // $data->setUser($user);
-            // $data->setMyEventSchedule($myEvent->getMyEventSchedule());
 
-            // 男女でフォームを分ける必要ない
-            if ($user->getUserDetail()->getGender() == GenderEnumType::MALE) {
-                $form = $this->createForm(MyEventApplicationMenType::class, $data);
-            } elseif ($user->getUserDetail()->getGender() == GenderEnumType::FEMALE) {
-                $form = $this->createForm(MyEventApplicationWomanType::class, $data);
-            }
+            $form = $this->getGenderAppForm($user->getUserDetail()->getGender(), $data);
 
             if ($request->isMethod('POST')) {
                 $form->handleRequest($request);
@@ -99,7 +93,6 @@ class MyEventController extends AbstractController
             return $this->render('my_event/show.html.twig', [
                 'my_event' => $myEvent,
                 'user' => $user,
-                // 'form' => $form->createView(),
              ]);
         }
     }
@@ -136,4 +129,17 @@ class MyEventController extends AbstractController
             'data' => $data,
          ]);
     }
+
+
+    public function getGenderAppForm($gender, $data) 
+    {
+        if ($gender == GenderEnumType::MALE) {
+            $form = $this->createForm(MyEventApplicationMenType::class, $data);
+        } elseif ($gender == GenderEnumType::FEMALE) {
+            $form = $this->createForm(MyEventApplicationWomanType::class, $data);
+        }
+        
+        return $form;
+    }
 }
+

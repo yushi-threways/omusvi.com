@@ -46,9 +46,9 @@ class MyEventScheduleRepository extends ServiceEntityRepository
         
         $params = [];
         
-        if ($searchFilter->getPrefecture()) {
-            $qb->andWhere('event.prefecture = :prefecture');
-            $params["prefecture"] = $searchFilter->getPrefecture();
+        if ($searchFilter->getTag()) {
+            $qb->andWhere(':tag MEMBER OF event.tags');
+            $params["tag"] = $searchFilter->getTag();
         }
     
         if ($searchFilter->getStartDate()) {
@@ -85,8 +85,9 @@ class MyEventScheduleRepository extends ServiceEntityRepository
             $params["end"] = $end;
         } else {
         }
-        
-        $qb->orderBy('schedule.eventDay', 'ASC')
+        $params["now"] = new \DateTime();
+        $qb->andWhere('schedule.eventDay >= :now')
+            ->orderBy('schedule.eventDay', 'ASC')
             ->setParameters($params);
         
         return $qb;
@@ -115,15 +116,16 @@ class MyEventScheduleRepository extends ServiceEntityRepository
             
             $params["startDate"] = $startDate;
             $params["endDate"] = $endDate;
-            $params["now"] = new \DateTime();
+            // $params["now"] = new \DateTime();
         }
 
         if (null !== $startTime) {
             $qb->andWhere('schedule.startTime > :startTime');
             $params["startTime"] = $startTime;
         }
-                
-        $qb->orderBy('schedule.eventDay', 'ASC')
+        $params["now"] = new \DateTime();
+        $qb->andWhere('schedule.eventDay >= :now')
+            ->orderBy('schedule.eventDay', 'ASC')
             ->setParameters($params);
         
         return $qb;

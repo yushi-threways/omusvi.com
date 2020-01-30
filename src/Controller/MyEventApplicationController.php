@@ -64,14 +64,22 @@ class MyEventApplicationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($data);
             $entityManager->flush();
-
+            
             if ($data->getPayMentType() == MyEventApplicationPayMentEnumType::BANKTRANSFER) {
                 $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
                     'data' => $data,
+                    'user' => $data->getUser(),
+                    'schedule' => $data->getMyEventSchedule(),
+                    'my_event' => $data->getMyEventSchedule()->getMyEvent(),
+                    'detail' => $data->getUser()->getUserDetail(),
                 ]);
             } elseif ($data->getPayMentType() == MyEventApplicationPayMentEnumType::LOCALPAYMENT) {
                 $mailer->sendMessage('_email/my_event_application/local_payment.txt.twig', [
                     'data' => $data,
+                    'user' => $data->getUser(),
+                    'schedule' => $data->getMyEventSchedule(),
+                    'my_event' => $data->getMyEventSchedule()->getMyEvent(),
+                    'detail' => $data->getUser()->getUserDetail(),
                 ]);
             }
             

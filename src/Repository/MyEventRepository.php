@@ -97,7 +97,7 @@ class MyEventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('ms.eventDay <= :now')
+            ->where('ms.eventDay >= :now')
             ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
