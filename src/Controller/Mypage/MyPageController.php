@@ -2,6 +2,7 @@
 
 namespace App\Controller\Mypage;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,19 +59,6 @@ class MyPageController extends AbstractController
     }
 
     /**
-    * @Route("/event", name="mypage_event", methods={"GET"})
-    */
-    public function event(): Response
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        return $this->render('my_page/event.html.twig', [
-
-        ]);
-    }
-
-    /**
      * @param Request $request
      * @param MyEventApplication $application
      * @Route("/event/application/{id}/applied", name="mypage_event_application_applied", methods={"POST"})
@@ -87,7 +75,6 @@ class MyPageController extends AbstractController
 
         $application->setStatus(MyEventApplicationStatusEnumType::PAIED);
         $entityManager = $this->getDoctrine()->getManager();
-        // $entityManager->persist($application);
         $entityManager->flush();
 
         $mailer->sendMessage('_email/my_event_application/paied.txt.twig', [
@@ -124,6 +111,10 @@ class MyPageController extends AbstractController
 
         $mailer->sendMessage('_email/my_event_application/canceled.txt.twig', [
             'application' => $application,
+            'user' => $application->getUser(),
+            'schedule' => $application->getMyEventSchedule(),
+            'my_event' => $application->getMyEventSchedule()->getMyEvent(),
+            'detail' => $application->getUser()->getUserDetail(),
         ]);
 
             $this->addFlash('success', 'イベント参加のキャンセルが送信されました。メールを送信しましたのでご確認お願いいたします。');

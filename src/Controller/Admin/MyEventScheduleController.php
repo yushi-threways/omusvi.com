@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MyEventSchedule;
-use App\Form\MyEventScheduleType;
+use App\Form\Type\MyEventScheduleType;
 use App\Repository\MyEventScheduleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

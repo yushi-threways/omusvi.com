@@ -67,6 +67,10 @@ class MyEventApplicationController extends AbstractController
 
         $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
             'data' => $application,
+            'user' => $application->getUser(),
+            'schedule' => $application->getMyEventSchedule(),
+            'my_event' => $application->getMyEventSchedule()->getMyEvent(),
+            'detail' => $application->getUser()->getUserDetail(),
         ]);
 
             $this->addFlash('success', 'イベント支払い確認が行われました。。メールを送信しましたのでご確認お願いいたします。');
