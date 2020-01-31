@@ -1,18 +1,53 @@
 {% use '_email/base.txt.twig' %}
 
-{% block subject %}イベント申し込み確認メール{% endblock %}
+{% block subject %}イベントキャンセル承りました|OMUSVi事務局{% endblock %}
 {% block to %}{{ application.user.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
+{{ detail.firstName }} {{ detail.lastName }} 様
 
-キャンセル受付ました。
+いつもお世話になっております。
+Omusvi事務局の関でございます。
+
+この度はキャンセルのご連絡を頂き誠にありがとうございます。
+下記イベントのお申し込みのキャンセルを承りました。
+
+━━━ お申し込みの情報 ━━━━━━━━━━━━━━━━
+
+【開催日時】　　：{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+【イベント名】　： {{ my_event.name }}
+【イベント概要】：{{ my_event.description }}
+{% if (detail.gender == 'male') %}
+【参加人数】　　：{{ data.menCount }}人　{{ my_event.menPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.menCount }}円（税込）
+{% elseif (detail.gender == 'female') %}
+【参加人数】　　：{{ data.womanCount }}人　{{ my_event.womanPrice|number_format }}円/人
+【イベント料金】：{{ my_event.menPrice * data.womanCount }}円（税込）
+{% endif %}
 
 ————————————————————————————————————
-お問い合わせ先
-OMUSVi事務局 　担当：関
-メール：info@omusvi.com
+
+この度はご連絡いただき、誠にありがとうございました。
+
+尚お申し込み費用の返金取り扱いについては下記の様になっております。
+
+販売開始〜32日前：購入価格の100%
+31日前～21日前：購入価格の80％
+20日前～11日前：購入価格の50％
+10日前～当日：購入価格の0％
+
+返金金額が購入価格0％の場合、返金はございません。
+返金金額が購入価格50～100％の場合は必要に応じた金額を差し引いた金額の返金がございますので、口座情報の登録・更新・確認をお願いいたします。
+口座情報の登録がない場合は、返金の手続きにお時間がかかる場合がございますのでご了承ください。
 ————————————————————————————————————
+
+
+今後のイベントで、ご都合がよろしい際は参加をご検討いただけますと幸いでございます。
+スタッフ一同心よりお待ちしております。
+
+他のイベントを探す
+{{ absolute_url(path('my_event_index')) }}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 【OMUSVi営事務局】

@@ -20,7 +20,7 @@
     letter-spacing: -0.06px;
   }
   .sw-Search_FormSelect {
-    @include font-size(13px);
+    @include font-size(16px);
     color: $color__text-screen;
     border-radius: 3px;
     letter-spacing: -0.06px;
@@ -28,7 +28,7 @@
     height: 31px;
   }
   .sw-Search_FormInput {
-    @include font-size(11px);
+    @include font-size(16px);
     color: $color__text-screen;
     border-radius: 3px;
     letter-spacing: -0.06px;
@@ -92,4 +92,8 @@
     &:hover {
         color: #fff;
     }
+  }
+
+  input[type=text] {
+    font-size: 16px;
   }

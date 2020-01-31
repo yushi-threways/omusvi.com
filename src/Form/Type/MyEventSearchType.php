@@ -21,7 +21,7 @@ class MyEventSearchType extends AbstractType
         $builder
             ->add('tag', EntityType::class, [
                 'class' => Tag::class,
-                'label' => 'イベントタグ',
+                'label' => 'ワードから探す',
                 'placeholder' => '指定なし',
                 'required' => false,
             ])
@@ -32,7 +32,7 @@ class MyEventSearchType extends AbstractType
             //     'required' => false,
             // ])
             ->add('startDate', DateType::class, [
-                'label' => "イベント日",
+                'label' => "開催日から探す",
                 'widget' => 'single_text',
                 'required' => false,
             ])
@@ -42,7 +42,7 @@ class MyEventSearchType extends AbstractType
                 'required' => false,
             ])
             ->add('eventTimeZone', ChoiceType::class, [
-                'label' => "イベント時間",
+                'label' => "開催時間から探す",
                 'placeholder' => '指定なし',
                 'choices' => [
                     '昼' => 'day_time',

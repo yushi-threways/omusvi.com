@@ -1,9 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block head %}
-<title>OMUSVIトップ</title>
+<title>OMUSVi</title>
 <meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
-<link rel="canonical" href="{{ absolute_url(path('default_index')) }}">   
 {% endblock %}
 
 {% block og %}
@@ -23,9 +22,6 @@
     {% endblock %}
 
 {% block main %}
-<div class="top-Search">
-    {% include 'default/_search_form.html.twig' with {'form': search_form} %}
-</div>
 {% if feature_my_event %}
 <div class="top-Wide">
     <div class="top-Wide_Inner">
@@ -64,6 +60,12 @@
         </a>
     </div>
 </section>
+
+<div class="top-Search">
+    {% include 'default/_search_form.html.twig' with {'form': search_form} %}
+</div>
+
+
 
 <div class="top-Wide top-Wide_Keyword">
     <div class="top-Wide_Inner">

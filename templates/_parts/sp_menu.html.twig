@@ -1,0 +1,100 @@
+                    <div class="sw-Nav_Side">
+                        <div class="sw-Nav_SideInner">
+                            <h3 class="sw-Nav_SideInnerTitle">イベントを探す</h3>
+                            <ul class="sw-Nav_SideList">
+                                <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">今週末いけるイベント</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                     <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">イベント検索</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">イベント一覧</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <h3 class="sw-Nav_SideInnerTitle">マイページ</h3>
+                            <ul class="sw-Nav_SideList">
+                                 {% if is_granted('ROLE_USER') %}
+                                   <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">応募中のイベント</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("mypage_detail_index") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">プロフィール</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">無料会員登録</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">ログイン</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <h3 class="sw-Nav_SideInnerTitle">参加者の方へ</h3>
+                            <ul class="sw-Nav_SideList">
+                                <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_venue_index") }}">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">会場一覧</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {# <li class="sw-Nav_SideListItem">
+                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
+                                        <div class="sw-Nav_SideItemUnit">
+                                            <div class="sw-Nav_SideUnitImg"></div>
+                                            <div class="sw-Nav_SideUnitText">よくある質問</div>
+                                        </div>
+                                    </a>
+                                </li> #}
+                                </ul>
+                                <ul class="sw-Nav_SideList">
+                                 {% if is_granted('ROLE_USER') %}
+                                 <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>

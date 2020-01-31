@@ -2,7 +2,15 @@
     border-bottom: 1px solid #ccc;
     margin: 0 auto 15px;
     @include media-breakpoint-down(sm) {
-        margin: 0 auto 10px;
+        margin: 0 auto;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 42px;
+        background-color: #fff;
+        width: 100%;
+        z-index: 10;
     }
 }
 .sw-Header_Inner {
@@ -20,8 +28,7 @@
     padding: 5px 0 0;
     letter-spacing: 2px;
     @include media-breakpoint-down(sm) {
-        @include font-size(10px);
-        padding: 5px 0 0;
+        display: none;
     }
 }
 
