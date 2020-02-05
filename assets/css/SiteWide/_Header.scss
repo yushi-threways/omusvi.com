@@ -1,6 +1,6 @@
 .sw-Header {
     border-bottom: 1px solid #ccc;
-    margin: 0 auto 15px;
+    // margin: 0 auto 15px;
     @include media-breakpoint-down(sm) {
         margin: 0 auto;
         position: -webkit-sticky;

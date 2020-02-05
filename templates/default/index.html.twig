@@ -1,96 +1,183 @@
 {% extends "base.html.twig" %}
 
 {% block head %}
-<title>OMUSVi</title>
-<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+	<title>OMUSVi</title>
+	<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
 {% endblock %}
 
 {% block og %}
-    <meta property="og:site_name" content="OMUSVI">
-    <meta property="og:title" content="OMUSVIトップ">
-    <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
-    <meta property="og:image" content="">
-    {% endblock %}
-    
-    {% block twitter %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="サイトのURL貼る">
-    <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
-    <meta name="twitter:image" content="ogpのURL貼る">
-    {% endblock %}
+	<meta property="og:site_name" content="OMUSVI">
+	<meta property="og:title" content="OMUSVIトップ">
+	<meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+	<meta property="og:image" content="">
+{% endblock %}
 
-{% block main %}
-{% if feature_my_event %}
-<div class="top-Wide">
-    <div class="top-Wide_Inner">
-        <div class="top-Event">
-        <h3 class="top-Wide_Title">注目のイベント</h3>
-            <div class="top-Event_Inner">
-                <div class="top-Event_Img">
-                <a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">
-                <img src="{{ vich_uploader_asset(feature_my_event, 'imageFile') }}" alt="{{ feature_my_event.imageName }}">
-                </a>
-                </div>
-                {% if not feature_my_event.tags.empty %}
-                <ul class="top-Event_TagItems">
-                {% for myEventTag in feature_my_event.tags %}
-                    <li class="top-Event_TagItem">
-                        <a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
-                            <i class="fas fa-hashtag"></i> {{ myEventTag.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-                {% endif %} 
-                <p class="top-Event_Title">
-                <a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">{{ feature_my_event.name }}</a>
-                </p>
+{% block twitter %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="サイトのURL貼る">
+	<meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。"/>
+	<meta name="twitter:image" content="ogpのURL貼る">
+{% endblock %}
+
+{% block main_outer %}
+    <div class="top-Visual">
+        <div class="top-Visual_Inner">
+            <div class="top-Visual_Catch">
+            	<img src="{{ asset('/images/Logo_blue_yokommm.png') }}" alt="あなたの恋の糸、さがそうオムスビ">
+            </div>
+            <div class="top-Search">
+                {% include 'default/_search_form.html.twig' with {'form': search_form} %}
             </div>
         </div>
     </div>
-</div>
-{% endif %}
+	<div class="sw-Main_Inner">
+		<div class="sw-Content">
+			{% block main %}
+				{% if feature_my_event %}
+					<div class="top-Wide">
+						<div class="top-Wide_Inner">
+							<div class="top-Event">
+								<h3 class="top-Wide_Title">注目のイベント</h3>
+								<div class="top-Event_Inner">
+									<div class="top-Event_Img">
+										<a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">
+											<img src="{{ vich_uploader_asset(feature_my_event, 'imageFile') }}" alt="{{ feature_my_event.imageName }}">
+										</a>
+									</div>
+									{% if not feature_my_event.tags.empty %}
+										<ul class="top-Event_TagItems">
+											{% for myEventTag in feature_my_event.tags %}
+												<li class="top-Event_TagItem">
+													<a href="{{ path('my_event_search', {'tag': myEventTag.name == app.request.query.get('tag') ? null : myEventTag.name}) }}">
+														<i class="fas fa-hashtag"></i>
+														{{ myEventTag.name }}
+													</a>
+												</li>
+											{% endfor %}
+										</ul>
+									{% endif %}
+									<p class="top-Event_Title">
+										<a href="{{ path('my_event_show', {'id': feature_my_event.id}) }}">{{ feature_my_event.name }}</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
 
-<section class="sw-Section">
-    <div class="top-Wide_Inner">
-        <a class="top-Search_Weekend" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
-            今週末行けるイベントを探す
-        </a>
-    </div>
-</section>
+				<section class="sw-Section">
+					<div class="top-Wide_Inner">
+						<a class="top-Search_Weekend" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime': "now"|date('G:i:s', "Asia/Tokyo")}) }}">
+							今週末行けるイベントを探す
+						</a>
+					</div>
+				</section>
 
-<div class="top-Search">
-    {% include 'default/_search_form.html.twig' with {'form': search_form} %}
-</div>
+				<div class="top-Wide top-Wide_Keyword">
+					<div class="top-Wide_Inner">
+						<h3 class="top-Wide_Title">キーワードから探す</h3>
+						<ul class="top-Wide_KeywordLists">
+							{% for tag in tag_lists() %}
+								<li class="top-Wide_KeywordListsItem">
+									<a href="{{ path('my_event_search', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
+										<i class="fas fa-hashtag"></i>
+										{{ tag.name }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
 
+				<section class="sw-Section">
+					<div class="top-Wide_Inner">
+						<h3 class="top-Wide_Title">新着イベント</h3>
+						{% for my_event in my_events %}
+							{% include '/_parts/event_list.html.twig' with {my_event: my_event} %}
+						{% else %}
+							<p>新着イベントはございません。</p>
+						{% endfor %}
+					</div>
+				</section>
 
+			{% endblock %}
+		</div>
+		<aside class="sw-Side">
+			{% block side %}
+				<div class="sw-Side_Inner">
+					<div class="sw-Side_Keyword">
+						<h2 class="sw-Side_KeywordTitle">OMUSVIの街コン・イベントを探す</h2>
+						<ul class="sw-Side_KeywordItems">
+							<li class="sw-Side_KeywordItem">
+								<h3 class="sw-Side_KeywordItemTitle">
+									<i class="fas fa-hashtag"></i>
+									イベントタグから探す</h3>
+								<ul class="sw-Side_KeywordLists">
+									{% for tag in tag_lists() %}
+										<li class="sw-Side_KeywordListsItem">
+											<a href="{{ path('my_event_search', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
+												<i class="fas fa-hashtag"></i>
+												{{ tag.name }}
+											</a>
+										</li>
+									{% endfor %}
+								</ul>
+							</li>
+							{# <li class="sw-Side_KeywordItem">
+							    <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-search"></i> キーワードで探す</h3>
+							    <ul class="sw-Side_KeywordLists">
+							    /ul>
+							</li> #}
+						</ul>
+					</div>
+					<ul class="sw-Side_Items">
+						<li class="sw-Side_Item">
+							<h3 class="sw-Side_ItemTitle">
+								<i class="fas fa-sign-in-alt"></i>
+								ログイン</h3>
+							<ul class="sw-Side_ItemLists">
+								{% if is_granted('ROLE_USER') %}
+									<li class="sw-Side_ItemList">
+										<a href="{{ path('default_index') }}">マイページ</a>
+									</li>
+									<li class="sw-Side_ItemList">
+										<a href="{{ path('fos_user_security_logout') }}">ログアウト</a>
+									</li>
+								{% else %}
+									<li class="sw-Side_ItemList">
+										<a href="{{ path('fos_user_registration_register') }}">会員登録</a>
+									</li>
+									<li class="sw-Side_ItemList">
+										<a href="{{ path('fos_user_security_login') }}">ログイン</a>
+									</li>
+								{% endif %}
+							</ul>
+						</li>
+						<li class="sw-Side_Item">
+							<h3 class="sw-Side_ItemTitle">
+								<i class="fas fa-bars"></i>
+								コンテンツ</h3>
+							<ul
+								class="sw-Side_ItemLists">
+								{# <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li> #}
+								<li class="sw-Side_ItemList">
+									<a href="{{ path('my_event_venue_index') }}">会場一覧</a>
+								</li>
+							</ul>
+						</li>
+						{# <li class="sw-Side_Item">
+						    <h3 class="sw-Side_ItemTitle">OMUSVI(オムスビ)とは</h3>
+						    <ul class="sw-Side_ItemLists">
+						    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">OMUSVIについて</a></li>
+						    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li> 
+						     </ul>
+						</li> #}
+					</ul>
+				</div>
 
-<div class="top-Wide top-Wide_Keyword">
-    <div class="top-Wide_Inner">
-        <h3 class="top-Wide_Title">キーワードから探す</h3>
-        <ul class="top-Wide_KeywordLists">
-        {% for tag in tag_lists() %}
-            <li class="top-Wide_KeywordListsItem">
-                <a href="{{ path('my_event_search', {'tag': tag.name == app.request.query.get('tag') ? null : tag.name}) }}">
-                    <i class="fas fa-hashtag"></i>{{ tag.name }}
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
-</div>
-
-<section class="sw-Section">
-    <div class="top-Wide_Inner">
-    <h3 class="top-Wide_Title">新着イベント</h3>
-    {% for my_event in my_events %}
-        {% include '/_parts/event_list.html.twig' with {my_event: my_event} %}
-    {% else %}
-        <p>新着イベントはございません。</p>
-    {% endfor %}
-    </div>
-</section>
-
+			{% endblock %}
+		</aside>
+	</div>
 {% endblock %}

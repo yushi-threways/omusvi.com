@@ -96,6 +96,7 @@
                 {% endblock %}
 
                     <main class="sw-Main">
+                        {% block main_outer %}
                         <div class="sw-Main_Inner">
                             <div class="sw-Content">
                                 {% block main %}
@@ -157,8 +158,9 @@
                                     </div>
                                 
                                 {% endblock %}
+                                </aside>
                             </div>
-                        </aside>
+                        {% endblock %}
                     </main>
 
                     <footer class="sw-Footer">

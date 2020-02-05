@@ -204,11 +204,14 @@
 
     .sw-Nav_SideInnerTitle {
         // @include pinkgra();
-        background-color: #ffe5e5;
+        // background-color: #ffe5e5;
+        background-color: $color__sex-woman;
         @include font-size(14px);
-        padding: 12px 0 12px 8px;
-        font-weight: bold;
-        color: #8E6F6F;
+        padding: 13px 0 13px 8px;
+        // font-weight: bold;
+        font-weight: normal;
+        // color: #8E6F6F;
+        color: #fff;
         // border-top: 1px solid #eee;
         // border-bottom: 1px solid #eee;
         margin: 0 auto;
