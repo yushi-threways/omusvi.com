@@ -24,3 +24,11 @@
     -o-transition: all $time ease;
     transition: all $time ease;
   }
+
+  @mixin pinkgra() {
+background: #ffe5e5; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #ffe5e5 0%, #fff7fb 49%, #ffe5e5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  #ffe5e5 0%,#fff7fb 49%,#ffe5e5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  #ffe5e5 0%,#fff7fb 49%,#ffe5e5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffe5e5', endColorstr='#ffe5e5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
