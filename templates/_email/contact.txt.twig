@@ -1,0 +1,42 @@
+{% use '_email/base.txt.twig' %}
+
+{% block subject %}お問い合わせありがとうございます{% endblock %}
+{% block to %}{{ user.email }}{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+
+※このメールはシステムからの自動返信です
+
+{{ detail.firstName }} {{ detail.lastName }} 様
+
+お世話になっております。
+OMUSVi事務局へのお問い合わせありがとうございました。
+
+以下の内容でお問い合わせを受け付けいたしました。
+3営業日以内に、担当者よりご連絡いたしますので
+今しばらくお待ちくださいませ。
+
+━━━━━━□■□　お問い合わせ内容　□■□━━━━━━
+
+お名前: {{ data.name }}
+EMail: {{ data.email }}
+お電話番号: {{ data.telNumber }}
+お問い合わせ内容:
+ {{ data.body }}
+
+━━━━━━□■□　□■□　□■□　□■□　□■□━━━━━━
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+【OMUSVi営事務局】
+{{ absolute_url(path('default_index')) }}
+
+【運営元：Meetie(ミータイ)】
+住所：〒462-0065　愛知県名古屋市北区喜惣治1-275-2
+電話番号：090-9191-7257
+営業時間：10:00時～22:00時
+メール：info@omusvi.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+{% endautoescape %}
+{% endblock %}

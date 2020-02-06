@@ -1,6 +1,6 @@
 .sw-Footer {
     @include media-breakpoint-down(sm) {
-        margin: 0 auto 60px;
+        margin: 0 auto;
     }
 }
 .sw-Footer_Inner {
@@ -9,7 +9,7 @@
     margin: 0 auto;
     @include media-breakpoint-down(sm) {
         width: 100%;
-        padding: 0 20px;
+        padding: 0;
     }
 }
 .sw-Footer_Items {
@@ -19,22 +19,72 @@
     padding: 0;
     justify-content: space-between;
     @include media-breakpoint-down(sm) {
-        display: none;
+        display: block;
+    }
+    .sw-Footer_Item {
+        @include media-breakpoint-down(sm) {
+            &:nth-child(1) {
+                .sw-Footer_ItemTitle {
+                background-color: antiquewhite;
+                // color: #fff;
+                padding: 5px 0 5px 8px;
+                }
+            }
+            &:nth-child(2) {
+                .sw-Footer_ItemTitle {
+                background-color: antiquewhite;
+                // color: #fff;
+                padding: 5px 0 5px 8px;
+                }
+            }
+        }
     }
 }
 .sw-Footer_Item {
     a {
         @include font-size(14px);
+        color: #58595B;
+        &:visited {
+            color: #58595B;
+        }
+        @include media-breakpoint-down(sm) {
+            display: block;
+            @include font-size(14px);
+            font-weight: normal;
+            padding: 0.75rem 0.5rem;
+            height: 42px;
+            border-right: 1px solid rgba(0,0,0,0.125);
+            margin: 0 0 -1px;
+            background: url(../../images/right-arrow.png) no-repeat right 18px top 10px;
+            background-size: 6px auto;
+            text-decoration: none;
+        }
     }
+    
 }
 .sw-Footer_ItemTitle {
     @include font-size(18px);
+    @include media-breakpoint-down(sm) {
+        @include font-size(15px);
+        margin: 0;
+    }
 }
 .sw-Footer_ItemLists {
     padding: 0 0 0 20px;
+    margin: 0 auto 20px;
+    @include media-breakpoint-down(sm) {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: #ffffff;
+    }
 }
 .sw-Footer_ItemList {
-    
+    @include media-breakpoint-down(sm) {
+        width: 50%;
+    }
 }
 .sw-Footer_Copy {
     margin: 30px auto 0;
@@ -44,6 +94,7 @@
 
     }
     @include media-breakpoint-down(sm) {
-        display: none;
+        text-align-last: center;
+        margin: 0 auto 10px;
     }
 }

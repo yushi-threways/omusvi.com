@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	<title>お問い合わせ確認</title>
+{% endblock %}
+
+{% block main_outer %}
+    <div class="sw-Content_Top container">
+        <header class="sw-Content_Header">
+            <h1>お問い合わせ</h1>
+        </header>
+        <main class="sw-PageBody">
+            <section class="sw-Section">
+                <h3 class="sw-Section_Title">お問い合わせフォーム</h3>
+                <div class="sw-Section_Body">
+                    <p>入力内容を確認の上、「送信する」ボタンを押してください。</p>
+                    {{ form_start(form, {'method': 'post', 'action': path('contact_confirm'), 'attr': {'class': 'app_contact'}}) }}
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>
+                                お名前
+                            </th>
+                            <td>
+                                {{ data.name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                メールアドレス
+                            </th>
+                            <td>
+                                {{ data.email }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                お電話番号
+                            </th>
+                            <td>
+                                {{ data.telNumber }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                お問い合わせ内容
+                            </th>
+                            <td>
+                                {{ data.body|nl2br }}
+                            </td>
+                        </tr>
+                    </table>
+                            {{ form_rest(form) }}
+
+                    <p class="text-center">
+                        <a class="btn-lg contact-Form_ButtonBack" href="{{ path('contact_index') }}">戻って修正</a>
+                        <button class="btn-primary btn-lg contact-Form_ButtonCkeck" type="submit">送信する</button>
+                    </p>
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+{% endblock %}
