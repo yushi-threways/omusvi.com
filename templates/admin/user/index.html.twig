@@ -18,8 +18,8 @@
                 <th>Email</th>
                 <th>Enabled</th>
                 <th>LastLogin</th>
-                <th>Roles</th>
                 <th>CreatedAt</th>
+                <th>BankAccount</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,7 +31,6 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
                 <td>{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>

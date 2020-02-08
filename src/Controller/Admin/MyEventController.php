@@ -62,7 +62,7 @@ class MyEventController extends AbstractController
             $entityManager->persist($myEvent);
             $entityManager->flush();
 
-            $this->addFlash('success', 'イベントを登録しました');
+            // $this->addFlash('success', 'イベントを登録しました');
 
             return $this->redirectToRoute('admin_my_event_index');
         }

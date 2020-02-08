@@ -73,7 +73,7 @@ class MyEventApplicationController extends AbstractController
             'detail' => $application->getUser()->getUserDetail(),
         ]);
 
-            $this->addFlash('success', 'イベント支払い確認が行われました。。メールを送信しましたのでご確認お願いいたします。');
+            // $this->addFlash('success', 'イベント支払い確認が行われました。。メールを送信しましたのでご確認お願いいたします。');
             return $this->redirectToRoute('admin_my_event_application_list', ['id' => $application->getMyEventSchedule()->getId()]);
     }
 }

@@ -1,5 +1,14 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+{% block head %}
+<title>リセットリクエスト|OMUSVi</title>
+<meta name=”robots” content=”noindex” />
+{% endblock %}
+
 {% block fos_user_content %}
-{% include "@FOSUser/Resetting/request_content.html.twig" %}
+<div class=" mypage-Login">
+    <div class="mypage-Login_Form">
+    {% include "@FOSUser/Resetting/request_content.html.twig" %}
+    </div>
+</div>
 {% endblock fos_user_content %}

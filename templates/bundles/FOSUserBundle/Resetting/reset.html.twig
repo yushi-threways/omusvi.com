@@ -1,5 +1,15 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+
+{% block head %}
+<title>パスワードリセット|OMUSVi</title>
+<meta name=”robots” content=”noindex” />
+{% endblock %}
+
 {% block fos_user_content %}
-{% include "@FOSUser/Resetting/reset_content.html.twig" %}
+<div class=" mypage-Login">
+    <div class="mypage-Login_Form">
+    {% include "@FOSUser/Resetting/reset_content.html.twig" %}
+    </div>
+</div>
 {% endblock fos_user_content %}

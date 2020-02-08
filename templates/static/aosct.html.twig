@@ -4,82 +4,83 @@
 {% set static_description = "特定商取引法に基づく表記ついて記載したページです。" %}
 
 {% block head %}
-    <title>{{ static_title }}</title>
-    <meta name="description" content="{{ static_title }}についての内容のページです。">
+	<title>{{ static_title }}</title>
+	<meta name="description" content="{{ static_title }}についての内容のページです。">
 {% endblock %}
 
 {% block og %}
-    <meta property="og:site_name" content="OMUSVi">
-    <meta property="og:title" content="{{ static_title }}|OMUSVi">
-    <meta property="og:description" content="{{ static_title }}についての内容のページです">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="">
+	<meta property="og:site_name" content="OMUSVi">
+	<meta property="og:title" content="{{ static_title }}|OMUSVi">
+	<meta property="og:description" content="{{ static_title }}についての内容のページです">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ app.request.uri }}">
+	<meta property="og:image" content="">
 {% endblock %}
-    
+
 {% block twitter %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="{{ app.request.uri }}">
-    <meta name="twitter:description" content="{{ static_title }}についての内容のページです"/>
-    <meta name="twitter:image" content="ogpのURL貼る">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="{{ app.request.uri }}">
+	<meta name="twitter:description" content="{{ static_title }}についての内容のページです"/>
+	<meta name="twitter:image" content="ogpのURL貼る">
 {% endblock %}
 
 
 {% block main %}
-<section class="sw-Section">
-    <div class="static-Content">
-        <div class="static-Content_Inner">
-            <h1 class="static-Content_Title">{{ static_title }}</h1>
-            <p class="static-Content_Desc">
-                {{ static_description }}
-            </p>
-            <table class="static-Aosct_Table">
-            <tbody>
-                <tr>
-                <td width="29%">販売業者：</td>
-                <td>Meetie(ミータイ)</td>
-                </tr>
-                <tr>
-                <td width="29%">所在地：</td>
-                <td>名古屋市北区喜惣治1丁目-275-2 203</td>
-                </tr>
-                <tr>
-                <td width="29%">メールアドレス：</td>
-                <td>info@omusvi.com</td>
-                </tr>
-                <tr>
-                <td width="29%">屋号又はサービス名：</td>
-                <td>Omusvi</td>
-                </tr>
-                <tr>
-                <td width="29%">販売価格：</td>
-                <td>各イベント画面にて掲載</td>
-                </tr>
-                <tr>
-                <td width="29%">商品代金以外の必要料金：</td>
-                <td>消費税(内税)</td>
-                </tr>
-                <tr>
-                <td width="29%">支払方法：</td>
-                <td>・銀行振込<br> ・現地支払い</td>
-                </tr>
-                <tr>
-                <td width="29%">販売数量の制限：</td>
-                <td>各イベント画面にて掲載</td>
-                </tr>
-                <tr>
-                <td width="29%">キャンセル：</td>
-                <td>各イベント画面にて掲載</td>
-                </tr>
-                <tr>
-                <td width="29%">返金：</td>
-                <td>
-                    <p>会員ログインを行い決済されたお客様に関しましては、イベントが開催されなかった場合に限り、全額返金を行います。その際、返金時期・返金方法はメールまたは電話でお知らせいたします。</p>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-    </div>  
-</section>
+	<section class="sw-Section">
+		<div class="static-Content">
+			<div class="static-Content_Inner">
+				<h1 class="static-Content_Title">{{ static_title }}</h1>
+				<p class="static-Content_Desc">
+					{{ static_description }}
+				</p>
+				<table class="static-Aosct_Table">
+					<tbody>
+						<tr>
+							<td width="29%">販売業者：</td>
+							<td>Meetie(ミータイ)</td>
+						</tr>
+						<tr>
+							<td width="29%">所在地：</td>
+							<td>名古屋市北区喜惣治1丁目-275-2 203</td>
+						</tr>
+						<tr>
+							<td width="29%">メールアドレス：</td>
+							<td>info@omusvi.com</td>
+						</tr>
+						<tr>
+							<td width="29%">屋号又はサービス名：</td>
+							<td>Omusvi</td>
+						</tr>
+						<tr>
+							<td width="29%">販売価格：</td>
+							<td>各イベント画面にて掲載</td>
+						</tr>
+						<tr>
+							<td width="29%">商品代金以外の必要料金：</td>
+							<td>消費税(内税)</td>
+						</tr>
+						<tr>
+							<td width="29%">支払方法：</td>
+							<td>・銀行振込<br>
+								・現地支払い</td>
+						</tr>
+						<tr>
+							<td width="29%">販売数量の制限：</td>
+							<td>各イベント画面にて掲載</td>
+						</tr>
+						<tr>
+							<td width="29%">キャンセル：</td>
+							<td>各イベント画面にて掲載</td>
+						</tr>
+						<tr>
+							<td width="29%">返金：</td>
+							<td>
+								<p>会員ログインを行い決済されたお客様に関しましては、イベントが開催されなかった場合に限り、全額返金を行います。その際、返金時期・返金方法はメールまたは電話でお知らせいたします。</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 {% endblock %}

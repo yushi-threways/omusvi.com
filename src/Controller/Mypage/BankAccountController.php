@@ -44,11 +44,7 @@ class BankAccountController extends AbstractController
     {
         /** @var BankAccountRepository $repo */
         $repo = $this->getDoctrine()->getRepository(BankAccount::class);
-        $account = $repo->find($this->getUser());
-
-        if (!$account) {
-            $account = new BankAccount();
-        }
+        $account = $repo->findOrCreateByUser($this->getUser());
     
         $form = $this->createForm(BankAccountFormType::class, $account);
 
