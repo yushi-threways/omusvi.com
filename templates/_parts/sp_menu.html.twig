@@ -46,6 +46,14 @@
                                             </div>
                                         </a>
                                     </li>
+                                    <li class="sw-Nav_SideListItem">
+                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
+                                            <div class="sw-Nav_SideItemUnit">
+                                                <div class="sw-Nav_SideUnitImg"></div>
+                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
+                                            </div>
+                                        </a>
+                                    </li>
                                 {% else %}
                                     <li class="sw-Nav_SideListItem">
                                         <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
@@ -84,17 +92,5 @@
                                     </a>
                                 </li> #}
                                 </ul>
-                                <ul class="sw-Nav_SideList">
-                                 {% if is_granted('ROLE_USER') %}
-                                 <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
                         </div>
                     </div>

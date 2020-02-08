@@ -1,291 +1,233 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="format-detection" content="telephone=no">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
 
-       
-{% block head %}
-<title>OMUSVi</title>
-<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
-<link rel="canonical" href="{{ absolute_url(path('default_index')) }}">   
-{% endblock %}
 
-{% block og %}
-    <meta property="og:site_name" content="OMUSVI">
-    <meta property="og:title" content="OMUSVIトップ">
-    <meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
-    <meta property="og:image" content="">
-    {% endblock %}
-    
-    {% block twitter %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="サイトのURL貼る">
-    <meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。" />
-    <meta name="twitter:image" content="ogpのURL貼る">
-    {% endblock %}
-       
-        {% block stylesheets %}
-        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
-        {{ encore_entry_link_tags('app') }}
+		{% block head %}
+			<title>OMUSVi</title>
+			<meta name="description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+			<link rel="canonical" href="{{ absolute_url(path('default_index')) }}">
+		{% endblock %}
 
-        <!-- Renders a link tag (if your module requires any CSS)
-            <link rel="stylesheet" href="/build/app.css"> -->
-    {% endblock %}
-    </head>
-    <body>
-        <header class="sw-Header">
-                        <header class="sw-Header">
-                        {% block header %}
-                        <div class="sw-Header_Inner">
-                            <h1 class="sw-Header_Lead">
-                                <strong>名古屋</strong>中心に<strong>街コン</strong>をナビゲートする<span>OMUSVI</span>
-                            </h1>
-                            <div class="sw-Header_Branding">
-                                <div class="sw-Header_Logo">
-                                    <a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
-                                        <img src="{{ asset('/images/Logo_blue_yoko_black.png') }}" alt="ロゴ">
-                                    </a>
-                                </div>
-                                
-                                {# <div class="sw-Header_MainNavOuter">
-                                    <nav class="sw-Header_MainNav">
-                                        <div class="sw-Header_MainNavInner">
-                                            <button class="menu-toggle sw-Nav_OpenBtn sw-Header_MainNavBtn" aria-controls="primary-menu" aria-expanded="false">
-                                                <i></i>
-                                                <i></i>
-                                                <i></i>
-                                            </button>
-                                            <ul class="sw-Header_MainNavItems">
-                                                {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-user"></i></a></li>
-                                                {% else %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
-                                                {% endif %}
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div> #}
-                            </div>
-                        </div>
-                        {% endblock %}
-                    </header>
-            {% block alert %}
-                {% if app.request.hasPreviousSession %}
-                    <div class="sw-Alert">
-                        {% for type, messages in app.session.flashbag.all() %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ type }}">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endblock %}
+		{% block og %}
+			<meta property="og:site_name" content="OMUSVI">
+			<meta property="og:title" content="OMUSVIトップ">
+			<meta property="og:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+			<meta property="og:type" content="website">
+			<meta property="og:url" content="{{ absolute_url(path('default_index')) }}">
+			<meta property="og:image" content="">
+		{% endblock %}
 
-        <main class="sw-Main">
-            <div class="sw-Main_Inner">
-                <div class="sw-Content">
-                        {% block fos_user_content %}
-                        {% endblock fos_user_content %}
-                </div>
-                <aside class="sw-Side">
-                    {% block side %}
-                                    <div class="sw-Side_Inner">
-                                        <div class="sw-Side_Keyword">
-                                            <h2 class="sw-Side_KeywordTitle">OMUSVIの街コン・イベントを探す</h2>
-                                            <ul class="sw-Side_KeywordItems">
-                                                <li class="sw-Side_KeywordItem">
-                                                    <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-hashtag"></i> イベントタグから探す</h3>
-                                                    <ul class="sw-Side_KeywordLists">
-                                                    </ul>
-                                                </li>
-                                                <li class="sw-Side_KeywordItem">
-                                                    <h3 class="sw-Side_KeywordItemTitle"><i class="fas fa-search"></i> キーワードで探す</h3>
-                                                    <ul class="sw-Side_KeywordLists">
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <ul class="sw-Side_Items">
-                                            <li class="sw-Side_Item">
-                                                <h3 class="sw-Side_ItemTitle"><i class="fas fa-sign-in-alt"></i> ログイン</h3>
-                                                <ul class="sw-Side_ItemLists">
-                                                    {% if is_granted('ROLE_USER') %}
-                                                        <li class="sw-Side_ItemList"><a href="{{ path('default_index') }}">マイページ</a></li>
-                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_security_logout') }}">ログアウト</a></li>
-                                                    {% else %}
-                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_registration_register') }}">会員登録</a></li>
-                                                        <li class="sw-Side_ItemList"><a href="{{ path('fos_user_security_login') }}">ログイン</a></li>
-                                                    {% endif %}
-                                                </ul>
-                                            </li>
-                                            <li class="sw-Side_Item">
-                                                <h3 class="sw-Side_ItemTitle"><i class="fas fa-bars"></i> コンテンツ</h3>
-                                                <ul class="sw-Side_ItemLists">
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li>
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a></li>  
-                                                </ul>
-                                            </li>
-                                            <li class="sw-Side_Item">
-                                                <h3 class="sw-Side_ItemTitle">オミパリとは</h3>
-                                                <ul class="sw-Side_ItemLists">
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">オミパリについて</a></li>
-                                                    <li class="sw-Side_ItemList"><a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a></li> 
-                                                </ul>
-                                            </li>
-                                        </ul>                  
-                                    </div>
-                                
-                                {% endblock %}
-                            </div>
-                        </aside>
+		{% block twitter %}
+			<meta name="twitter:card" content="summary_large_image">
+			<meta name="twitter:site" content="サイトのURL貼る">
+			<meta name="twitter:description" content="オムスビは、愛知県名古屋市の出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。"/>
+			<meta name="twitter:image" content="ogpのURL貼る">
+		{% endblock %}
 
-                {% block spmenu %}
-                    <div class="sw-Nav_Bottom">
-                        <div class="sw-Nav_BottomInner">
-                            <a class="sw-Nav_BottomLink" href="{{ path('default_index') }}">
-                                <i class="fas fa-home"></i>
-                            </a>
-                            <a class="sw-Nav_BottomLink" href="{{ path('my_event_search') }}">
-                                <i class="fas fa-search"></i>
-                            </a>
-                            {% if is_granted('ROLE_USER') %}
-                            <a class="sw-Nav_BottomLink" href="{{ path('app_mypage_mypage_index') }}">
-                                <i class="fas fa-user"></i>
-                            </a>
-                            {% else %}
-                             <a class="sw-Nav_BottomLink" href="{{ path('fos_user_security_login') }}">
-                                <i class="fas fa-user-lock"></i>
-                             </a>
-                             {% endif %}
-                            <a class="sw-Nav_BottomLink" href="{{ path('my_event_index') }}">
-                                <i class="fas fa-calendar-alt"></i>
-                            </a>
-                            <button class="sw-Nav_BottomLink sw-Nav_OpenBtn">
-                                <i class="fas fa-bars"></i>
-                            </a>
-                            </button>
-                        </div>
-                    </div>
+		{% block stylesheets %}
+			{# 'app' must match the first argument to addEntry() in webpack.config.js #}
+			{{ encore_entry_link_tags('app') }}
 
-                    <div class="sw-Nav_Side">
-                        <div class="sw-Nav_SideInner">
-                            <ul class="sw-Nav_SideList">
-                                <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime':  "now"|date('G:i:s', "Asia/Tokyo")}) }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">今週末いけるイベント</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                 {% if is_granted('ROLE_USER') %}
-                                   <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("app_mypage_mypage_index") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">応募中のイベント</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("mypage_detail_index") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">プロフィール</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_registration_register") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">無料会員登録</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_login") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">ログイン</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_venue_index") }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">会場一覧</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("my_event_index") }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">イベント一覧</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "about"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">OMUSVIについて</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "guide"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">初めての方へ</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                {# <li class="sw-Nav_SideListItem">
-                                    <a class="sw-Nav_SideItemLink" href="{{ path("omipari_static", {page: "qa"}) }}">
-                                        <div class="sw-Nav_SideItemUnit">
-                                            <div class="sw-Nav_SideUnitImg"></div>
-                                            <div class="sw-Nav_SideUnitText">よくある質問</div>
-                                        </div>
-                                    </a>
-                                </li> #}
-                                 {% if is_granted('ROLE_USER') %}
-                                 <li class="sw-Nav_SideListItem">
-                                        <a class="sw-Nav_SideItemLink" href="{{ path("fos_user_security_logout") }}">
-                                            <div class="sw-Nav_SideItemUnit">
-                                                <div class="sw-Nav_SideUnitImg"></div>
-                                                <div class="sw-Nav_SideUnitText">ログアウト</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                     {% endblock %}
+			<!-- Renders a link tag (if your module requires any CSS)
+												            <link rel="stylesheet" href="/build/app.css"> -->
+		{% endblock %}
+	</head>
+	<body>
+		<header class="sw-Header">
+			{% block header %}
+				<div class="sw-Header_Inner">
+					<h1 class="sw-Header_Lead">
+						<strong>名古屋</strong>中心に<strong>出会いイベント</strong>をナビゲートする<span>OMUSVi</span>
+					</h1>
+					<div class="sw-Header_Branding">
+						<div class="sw-Header_Logo">
+							<a class="sw-Header_LogoMark" href="{{ path('default_index') }}">
+								<img src="{{ asset('/images/Logo_blue_yoko_black.png') }}" alt="ロゴ">
+							</a>
+						</div>
 
-                     {% block javascripts %}
-                        {{ encore_entry_script_tags('app') }}
+						<div class="sw-Header_MainNavOuter">
+							<nav class="sw-Header_MainNav">
+								<div class="sw-Header_MainNavInner">
+									<button class="menu-toggle sw-Nav_OpenBtn sw-Header_MainNavBtn" aria-controls="primary-menu" aria-expanded="false">
+										<i></i>
+										<i></i>
+										<i></i>
+									</button>
+									<ul class="sw-Header_MainNavItems">
+										{% if is_granted('ROLE_USER') %}
+											<li class="sw-Header_MainNavItem">
+												<a href="{{ path('mypage_detail_index') }}">
+													<i class="fas fa-user-cog"></i>
+												</a>
+											</li>
+											<li class="sw-Header_MainNavItem">
+												<a href="{{ path('app_mypage_mypage_index') }}">
+													<i class="fas fa-calendar-alt"></i>
+												</a>
+											</li>
+										{% else %}
+											<li class="sw-Header_MainNavItem">
+												<a href="{{ path('fos_user_security_login') }}">
+													<i class="fas fa-user-lock"></i>
+												</a>
+											</li>
+										{% endif %}
+									</ul>
+								</div>
+							</nav>
+						</div>
+					</div>
+				</div>
+			{% endblock %}
+		</header>
+		{% block alert %}
+			{% if app.request.hasPreviousSession %}
+				<div class="sw-Alert">
+					{% for type, messages in app.session.flashbag.all() %}
+						{% for message in messages %}
+							<div class="alert alert-{{ type }}">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endfor %}
+				</div>
+			{% endif %}
+		{% endblock %}
 
-                        <!-- Renders app.js & a webpack runtime.js file
-                            <script src="/build/runtime.js"></script>
-                            <script src="/build/app.js"></script> -->
-                    {% endblock %}
-            </div>
-        </main>
-    </body>
-</html>
+		<main class="sw-Main">
+			<div class="sw-Main_Inner">
+				<div class="sw-Content"> {% block fos_user_content %}{% endblock fos_user_content %}
+					</div>
+					<aside class="sw-Side">
+						{% block side %}
+							<div class="sw-Side_Inner">
+								<div class="sw-Side_Keyword">
+									<h2 class="sw-Side_KeywordTitle">OMUSVIの街コン・イベントを探す</h2>
+									<ul class="sw-Side_KeywordItems">
+										<li class="sw-Side_KeywordItem">
+											<h3 class="sw-Side_KeywordItemTitle">
+												<i class="fas fa-hashtag"></i>
+												イベントタグから探す</h3>
+											<ul class="sw-Side_KeywordLists"></ul>
+										</li>
+										<li class="sw-Side_KeywordItem">
+											<h3 class="sw-Side_KeywordItemTitle">
+												<i class="fas fa-search"></i>
+												キーワードで探す</h3>
+											<ul class="sw-Side_KeywordLists"></ul>
+										</li>
+									</ul>
+								</div>
+								<ul class="sw-Side_Items">
+									<li class="sw-Side_Item">
+										<h3 class="sw-Side_ItemTitle">
+											<i class="fas fa-sign-in-alt"></i>
+											ログイン</h3>
+										<ul class="sw-Side_ItemLists">
+											{% if is_granted('ROLE_USER') %}
+												<li class="sw-Side_ItemList">
+													<a href="{{ path('default_index') }}">マイページ</a>
+												</li>
+												<li class="sw-Side_ItemList">
+													<a href="{{ path('fos_user_security_logout') }}">ログアウト</a>
+												</li>
+											{% else %}
+												<li class="sw-Side_ItemList">
+													<a href="{{ path('fos_user_registration_register') }}">会員登録</a>
+												</li>
+												<li class="sw-Side_ItemList">
+													<a href="{{ path('fos_user_security_login') }}">ログイン</a>
+												</li>
+											{% endif %}
+										</ul>
+									</li>
+									<li class="sw-Side_Item">
+										<h3 class="sw-Side_ItemTitle">
+											<i class="fas fa-bars"></i>
+											コンテンツ</h3>
+										<ul class="sw-Side_ItemLists">
+											<li class="sw-Side_ItemList">
+												<a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a>
+											</li>
+											<li class="sw-Side_ItemList">
+												<a href="{{ path('omipari_static', {page: "about"}) }}">会場一覧</a>
+											</li>
+										</ul>
+									</li>
+									<li class="sw-Side_Item">
+										<h3 class="sw-Side_ItemTitle">オミパリとは</h3>
+										<ul class="sw-Side_ItemLists">
+											<li class="sw-Side_ItemList">
+												<a href="{{ path('omipari_static', {page: "about"}) }}">オミパリについて</a>
+											</li>
+											<li class="sw-Side_ItemList">
+												<a href="{{ path('omipari_static', {page: "qa"}) }}">よくある質問</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						{% endblock %}
+					</aside>
+				</div>
+			</main>
+			<footer class="sw-Footer">
+				{% block footer %}
+					<div class="sw-Footer_Inner">
+						<ul class="sw-Footer_Items">
+							<li class="sw-Footer_Item">
+								<p class="sw-Footer_ItemTitle">コンテンツ</p>
+								<ul class="sw-Footer_ItemLists">
+									<li class="sw-Footer_ItemList">
+										<a href="{{ path('default_index') }}">トップ</a>
+									</li>
+									{# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">ブログ一覧</a></li> #}
+									<li class="sw-Footer_ItemList">
+										<a href="{{ path('my_event_venue_index')}}">会場一覧</a>
+									</li>
+									{# <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "about"}) }}">会場募集</a></li> #}
+								</ul>
+							</li>
+							<li class="sw-Footer_Item">
+								<p class="sw-Footer_ItemTitle">サイトメニュー</p>
+								<ul class="sw-Footer_ItemLists">
+									<li class="sw-Footer_ItemList">
+										<a href="{{ path('omipari_static', {page: "agree"}) }}">利用規約</a>
+									</li>
+									<li class="sw-Footer_ItemList">
+										<a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法</a>
+									</li>
+									<li class="sw-Footer_ItemList">
+										<a href="{{ path('omipari_static', {page: "pp"}) }}">プライバシーポリシー</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="sw-Footer_Copy">
+							<small>
+								Copyright © 2019 Meetie Inc. All Rights Reserved.
+							</small>
+						</div>
+					</div>
+				{% endblock %}
+
+			</footer>
+
+			{% block spmenu %}
+				{% include '_parts/sp_menu.html.twig' %}
+			{% endblock %}
+
+			{% block javascripts %}
+				{{ encore_entry_script_tags('app') }}
+			{% endblock %}
+		</body>
+	</html>

@@ -32,7 +32,7 @@ class UserDetailController extends AbstractController
 
         /** @var BankAccountRepository $repo */
         $repo = $this->getDoctrine()->getRepository(BankAccount::class);
-        $account = $repo->find($user);
+        $account = $repo->findOrCreateByUser($user);
 
         return $this->render('my_page/user_detail/index.html.twig', [
             'user' => $user,
