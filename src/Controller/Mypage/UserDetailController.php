@@ -2,17 +2,16 @@
 
 namespace App\Controller\Mypage;
 
-use App\Entity\UserDetail;
 use App\Entity\User;
+use App\Entity\BankAccount;
 use App\Form\Type\UserDetailType;
-use App\Form\Type\ConfirmFormType;
 use App\DBAL\Types\GenderEnumType;
-use App\Repository\UserDetailRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\Type\ConfirmFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/mypage/detail")
@@ -31,9 +30,14 @@ class UserDetailController extends AbstractController
         $user = $this->getUser();
         $detail = $user->getUserDetail();
 
+        /** @var BankAccountRepository $repo */
+        $repo = $this->getDoctrine()->getRepository(BankAccount::class);
+        $account = $repo->find($user);
+
         return $this->render('my_page/user_detail/index.html.twig', [
             'user' => $user,
             'detail' => $detail,
+            'account' => $account
         ]);
     }
 

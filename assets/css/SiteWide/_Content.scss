@@ -10,3 +10,17 @@
     @include font-size(24px);
     margin: 0 auto 20px;
 }
+
+.sw-Content_Top {
+    margin: 20px auto 0;
+}
+
+.sw-Content_Header {
+    h1 {
+        @include font-size(33px);
+        margin: 0 auto 1s0px;
+        @include media-breakpoint-down(sm) {
+            @include font-size(28px);
+        }
+    }
+}

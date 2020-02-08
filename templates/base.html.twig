@@ -67,7 +67,8 @@
                                             </button>
                                             <ul class="sw-Header_MainNavItems">
                                                 {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-user"></i></a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('mypage_detail_index') }}"><i class="fas fa-user-cog"></i></a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-calendar-alt"></i></a></li>
                                                 {% else %}
                                                     <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
                                                 {% endif %}
@@ -177,10 +178,10 @@
                                         </ul>
                                     </li>
                                     <li class="sw-Footer_Item">
-                                        <p class="sw-Footer_ItemTitle">利用規約とプライバシー</p>
+                                        <p class="sw-Footer_ItemTitle">サイトメニュー</p>
                                         <ul class="sw-Footer_ItemLists">
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "agree"}) }}">利用規約</a></li>
-                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法に基づく表記</a></li>
+                                            <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "aosct"}) }}">特定商取引法</a></li>
                                             <li class="sw-Footer_ItemList"><a href="{{ path('omipari_static', {page: "pp"}) }}">プライバシーポリシー</a></li>
                                         </ul>
                                     </li>

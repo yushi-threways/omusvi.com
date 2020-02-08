@@ -1,0 +1,72 @@
+.mypage-Form {
+    label:not(.custom-file-label), .col-form-label {
+      @include font-size(13px);
+      text-align: left;
+      letter-spacing: -0.06px;
+      color: $color__text-screen;
+      &.required {
+        &:before {
+          display: inline-block;
+          content: '*';
+          margin-right: 5px;
+          color: red;
+          @include font-size(15px);
+        }
+      }
+    }
+    input, select {
+      background: $color__background-body 0 0 no-repeat padding-box;
+      border: 1px solid #6C757E;
+      border-radius: 4px;
+    }
+    .form-check {
+      display: inline-block;
+      margin: 0 15px 0 0;
+    }
+    .mypage-Form_Image {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .mypage-Form_Image-preview {
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        img {
+          max-width: 150px;
+          max-height: 150px;
+          background: $color__background-body 0 0 no-repeat padding-box;
+          border-radius: 4px;
+        }
+      }
+      .mypage-Form_Image-form {
+        .custom-file span {
+          position: absolute;
+          left: 10px;
+          top: 6px;
+          z-index: 1;
+        }
+      }
+      @include media-breakpoint-down(xs){
+        flex-direction: column;
+      }
+    }
+  }
+
+.mypage-Form_Buttons {
+    margin: 30px 0;
+    @include media-breakpoint-down(md) {
+        margin: 10px 0;
+      }
+    button {
+      @extend .btn;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 300px;
+      display: block;
+      @include button-variant($color__sex-woman, $color__border-button-hover);
+      color: $color__background-body;
+      @include media-breakpoint-down(md) {
+        margin: 20px auto 0;
+      }
+    }
+  }
