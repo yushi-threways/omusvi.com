@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Form\Type\ContactFormType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\Mailer\TwigSwiftMailer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @package App\Controller

@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    <title>口座情報編集</title>
+{% endblock %}
+
+{% block main %}
+    <div class="myde-Content">
+        <h1 class="myde-Content_Title">口座情報の登録</h1>
+        <p>
+            <label class="required" style="color:red;">*</label>は入力必須項目です
+        </p>
+        <div class="mypage-Form">
+            {{ form_start(form) }}
+            {{ form_rest(form) }}
+
+            <div class="mypage-Form_Buttons">
+                <button type="submit">
+                    登録
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

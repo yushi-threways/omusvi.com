@@ -109,7 +109,7 @@ class MyEventApplicationController extends AbstractController
         $data = $session->get(self::SESSION_KEY);
 
         if (!$data) {
-            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getId()]);
+            return $this->redirectToRoute('my_event_show', ['id' => $schedule->getMyEvent()->getId()]);
         }
 
         $session->remove(self::SESSION_KEY);
