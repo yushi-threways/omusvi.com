@@ -37,6 +37,13 @@
                 padding: 5px 0 5px 8px;
                 }
             }
+            &:nth-child(3) {
+                .sw-Footer_ItemTitle {
+                background-color: antiquewhite;
+                // color: #fff;
+                padding: 5px 0 5px 8px;
+                }
+            }
         }
     }
 }
@@ -94,7 +101,30 @@
 
     }
     @include media-breakpoint-down(sm) {
-        text-align-last: center;
+        text-align: center;
         margin: 0 auto 10px;
+    }
+}
+
+.sw-Footer_ItemLinks {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.sw-Footer_ItemLinkList {
+    a {
+        @include media-breakpoint-down(sm) {
+            height: auto;
+        }
+    }
+    img {
+        max-width: 160px;
+        height: auto;
+        margin: 0 auto;
+        vertical-align: bottom;
+        @include media-breakpoint-down(sm) {
+            max-width: 120px;
+        }
     }
 }
