@@ -30,6 +30,11 @@
                     <div class="me-Detail_Img">
                         <img src="{{ vich_uploader_asset(my_event, 'imageFile') }}" alt="{{ my_event.imageName }}">
                     </div>
+                    {% if (after_event_date(my_event.myEventSchedule)) %}
+                        <p class="me-Detail_AfterText">
+                            ※すでに開催されたイベントです。
+                        </p>
+                    {% endif %}
                     <div class="me-Detail_Info">
                         {% if my_event.myEventVenue %}
                         <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
@@ -199,6 +204,7 @@
                 </ul>
             {% endif %}
         </section>
+        {{ (after_event_date(my_event.myEventSchedule)) }}
     </div>
 
     <div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -219,16 +225,19 @@
         </div>
     </div>
     <div class="me-Applicatin_Btn">
+    {% if not (after_event_date(my_event.myEventSchedule)) %}
         {% if is_granted('ROLE_USER') %}
             {% if my_event.isApplied(user) %}
                 <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
                     すでに申込み済です
                 </a>
-            {% else %}
+            {% endif %}
                 {% if user.userDetail %}
-                    <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
-                        イベントに申し込む
-                    </button>
+                    {% if user.userDetail.gender == "male" %}
+                        {% include '_parts/male_application.html.twig' with {'myEvent': my_event} %}
+                    {% else %}
+                        {% include '_parts/female_application.html.twig' with {'myEvent': my_event} %}
+                    {% endif %}
                 {% else %}
                     <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
                         申し込むには詳細情報を登録してください
@@ -240,5 +249,13 @@
                 申し込むにはログインしてください
             </a>
         {% endif %}
+    {% else %}
+        <a 
+            href="{{ path('my_event_search', {'startDate': get_sat(), 'endDate': get_sun(), 'startTime': "now"|date('G:i:s', "Asia/Tokyo")}) }}"
+            class="me-Applicatin_BtnUnit-after"
+        >
+            開催後のイベントです。今週末イベントを探す
+         </a>
+    {% endif %}
     </div>
 {% endblock %}

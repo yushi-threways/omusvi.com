@@ -21,24 +21,23 @@ class MyEventApplicationExtension extends AbstractExtension
         ];
     }
 
-    public function isApplied(MyEventApplication $application): bool 
+    public function isApplied(MyEventApplication $application): bool
     {
         return $application->isApplied();
-  
     }
-    public function isPaied(MyEventApplication $application): bool 
+    public function isPaied(MyEventApplication $application): bool
     {
         return $application->isPaied();
     }
-    public function isAccepted(MyEventApplication $application): bool 
+    public function isAccepted(MyEventApplication $application): bool
     {
         return $application->isAccepted();
     }
-    public function isCanceled(MyEventApplication $application): bool 
+    public function isCanceled(MyEventApplication $application): bool
     {
         return $application->isCanceled();
     }
-    public function isRejected(MyEventApplication $application): bool 
+    public function isRejected(MyEventApplication $application): bool
     {
         return $application->isRejected();
     }

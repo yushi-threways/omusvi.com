@@ -1,10 +1,15 @@
-{% if countAcceptMaleCount(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
+{% if (after_event_date(myEvent.myEventSchedule)) %}
     <span class="">完売×</span>
-{% elseif 
-    countAcceptMaleCount(myEvent.myEventSchedule) >= myEvent.myEventSchedule.manLimit / 2 and
-    countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit
-%}
-    <span class="">残りわずか△</span>
-{% elseif countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
-    <span class="">空席あり○</span>
+    {% else %}
+
+    {% if countAcceptMaleCount(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
+        <span class="">完売×</span>
+    {% elseif 
+        countAcceptMaleCount(myEvent.myEventSchedule) >= myEvent.myEventSchedule.manLimit / 2 and
+        countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit
+    %}
+        <span class="">残りわずか△</span>
+    {% elseif countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
+        <span class="">空席あり○</span>
+    {% endif %}
 {% endif %}
