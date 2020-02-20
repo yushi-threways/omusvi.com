@@ -231,7 +231,7 @@
                 <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
                     すでに申込み済です
                 </a>
-            {% endif %}
+            {% else %}
                 {% if user.userDetail %}
                     {% if user.userDetail.gender == "male" %}
                         {% include '_parts/male_application.html.twig' with {'myEvent': my_event} %}
