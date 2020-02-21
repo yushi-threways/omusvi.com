@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    <title>エラーが発生しました {{ status_code }}</title>
+    <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block og %}
+
+{% endblock %}
+    
+{% block twitter %}
+
+{% endblock %}
+
+{% block main_outer %}
+<section class="sw-Section">
+    <div class="sw-Error">
+        <h1> "{{ status_code }} {{ status_text }}"</h1>
+        {# <h2>サーバーエラーが発生しました。</h2> #}
+            <p>
+                エラーが発生しています。<br>
+                しばらく時間をおいて再度アクセスいただくか、それでもこの画面が表示される場合は<a href="{{ path('contact_index') }}">こちら</a>からお問い合わせください。
+            </p>
+    </div>
+</section>
+{% endblock %}
