@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    <title>エラーが発生しました {{ status_code }}</title>
+    <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block og %}
+
+{% endblock %}
+    
+{% block twitter %}
+
+{% endblock %}
+
+{% block main_outer %}
+<section class="sw-Section">
+    <div class="sw-Error">
+        <h1> "{{ status_code }} {{ status_text }}"</h1>
+        <h2>お探しのページが見つかりません。</h2>
+
+        <p>
+            お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。 また、URL、ファイル名にタイプミスがないか再度ご確認ください。
+        </p>
+
+        
+    </div>
+</section>
+{% endblock %}

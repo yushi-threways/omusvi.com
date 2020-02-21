@@ -1,0 +1,11 @@
+.sw-Error {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 15px 10px;
+    h1 {
+        color: $color__sex_woman;
+    }
+    h2 {
+        @include font-size(28px);
+    }
+}

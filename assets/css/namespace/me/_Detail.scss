@@ -157,3 +157,10 @@
 .me-Detail_Application {
     margin: 20px auto 0;
 }
+
+.me-Detail_AfterText {
+    margin: 0 auto 15px;
+    @include font-size(18px);
+    color: red;
+    font-weight: bold;
+}
