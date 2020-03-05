@@ -1,0 +1,27 @@
+title_show: 表示 "%name%"
+btn_advanced_filters: 絞り込み拡張
+Admin:
+  Side:
+    User:
+      Label: ユーザー
+    MyEvent:
+      Label: 仕事
+    Application:
+      Label: イベント
+    Master:
+      Label: マスターデータ
+    Admin:
+      Label: 管理者アカウント
+    Tag:
+      Label: タグ
+
+action_accept: 承認
+action_work: 仕事完了
+action_review: レビュー登録
+action_pay: 報酬支払い
+action_cancel: キャンセル
+action_reject: 却下
+action_facility_cancel: キャンセル(施設)
+action_worker_cancel: キャンセル(働き手)
+
+action_approve: 承認

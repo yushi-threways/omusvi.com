@@ -35,6 +35,13 @@ class User extends BaseUser
      */
     private $userDetail;
 
+    /**
+     * @var BankAccount | null
+     * @ORM\OneToOne(targetEntity="BankAccount", mappedBy="user", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    private $bankAccount;
+
     public function __construct()
     {
         $this->myEventApplications = new ArrayCollection();
@@ -83,11 +90,18 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * @return UserDetail|null
+     */
     public function getUserDetail(): ?UserDetail
     {
         return $this->userDetail;
     }
 
+    /**
+     * @param UserDetail $userDetail
+     * @return User
+     */
     public function setUserDetail(UserDetail $userDetail): self
     {
         $this->userDetail = $userDetail;
@@ -97,6 +111,27 @@ class User extends BaseUser
             $userDetail->setUser($this);
         }
 
+        return $this;
+    }
+
+    /**
+     * @return BankAccount|null
+     */
+    public function getBankAccount(): ?BankAccount
+    {
+        return $this->bankAccount;
+    }
+
+    /**
+     * @param BankAccount $bankAccount
+     * @return User
+     */
+    public function setBankAccount(?BankAccount $bankAccount): self
+    {
+        $this->bankAccount = $bankAccount;
+        if ($this->bankAccount) {
+            $this->bankAccount->setUser($this);
+        }
         return $this;
     }
 }
