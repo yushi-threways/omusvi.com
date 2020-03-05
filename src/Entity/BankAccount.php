@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BankAccountRepository")
@@ -26,36 +28,92 @@ class BankAccount
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="金融機関名を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
      */
     private $bankName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=4)
+     * @Assert\NotBlank(
+     *     message="金融機関コードを入力してください。"
+     * )
+     * @Assert\Length(
+     *     min = 4,
+     *     max = 4,
+     *     exactMessage = "{{ limit }}文字で入力してください。"
+     * )
+     * @Assert\Regex(pattern="/^[0-9]+$/u")
      */
     private $bankCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="支店名を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
      */
     private $storeName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=3)
+     * @Assert\NotBlank(
+     *     message="支店コードを入力してください。"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 3,
+     *     exactMessage = "{{ limit }}文字で入力してください。"
+     *     )
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/u",
+     *     message="半角数字で入力してください。"
+     * )
      */
     private $storeCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2)
+     * @Assert\NotBlank(
+     *     message="種別を選択してください。"
+     * )
      */
     private $bankType;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=8)
+     * @Assert\NotBlank(
+     *     message="口座番号を入力してください。"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/u",
+     *     message="半角数字で入力してください"
+     * )
      */
     private $accountNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *     message="口座名義（カタカナ）を入力してください。"
+     * )
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage = "{{ limit }}文字以内で入力してください。"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[ァ-ヴー\s]+$/u",
+     *     message="カタカナで入力してください。"
+     * )
      */
     private $accountName;
 

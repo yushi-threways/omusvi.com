@@ -1,0 +1,27 @@
+Admin:
+  Page:
+    # 働き手
+    User:
+      Label: ユーザー管理
+
+    # 仕事
+    MyEvent:
+      Label: イベント管理
+    MyEventSchedule:
+      Label: イベントスケジュール管理
+
+    # 申し込み
+    MyEventApplication:
+      Label: イベント申し込み管理
+
+    # マスターデータ
+    Prefecture:
+      Label: 都道府県管理
+
+    # タグ
+    Tag:
+      Label: タグ管理
+
+    # 管理者アカウント
+    Admin:
+      Label: アカウント管理

@@ -6,7 +6,7 @@ namespace App\Controller\Admin;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 
-final class MyEventController extends CRUDController
+final class PrefectureController extends CRUDController
 {
 
 }

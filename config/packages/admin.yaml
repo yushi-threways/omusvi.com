@@ -1,0 +1,75 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, App\Controller\Admin\UserController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.User.Label}
+        public: true
+
+    admin.bank_account:
+        class: App\Admin\BankAccountAdmin
+        arguments: [~, App\Entity\BankAccount, App\Controller\Admin\BankAccountController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Bank.Label }
+        public: true
+
+#    admin.user_detail:
+#        class: App\Admin\UserDetailAdmin
+#        arguments: [~, App\Entity\UserDetail, App\Controller\Admin\UserDetailController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Admin.Page.UserDetail.Label }
+#        public: true
+
+#    admin.my_event:
+#        class: App\Admin\MyEventAdmin
+#        arguments: [~, App\Entity\MyEvent, App\Controller\Admin\MyEventController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Admin.Page.MyEvent.Label }
+#        public: true
+
+#    admin.venue:
+#        class: App\Admin\MyEventVenueAdmin
+#        arguments: [~, App\Entity\MyEventVenue, App\Controller\Admin\MyEventVenueController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Venue.Label }
+#        public: true
+
+#    admin.my_event_schedule:
+#        class: App\Admin\MyEventScheduleAdmin
+#        arguments: [~, App\Entity\MyEventSchedule, App\Controller\Admin\MyEventScheduleController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEventSchedule.Label }
+#        public: true
+#
+#    admin.my_event_application:
+#        class: App\Admin\MyEventApplicationAdmin
+#        arguments: [~, App\Entity\MyEventApplication, App\Controller\Admin\MyEventApplicationController]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Admin.Page.MyEventApplication.Label }
+#        public: true
+
+    admin.prefecture:
+        class: App\Admin\PrefectureAdmin
+        arguments: [~, App\Entity\Prefecture, App\Controller\Admin\PrefectureController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Prefecture.Label }
+        public: true
+#
+    admin.tag:
+        class: App\Admin\TagAdmin
+        arguments: [~, App\Entity\Tag, App\Controller\Admin\TagController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Tag.Label }
+        public: true
+
+    admin.admin:
+        class: App\Admin\AdminAdmin
+        arguments: [~, App\Entity\Admin, App\Controller\Admin\AdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Admin.Label }
+        public: true
