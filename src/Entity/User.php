@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -58,7 +59,7 @@ class User extends BaseUser
         parent::setEmail($email);
         $this->setUsername($email);
     }
-    
+
     /**
      * @return Collection|MyEventApplication[]
      */

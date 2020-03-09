@@ -65,11 +65,11 @@ class MyEventSchedule
     private $womanTerms;
 
     /**
-    * @ORM\Column(type="text")
-    */
+     * @ORM\Column(type="text")
+     */
     private $textTerms;
 
-     /**
+    /**
      * @Assert\Time
      * @ORM\Column(type="time")
      */
@@ -86,7 +86,7 @@ class MyEventSchedule
     private $myEventApplications;
 
     public function __construct()
-    {        
+    {
         $this->eventDay = new \DateTimeImmutable();
         $this->myEventApplications = new ArrayCollection();
     }
@@ -249,7 +249,7 @@ class MyEventSchedule
         $acceptCount = 0;
         $acceptMaleCount = 0;
         $acceptFemaleCount = 0;
-        foreach($applications as $application) {
+        foreach ($applications as $application) {
             if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
                 $acceptMaleCount += $application->getMenCount();
                 $acceptFemaleCount += $application->getWomanCount();
@@ -263,20 +263,20 @@ class MyEventSchedule
     {
         $applications = $this->getMyEventApplications();
         $maleCount = 0;
-        foreach($applications as $application) {
+        foreach ($applications as $application) {
             if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
                 $maleCount += $application->getMenCount();
             }
         }
-        
+
         return $maleCount;
-        }
+    }
 
     public function getAcceptFemaleCount(): ?int
     {
         $applications = $this->getMyEventApplications();
         $femaleCount = 0;
-        foreach($applications as $application) {
+        foreach ($applications as $application) {
             if ($application->getStatus() == MyEventApplicationStatusEnumType::ACCEPTED) {
                 $femaleCount += $application->getWomanCount();
             }

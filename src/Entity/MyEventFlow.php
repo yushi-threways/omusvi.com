@@ -57,13 +57,13 @@ class MyEventFlow
         return $this->id;
     }
 
-    
+
     public function getStartTime(): ?string
     {
         return $this->startTime;
     }
 
-    
+
     public function setStartTime(?string $startTime): self
     {
         $this->startTime = $startTime;
@@ -71,17 +71,17 @@ class MyEventFlow
         return $this;
     }
 
-    
+
     public function getEndTime(): ?string
     {
         return $this->endTime;
     }
 
-   
+
     public function setEndTime(?string $endTime): self
     {
         $this->endTime = $endTime;
-        
+
         return $this;
     }
 
@@ -119,5 +119,10 @@ class MyEventFlow
         $this->myEvent = $myEvent;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

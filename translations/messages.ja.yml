@@ -9,7 +9,8 @@ Admin:
       Label: イベント管理
     MyEventSchedule:
       Label: イベントスケジュール管理
-
+    Venue:
+      Label: 会場管理
     # 申し込み
     MyEventApplication:
       Label: イベント申し込み管理

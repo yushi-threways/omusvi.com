@@ -1,0 +1,239 @@
+<?php
+
+namespace App\Admin;
+
+use Sonata\Form\Type\CollectionType;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Form\Type\Filter\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+
+final class MyEventAdmin extends AbstractAdmin
+{
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+
+        /** @var Myevent $my_event */
+        $my_event = $this->getSubject();
+
+        $hasImage = (bool) $my_event->getImageName();
+
+        $formMapper
+            ->with('イベント情報')
+            ->add('name', null, [
+                'label' => 'イベント名'
+            ])
+            ->add('description', null, [
+                'label' => 'イベント概要'
+            ])
+            ->add('content', CKEditorType::class, [
+                'label' => 'イベント内容',
+                'config_name' => 'my_config',
+            ])
+            ->add('menPrice', null, [
+                'label' => '男性料金'
+            ])
+            ->add('womanPrice', null, [
+                'label' => '女性料金'
+            ])
+            ->add('imageFile', FileType::class, [
+                'label' => 'アバター画像',
+                'required' => !$hasImage,
+            ])
+            ->end();
+
+        $formMapper
+            ->with('イベントの流れ')
+            ->add('myEventFlows', CollectionType::class, [
+                'by_reference' => false,
+                // 'type_options' => [
+                //     'delete' => true,
+                // ]
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ])
+            ->end();
+
+        $formMapper
+            ->with('イベント場所')
+            ->add('myEventVenue', ModelListType::class, [
+                'label' => 'イベント会場',
+                'btn_add' => false,
+                'btn_delete' => false,
+                'btn_edit' => false,
+            ])
+            ->end();
+
+        $formMapper
+            ->with('イベントタグ')
+            ->add('tags', null, [
+                'expanded' => true,
+            ])
+            ->end();
+
+        // $formMapper
+        //     ->with('イベント日程')
+        //     ->add('myEventSchedule.manLimit', NumberType::class, [
+        //         'label' =>  '男性最大数'
+        //     ])
+        //     ->add('myEventSchedule.womanLimit', NumberType::class, [
+        //         'label' =>  '女性最大数'
+        //     ])
+        //     ->add('myEventSchedule.manTerms', null, [
+        //         'label' =>  '男性条件'
+        //     ])
+        //     ->add('myEventSchedule.womanTerms', null, [
+        //         'label' =>  '女性条件'
+        //     ])
+        //     ->add('myEventSchedule.textTerms', null, [
+        //         'label' =>  '参加条件'
+        //     ])
+        //     ->add('myEventSchedule.startTime', TimeType::class, [
+        //         'label' =>  '開始時間',
+        //         'input' => 'datetime_immutable',
+        //     ])
+        //     ->add('myEventSchedule.evnetDay', DateType::class, [
+        //         'label' =>  '開催日',
+        //         'input' => 'datetime_immutable',
+        //     ])
+        //     ->end();
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('id', null, [
+                'label' => 'ID',
+            ])
+            ->add('name', null, [
+                'label' => 'イベント名',
+            ])
+            ->add('myEventVenue', null, [
+                'label' => 'イベント会場',
+            ])
+            // ->add('myEventSchedule', null, [
+            //     'label' =>  '開催日',
+            // ])
+            ->add('updatedAt', null, [
+                'label' => '最終更新日時',
+                'format' => 'Y-m-d H:i:s'
+            ])
+            ->add('createdAt', null, [
+                'label' => '登録日時',
+                'format' => 'Y-m-d H:i:s'
+            ]);
+    }
+
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('id', null, [
+                'label' => 'ID',
+            ])
+            ->add('name', null, [
+                'label' => 'イベント名'
+            ])
+            ->add('myEventVenue', null, [
+                'label' => 'イベント会場',
+            ])
+            ->add('myEventSchedule.evnetDay', null, [
+                'label' =>  '開催日',
+                'format' => 'Y-m-d'
+            ])
+            ->add('updatedAt', null, [
+                'label' => '最終更新日時',
+                'format' => 'Y-m-d H:i:s'
+            ])
+            ->add('createdAt', null, [
+                'label' => '登録日時',
+                'format' => 'Y-m-d H:i:s'
+            ])
+            ->add('_action', null, [
+                'label' => '操作',
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                    'delete' => [],
+                ],
+            ]);
+    }
+
+    protected function configureShowFields(ShowMapper $showMapper): void
+    {
+        $showMapper
+            ->add('id', null, [
+                'label' => 'ID',
+            ])
+            ->add('name', null, [
+                'label' => 'イベント名'
+            ])
+            ->add('description', null, [
+                'label' => 'イベント概要'
+            ])
+            ->add('content', null, [
+                'label' => 'イベント内容',
+            ])
+            ->add('menPrice', null, [
+                'label' => '男性料金'
+            ])
+            ->add('womanPrice', null, [
+                'label' => '女性料金'
+            ])
+            ->add('imageFile', null, [
+                'label' => 'アバター画像',
+            ])
+            ->end();
+
+        $showMapper
+            ->with('イベント場所')
+            ->add('myEventVenue', null, [
+                'label' => 'イベント会場',
+            ])
+            ->end();
+
+        $showMapper
+            ->with('イベントタグ')
+            ->add('tags', null, [
+                'label' => 'タグ'
+            ])
+            ->end();
+
+        $showMapper
+            ->with('イベント日程')
+            ->add('myEventSchedule.manLimit', null, [
+                'label' =>  '男性最大数'
+            ])
+            ->add('myEventSchedule.womanLimit', null, [
+                'label' =>  '女性最大数'
+            ])
+            ->add('myEventSchedule.manTerms', null, [
+                'label' =>  '男性条件'
+            ])
+            ->add('myEventSchedule.womanTerms', null, [
+                'label' =>  '女性条件'
+            ])
+            ->add('myEventSchedule.textTerms', null, [
+                'label' =>  '参加条件'
+            ])
+            ->add('myEventSchedule.startTime', null, [
+                'label' =>  '開始時間',
+                'format' => 'H:i:s'
+
+            ])
+            ->add('myEventSchedule.evnetDay', null, [
+                'label' =>  '開催日',
+                'format' => 'Y-m-d'
+
+            ])
+            ->end();
+    }
+}
