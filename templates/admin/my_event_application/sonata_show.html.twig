@@ -1,0 +1,33 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+    {% spaceless %}
+        {% if value.owner.myEventApplications %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>申込者</th>
+                    <th>ステータス</th>
+                    <th>参加人数（男性）</th>
+                    <th>参加人数（女性）</th>
+                    <th>キャンセル</th>
+                    <th>支払い方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for myevent_application in value.owner.myEventApplications %}
+                    <tr>
+                        <td>{{ myevent_application.user }}</td>
+                        <td>{{ status_text(myevent_application.status) }}</td>
+                        <td>{{ myevent_application.menCount }}</td>
+                        <td>{{ myevent_application.womanCount }}</td>
+                        <td>{{ myevent_application.cancelled }}</td>
+                        <td>{{ myevent_application.paymentType }}</td>
+                    </tr>
+            {% else %}
+            {% endfor %}
+            </tbody>
+        </table>
+            {% endif %}
+    {% endspaceless %}
+{% endblock %}

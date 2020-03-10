@@ -326,4 +326,8 @@ class MyEvent
         return false;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

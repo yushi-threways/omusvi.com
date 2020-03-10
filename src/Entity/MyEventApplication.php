@@ -228,4 +228,9 @@ class MyEventApplication
                 echo "";
         }
     }
+
+    public function __toString()
+    {
+        return $this->getStatusText($this->status);
+    }
 }

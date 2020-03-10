@@ -284,4 +284,9 @@ class MyEventSchedule
 
         return $femaleCount;
     }
+
+    public function __toString()
+    {
+        return $this->eventDay->format('Y-m-d');
+    }
 }
