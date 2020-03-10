@@ -22,7 +22,7 @@
                         <td>{{ myevent_application.menCount }}</td>
                         <td>{{ myevent_application.womanCount }}</td>
                         <td>{{ myevent_application.cancelled }}</td>
-                        <td>{{ myevent_application.paymentType }}</td>
+                        <td>{{ get_payment_text(myevent_application.paymentType) }}</td>
                     </tr>
             {% else %}
             {% endfor %}
