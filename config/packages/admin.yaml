@@ -45,13 +45,13 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Admin.Page.Venue.Label }
         public: true
-#
-#    admin.my_event_application:
-#        class: App\Admin\MyEventApplicationAdmin
-#        arguments: [~, App\Entity\MyEventApplication, App\Controller\Admin\MyEventApplicationController]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, group: admin, label: Admin.Page.MyEventApplication.Label }
-#        public: true
+
+    admin.my_event_application:
+        class: App\Admin\MyEventApplicationAdmin
+        arguments: [~, App\Entity\MyEventApplication, App\Controller\Admin\MyEventApplicationController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEventApplication.Label }
+        public: true
 
     admin.flows:
         class: App\Admin\MyEventFlowAdmin

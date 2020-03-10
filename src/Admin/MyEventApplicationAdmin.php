@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\Entity\MyEventApplication;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
+
 
 final class MyEventApplicationAdmin extends AbstractAdmin
 {
@@ -23,20 +24,20 @@ final class MyEventApplicationAdmin extends AbstractAdmin
             ->add('id', null, [
                 'label' => 'ID',
             ])
-            ->add('myEvent', null, [])
-            ->add('startTime', null, [
-                'label' => '開始時刻'
+            ->add('myEventSchedule', null, [
+                'label' => 'イベントスケジュール'
             ])
-            ->add('eventDay', null, [
-                'label' => 'イベント日',
-                'format' => 'Y-m-d'
-
+            ->add('user', null, [
+                'label' => 'ユーザー'
             ])
-            ->add('womanLimit', null, [
-                'label' => '女性制限数'
+            ->add('status', null, [
+                'label' => 'ステータス'
             ])
-            ->add('manLimit', null, [
-                'label' => '男性制限数'
+            ->add('womanCount', null, [
+                'label' => '女性応募数'
+            ])
+            ->add('menCount', null, [
+                'label' => '男性応募数'
             ])
             ->add('updatedAt', null, [
                 'label' => '最終更新日時',
@@ -54,19 +55,20 @@ final class MyEventApplicationAdmin extends AbstractAdmin
             ->add('id', null, [
                 'label' => 'ID',
             ])
-            ->add('myEvent', null, [])
-            ->add('startTime', null, [
-                'label' => '開始時刻'
+            ->add('myEventSchedule', null, [
+                'label' => 'イベントスケジュール'
             ])
-            ->add('eventDay', null, [
-                'label' => 'イベント日',
-                'format' => 'Y-m-d'
+            ->add('user', null, [
+                'label' => 'ユーザー'
             ])
-            ->add('womanLimit', null, [
-                'label' => '女性制限数'
+            ->add('status', null, [
+                'label' => 'ステータス'
             ])
-            ->add('manLimit', null, [
-                'label' => '男性制限数'
+            ->add('womanCount', null, [
+                'label' => '女性応募数'
+            ])
+            ->add('menCount', null, [
+                'label' => '男性応募数'
             ])
             ->add('updatedAt', null, [
                 'label' => '最終更新日時',
@@ -81,6 +83,8 @@ final class MyEventApplicationAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
+                    'accept' => [],
+                    'reject' => [],
                 ],
             ]);
     }
@@ -88,34 +92,29 @@ final class MyEventApplicationAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper->with('スケジュール詳細')
-            ->add('myEvent', ModelListType::class, [
-                'label' => 'イベント',
+            ->add('myEventSchedule', ModelListType::class, [
+                'label' => 'イベントスケジュール',
                 'btn_add' => false,
                 'btn_delete' => false,
                 'btn_edit' => false,
             ])
-            ->add('startTime', TimeType::class, [
-                'label' => '開始時刻',
-                'placeholder' => '',
+            ->add('user', ModelListType::class, [
+                'label' => 'ユーザー',
+                'btn_add' => false,
+                'btn_delete' => false,
+                'btn_edit' => false,
             ])
-            ->add('eventDay', DateType::class, [
-                'label' => 'イベント日',
-                'input' => 'datetime_immutable'
+            ->add('status', null, [
+                'label' => 'ステータス'
             ])
-            ->add('womanLimit', NumberType::class, [
-                'label' => '女性制限数'
+            ->add('womanCount', NumberType::class, [
+                'label' => '女性応募数'
             ])
-            ->add('manLimit', NumberType::class, [
-                'label' => '男性制限数'
+            ->add('menCount', NumberType::class, [
+                'label' => '男性応募数'
             ])
-            ->add('manTerms', null, [
-                'label' => '男性条件'
-            ])
-            ->add('womanTerms', null, [
-                'label' => '女性条件'
-            ])
-            ->add('textTerms', null, [
-                'label' => 'イベント条件',
+            ->add('cancelled', null, [
+                'label' => 'キャンセル',
                 'required' => false
             ]);
     }
@@ -126,26 +125,23 @@ final class MyEventApplicationAdmin extends AbstractAdmin
             ->add('id', null, [
                 'label' => 'ID',
             ])
-            ->add('myEvent', null, [])
-            ->add('startTime', null, [
-                'label' => '開始時刻',
+            ->add('myEventSchedule', null, [
+                'label' => 'イベントスケジュール'
             ])
-            ->add('eventDay', null, [
-                'label' => 'イベント日',
-                'format' => 'Y-m-d'
-
+            ->add('user', null, [
+                'label' => 'ユーザー'
             ])
-            ->add('womanLimit', NumberType::class, [
-                'label' => '女性制限数'
+            ->add('status', null, [
+                'label' => 'ステータス'
             ])
-            ->add('manLimit', NumberType::class, [
-                'label' => '男性制限数'
+            ->add('womanCount', null, [
+                'label' => '女性応募数'
             ])
-            ->add('manTerms', null, [
-                'label' => '男性条件'
+            ->add('menCount', null, [
+                'label' => '男性応募数'
             ])
-            ->add('womanTerms', null, [
-                'label' => '女性条件'
+            ->add('cancelled', null, [
+                'label' => 'キャンセル'
             ])
             ->add('updatedAt', null, [
                 'label' => '最終更新日時',
@@ -155,5 +151,34 @@ final class MyEventApplicationAdmin extends AbstractAdmin
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
             ]);
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('accept', $this->getRouterIdParameter().'/accept');
+        $collection->add('reject', $this->getRouterIdParameter().'/reject');
+    }
+
+    public function checkAccess($action, $object = null)
+    {
+
+        switch ($action) {
+            case 'accept':
+                return $this->isAcceptable($object);
+            case 'reject':
+                return $this->isRejectable($object);
+        }
+
+        return parent::checkAccess($action, $object);
+    }
+
+    private function isAcceptable(MyEventApplication $application)
+    {
+
+    }
+    
+    private function isRejectable(MyEventApplication $application)
+    {
+
     }
 }
