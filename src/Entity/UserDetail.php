@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
+use App\DBAL\Types\GenderEnumType;
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\Gender;
 use Symfony\Component\Validator\Constraints as Assert;
 use Fresh\DoctrineEnumBundle\Validator\Constraints;
 
@@ -80,7 +80,7 @@ class UserDetail
      */
     private $lastKana;
 
-   /**
+    /**
      * @var Gender | null
      * @ORM\Column(type="GenderEnumType", nullable=true)
      * @Constraints\Enum(entity="App\DBAL\Types\GenderEnumType")
@@ -96,7 +96,8 @@ class UserDetail
     private $telNumber;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTimeImmutable | null
+     * @ORM\Column(type="date_immutable")
      * @Assert\NotBlank(
      *     message="生年月日を入力してください。"
      * )
@@ -197,12 +198,12 @@ class UserDetail
 
         return $this;
     }
-    public function getBirthday(): ?\DateTimeInterface
+    public function getBirthday(): ?\DateTimeImmutable
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?\DateTimeInterface $birthday): self
+    public function setBirthday(?\DateTimeImmutable $birthday): self
     {
         $this->birthday = $birthday;
 

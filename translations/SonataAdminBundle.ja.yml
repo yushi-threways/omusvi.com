@@ -5,9 +5,9 @@ Admin:
     User:
       Label: ユーザー
     MyEvent:
-      Label: 仕事
-    Application:
       Label: イベント
+    Application:
+      Label: イベント申し込み
     Master:
       Label: マスターデータ
     Admin:

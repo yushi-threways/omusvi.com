@@ -66,7 +66,7 @@ class MyEventVenue
         return $this->id;
     }
 
-    public function getName():?string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -129,7 +129,7 @@ class MyEventVenue
     /**
      * @return string
      */
-    public function getUrl():?string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -173,5 +173,10 @@ class MyEventVenue
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -40,9 +40,8 @@ final class UserAdmin extends AbstractAdmin
             ->add('enabled', null, [
                 'label' => '有効化'
             ])
-            ->end()
-        ;
-        
+            ->end();
+
 
         $formMapper
             ->with('ユーザ詳細情報')
@@ -70,11 +69,10 @@ final class UserAdmin extends AbstractAdmin
             ->add('userDetail.telNumber', null, [
                 'label' => '電話番号'
             ])
-            ->end()
-        ;
-        
-        if (!$user->ge) {
-            $worker->setBankAccount(new BankAccount());
+            ->end();
+
+        if (!$user->getBankAccount()) {
+            $user->setBankAccount(new BankAccount());
         }
 
         $formMapper->with('銀行口座')
@@ -129,8 +127,7 @@ final class UserAdmin extends AbstractAdmin
             ->add('createdAt', null, [
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
-            ])
-            ;
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -201,9 +198,8 @@ final class UserAdmin extends AbstractAdmin
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
             ])
-            ->end()
-        ;
-        
+            ->end();
+
         $showMapper
             ->with('ユーザ詳細情報')
             ->add('userDetail.firstName', null, [
@@ -218,7 +214,6 @@ final class UserAdmin extends AbstractAdmin
             ->add('userDetail.birthday', null, [
                 'label' => '生年月日'
             ])
-            ->end()
-        ;
+            ->end();
     }
 }
