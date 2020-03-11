@@ -2,6 +2,9 @@
 
 namespace App\Admin;
 
+use App\Entity\MyEvent;
+use Sonata\DoctrineORMAdminBundle\Filter\DateFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeFilter;
 use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -20,7 +23,7 @@ final class MyEventAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
 
-        /** @var Myevent $my_event */
+        /** @var MyEvent $my_event */
         $my_event = $this->getSubject();
 
         $hasImage = (bool) $my_event->getImageName();
@@ -44,7 +47,7 @@ final class MyEventAdmin extends AbstractAdmin
                 'label' => '女性料金'
             ])
             ->add('imageFile', FileType::class, [
-                'label' => 'アバター画像',
+                'label' => 'イベント画像',
                 'required' => !$hasImage,
             ])
             ->end();
@@ -120,9 +123,10 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('myEventVenue', null, [
                 'label' => 'イベント会場',
             ])
-            // ->add('myEventSchedule', null, [
-            //     'label' =>  '開催日',
-            // ])
+             ->add('myEventSchedule.eventDay', DateFilter::class, [
+                 'label' =>  '開催日',
+                 'input' => 'datetime_immutable'
+             ])
             ->add('updatedAt', null, [
                 'label' => '最終更新日時',
                 'format' => 'Y-m-d H:i:s'
@@ -145,7 +149,7 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('myEventVenue', null, [
                 'label' => 'イベント会場',
             ])
-            ->add('myEventSchedule.evnetDay', null, [
+            ->add('myEventSchedule', null, [
                 'label' =>  '開催日',
                 'format' => 'Y-m-d'
             ])
@@ -189,7 +193,7 @@ final class MyEventAdmin extends AbstractAdmin
                 'label' => '女性料金'
             ])
             ->add('imageFile', null, [
-                'label' => 'アバター画像',
+                'label' => 'イベント画像',
             ])
             ->end();
 
@@ -229,7 +233,7 @@ final class MyEventAdmin extends AbstractAdmin
                 'format' => 'H:i:s'
 
             ])
-            ->add('myEventSchedule.evnetDay', null, [
+            ->add('myEventSchedule.eventDay', null, [
                 'label' =>  '開催日',
                 'format' => 'Y-m-d'
 

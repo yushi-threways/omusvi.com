@@ -158,7 +158,7 @@ class MyEventApplication
 
     public function getEvent()
     {
-        $event = $this->getMyEventSchedule()->getEvent();
+        $event = $this->getMyEventSchedule()->getMyEvent();
         return $event;
     }
 
@@ -227,5 +227,10 @@ class MyEventApplication
             default:
                 echo "";
         }
+    }
+
+    public function _toString()
+    {
+        return $this->getStatusText($this->status);
     }
 }

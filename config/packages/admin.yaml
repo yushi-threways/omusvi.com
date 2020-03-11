@@ -32,6 +32,13 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEvent.Label }
         public: true
 
+    admin.my_event_schedule:
+        class: App\Admin\MyEventScheduleAdmin
+        arguments: [~, App\Entity\MyEventSchedule, App\Controller\Admin\MyEventScheduleController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEventSchedule.Label }
+        public: true
+
     admin.my_eventvenue:
         class: App\Admin\MyEventVenueAdmin
         arguments: [~, App\Entity\MyEventVenue, App\Controller\Admin\MyEventVenueController]
@@ -39,19 +46,12 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Admin.Page.Venue.Label }
         public: true
 
-#    admin.my_event_schedule:
-#        class: App\Admin\MyEventScheduleAdmin
-#        arguments: [~, App\Entity\MyEventSchedule, App\Controller\Admin\MyEventScheduleController]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEventSchedule.Label }
-#        public: true
-#
-#    admin.my_event_application:
-#        class: App\Admin\MyEventApplicationAdmin
-#        arguments: [~, App\Entity\MyEventApplication, App\Controller\Admin\MyEventApplicationController]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, group: admin, label: Admin.Page.MyEventApplication.Label }
-#        public: true
+    admin.my_event_application:
+        class: App\Admin\MyEventApplicationAdmin
+        arguments: [~, App\Entity\MyEventApplication, App\Controller\Admin\MyEventApplicationController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.MyEventApplication.Label }
+        public: true
 
     admin.flows:
         class: App\Admin\MyEventFlowAdmin

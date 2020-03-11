@@ -1,41 +1,100 @@
- <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="format-detection" content="telephone=no">
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
 
-        {% set title = 'オミパリ管理 | オミパリ' %}
-        <title>{{ title }}</title>
-    
-        {{ encore_entry_link_tags('app') }}
-    </head>
-    <body>
-        {% form_theme form "form/layout.html.twig" %}
-        
-        <header class="admin-Login_Header">
-            <p class="admin-Login_HaederText">オミパリ管理</p>
-        </header>
-        <div class="container admin-Login">
-        <h1 class="admin-Login_Title">ログイン</h1>
-        <div class="admin-Login_Form">
-        {{ form_start(form) }}
-        {{ form_rest(form) }}
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-block">送信</button>
-        </div>
-        {{ form_end(form) }}
-       </div>
-        </div>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+{% block sonata_nav %}
+{% endblock sonata_nav %}
 
-            <!-- Renders app.js & a webpack runtime.js file
-                <script src="/build/runtime.js"></script>
-                <script src="/build/app.js"></script> -->
+{% block logo %}
+{% endblock logo %}
+
+{% block sonata_left_side %}
+{% endblock sonata_left_side %}
+
+{% block body_attributes %}class="sonata-bc login-page"{% endblock %}
+
+{% block sonata_wrapper %}
+
+    <div class="login-box">
+        {% block login_box_header %}
+            <div class="login-logo">
+                <a href="{{ path('sonata_admin_dashboard') }}">
+                    {% if sonata_admin.adminPool.getOption('title_mode') in ['single_image', 'both'] %}
+                        <div>
+                            <img style="width:64px;" src="{{ asset(sonata_admin.adminPool.titlelogo) }}" alt="{{ sonata_admin.adminPool.title }}">
+                        </div>
+                    {% endif %}
+                    {% if sonata_admin.adminPool.getOption('title_mode') in ['single_text', 'both'] %}
+                        <span>{{ sonata_admin.adminPool.title }}</span>
+                    {% endif %}
+                </a>
+            </div>
         {% endblock %}
-    </body>
-</html>
+
+        <div class="login-box-body">
+            {% block sonata_user_login_form %}
+                {% block sonata_user_login_error %}
+                    {% if error %}
+                        <div class="alert alert-danger alert-error">
+                            {{ error.message }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+                <p class="login-box-msg">ログイン</p>
+
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+                {{ form_start(form) }}
+                {{ form_rest(form) }}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">送信</button>
+                </div>
+                {{ form_end(form) }}
+
+
+                {#<form action="{{ path("sonata_user_admin_security_check") }}" method="post" role="form">#}
+                {#<input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>#}
+
+                {#<div class="form-group has-feedback">#}
+                {#<input class="form-control"#}
+                {#id="username"#}
+                {#name="_username"#}
+                {#placeholder="{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}"#}
+                {#required="required"#}
+                {#type="text"#}
+                {#value="{{ last_username }}"/>#}
+                {#<span class="glyphicon glyphicon-user form-control-feedback"></span>#}
+                {#</div>#}
+
+                {#<div class="form-group has-feedback">#}
+                {#<input class="form-control"#}
+                {#id="password"#}
+                {#name="_password"#}
+                {#placeholder="{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}"#}
+                {#required="required"#}
+                {#type="password"/>#}
+                {#<span class="glyphicon glyphicon-lock form-control-feedback"></span>#}
+                {#</div>#}
+
+                {#<div class="row">#}
+                {#<div class="col-xs-8">#}
+                {#<div class="checkbox">#}
+                {#<label>#}
+                {#<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>#}
+                {#{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}#}
+                {#</label>#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="col-xs-4">#}
+                {#<button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>#}
+                {#</div>#}
+                {#</div>#}
+                {#</form>#}
+
+                {#<a href="{{ reset_route }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a>#}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock sonata_wrapper %}
 
 
