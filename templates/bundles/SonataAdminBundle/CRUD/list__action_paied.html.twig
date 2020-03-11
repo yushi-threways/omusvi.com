@@ -1,0 +1,25 @@
+{% if admin.checkAccess('paied', object) %}
+    <button type="button" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#payConfirmModal-{{ object.id }}">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        {{ 'action_paied'|trans({}, 'SonataAdminBundle') }}
+    </button>
+
+    <div class="modal fade" id="payConfirmModal-{{ object.id }}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">確認</h4>
+                </div>
+                <div class="modal-body">
+                    イベント料金の入金確認の承認を行います。 よろしいですか。<br>
+                    お客様に完了メールが送信されますので必ず入金確認後に送信してください。
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">閉じる</button>
+                    <a href="{{ admin.generateObjectUrl('paied', object) }}" class="btn btn-primary">確認</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

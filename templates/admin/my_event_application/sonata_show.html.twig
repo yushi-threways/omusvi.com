@@ -12,6 +12,8 @@
                     <th>参加人数（女性）</th>
                     <th>キャンセル</th>
                     <th>支払い方法</th>
+                    <th>申込日</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,11 +25,92 @@
                         <td>{{ myevent_application.womanCount }}</td>
                         <td>{{ myevent_application.cancelled }}</td>
                         <td>{{ get_payment_text(myevent_application.paymentType) }}</td>
+                        <td>{{ myevent_application.createdAt ? myevent_application.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('admin_app_myeventapplication_edit', {id: myevent_application.id }) }}" class="btn btn-sm btn-default edit_link" title="編集">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    編集
+                                </a>
+
+                                <a href="{{ path('admin_app_myeventapplication_delete', {id: myevent_application.id }) }}" class="btn btn-sm btn-default delete_link" title="削除">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    削除
+                                </a>
+                                {% if isPaied(myevent_application) %}
+                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#payConfirmModal-{{ myevent_application.id }}">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    支払承認
+                                </button>
+
+                                <div class="modal fade" id="payConfirmModal-{{ myevent_application.id }}" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                                                <h4 class="modal-title">確認</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                イベント料金の入金確認の承認を行います。 よろしいですか。<br>
+                                                お客様に完了メールが送信されますので必ず入金確認後に送信してください。
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-default" data-dismiss="modal">閉じる</button>
+                                                <a href="{{ path('admin_app_myeventapplication_paied', {id: myevent_application.id }) }}" class="btn btn-primary">確認</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    {% endif %}
+                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#rejectConfirmModal-{{ myevent_application.id }}">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    却下
+                                </button>
+
+                                <div class="modal fade" id="rejectConfirmModal-{{ myevent_application.id }}" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                                                <h4 class="modal-title">確認</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                イベント参加を却下します。 よろしいですか。
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-default" data-dismiss="modal">閉じる</button>
+                                                <a href="{{ path('admin_app_myeventapplication_reject', {id: myevent_application.id }) }}" class="btn btn-primary">確認</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
             {% else %}
             {% endfor %}
             </tbody>
         </table>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>男性申込数</th>
+                    <th>女性申込数</th>
+                    <th>申込完了数</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for myevent_schedule in value.owner %}
+                    <tr>
+                        <td>{{ value.owner.manLimit }}<br>{{ countAcceptFemaleCount(myevent_schedule) }}</td>
+                        <td>{{ value.owner.womanLimit }}<br>{{ countAcceptMaleCount(myevent_schedule) }}</td>
+                        <td>{{ countApplied(myevent_schedule) }}<br>{{ countAccepted(myevent_schedule) }}</td>
+                    </tr>
+                {% else %}
+                {% endfor %}
+                </tbody>
+            </table>
             {% endif %}
     {% endspaceless %}
 {% endblock %}

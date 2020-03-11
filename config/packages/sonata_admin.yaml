@@ -1,5 +1,7 @@
+sonata_admin:
+    title: 'OMUSVi管理'
+
 sonata_block:
     blocks:
-        # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]

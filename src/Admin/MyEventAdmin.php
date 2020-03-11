@@ -3,6 +3,8 @@
 namespace App\Admin;
 
 use App\Entity\MyEvent;
+use Sonata\DoctrineORMAdminBundle\Filter\DateFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeFilter;
 use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -121,9 +123,9 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('myEventVenue', null, [
                 'label' => 'イベント会場',
             ])
-             ->add('myEventSchedule', null, [
+             ->add('myEventSchedule.eventDay', DateFilter::class, [
                  'label' =>  '開催日',
-                 'format' => 'Y-m-d'
+                 'input' => 'datetime_immutable'
              ])
             ->add('updatedAt', null, [
                 'label' => '最終更新日時',

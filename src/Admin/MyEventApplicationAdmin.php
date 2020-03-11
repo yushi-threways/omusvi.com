@@ -83,7 +83,7 @@ final class MyEventApplicationAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'accept' => [],
+                    'paied' => [],
                     'reject' => [],
                 ],
             ]);
@@ -155,7 +155,7 @@ final class MyEventApplicationAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('accept', $this->getRouterIdParameter().'/accept');
+        $collection->add('paied', $this->getRouterIdParameter().'/paied');
         $collection->add('reject', $this->getRouterIdParameter().'/reject');
     }
 
@@ -163,7 +163,7 @@ final class MyEventApplicationAdmin extends AbstractAdmin
     {
 
         switch ($action) {
-            case 'accept':
+            case 'paied':
                 return $this->isAcceptable($object);
             case 'reject':
                 return $this->isRejectable($object);
@@ -174,11 +174,13 @@ final class MyEventApplicationAdmin extends AbstractAdmin
 
     private function isAcceptable(MyEventApplication $application)
     {
-
+        return $this->isGranted("ADMIN") &&
+        $application->isPaied();
     }
     
     private function isRejectable(MyEventApplication $application)
     {
-
+        return $this->isGranted("ADMIN") &&
+        $application->isApplied() || $application->isPaied() || $application->isAccepted();
     }
 }

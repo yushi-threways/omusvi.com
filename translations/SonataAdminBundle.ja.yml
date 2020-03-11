@@ -15,7 +15,7 @@ Admin:
     Tag:
       Label: タグ
 
-action_accept: 承認
+action_paied: 支払承認
 action_work: 仕事完了
 action_review: レビュー登録
 action_pay: 報酬支払い
