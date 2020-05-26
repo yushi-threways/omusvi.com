@@ -42,7 +42,7 @@
 			{% block header %}
 				<div class="sw-Header_Inner">
 					<h1 class="sw-Header_Lead">
-						<strong>名古屋</strong>中心に<strong>出会いイベント</strong>をナビゲートする<span>OMUSVi</span>
+						<strong>愛知県・名古屋</strong>中心に<strong>出会いのイベント</strong>をナビゲートする<span>OMUSVi</span>
 					</h1>
 					<div class="sw-Header_Branding">
 						<div class="sw-Header_Logo">
@@ -61,22 +61,10 @@
 									</button>
 									<ul class="sw-Header_MainNavItems">
 										{% if is_granted('ROLE_USER') %}
-											<li class="sw-Header_MainNavItem">
-												<a href="{{ path('mypage_detail_index') }}">
-													<i class="fas fa-user-cog"></i>
-												</a>
-											</li>
-											<li class="sw-Header_MainNavItem">
-												<a href="{{ path('app_mypage_mypage_index') }}">
-													<i class="fas fa-calendar-alt"></i>
-												</a>
-											</li>
+											<li class="sw-Header_MainNavItem"><a href="{{ path('mypage_detail_index') }}">登録情報</a></li>
+											<li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}">マイイベント</a></li>
 										{% else %}
-											<li class="sw-Header_MainNavItem">
-												<a href="{{ path('fos_user_security_login') }}">
-													<i class="fas fa-user-lock"></i>
-												</a>
-											</li>
+											<li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}">ログイン</a></li>
 										{% endif %}
 									</ul>
 								</div>

@@ -86,15 +86,16 @@
 }
 
 .sw-Header_MainNavItem {
+    padding: 5px 20px 0 0;
     a {
         display: block;
         margin: 0;
-        padding: 5px 8px 0 0;
+        padding: 5px;
         text-align: center;
-        @include font-size(18px);
-        i {
-            color: $color__sex-woman;
-            @include font-size(20px);
-        }
+        border: 1px solid $color__sex-woman;
+        color: $color__sex-woman;
+        border-radius: 5px;
+        @include font-size(13px);
+        text-decoration: none;
     }
 }

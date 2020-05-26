@@ -8,7 +8,7 @@
     
 
     {% block head %}
-    <title>OMUSVi</title>
+    <title>OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中</title>
     <meta name="description" content="オムスビは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
     {% endblock %}
     <link rel="icon" href="{{ asset('/images/favicon.ico') }}">
@@ -49,7 +49,7 @@
                         {% block header %}
                         <div class="sw-Header_Inner">
                             <h1 class="sw-Header_Lead">
-                                <strong>名古屋</strong>中心に<strong>出会いイベント</strong>をナビゲートする<span>OMUSVi</span>
+                                <strong>愛知県・名古屋</strong>中心に<strong>出会いのイベント</strong>をナビゲートする<span>OMUSVi</span>
                             </h1>
                             <div class="sw-Header_Branding">
                                 <div class="sw-Header_Logo">
@@ -68,10 +68,10 @@
                                             </button>
                                             <ul class="sw-Header_MainNavItems">
                                                 {% if is_granted('ROLE_USER') %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('mypage_detail_index') }}"><i class="fas fa-user-cog"></i></a></li>
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}"><i class="fas fa-calendar-alt"></i></a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('mypage_detail_index') }}">登録情報</a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('app_mypage_mypage_index') }}">マイイベント</a></li>
                                                 {% else %}
-                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-lock"></i></a></li>
+                                                    <li class="sw-Header_MainNavItem"><a href="{{ path('fos_user_security_login') }}">ログイン</a></li>
                                                 {% endif %}
                                             </ul>
                                         </div>
