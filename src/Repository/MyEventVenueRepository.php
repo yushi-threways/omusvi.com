@@ -19,6 +19,16 @@ class MyEventVenueRepository extends ServiceEntityRepository
         parent::__construct($registry, MyEventVenue::class);
     }
 
+    public function findPubliehed()
+    {
+        return $this->createQueryBuilder('m')
+        ->where('m.published = 1')
+        ->orderBy('m.name', 'ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return MyEventVenue[] Returns an array of MyEventVenue objects
     //  */

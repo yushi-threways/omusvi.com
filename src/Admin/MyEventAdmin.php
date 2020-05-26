@@ -83,6 +83,13 @@ final class MyEventAdmin extends AbstractAdmin
             ])
             ->end();
 
+        $formMapper
+            ->with('公開状況')
+            ->add('published', null, [
+                'label' => '公開'
+            ])
+            ->end();
+
         // $formMapper
         //     ->with('イベント日程')
         //     ->add('myEventSchedule.manLimit', NumberType::class, [
@@ -134,7 +141,11 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('createdAt', null, [
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
-            ]);
+            ])
+            ->add('published', null, [
+                'label' => '公開状況',
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -160,6 +171,9 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('createdAt', null, [
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
+            ])
+            ->add('published', null, [
+                'label' => '公開状況',
             ])
             ->add('_action', null, [
                 'label' => '操作',
@@ -237,6 +251,13 @@ final class MyEventAdmin extends AbstractAdmin
                 'label' =>  '開催日',
                 'format' => 'Y-m-d'
 
+            ])
+            ->end();
+
+        $showMapper
+            ->with('公開状況')
+            ->add('publishes', null, [
+                'label' => '公開状況',
             ])
             ->end();
     }

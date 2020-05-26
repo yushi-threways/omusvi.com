@@ -42,7 +42,8 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     public function createQueryBuilderBySearchFilter(EventSearchFilter $searchFilter): \Doctrine\ORM\QueryBuilder
     {
         $qb = $this->createQueryBuilder("schedule")
-            ->leftJoin('schedule.myEvent', 'event');
+            ->leftJoin('schedule.myEvent', 'event')
+            ->where('event.published = 1');
         
         $params = [];
         
@@ -99,7 +100,8 @@ class MyEventScheduleRepository extends ServiceEntityRepository
     public function createQueryBuilderBySearchRequest($tag = null, $startDate = null, $endDate = null, $startTime = null): \Doctrine\ORM\QueryBuilder
     {
         $qb = $this->createQueryBuilder("schedule")
-            ->leftJoin('schedule.myEvent', 'event');
+            ->leftJoin('schedule.myEvent', 'event')
+            ->where('event.published = 1');
         
         $params = [];
         

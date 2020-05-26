@@ -47,6 +47,11 @@ class EventSearchFilter
     private $eventTimeZone;
 
     /**
+     * @var boolean
+     */
+    private $published;
+
+    /**
      * @return Prefecture
      */
     public function getPrefecture(): ?Prefecture
@@ -197,7 +202,7 @@ class EventSearchFilter
         {
             $criteria[] = MyEventScheduleCriteria::startDayTime($this->startTime);
         } elseif ($this->eventTimeZone = "night_time") {
-            $criteria[] = MyEventScheduleCriteria::startNightTime($this->starTime);
+            $criteria[] = MyEventScheduleCriteria::startNightTime($this->startTime);
         } else {
 
         }

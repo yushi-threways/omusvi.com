@@ -12,6 +12,10 @@ use Doctrine\Common\Collections\Criteria;
  */
 class MyEventCriteria
 {
+    public  static function isPublished()
+    {
+        return Criteria::create()->where(Criteria::expr()->eq('myEvent.published', 1));
+    }
     public static function eventTag(Tag $tag)
     {
         return Criteria::create()->where(Criteria::expr()->eq('myEvent.tag', $tag));
