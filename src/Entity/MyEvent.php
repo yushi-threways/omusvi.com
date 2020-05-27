@@ -162,6 +162,11 @@ class MyEvent
      */
     private $femaleAgeUpper;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTicket", mappedBy="myEvent")
+     */
+    private $myEventTickets;
+
     public function __construct()
     {
         $this->published = false;
@@ -169,6 +174,7 @@ class MyEvent
         $this->endAt = new \DateTimeImmutable();
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->myEventTickets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -497,6 +503,37 @@ class MyEvent
     public function setFemaleAgeUpper(?int $femaleAgeUpper): self
     {
         $this->femaleAgeUpper = $femaleAgeUpper;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MyEventTicket[]
+     */
+    public function getMyEventTickets(): Collection
+    {
+        return $this->myEventTickets;
+    }
+
+    public function addMyEventTicket(MyEventTicket $myEventTicket): self
+    {
+        if (!$this->myEventTickets->contains($myEventTicket)) {
+            $this->myEventTickets[] = $myEventTicket;
+            $myEventTicket->setMyEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMyEventTicket(MyEventTicket $myEventTicket): self
+    {
+        if ($this->myEventTickets->contains($myEventTicket)) {
+            $this->myEventTickets->removeElement($myEventTicket);
+            // set the owning side to null (unless already changed)
+            if ($myEventTicket->getMyEvent() === $this) {
+                $myEventTicket->setMyEvent(null);
+            }
+        }
 
         return $this;
     }
