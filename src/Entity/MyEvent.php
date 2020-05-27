@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventRepository")
@@ -117,13 +118,57 @@ class MyEvent
      */
     private $published;
 
+    /**
+     * @var \DateTimeImmutable | null
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime_immutable", options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $startAt;
+
+    /**
+     * @var \DateTimeImmutable | null
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime_immutable", options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private $endAt;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $maleSeats;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $femaleSeats;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $maleAgeLower;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maleAgeUpper;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $femaleAgeLower;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $femaleAgeUpper;
+
     public function __construct()
     {
         $this->published = false;
+        $this->startAt = new \DateTimeImmutable();
+        $this->endAt = new \DateTimeImmutable();
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->setMyEventSchedule(new MyEventSchedule());
-
     }
 
     public function getId(): ?int
@@ -358,5 +403,101 @@ class MyEvent
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getStartAt(): ?\DateTimeImmutable
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(\DateTimeImmutable $startAt): self
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    public function getEndAt(): ?\DateTimeImmutable
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(\DateTimeImmutable $endAt): self
+    {
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getMaleSeats(): ?int
+    {
+        return $this->maleSeats;
+    }
+
+    public function setMaleSeats(int $maleSeats): self
+    {
+        $this->maleSeats = $maleSeats;
+
+        return $this;
+    }
+
+    public function getFemaleSeats(): ?int
+    {
+        return $this->femaleSeats;
+    }
+
+    public function setFemaleSeats(int $femaleSeats): self
+    {
+        $this->femaleSeats = $femaleSeats;
+
+        return $this;
+    }
+
+    public function getMaleAgeLower(): ?int
+    {
+        return $this->maleAgeLower;
+    }
+
+    public function setMaleAgeLower(int $maleAgeLower): self
+    {
+        $this->maleAgeLower = $maleAgeLower;
+
+        return $this;
+    }
+
+    public function getMaleAgeUpper(): ?int
+    {
+        return $this->maleAgeUpper;
+    }
+
+    public function setMaleAgeUpper(int $maleAgeUpper): self
+    {
+        $this->maleAgeUpper = $maleAgeUpper;
+
+        return $this;
+    }
+
+    public function getFemaleAgeLower(): ?int
+    {
+        return $this->femaleAgeLower;
+    }
+
+    public function setFemaleAgeLower(int $femaleAgeLower): self
+    {
+        $this->femaleAgeLower = $femaleAgeLower;
+
+        return $this;
+    }
+
+    public function getFemaleAgeUpper(): ?int
+    {
+        return $this->femaleAgeUpper;
+    }
+
+    public function setFemaleAgeUpper(?int $femaleAgeUpper): self
+    {
+        $this->femaleAgeUpper = $femaleAgeUpper;
+
+        return $this;
     }
 }

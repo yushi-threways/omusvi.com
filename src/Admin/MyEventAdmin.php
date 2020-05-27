@@ -40,6 +40,30 @@ final class MyEventAdmin extends AbstractAdmin
                 'label' => 'イベント内容',
                 'config_name' => 'my_config',
             ])
+            ->add('startAt', null, [
+                'label' => '開始日時'
+            ])
+            ->add('endAt', null, [
+                'label' => '終了日時'
+            ])
+            ->add('maleSeats', null, [
+                'label' => '男性募集人数'
+            ])
+            ->add('femaleSeats', null, [
+                'label' => '女性募集人数'
+            ])
+            ->add('maleAgeLower', null, [
+                'label' => '参加可能年齢下限（男性）'
+            ])
+            ->add('maleAgeUpper', null, [
+                'label' => '参加可能年齢上限（男性）'
+            ])
+            ->add('femaleAgeLower', null, [
+                'label' => '参加可能年齢下限（女性）'
+            ])
+            ->add('femaleAgeUpper', null, [
+                'label' => '参加可能年齢上限（女性）'
+            ])
             ->add('menPrice', null, [
                 'label' => '男性料金'
             ])
@@ -199,6 +223,30 @@ final class MyEventAdmin extends AbstractAdmin
             ])
             ->add('content', null, [
                 'label' => 'イベント内容',
+            ])
+            ->add('startAt', null, [
+                'label' => '開始日時'
+            ])
+            ->add('endAt', null, [
+                'label' => '終了日時'
+            ])
+            ->add('maleSeats', null, [
+                'label' => '男性募集人数'
+            ])
+            ->add('femaleSeats', null, [
+                'label' => '女性募集人数'
+            ])
+            ->add('maleAgeLower', null, [
+                'label' => '参加可能年齢下限（男性）'
+            ])
+            ->add('maleAgeUpper', null, [
+                'label' => '参加可能年齢上限（男性）'
+            ])
+            ->add('femaleAgeLower', null, [
+                'label' => '参加可能年齢下限（女性）'
+            ])
+            ->add('femaleAgeUpper', null, [
+                'label' => '参加可能年齢上限（女性）'
             ])
             ->add('menPrice', null, [
                 'label' => '男性料金'

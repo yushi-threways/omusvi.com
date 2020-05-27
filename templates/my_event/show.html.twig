@@ -39,7 +39,7 @@
                         {% if my_event.myEventVenue %}
                         <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
                         {% endif %}
-                        <span class="me-Detail_Info-date">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}〜</span>
+                        <span class="me-Detail_Info-date">{{ my_event.startAt|date("n月j日 G:i") }}〜</span>
                     </div>
                     <h1 class="me-Detail_Title">
                         {{ my_event.name }}
@@ -51,7 +51,11 @@
                                     <i class="fas fa-ribbon"></i>
                                 </div>
                                 <div class="me-Detail_WomanInfo">
-                                    <div class="me-Detail_WomanInfo-limit">{{ my_event.myEventSchedule.womanTerms }}歳</div>
+                                    <div class="me-Detail_WomanInfo-limit">
+                                        {%  if my_event.femaleAgeLower %}
+                                            {{ my_event.femaleAgeLower }}歳〜{%  if my_event.femaleAgeUpper %}{{ my_event.femaleAgeUpper }}歳{% endif %}
+                                        {% endif %}
+                                    </div>
                                     <span class="me-Detail_WomanInfo-price">{{ my_event.womanPrice|number_format }}円</span>
                                     <div class="me-Detail_WomanInfo-text">
                                         {% include '_parts/female_count.html.twig' with {'myEvent': my_event} %}
@@ -65,7 +69,11 @@
                                     <i class="fab fa-black-tie"></i>
                                 </div>
                                 <div class="me-Detail_ManInfo">
-                                    <div class="me-Detail_ManInfo-limit">{{ my_event.myEventSchedule.manTerms }}歳</div>
+                                    <div class="me-Detail_ManInfo-limit">
+                                        {%  if my_event.maleAgeLower %}
+                                            {{ my_event.maleAgeLower }}歳〜{%  if my_event.maleAgeUpper %}{{ my_event.maleAgeUpper }}歳{% endif %}
+                                        {% endif %}
+                                    </div>
                                     <span class="me-Detail_ManInfo-price">{{ my_event.menPrice|number_format }}円</span>
                                     <div class="me-Detail_ManInfo-text">
                                         {% include '_parts/male_count.html.twig' with {'myEvent': my_event} %}
@@ -179,7 +187,7 @@
                                 </div>
                                 <div class="me-Info_TableInner">
                                     <p class="me-Info_TableTh">購入締切</p>
-                                    <p class="me-Info_TableTd">{{ my_event.myEventSchedule.eventDay|date("n月j日") }} {{ my_event.myEventSchedule.startTime|date("G:i") }}</p>
+                                    <p class="me-Info_TableTd">{{ my_event.startAt|date("Y年n月j日 G:i") }}</p>
                                 </div>
                                 <div class="me-Info_TableInner">
                                     <p class="me-Info_TableTh">問い合わせ</p>
