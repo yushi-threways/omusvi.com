@@ -112,8 +112,14 @@ class MyEvent
      */
     private $myEventSchedule;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $published;
+
     public function __construct()
     {
+        $this->published = false;
         $this->myEventFlows = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->setMyEventSchedule(new MyEventSchedule());
@@ -297,6 +303,18 @@ class MyEvent
         return $this->myEventSchedule;
     }
 
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
     /**
      * Undocumented function
      *
@@ -322,6 +340,17 @@ class MyEvent
             if ($application->getUser() == $user) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        if ($this->published)  {
+            return true;
         }
         return false;
     }

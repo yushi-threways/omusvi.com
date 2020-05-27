@@ -26,9 +26,10 @@ class MyEventRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('mt')
             ->addSelect('t')
+            ->where('mt.published = 1')
             ->leftJoin('mt.tags', 't')
             ->innerJoin('mt.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+            ->andWhere('ms.eventDay >= :now')
             ->orderBy('mt.createdAt', 'DESC')
             ->setParameter('now', new \Datetime())
             ->setMaxResults($limit)
@@ -49,7 +50,8 @@ class MyEventRepository extends ServiceEntityRepository
       {
           $qb = $this->createQueryBuilder("m");
           $qb->innerJoin('m.myEventSchedule', 'ms')
-              ->where('ms.eventDay >= :now')
+              ->where('m.published = 1')
+              ->andWhere('ms.eventDay >= :now')
               ->setParameter('now', new \DateTime())
               ->setMaxResults(1)
               ;
@@ -63,7 +65,8 @@ class MyEventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+            ->where('m.published = 1')
+            ->andWhere('ms.eventDay >= :now')
             ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
@@ -80,7 +83,8 @@ class MyEventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+            ->where('m.published = 1')
+            ->andWhere('ms.eventDay >= :now')
             ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
@@ -97,7 +101,8 @@ class MyEventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder("m");
         $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+            ->where('m.published = 1')
+            ->andWhere('ms.eventDay >= :now')
             ->orderBy('ms.eventDay', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)

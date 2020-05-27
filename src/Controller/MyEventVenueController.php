@@ -23,7 +23,7 @@ class MyEventVenueController extends AbstractController
     public function index(Request $request, MyEventVenueRepository $myEventVenueRepository, PaginatorInterface $paginator): Response
     {
 
-        $query = $myEventVenueRepository->findAll();
+        $query = $myEventVenueRepository->findPubliehed();
 
         $pagination = $paginator->paginate(
             $query, /* query NOT result */

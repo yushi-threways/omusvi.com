@@ -41,6 +41,7 @@ class MyEventVenue
      * @ORM\Column(type="string", length=255)
      */
     private $url;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -56,9 +57,15 @@ class MyEventVenue
      */
     private $myEvents;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $published;
+
     public function __construct()
     {
         $this->myEvents = new ArrayCollection();
+        $this->published = false;
     }
 
     public function getId(): ?int
@@ -173,6 +180,29 @@ class MyEventVenue
         }
 
         return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        if ($this->published)  {
+            return true;
+        }
+        return false;
     }
 
     public function __toString()

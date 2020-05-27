@@ -27,16 +27,19 @@ final class MyEventVenueAdmin extends AbstractAdmin
             ->add('url', null, [
                 'label' => 'サイトurl'
             ])
-            ->add('address', null, [
-                'label' => '住所'
-            ])
             ->add('prefecture', ModelListType::class, [
                 'label' => '都道府県',
                 'btn_add' => false,
                 'btn_delete' => false,
                 'btn_edit' => false,
             ])
-
+            ->add('address', null, [
+                'label' => '住所'
+            ])
+            ->with('公開状況')
+                 ->add('published', null, [
+                     'label' => '公開'
+                 ])
             ->end();
     }
 
@@ -56,6 +59,9 @@ final class MyEventVenueAdmin extends AbstractAdmin
             ->add('createdAt', null, [
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
+            ])
+            ->add('published', null, [
+                'label' => '公開'
             ]);
     }
 
@@ -82,6 +88,9 @@ final class MyEventVenueAdmin extends AbstractAdmin
                 'label' => '登録日時',
                 'format' => 'Y-m-d H:i:s'
             ])
+            ->add('published', null, [
+                'label' => '公開'
+            ])
             ->add('_action', null, [
                 'label' => '操作',
                 'actions' => [
@@ -103,6 +112,9 @@ final class MyEventVenueAdmin extends AbstractAdmin
             ])
             ->add('map', null, [
                 'label' => 'マップ'
+            ])
+            ->add('published', null, [
+                'label' => '公開'
             ])
             // ->add('traffic', null, [
             //     'label' => '交通手段'
