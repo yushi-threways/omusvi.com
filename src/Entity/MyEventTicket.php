@@ -50,6 +50,7 @@ class MyEventTicket
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\MyEvent", inversedBy="myEventTickets")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $myEvent;
 
@@ -57,6 +58,11 @@ class MyEventTicket
      * @ORM\OneToMany(targetEntity="App\Entity\MyEventApplication", mappedBy="myEventTicket", orphanRemoval=true)
      */
     private $myEventApplications;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Discount", inversedBy="myEventTickets")
+     */
+    private $discount;
 
     public function __construct()
     {
@@ -179,6 +185,18 @@ class MyEventTicket
                 $myEventApplication->setMyEventTicket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDiscount(): ?Discount
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?Discount $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }
