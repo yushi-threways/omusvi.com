@@ -15,9 +15,11 @@ Admin:
     Tag:
       Label: タグ
     Flow:
-      Label:イベントの流れ
+      Label: イベントの流れ
     Ticket:
       Label: チケット
+    Discount:
+      Label: ディスカウント
 
 action_paied: 支払承認
 action_work: 仕事完了

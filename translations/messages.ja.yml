@@ -34,3 +34,7 @@ Admin:
     # チケット
     Ticket:
       Label: チケット管理
+    
+    # ディスカウント
+    Discount:
+      Label: ディスカウント

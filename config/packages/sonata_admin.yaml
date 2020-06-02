@@ -1,6 +1,36 @@
 sonata_admin:
     title: 'OMUSVi管理'
-
+    dashboard: 
+        groups:
+            MyEvent: 
+                label: Admin.Side.MyEvent.Label
+                label_catalogue: ~
+                items:
+                    - admin.my_event
+                    - admin.my_event_application
+                    - admin.my_event_ticket
+            Discount: 
+                label: Admin.Side.Discount.Label
+                label_catalogue: ~
+                items:
+                    - admin.discount
+            User: 
+                label: Admin.Side.User.Label
+                label_catalogue: ~
+                items:
+                    - admin.user
+            Master:
+                label: Admin.Side.Master.Label
+                label_catalogue: ~
+                items:
+                    - admin.prefecture
+                    - admin.tag
+                    - admin.my_eventvenue
+            Admin: 
+                label: Admin.Side.Admin.Label
+                label_catalogue: ~
+                items:
+                    - admin.admin
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
