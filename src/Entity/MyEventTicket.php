@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MyEventTicketRepository")
  */
 class MyEventTicket
 {
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,7 +22,9 @@ class MyEventTicket
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var Gender | null
+     * @ORM\Column(type="GenderEnumType", nullable=true)
+     * @Constraints\Enum(entity="App\DBAL\Types\GenderEnumType")
      */
     private $gender;
 
@@ -34,7 +39,7 @@ class MyEventTicket
     private $price;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $sales;
 
@@ -74,12 +79,12 @@ class MyEventTicket
         return $this->id;
     }
 
-    public function getGender(): ?int
+    public function getGender()
     {
         return $this->gender;
     }
 
-    public function setGender(int $gender): self
+    public function setGender(?string $gender): self
     {
         $this->gender = $gender;
 
@@ -199,5 +204,10 @@ class MyEventTicket
         $this->discount = $discount;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->gender;
     }
 }

@@ -48,7 +48,7 @@
                         <div class="me-Detail_Person-woman">
                             <div class="me-Detail_WomanUnit">
                                 <div class="me-Detail_WomanIcon">
-                                    <i class="fas fa-ribbon"></i>
+                                    <i class="fas fa-female"></i>
                                 </div>
                                 <div class="me-Detail_WomanInfo">
                                     <div class="me-Detail_WomanInfo-limit">
@@ -66,7 +66,7 @@
                         <div class="me-Detail_Person-man">
                             <div class="me-Detail_ManUnit">
                                 <div class="me-Detail_ManIcon">
-                                    <i class="fab fa-black-tie"></i>
+                                    <i class="fas fa-male"></i>
                                 </div>
                                 <div class="me-Detail_ManInfo">
                                     <div class="me-Detail_ManInfo-limit">
@@ -109,7 +109,7 @@
                 </div>
             </div>
         </section>
-        {% for flow in my_event.myEventFlows %}
+        {% if my_event.myEventFlows %}
         <section class="sw-Section">
             <div class="me-Content">
                 <div class="me-Content_Inner">
@@ -117,6 +117,7 @@
                     <div class="me-Flow">
                         <div class="me-Flow_Inner">
                             <ul class="me-Flow_List">
+                                    {% for flow in my_event.myEventFlows %}
                                     <li class="me-Flow_Item">
                                         <div class="me-Flow_Item-date">
                                             <span>{% if flow.startTime %}{{ flow.startTime|date("G:i") }}{% endif %}</span>
@@ -132,13 +133,15 @@
                                             {% endif %}
                                         </div>
                                     </li>
+                                    {% endfor %}
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        {% endfor %}
+        {% endif %}
+
         <section class="sw-Section">
             <div class="me-Content">
                 <div class="me-Content_Inner">

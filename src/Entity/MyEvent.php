@@ -163,7 +163,7 @@ class MyEvent
     private $femaleAgeUpper;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTicket", mappedBy="myEvent")
+     * @ORM\OneToMany(targetEntity="App\Entity\MyEventTicket", mappedBy="myEvent", cascade={"persist", "remove"})
      */
     private $myEventTickets;
 

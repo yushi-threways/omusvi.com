@@ -5,12 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DiscountRepository")
  */
 class Discount
 {
+
+    use Timestampable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,7 +28,9 @@ class Discount
     private $myEventTickets;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var Type | null
+     * @ORM\Column(type="RateEnumType", nullable=true)
+     * @Constraints\Enum(entity="App\DBAL\Types\RateEnumType")
      */
     private $type;
 
@@ -89,12 +95,12 @@ class Discount
         return $this;
     }
 
-    public function getType(): ?int
+    public function getType()
     {
         return $this->type;
     }
 
-    public function setType(int $type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -147,5 +153,10 @@ class Discount
         $this->summary = $summary;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

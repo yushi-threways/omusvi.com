@@ -14,6 +14,10 @@ Admin:
       Label: 管理者アカウント
     Tag:
       Label: タグ
+    Flow:
+      Label:イベントの流れ
+    Ticket:
+      Label: チケット
 
 action_paied: 支払承認
 action_work: 仕事完了
