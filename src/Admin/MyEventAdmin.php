@@ -40,16 +40,64 @@ final class MyEventAdmin extends AbstractAdmin
                 'label' => 'イベント内容',
                 'config_name' => 'my_config',
             ])
+            ->add('startAt', null, [
+                'label' => '開始日時'
+            ])
+            ->add('endAt', null, [
+                'label' => '終了日時'
+            ])
+            ->add('imageFile', FileType::class, [
+                'label' => 'イベント画像',
+                'required' => !$hasImage,
+            ])
+            ->add('maleSeats', null, [
+                'label' => '男性募集人数'
+            ])
+            ->add('femaleSeats', null, [
+                'label' => '女性募集人数',
+                'attr'  => [
+                    'class' => 'col-md-6'
+                ]
+            ])
+            ->add('maleAgeLower', null, [
+                'label' => '参加可能年齢下限（男性）',
+                'attr'  => [
+                    'class' => 'col-md-6'
+                ]
+            ])
+            ->add('maleAgeUpper', null, [
+                'label' => '参加可能年齢上限（男性）',
+                'attr'  => [
+                    'class' => 'col-md-6'
+                ]
+            ])
+            ->add('femaleAgeLower', null, [
+                'label' => '参加可能年齢下限（女性）',
+            ])
+            ->add('femaleAgeUpper', null, [
+                'label' => '参加可能年齢上限（女性）',
+                'attr'  => [
+                    'class' => 'col-md-3'
+                ]
+            ])
             ->add('menPrice', null, [
                 'label' => '男性料金'
             ])
             ->add('womanPrice', null, [
                 'label' => '女性料金'
             ])
-            ->add('imageFile', FileType::class, [
-                'label' => 'イベント画像',
-                'required' => !$hasImage,
+            
+            ->end();
+
+        $formMapper
+            ->with('イベントチケット')
+            ->add('myEventTickets', CollectionType::class, [
+                'by_reference' => false,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
             ])
+            
             ->end();
 
         $formMapper
@@ -62,7 +110,6 @@ final class MyEventAdmin extends AbstractAdmin
             ], [
                 'edit' => 'inline',
                 'inline' => 'table',
-                'sortable' => 'position',
             ])
             ->end();
 
@@ -200,6 +247,30 @@ final class MyEventAdmin extends AbstractAdmin
             ->add('content', null, [
                 'label' => 'イベント内容',
             ])
+            ->add('startAt', null, [
+                'label' => '開始日時'
+            ])
+            ->add('endAt', null, [
+                'label' => '終了日時'
+            ])
+            ->add('maleSeats', null, [
+                'label' => '男性募集人数'
+            ])
+            ->add('femaleSeats', null, [
+                'label' => '女性募集人数'
+            ])
+            ->add('maleAgeLower', null, [
+                'label' => '参加可能年齢下限（男性）'
+            ])
+            ->add('maleAgeUpper', null, [
+                'label' => '参加可能年齢上限（男性）'
+            ])
+            ->add('femaleAgeLower', null, [
+                'label' => '参加可能年齢下限（女性）'
+            ])
+            ->add('femaleAgeUpper', null, [
+                'label' => '参加可能年齢上限（女性）'
+            ])
             ->add('menPrice', null, [
                 'label' => '男性料金'
             ])
@@ -208,6 +279,20 @@ final class MyEventAdmin extends AbstractAdmin
             ])
             ->add('imageFile', null, [
                 'label' => 'イベント画像',
+            ])
+            ->end();
+
+        $showMapper
+            ->with('チケット')
+            ->add('myEventTickets', null, [
+               
+            ])
+            ->end();
+
+        $showMapper
+            ->with('イベントの流れ')
+            ->add('myEventFlows', null, [
+               
             ])
             ->end();
 
@@ -225,34 +310,34 @@ final class MyEventAdmin extends AbstractAdmin
             ])
             ->end();
 
-        $showMapper
-            ->with('イベント日程')
-            ->add('myEventSchedule.manLimit', null, [
-                'label' =>  '男性最大数'
-            ])
-            ->add('myEventSchedule.womanLimit', null, [
-                'label' =>  '女性最大数'
-            ])
-            ->add('myEventSchedule.manTerms', null, [
-                'label' =>  '男性条件'
-            ])
-            ->add('myEventSchedule.womanTerms', null, [
-                'label' =>  '女性条件'
-            ])
-            ->add('myEventSchedule.textTerms', null, [
-                'label' =>  '参加条件'
-            ])
-            ->add('myEventSchedule.startTime', null, [
-                'label' =>  '開始時間',
-                'format' => 'H:i:s'
+        // $showMapper
+        //     ->with('イベント日程')
+        //     ->add('myEventSchedule.manLimit', null, [
+        //         'label' =>  '男性最大数'
+        //     ])
+        //     ->add('myEventSchedule.womanLimit', null, [
+        //         'label' =>  '女性最大数'
+        //     ])
+        //     ->add('myEventSchedule.manTerms', null, [
+        //         'label' =>  '男性条件'
+        //     ])
+        //     ->add('myEventSchedule.womanTerms', null, [
+        //         'label' =>  '女性条件'
+        //     ])
+        //     ->add('myEventSchedule.textTerms', null, [
+        //         'label' =>  '参加条件'
+        //     ])
+        //     ->add('myEventSchedule.startTime', null, [
+        //         'label' =>  '開始時間',
+        //         'format' => 'H:i:s'
 
-            ])
-            ->add('myEventSchedule.eventDay', null, [
-                'label' =>  '開催日',
-                'format' => 'Y-m-d'
+        //     ])
+        //     ->add('myEventSchedule.eventDay', null, [
+        //         'label' =>  '開催日',
+        //         'format' => 'Y-m-d'
 
-            ])
-            ->end();
+        //     ])
+        //     ->end();
 
         $showMapper
             ->with('公開状況')

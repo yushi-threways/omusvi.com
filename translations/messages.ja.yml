@@ -1,6 +1,6 @@
 Admin:
   Page:
-    # 働き手
+    # ユーザー
     User:
       Label: ユーザー管理
 
@@ -26,3 +26,11 @@ Admin:
     # 管理者アカウント
     Admin:
       Label: アカウント管理
+
+    # イベントの流れ
+    Flow:
+      Label: イベントフロー管理
+
+    # チケット
+    Ticket:
+      Label: チケット管理

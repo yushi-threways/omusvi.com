@@ -61,6 +61,12 @@ class MyEventApplication
      */
     private $paymentType;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MyEventTicket", inversedBy="myEventApplications")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $myEventTicket;
+
     public function __construct()
     {
         $this->status = MyEventApplicationStatusEnumType::APPLIED;
@@ -232,5 +238,17 @@ class MyEventApplication
     public function _toString()
     {
         return $this->getStatusText($this->status);
+    }
+
+    public function getMyEventTicket(): ?MyEventTicket
+    {
+        return $this->myEventTicket;
+    }
+
+    public function setMyEventTicket(?MyEventTicket $myEventTicket): self
+    {
+        $this->myEventTicket = $myEventTicket;
+
+        return $this;
     }
 }

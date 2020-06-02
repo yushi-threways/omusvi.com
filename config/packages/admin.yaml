@@ -57,7 +57,21 @@ services:
         class: App\Admin\MyEventFlowAdmin
         arguments: [~, App\Entity\MyEventFlow, App\Controller\Admin\MyEventFlowController]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Prefecture.Label }
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Flow.Label }
+        public: true
+
+    admin.my_event_ticket:
+        class: App\Admin\MyEventTicketAdmin
+        arguments: [~, App\Entity\MyEventTicket, App\Controller\Admin\MyEventTicketController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Ticket.Label }
+        public: true
+
+    admin.discount:
+        class: App\Admin\DiscountAdmin
+        arguments: [~, App\Entity\Discount, App\Controller\Admin\DiscountController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Admin.Page.Discount.Label }
         public: true
 
     admin.prefecture:

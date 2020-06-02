@@ -163,7 +163,7 @@ class UserDetail
         return $this;
     }
 
-    public function getGender(): ?string
+    public function getGender()
     {
         return $this->gender;
     }
