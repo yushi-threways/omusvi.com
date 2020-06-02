@@ -2,25 +2,28 @@
 
 namespace App\Controller;
 
-use App\Entity\MyEvent;
-use App\Entity\MyEventSchedule;
 use App\Entity\User;
+use App\Entity\MyEvent;
 use App\Entity\UserDetail;
+use App\DBAL\Types\GenderEnumType;
 use App\Entity\MyEventApplication;
-use App\Form\Type\MyEventApplicationMenType;
-use App\Form\Type\MyEventApplicationWomanType;
 use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventRepository;
-use App\Repository\TagRepository;
 use App\Repository\UserDetailRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+use App\Form\Type\MyEventApplicationMenType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\Type\MyEventApplicationWomanType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\DBAL\Types\GenderEnumType;
-use App\DBAL\Types\MyEventApplicationPayMentEnumType;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
-use Knp\Component\Pager\PaginatorInterface;
+use App\DBAL\Types\MyEventApplicationPayMentEnumType;
+use App\Entity\MyEventTicket;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
@@ -71,7 +74,16 @@ class MyEventController extends AbstractController
             $data = $session->get(self::SESSION_KEY);
             $data = new MyEventApplication();
 
-            $form = $this->getGenderAppForm($user->getUserDetail()->getGender(), $data);
+            dump($data);
+
+            // $form = $this->getGenderAppForm($user->getUserDetail()->getGender(), $data);
+            $formFactoryBuilder = Forms::createFormFactoryBuilder();
+            $formFactory = $formFactoryBuilder->getFormFactory();
+
+            $form = $formFactory->createBuilder(FormType::class)
+            ->setMethod('POST')
+            ->add('save', SubmitType::class)
+            ->getForm();
 
             if ($request->isMethod('POST')) {
                 $form->handleRequest($request);
@@ -80,7 +92,7 @@ class MyEventController extends AbstractController
                         $form->getData()->setStatus(MyEventApplicationStatusEnumType::ACCEPTED);
                     }
                     $session->set(self::SESSION_KEY, $form->getData());
-                    return $this->redirectToRoute('my_event_application_confirm', ['id' => $myEvent->getMyEventSchedule()->getId()]);
+                    return $this->redirectToRoute('my_event_application_confirm', ['id' => $data->getMyEventSchedule()->getId()]);
                 }
             }
 
@@ -97,40 +109,6 @@ class MyEventController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/{id}", name="my_event_confirm", methods={"GET", "POST"})
-     */
-    public function confirm(Request $request, MyEvent $myEvent): Response
-    {
-        $session = $request->getSession();
-        $data = $session->get(self::SESSION_KEY);
-
-        if (!$data) {
-            return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
-        }
-        
-        $form = $this->createForm(ConfirmFormType::class, $data);
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($data);
-                $entityManager->flush();
-
-                $session->remove(self::SESSION_KEY);
-
-                return $this->redirectToRoute('my_event_application_complete', ['id' => $myEvent->getMyEventSchedule()->getId()]);
-            }
-        }
-        return $this->render('my_event_application/confirm.html.twig', [
-            'form' => $form->createView(),
-            'myEvent' => $myEvent,
-            'data' => $data,
-         ]);
-    }
-
-
     public function getGenderAppForm($gender, $data) 
     {
         if ($gender == GenderEnumType::MALE) {
@@ -140,6 +118,37 @@ class MyEventController extends AbstractController
         }
         
         return $form;
+    }
+
+    /**
+     * @Route("/{id}/tickets/{ticket_id}/guest_purchases/new", name="my_event_guest_purchases", methods={"GET", "POST"})
+     * @ParamConverter("my_event_ticket", options={"id" = "ticket_id"})
+     */
+    public function guestPurchases()
+    {
+        
+    }
+
+    /**
+     * @Route("/{id}/tickets/{myEventTicket}/purchases/new", name="my_event_purchases", methods={"GET", "POST"})
+     */
+    public function purchases(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
+    {
+        return $this->render('my_event/purchases/new.html.twig', [
+            'my_event' => $myEvent,
+            'my_event_ticket' => $myEventTicket,
+         ]);
+    }
+
+    /**
+     * @Route("/{id}/tickets/{myEventTicket}/purchases/confirm", name="my_event_purchases_confirm", methods={"GET", "POST"})
+     */
+    public function purchasesConfirm(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
+    {
+        return $this->render('my_event/purchases/confirm.html.twig', [
+            'my_event' => $myEvent,
+            'my_event_ticket' => $myEventTicket,
+         ]);
     }
 }
 
