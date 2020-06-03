@@ -49,9 +49,8 @@ class MyEventRepository extends ServiceEntityRepository
       public function findOneByLatestEvent()
       {
           $qb = $this->createQueryBuilder("m");
-          $qb->innerJoin('m.myEventSchedule', 'ms')
-              ->where('m.published = 1')
-              ->andWhere('ms.eventDay >= :now')
+          $qb->where('m.published = 1')
+              ->andWhere('m.startAt >= :now')
               ->setParameter('now', new \DateTime())
               ->setMaxResults(1)
               ;
@@ -64,10 +63,9 @@ class MyEventRepository extends ServiceEntityRepository
     public function findLatestEvent($limit = null)
     {
         $qb = $this->createQueryBuilder("m");
-        $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('m.published = 1')
-            ->andWhere('ms.eventDay >= :now')
-            ->orderBy('ms.eventDay', 'ASC')
+        $qb->where('m.published = 1')
+            ->andWhere('m.startAt >= :now')
+            ->orderBy('m.startAt', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
             ;
@@ -82,10 +80,9 @@ class MyEventRepository extends ServiceEntityRepository
     public function findBeforeEvent($limit = null)
     {
         $qb = $this->createQueryBuilder("m");
-        $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('m.published = 1')
-            ->andWhere('ms.eventDay >= :now')
-            ->orderBy('ms.eventDay', 'ASC')
+        $qb->where('m.published = 1')
+            ->andWhere('m.startAt >= :now')
+            ->orderBy('m.startAt', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
         ;
@@ -100,10 +97,9 @@ class MyEventRepository extends ServiceEntityRepository
     public function findAfterEvent($limit = null)
     {
         $qb = $this->createQueryBuilder("m");
-        $qb->innerJoin('m.myEventSchedule', 'ms')
-            ->where('m.published = 1')
-            ->andWhere('ms.eventDay >= :now')
-            ->orderBy('ms.eventDay', 'ASC')
+        $qb->where('m.published = 1')
+            ->andWhere('m.startAt >= :now')
+            ->orderBy('m.startAt', 'ASC')
             ->setParameter('now', new \DateTime())
             ->setMaxResults($limit)
         ;

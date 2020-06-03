@@ -2,6 +2,8 @@
 
 namespace App\Twig;
 
+use App\Entity\MyEvent;
+use App\Entity\MyEventTicket;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
@@ -74,5 +76,35 @@ class EventApplicationCountExtension extends AbstractExtension
             }
         }
         return $femaleCount;
+    }
+
+    public function countMaleTickets(MyEvent $myEvent)
+    {
+        // Entityに男女別でチケットを取得するメソッドを作成
+        // 取得した複数のチケットのsalesの合計を集計
+        // その合計をMyEventのseats数で引き算（残席数が出る）
+        // 残席数とチケットの単位を計算して残席数を超えるものは購入不可(btnにdisableを追加)
+        //
+
+    }
+
+    public function 女性チケット取得()
+    {
+
+    }
+
+    public function 男性チケット取得()
+    {
+
+    }
+
+    public function 女性席残数取得()
+    {
+
+    }
+
+    public function 男性席残数取得()
+    {
+
     }
 }
