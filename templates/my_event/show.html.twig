@@ -237,11 +237,11 @@
         </div>
     </div>
     <div class="me-Applicatin_Btn">
-    {% if not (after_event_date(my_event.myEventSchedule)) %}
+    {% if not (after_event_date(my_event.startAt)) %}
         {% if is_granted('ROLE_USER') %}
             {% if my_event.isApplied(user) %}
-                <a href="{{ path('mypage_detail_edit') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
-                    すでに申込み済です
+                <a href="{{ path('default_index') }}" class="btn btn-outline-secondary disabled btn-sm" tabindex="-1" role="button" aria-disabled="true">
+                    チケット購入済みです
                 </a>
             {% else %}
                 {% if user.userDetail %}
