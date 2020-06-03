@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\MyEvent;
 use App\Entity\UserDetail;
+use App\Entity\MyEventTicket;
+use Symfony\Component\Form\Forms;
 use App\DBAL\Types\GenderEnumType;
 use App\Entity\MyEventApplication;
 use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventRepository;
+use App\Service\Mailer\TwigSwiftMailer;
 use App\Repository\UserDetailRepository;
+use App\Form\Type\MyEventPaymentFormType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\Type\MyEventApplicationMenType;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\DBAL\Types\MyEventApplicationStatusEnumType;
 use App\DBAL\Types\MyEventApplicationPayMentEnumType;
-use App\Entity\MyEventTicket;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 /**
@@ -134,18 +136,84 @@ class MyEventController extends AbstractController
      */
     public function purchases(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
     {
+       
+        $form = $this->createForm(MyEventPaymentFormType::class);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                return $this->redirectToRoute('my_event_purchases_confirm', ['id' => $myEvent, 'myEventTicket' => $myEventTicket]);
+            }
+        }
+
         return $this->render('my_event/purchases/new.html.twig', [
             'my_event' => $myEvent,
             'my_event_ticket' => $myEventTicket,
+            'form' => $form->createView()
          ]);
     }
 
     /**
-     * @Route("/{id}/tickets/{myEventTicket}/purchases/confirm", name="my_event_purchases_confirm", methods={"GET", "POST"})
+     * @Route("/{id}/tickets/{myEventTicket}/purchases/confirm", name="my_event_purchases_confirm", methods={"POST"})
      */
-    public function purchasesConfirm(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
+    public function purchasesConfirm(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket, TwigSwiftMailer $mailer)
     {
+        $formData = $request->request->get('my_event_payment_form');
+        $paymentData = $formData['paymentType'];
+        $application = new MyEventApplication();
+        dump($application);
+
+        $form = $this->createForm(ConfirmFormType::class, $application);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $application->setUser($this->getUser());
+                $application->setMyEventTicket($myEventTicket);
+                $application->setPaymentType($paymentData);
+                
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($application);
+                $entityManager->flush();
+
+                // if ($paymentData == 'bt') {
+                //     $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
+                //         'data' => $application,
+                //         'user' => $application->getUser(),
+                //         'ticket' => $myEventTicket,
+                //         'my_event' => $myEvent,
+                //         'detail' => $application->getUser()->getUserDetail(),
+                //     ]);
+                // } else {
+                //     $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
+                //         'data' => $application,
+                //         'user' => $application->getUser(),
+                //         'ticket' => $myEventTicket,
+                //         'my_event' => $myEvent,
+                //         'detail' => $application->getUser()->getUserDetail(),
+                //     ]);
+                // }
+                
+                return $this->redirectToRoute('my_event_purchases_confirm', ['id' => $myEvent, 'myEventTicket' => $myEventTicket]);
+            }
+        }
+
         return $this->render('my_event/purchases/confirm.html.twig', [
+            'my_event' => $myEvent,
+            'my_event_ticket' => $myEventTicket,
+            'paymentData' => $paymentData,
+            'form' => $form->createView()
+         ]);
+    }
+
+    /**
+     * @Route("/{id}/tickets/{myEventTicket}/purchases/complete", name="my_event_purchases_complete", methods={"POST"})
+     */
+    public function purchasesComplete(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
+    {
+
+
+        return $this->render('my_event/purchases/complete.html.twig', [
             'my_event' => $myEvent,
             'my_event_ticket' => $myEventTicket,
          ]);
