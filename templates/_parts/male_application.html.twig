@@ -1,17 +1,17 @@
 
     {% if countAcceptMaleCount(myEvent.myEventSchedule) > myEvent.myEventSchedule.manLimit %}
         <a href="{{ path('my_event_index') }}" class="me-Applicatin_BtnUnit-after">
-            男性は完売です。　他のイベントを探す
+            男性完売です。
         </a>
     {% elseif 
         countAcceptMaleCount(myEvent.myEventSchedule) >= myEvent.myEventSchedule.manLimit / 2 and
         countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit
     %}
         <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
-            男性は残りわずかです。イベントに申し込む
+            男性残りわずかです。チケットを購入する
          </button>
     {% elseif countAcceptMaleCount(myEvent.myEventSchedule) < myEvent.myEventSchedule.manLimit / 2 %}
         <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
-            イベントに申し込む
+            チケットを購入する
         </button>
     {% endif %}
