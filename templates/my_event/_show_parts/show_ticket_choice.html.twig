@@ -1,0 +1,47 @@
+<div class="modal-body">
+	<div class="me-Modal-Ticket">
+		{% for ticket in my_event.myEventTickets %}
+			<div class="me-Modal-TicketList">
+                <div class="me-Modal-TicketList-unit">
+                    <div class="me-Modal-TicketList-gender">
+                        {% if (ticket.gender  == 'female') %}
+                            <i class="fas fa-female me-Modal-TicketList-female"></i>
+                        {% else %}
+                            <i class="fas fa-male me-Modal-TicketList-male"></i>
+                        {% endif %}
+                    </div>
+                    <div class="me-Modal-TicketList-number">
+                        {{ ticket.numberUnit }}人
+                    </div>
+                </div>
+				<div class="me-Modal-TicketList-price">
+                   <form method="post" action="{{ path('my_event_purchases', {'id': my_event.id, 'myEventTicket': ticket.id}) }}">
+                        <button class="btn btn-sm btn-success">{{ ticket.price|number_format }}円</button>
+                    </form>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="me-Modal-Cancel">
+		<p class="me-Modal-CancelAbout">
+			キャンセル料金について<br>
+            お客様都合でキャンセルされた場合、キャンセル料が発生いたします。
+		</p>
+		<table class="me-Modal-CancelTable">
+			<thead>
+				<tr>
+					<td>〜21日前</td>
+					<td>20〜11日前</td>
+					<td>10日前〜当日</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>料金の20％</td>
+					<td>料金の50％</td>
+					<td>料金の100%</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

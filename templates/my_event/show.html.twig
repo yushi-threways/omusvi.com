@@ -222,14 +222,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">人数・支払い方法を選択する</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">チケットを選択する</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 {% if is_granted('ROLE_USER') %}
                     {% if user.userDetail %}
-                        {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }}
+                        {% include 'my_event/_show_parts/show_ticket_choice.html.twig' with {'myEvent': my_event} %}
+                        {# {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }} #}
                     {% endif %}
                 {% endif %}
             </div>
@@ -249,15 +250,14 @@
                     {% else %}
                         {% include '_parts/female_application.html.twig' with {'myEvent': my_event} %}
                     {% endif %}
-                {% else %}
-                    <a href="{{ path('mypage_detail_edit') }}" class="me-Applicatin_Btn-login">
-                        申し込むには詳細情報を登録してください
-                    </a>
                 {% endif %}
             {% endif %}
         {% else %}
-            <a href="{{ path('fos_user_security_login') }}" class="me-Applicatin_Btn-login">
-                申し込むにはログインしてください
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-success">
+                ログインして購入に進む
+            </a>
+            <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
+                登録・購入に進む
             </a>
         {% endif %}
     {% else %}

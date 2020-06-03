@@ -1,0 +1,52 @@
+.me-Modal-Ticket {
+
+}
+.me-Modal-TicketList {
+    width: 100%;
+    margin: 0 auto 5px;
+    padding: 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+
+}
+.me-Modal-TicketList-unit {
+    width: 60%;
+    display: flex;
+    align-items: center;
+} 
+.me-Modal-TicketList-gender {
+    padding: 0 10px 0 0;
+    @include font-size(26px);
+    display: inline-block;
+}
+.me-Modal-TicketList-female {
+    color: $color__sex-woman;
+}
+.me-Modal-TicketList-male {
+    color: $color__sex-man;
+}
+.me-Modal-TicketList-number {
+    display: inline-block;
+}
+.me-Modal-TicketList-price {
+    width: 40%;
+    text-align: right;
+}
+.me-Modal-Cancel {
+    @include font-size(14px);
+}
+.me-Modal-CancelAbout {
+    
+}
+.me-Modal-CancelTable {
+    width: 100%;
+    margin: 0 auto;
+    thead {
+
+    }
+    tbody {
+
+    }
+}
