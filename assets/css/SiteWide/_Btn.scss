@@ -1,0 +1,6 @@
+.sw-Btn{
+    @extend .btn;
+    @include button-variant($color__sex-woman, $color__border-button-hover);
+    color: $color__background-body;
+    letter-spacing: -1.12px;
+  }

@@ -8,7 +8,7 @@
 {% block main_outer %}
 	<section class="sw-Section">
 		<div class="purchses-New">
-			<h1 class="purchses-New_Title">購入方法を選択</h1>
+			<h1 class="purchses-New_Title">支払い方法を確認</h1>
 			<h2>申込内容</h2>
 			<div class="purchses-New_Inner">
 				<div class="purchses-New_Unit">
@@ -45,18 +45,37 @@
 			</div>
 			<h2>決済方法</h2>
 			<div class="purchses-New_Inner">
-				{{ form_start(form, {'method': 'post', 'action': path('my_event_purchases_confirm', {'id': my_event.id, 'myEventTicket': my_event_ticket.id}), 'attr': {'class': 'purchses-New_PaymentForm'}}) }}
-                    <div class="purchses-New_PaymentForm-group">
-					{{ form_label(form.paymentType) }}
-					{{ form_widget(form.paymentType) }}
-                    </div>
-				{{ form_rest(form) }}
-                <div class="purchses-New_Payment-price">
-                    <p class="purchses-New_Payment-pricetext">{{ my_event_ticket.price|number_format }}円<small>（参加人数{{ my_event_ticket.numberUnit }}）</small></p>
-                    <small class="purchses-New_Payment-terms">「次へ」ボタンを押すことにより、利用規約及び参加条件 に同意の上、申し込みいただいたことになります。</small>
-                </div>
-				<button class="btn-primary sw-Btn btn-block" type="submit">次へ</button>
-				{{ form_end(form) }}
+				<div class="purchses-New_Payment">
+					<div class="purchses-New_PaymentUnit">
+						<div class="purchses-New_EventUnit-left">
+							{% if paymentData == "bt" %}
+								銀行振込
+							{% else %}
+								当日受付払い
+							{% endif %}
+						</div>
+					</div>
+					<div class="purchses-New_Payment-desc">
+						{% if paymentData == "bt" %}
+							<p>
+								購入手続き後完了後メールにてご案内させて頂きますのでお振込みをお願い致します。<br>
+								お振込後マイページの申込中イベントの入金報告ボタンから入金報告を行なってください。<br>
+								事務局で入金の確認ができましたらメールにて通知いたします。<br>
+								入金確認は最大48時間以内に対応いたします。<br>
+								※別途振込み手数料は、恐れ入りますがご負担くださいませ。
+							</p>
+						{% else %}
+							<p>
+								チケット料金はイベント会場にてお支払いお願いいたします。<br>
+								受付の際に、料金のお支払い・ご本人様確認をさせていただきますので、お名前とご年齢がわかるもの（運転免許証、パスポートなど）をご持参ください。
+							</p>
+						{% endif %}
+					</div>
+					{{ form_start(form, {'method': 'post', 'action': path('my_event_purchases_complete', {'id': my_event.id, 'myEventTicket': my_event_ticket.id}), 'attr': {'class': 'purchses-New_PaymentForm'}}) }}
+					{{ form_rest(form) }}
+					<button class="btn-primary sw-Btn btn-block" type="submit">購入する</button>
+					{{ form_end(form) }}
+				</div>
 			</div>
 		</div>
 	</section>

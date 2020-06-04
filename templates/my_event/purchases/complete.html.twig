@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+	<title>OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中</title>
+	<meta name="description" content="オムスビは、愛知県,名古屋・栄を中心に出会える合コン街コンを開催しています！イベントで名古屋を活性化！地域密着型の街コンをに掲載するサイト！出会えるイベントを掲載しています。">
+{% endblock %}
+
+{% block main_outer %}
+    <section class="sw-Section">
+        <div class="purchses-Complete">
+                <h1 class="purchses-Complete_Title">イベント申込ありがとうございます。</h1>
+                <div class="purchses-Complete_Inner">
+
+                <p class="purchses-Complete_Text">
+                    メールアドレスにイベント内容についてのご案内が届きますのでご確認ください。
+                </p>
+               <p class="purchses-Complete_Caption">
+                    メールが届かない方は<a href="{{ path("contact_index") }}">こちら</a>にお問い合わせください。
+                </p>
+                <div class="purchses-Complete_BtnUnit">
+                    <a class="sw-Btn btn-sm" href="{{ path("app_mypage_mypage_index") }}">マイページ</a>
+                    <a class="sw-Btn btn-sm" href="{{ path("default_index") }}">トップへ戻る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -23,7 +23,7 @@ OMUSVi事務局の関です。
 
 ━━━ お申し込みの情報 ━━━━━━━━━━━━━━━━
 
-【開催日時】　　：{{ schedule.eventDay|date("n月j日") }} {{ schedule.startTime|date("G:i") }}〜
+【開催日時】　　：{{ my_event.startAt|date("n月j日 G:i") }}〜
 【イベント名】　： {{ my_event.name }}
 【イベント概要】：{{ my_event.description }}
 {% if my_event.myEventVenue %}
@@ -33,19 +33,14 @@ OMUSVi事務局の関です。
 【開催アクセス】：{{ venue.traffic }}
 【開催URL】　　：{{ venue.url }}
 {% endif %}
-{% if (detail.gender == 'male') %}
-【参加人数】　　：{{ data.menCount }}人　{{ my_event.menPrice|number_format }}円/人
-【イベント料金】：{{ my_event.menPrice * data.menCount }}円（税込）
-{% elseif (detail.gender == 'female') %}
-【参加人数】　　：{{ data.womanCount }}人　{{ my_event.womanPrice|number_format }}円/人
-【イベント料金】：{{ my_event.menPrice * data.womanCount }}円（税込）
-{% endif %}
+【参加人数】　　：{{ ticket.numberUnit }}人
+【チケット料金】：{{ ticket.price }}円（税込）
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 それでは、当日イベント会場にてお会いできるのを楽しみにしております。
-
 また、イベントに関してご質問等ございましたら、事務局までお問い合わせください。
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 【OMUSVi営事務局】
 {{ absolute_url(path('default_index')) }}
 

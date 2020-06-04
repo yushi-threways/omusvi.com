@@ -39,7 +39,7 @@
                         {% if my_event.myEventVenue %}
                         <span class="me-Detail_Info-place"><i class="fas fa-map-marker-alt"></i> {{ my_event.myEventVenue.prefecture }}</span>
                         {% endif %}
-                        <span class="me-Detail_Info-date">{{ my_event.startAt|date("n月j日 G:i") }}〜</span>
+                        <span class="me-Detail_Info-date">{{ my_event.startAt|date("n月j日 G:i") }}〜{{ my_event.endAt|date("G:i") }}</span>
                     </div>
                     <h1 class="me-Detail_Title">
                         {{ my_event.name }}
