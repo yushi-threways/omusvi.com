@@ -210,4 +210,32 @@ class MyEventTicket
     {
         return $this->gender;
     }
+
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->getMyEvent()->getStartAt() <= new \DateTimeImmutable();
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function isApplied(User $user)
+    {
+        foreach ($this->getMyEventApplications() as $application)
+        {
+            if ($application->getUser() == $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function canApply(User $user)
+    {
+        return !$this->isExpired() && !$this->isApplied($user);
+    }
 }

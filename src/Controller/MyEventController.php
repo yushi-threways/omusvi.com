@@ -26,7 +26,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
+use App\Service\MyEventApplication\Factory\UserMyEventApplicationFactory;
 
 /**
  * @Route("/event")
@@ -177,46 +177,37 @@ class MyEventController extends AbstractController
     /**
      * @Route("/{id}/tickets/{myEventTicket}/purchases/complete", name="my_event_purchases_complete", methods={"POST"})
      */
-    public function purchasesComplete(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket, TwigSwiftMailer $mailer)
+    public function purchasesComplete(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket, TwigSwiftMailer $mailer, UserMyEventApplicationFactory $userMyEventApplicationFactory)
     {
 
         $session = $request->getSession();
         $paymentData = $session->get(self::SESSION_KEY);
 
         $form = $this->createForm(ConfirmFormType::class)->handleRequest($request);
+        $user = $this->getUser();
 
-        // 申し込み済みの場合を追加、イベント日を過ぎていないを追加
-        if ($form->isSubmitted() && $form->isValid()){
-            $application = new MyEventApplication();
-            /** @var User $user */
-            $user = $this->getUser();
-            $application->setUser($user);
-            $application->setMyEventTicket($myEventTicket);
-            $application->setPaymentType($paymentData);
+        if ($form->isSubmitted() && $form->isValid() && $myEventTicket->canApply($user)){
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($application);
-            $entityManager->flush();
+            $application = $userMyEventApplicationFactory->create($user, $myEventTicket);
+            $session->remove(self::SESSION_KEY);
 
-//            $session->remove(self::SESSION_KEY);
-
-//            if ($paymentData == 'bt') {
-//                $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
-//                    'data' => $application,
-//                    'user' => $application->getUser(),
-//                    'ticket' => $myEventTicket,
-//                    'my_event' => $myEvent,
-//                    'detail' => $application->getUser()->getUserDetail(),
-//                ]);
-//            } else {
-//                $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
-//                    'data' => $application,
-//                    'user' => $application->getUser(),
-//                    'ticket' => $myEventTicket,
-//                    'my_event' => $myEvent,
-//                    'detail' => $application->getUser()->getUserDetail(),
-//                ]);
-//            }
+           if ($paymentData == 'bt') {
+               $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
+                   'data' => $application,
+                   'user' => $application->getUser(),
+                   'ticket' => $myEventTicket,
+                   'my_event' => $myEvent,
+                   'detail' => $application->getUser()->getUserDetail(),
+               ]);
+           } else {
+               $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
+                   'data' => $application,
+                   'user' => $application->getUser(),
+                   'ticket' => $myEventTicket,
+                   'my_event' => $myEvent,
+                   'detail' => $application->getUser()->getUserDetail(),
+               ]);
+           }
 
             return $this->render('my_event/purchases/complete.html.twig', [
                 'my_event' => $myEvent,
