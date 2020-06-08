@@ -2,10 +2,11 @@
 
 namespace App\Service\MyEventApplication\Factory;
 
-use App\Entity\MyEventApplication;
-use App\Entity\MyEventTicket;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\MyEventTicket;
+use App\Entity\MyEventApplication;
+use App\DBAL\Types\MyEventApplicationStatusEnumType;
+use App\DBAL\Types\MyEventApplicationPayMentEnumType;
 
 /**
  * Class UserMyEventApplicationFactory
@@ -13,21 +14,33 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class UserMyEventApplicationFactory extends MyEventApplicationFactory
 {
-    
     /**
      * @param User $user
      * @param MyEventTicket $myEventTicket
      * @return MyEVentApplication
      */
-    public function create(User $user, MyEventTicket $myEventTicket)
+    public function userApplicationCreate(User $user, MyEventTicket $myEventTicket, $paymentType):MyEventApplication
     {
         $application = new MyEventApplication();
         $application->setUser($user);
         $application->setMyEventTicket($myEventTicket);
         
+        if ($this->isBanktransfer($paymentType)) {
+            $application->setStatus(MyEventApplicationStatusEnumType::APPLIED);
+        }
+
         $this->entityManager->persist($application);
         $this->entityManager->flush();
         
         return $application;
+    }
+
+    /**
+     * @param [type] $paymentType
+     * @return boolean
+     */
+    public function isBanktransfer($paymentType): bool
+    {
+        return $paymentType == MyEventApplicationPayMentEnumType::BANKTRANSFER;
     }
 }

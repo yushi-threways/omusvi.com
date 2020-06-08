@@ -70,57 +70,21 @@ class MyEventController extends AbstractController
         /** @var UserDetailRepository $repo */
         $repo = $this->getDoctrine()->getRepository(UserDetail::class);
         $detail = $repo->findOneBy(['user' => $user]);
-        
-        if (!$detail == null) {
-            $session = $request->getSession();
-            $data = $session->get(self::SESSION_KEY);
-            $data = new MyEventApplication();
 
-            dump($data);
-
-            // $form = $this->getGenderAppForm($user->getUserDetail()->getGender(), $data);
-            $formFactoryBuilder = Forms::createFormFactoryBuilder();
-            $formFactory = $formFactoryBuilder->getFormFactory();
-
-            $form = $formFactory->createBuilder(FormType::class)
+        $formFactoryBuilder = Forms::createFormFactoryBuilder();
+        $formFactory = $formFactoryBuilder->getFormFactory();
+        $form = $formFactory->createBuilder(FormType::class)
             ->setMethod('POST')
             ->add('save', SubmitType::class)
             ->getForm();
 
-            if ($request->isMethod('POST')) {
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    if ($form->getData()->getPayMentType() == MyEventApplicationPayMentEnumType::LOCALPAYMENT) {
-                        $form->getData()->setStatus(MyEventApplicationStatusEnumType::ACCEPTED);
-                    }
-                    $session->set(self::SESSION_KEY, $form->getData());
-                    return $this->redirectToRoute('my_event_application_confirm', ['id' => $data->getMyEventSchedule()->getId()]);
-                }
-            }
-
-            return $this->render('my_event/show.html.twig', [
-                'my_event' => $myEvent,
-                'user' => $user,
-                'form' => $form->createView(),
-             ]);
-        } else {
-            return $this->render('my_event/show.html.twig', [
-                'my_event' => $myEvent,
-                'user' => $user,
-             ]);
-        }
+        return $this->render('my_event/show.html.twig', [
+            'my_event' => $myEvent,
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
     }
 
-    public function getGenderAppForm($gender, $data) 
-    {
-        if ($gender == GenderEnumType::MALE) {
-            $form = $this->createForm(MyEventApplicationMenType::class, $data);
-        } elseif ($gender == GenderEnumType::FEMALE) {
-            $form = $this->createForm(MyEventApplicationWomanType::class, $data);
-        }
-        
-        return $form;
-    }
 
     /**
      * @Route("/{id}/tickets/{ticket_id}/guest_purchases/new", name="my_event_guest_purchases", methods={"GET", "POST"})
@@ -128,7 +92,6 @@ class MyEventController extends AbstractController
      */
     public function guestPurchases()
     {
-        
     }
 
     /**
@@ -136,7 +99,7 @@ class MyEventController extends AbstractController
      */
     public function purchases(Request $request, MyEvent $myEvent, MyEventTicket $myEventTicket)
     {
-       
+
         $form = $this->createForm(MyEventPaymentFormType::class);
 
         if ($request->isMethod('POST')) {
@@ -150,7 +113,7 @@ class MyEventController extends AbstractController
             'my_event' => $myEvent,
             'my_event_ticket' => $myEventTicket,
             'form' => $form->createView()
-         ]);
+        ]);
     }
 
     /**
@@ -171,7 +134,7 @@ class MyEventController extends AbstractController
             'my_event_ticket' => $myEventTicket,
             'paymentData' => $paymentData,
             'form' => $form->createView()
-         ]);
+        ]);
     }
 
     /**
@@ -184,30 +147,31 @@ class MyEventController extends AbstractController
         $paymentData = $session->get(self::SESSION_KEY);
 
         $form = $this->createForm(ConfirmFormType::class)->handleRequest($request);
+        /** User $user */
         $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid() && $myEventTicket->canApply($user)){
+        if ($form->isSubmitted() && $form->isValid() && $myEventTicket->canApply($user)) {
 
-            $application = $userMyEventApplicationFactory->create($user, $myEventTicket);
+            $application = $userMyEventApplicationFactory->userApplicationCreate($user, $myEventTicket, $paymentData);
             $session->remove(self::SESSION_KEY);
 
-           if ($paymentData == 'bt') {
-               $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
-                   'data' => $application,
-                   'user' => $application->getUser(),
-                   'ticket' => $myEventTicket,
-                   'my_event' => $myEvent,
-                   'detail' => $application->getUser()->getUserDetail(),
-               ]);
-           } else {
-               $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
-                   'data' => $application,
-                   'user' => $application->getUser(),
-                   'ticket' => $myEventTicket,
-                   'my_event' => $myEvent,
-                   'detail' => $application->getUser()->getUserDetail(),
-               ]);
-           }
+            if ($paymentData == 'bt') {
+                $mailer->sendMessage('_email/my_event_application/applied.txt.twig', [
+                    'data' => $application,
+                    'user' => $user,
+                    'ticket' => $myEventTicket,
+                    'my_event' => $myEvent,
+                    'detail' => $user->getUserDetail(),
+                ]);
+            } else {
+                $mailer->sendMessage('_email/my_event_application/accepted.txt.twig', [
+                    'data' => $application,
+                    'user' => $user,
+                    'ticket' => $myEventTicket,
+                    'my_event' => $myEvent,
+                    'detail' => $user->getUserDetail(),
+                ]);
+            }
 
             return $this->render('my_event/purchases/complete.html.twig', [
                 'my_event' => $myEvent,
@@ -215,7 +179,7 @@ class MyEventController extends AbstractController
             ]);
         }
 
+        $this->addFlash('warning', '申込済みのイベントです');
         return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
     }
 }
-

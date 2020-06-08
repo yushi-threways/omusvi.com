@@ -5,7 +5,9 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use App\DBAL\Tyeps\MyEventApplicationStatusEnumType;
+use App\Entity\MyEvent;
 use App\Entity\MyEventApplication;
+use App\Entity\User;
 
 class MyEventApplicationExtension extends AbstractExtension
 {

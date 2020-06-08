@@ -215,7 +215,6 @@
                 </ul>
             {% endif %}
         </section>
-        {{ (after_event_date(my_event.myEventSchedule)) }}
     </div>
 
     <div class="modal fade" id="meModalApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -228,10 +227,9 @@
                     </button>
                 </div>
                 {% if is_granted('ROLE_USER') %}
-                    {% if user.userDetail %}
-                        {% include 'my_event/_show_parts/show_ticket_choice.html.twig' with {'myEvent': my_event} %}
-                        {# {{ include('my_event_application/_form.html.twig', {'button_label': '申し込む'}) }} #}
-                    {% endif %}
+                    {% include 'my_event/_show_parts/user_ticket_choice.html.twig' with {'myEvent': my_event, 'user': user} %}
+                {% else %}
+                    {% include 'my_event/_show_parts/guest_ticket_choice.html.twig' with {'myEvent': my_event} %}
                 {% endif %}
             </div>
         </div>
@@ -244,20 +242,16 @@
                     チケット購入済みです
                 </a>
             {% else %}
-                {% if user.userDetail %}
-                    {% if user.userDetail.gender == "male" %}
-                        {% include '_parts/male_application.html.twig' with {'myEvent': my_event} %}
-                    {% else %}
-                        {% include '_parts/female_application.html.twig' with {'myEvent': my_event} %}
-                    {% endif %}
-                {% endif %}
+                <button type="button" class="btn btn-success me-Applicatin_Btn-modal" data-toggle="modal" data-target="#meModalApplication">
+                    チケットを購入する
+                </button>
             {% endif %}
         {% else %}
             <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-success">
                 ログインして購入に進む
             </a>
             <a href="{{ path('fos_user_security_login') }}" class="btn btn-success">
-                登録・購入に進む
+                ゲスト購入する
             </a>
         {% endif %}
     {% else %}

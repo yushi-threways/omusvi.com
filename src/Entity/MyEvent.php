@@ -385,9 +385,10 @@ class MyEvent
      */
     public function isApplied(User $user)
     {
-        $schedule = $this->getMyEventSchedule();
-        foreach ($schedule->getMyEventApplications() as $application)
+        $tickets = $this->getMyEventTickets();
+        foreach ($tickets as $ticket)
         {
+            foreach ($ticket->getMyEventApplications() as $application)
             if ($application->getUser() == $user) {
                 return true;
             }

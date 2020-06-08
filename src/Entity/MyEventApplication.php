@@ -69,7 +69,7 @@ class MyEventApplication
 
     public function __construct()
     {
-        $this->status = MyEventApplicationStatusEnumType::APPLIED;
+        $this->status = MyEventApplicationStatusEnumType::ACCEPTED;
         $this->paymentType = MyEventApplicationPayMentEnumType::BANKTRANSFER;
     }
 
