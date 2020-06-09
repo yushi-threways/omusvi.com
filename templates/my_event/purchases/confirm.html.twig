@@ -50,8 +50,10 @@
 						<div class="purchses-New_EventUnit-left">
 							{% if paymentData == "bt" %}
 								銀行振込
-							{% else %}
+							{% elseif paymentData == "lp" %}
 								当日受付払い
+							{% else %}
+								クレジットカード
 							{% endif %}
 						</div>
 					</div>
@@ -64,10 +66,14 @@
 								入金確認は最大48時間以内に対応いたします。<br>
 								※別途振込み手数料は、恐れ入りますがご負担くださいませ。
 							</p>
-						{% else %}
+						{% elseif paymentData == "lp" %}
 							<p>
 								チケット料金はイベント会場にてお支払いお願いいたします。<br>
 								受付の際に、料金のお支払い・ご本人様確認をさせていただきますので、お名前とご年齢がわかるもの（運転免許証、パスポートなど）をご持参ください。
+							</p>
+						{% else %}
+							<p>
+								クレジットカード。<br>
 							</p>
 						{% endif %}
 					</div>

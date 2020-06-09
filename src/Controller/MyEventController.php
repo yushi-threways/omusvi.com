@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Entity\MyEvent;
 use App\Entity\UserDetail;
 use App\Entity\MyEventTicket;
+use Flosch\Bundle\StripeBundle\Stripe\StripeClient;
+use Stripe\Stripe;
 use Symfony\Component\Form\Forms;
 use App\DBAL\Types\GenderEnumType;
 use App\Entity\MyEventApplication;

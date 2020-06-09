@@ -221,6 +221,11 @@ class MyEventApplication
         return $this->paymentType == MyEventApplicationPayMentEnumType::LOCALPAYMENT;
     }
 
+    public function isCC(): bool
+    {
+        return $this->paymentType == MyEventApplicationPayMentEnumType::CREDITCARD;
+    }
+
     public function getPaymentText($paymentType)
     {
         switch ($paymentType){
@@ -229,6 +234,9 @@ class MyEventApplication
                 break;
             case MyEventApplicationPayMentEnumType::LOCALPAYMENT:
                 echo "現地払い";
+                break;
+            case MyEventApplicationPayMentEnumType::CREDITCARD:
+                echo "クレジットカード";
                 break;
             default:
                 echo "";
