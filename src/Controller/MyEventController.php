@@ -18,6 +18,7 @@ use App\Repository\UserDetailRepository;
 use App\Form\Type\MyEventPaymentFormType;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\Type\MyEventApplicationMenType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\MyEventApplicationWomanType;
 use Symfony\Component\HttpFoundation\Response;
@@ -129,13 +130,23 @@ class MyEventController extends AbstractController
         $session = $request->getSession();
         $session->set(self::SESSION_KEY, $paymentData);
 
+        \Stripe\Stripe::setApiKey('sk_test_51GrddrLMZDJdSAX608ugtvN4qIt47s7zYipkIYGV6lEwSLSTcVVVhttFyZI0v5a4tN0i02jLJ8sRV15PrfHXeTcy00RAcJ0ftT');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $myEventTicket->getPrice(),
+            'currency' => 'jpy',
+            // Verify your integration in this guide by including this parameter
+            'metadata' => ['integration_check' => 'accept_a_payment'],
+        ]);
+
         $form = $this->createForm(ConfirmFormType::class);
 
         return $this->render('my_event/purchases/confirm.html.twig', [
             'my_event' => $myEvent,
             'my_event_ticket' => $myEventTicket,
             'paymentData' => $paymentData,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'intent' => $intent
         ]);
     }
 
@@ -183,5 +194,21 @@ class MyEventController extends AbstractController
 
         $this->addFlash('warning', '申込済みのイベントです');
         return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/tickets/{myEventTicket}/purchases/secret", name="my_event_purchases_secret", methods={"POST"})
+     */
+    public function purchasesSecret(MyEvent $myEvent, MyEventTicket $myEventTicket)
+    {
+        \Stripe\Stripe::setApiKey('sk_test_51GrddrLMZDJdSAX608ugtvN4qIt47s7zYipkIYGV6lEwSLSTcVVVhttFyZI0v5a4tN0i02jLJ8sRV15PrfHXeTcy00RAcJ0ftT');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $myEventTicket->getPrice(),
+            'currency' => 'jpy',
+            'payment_method_types' => ['card'],
+        ]);
+
+        return new JsonResponse(['client_secret' => $intent->client_secret]);
     }
 }

@@ -295,6 +295,9 @@
     "sonata-project/exporter": {
         "version": "2.1.0"
     },
+    "stripe/stripe-php": {
+        "version": "v7.36.2"
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.1"
     },
