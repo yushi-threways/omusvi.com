@@ -34,6 +34,8 @@ class UserDetailType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'label' => '性別',
                 'choices' => GenderEnumType::getChoices(),
+                'expanded' => true,
+                'multiple' => false
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => '生年月日',

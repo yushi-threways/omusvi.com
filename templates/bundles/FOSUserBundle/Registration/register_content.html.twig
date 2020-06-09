@@ -5,7 +5,51 @@
 {% endif %}
     
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_label(form.userDetail.firstName) }}
+            {{ form_widget(form.userDetail.firstName, { 'attr': {'class': 'foo'} }) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.userDetail.lastName) }}
+            {{ form_widget(form.userDetail.lastName, { 'attr': {'class': 'foo'} }) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.userDetail.firstKana) }}
+            {{ form_widget(form.userDetail.firstKana, { 'attr': {'class': 'foo'} }) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.userDetail.lastKana) }}
+            {{ form_widget(form.userDetail.lastKana, { 'attr': {'class': 'foo'} }) }}
+        </div>
+    </div>
+    <div class="">
+        {{ form_label(form.userDetail.gender) }}
+        {{ form_widget(form.userDetail.gender, { 'attr': {'class': 'foo'} }) }}
+    </div>
+    <div class="">
+        {{ form_label(form.userDetail.birthday) }}
+        {{ form_widget(form.userDetail.birthday, { 'attr': {'class': 'foo'} }) }}
+    </div>
+    <div class="">
+        {{ form_label(form.userDetail.telNumber) }}
+        {{ form_widget(form.userDetail.telNumber, { 'attr': {'class': 'foo'} }) }}
+    </div>
+    <div class="">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, { 'attr': {'class': 'foo'} }) }}
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_label(form.plainPassword['first']) }}
+            {{ form_widget(form.plainPassword['first'], { 'attr': {'class': 'foo'} }) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.plainPassword['second']) }}
+            {{ form_widget(form.plainPassword['second'], { 'attr': {'class': 'foo'} }) }}
+
+        </div>
+    </div>
     <div>
         <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-block btn-primary" />
     </div>

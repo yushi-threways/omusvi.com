@@ -33,3 +33,7 @@ services:
     App\Controller\Mypage\ChangePasswordController:
         arguments:
             $formFactory: '@fos_user.change_password.form.factory'
+
+    App\Controller\RegistrationController:
+            arguments:
+                $formFactory: '@fos_user.registration.form.factory'
