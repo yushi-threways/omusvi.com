@@ -1,19 +1,29 @@
 .mypage-Login {
-    max-width: 400px;
     width: 100%;
     margin: 0 auto 30px;
     padding: 15px;
 }
 .mypage-Login_Title {
-    @include font-size(30px);
-    font-weight: bold;
+    padding: 5px 0;
     margin: 0 auto 10px;
+    font-weight: bold;
+    color: $color__sex-woman;
+    @include font-size(20px);
+    border-bottom: 3px solid $color__sex-woman;
 }
 
 .mypage-Login_Form {
     label {
-        @include font-size(14px);
+        @include font-size(15px);
+        font-weight: bold;
+        margin: 0 0 0.5rem;
     }
+}
+
+.mypage-Login_Desc {
+    @include font-size(14px);
+    font-weight: normal;
+    color: #a9a9a9;
 }
 
 .mypage-Login_Header {
@@ -29,7 +39,9 @@
 }
 
 .mypage-Login_InfoText {
-    display: block;
     @include font-size(15px);
-    padding: 8px 0 0;
+    color: $color__sex-woman;
+    text-decoration: underline;
+    display: inline-block;
+    margin: 10px 0 0;
 }
