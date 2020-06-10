@@ -1,16 +1,16 @@
 .mypage-Form {
     label:not(.custom-file-label), .col-form-label {
-      @include font-size(13px);
+      @include font-size(14px);
       text-align: left;
-      letter-spacing: -0.06px;
+      font-weight: bold;
       color: $color__text-screen;
       &.required {
         &:before {
           display: inline-block;
-          content: '*';
+          content: '必須';
           margin-right: 5px;
-          color: red;
-          @include font-size(15px);
+          color: $color__sex-woman;
+          @include font-size(13px);
         }
       }
     }

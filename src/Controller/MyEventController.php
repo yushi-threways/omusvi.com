@@ -4,27 +4,18 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\MyEvent;
-use App\Entity\UserDetail;
 use App\Entity\MyEventTicket;
-use Flosch\Bundle\StripeBundle\Stripe\StripeClient;
-use Stripe\Stripe;
 use Symfony\Component\Form\Forms;
-use App\DBAL\Types\GenderEnumType;
-use App\Entity\MyEventApplication;
 use App\Form\Type\ConfirmFormType;
 use App\Repository\MyEventRepository;
 use App\Service\Mailer\TwigSwiftMailer;
-use App\Repository\UserDetailRepository;
 use App\Form\Type\MyEventPaymentFormType;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Form\Type\MyEventApplicationMenType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\Type\MyEventApplicationWomanType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\DBAL\Types\MyEventApplicationStatusEnumType;
-use App\DBAL\Types\MyEventApplicationPayMentEnumType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +34,6 @@ class MyEventController extends AbstractController
      */
     public function index(Request $request, MyEventRepository $myEventRepository, PaginatorInterface $paginator): Response
     {
-
         $query = $myEventRepository->findBeforeEvent();
 
         $pagination = $paginator->paginate(
@@ -52,13 +42,11 @@ class MyEventController extends AbstractController
             10 /*limit per page*/
         );
 
-        $pagination_data = $pagination->getPaginationData();
-
         return $this->render('my_event/index.html.twig', [
             'pagination' => $pagination,
             'total' => $pagination->getTotalItemCount(),
-            'start' => $pagination_data['firstItemNumber'],
-            'end' => $pagination_data['lastItemNumber']
+            'start' => $this->calcStart($pagination),
+            'end' => $this->calcEnd($pagination)
         ]);
     }
 
@@ -69,10 +57,6 @@ class MyEventController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-
-        /** @var UserDetailRepository $repo */
-        $repo = $this->getDoctrine()->getRepository(UserDetail::class);
-        $detail = $repo->findOneBy(['user' => $user]);
 
         $formFactoryBuilder = Forms::createFormFactoryBuilder();
         $formFactory = $formFactoryBuilder->getFormFactory();
@@ -210,5 +194,19 @@ class MyEventController extends AbstractController
         ]);
 
         return new JsonResponse(['client_secret' => $intent->client_secret]);
+    }
+
+    public function calcStart(PaginationInterface $pagination): int
+    {
+        $total = $pagination->getTotalItemCount();
+        $start = ($pagination->getCurrentPageNumber() - 1) * $pagination->getItemNumberPerPage() + 1;
+        return $start > $total? $total: $start;
+    }
+    
+    public function calcEnd(PaginationInterface $pagination): int
+    {
+        $total = $pagination->getTotalItemCount();
+        $end = $pagination->getCurrentPageNumber() * $pagination->getItemNumberPerPage();
+        return $end > $total? $total: $end;
     }
 }

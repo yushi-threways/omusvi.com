@@ -14,7 +14,7 @@ set('git_tty', true);
 
 // Shared files/dirs between deploys
 add('shared_files', []);
-add('shared_dirs', []);
+add('shared_dirs', ['public/upload']);
 
 // Writable dirs by web server
 add('writable_dirs', []);
@@ -41,7 +41,7 @@ host('omusvi.com')
     ->set('branch', 'master')
     ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader')
     ->set('deploy_path', '~/public_html/{{application}}')
-    ->add('shared_files', ['.env.local', 'public/.htaccess']);
+    ->add('shared_files', ['.env.local', 'public/.htaccess', 'public/robots.txt']);
 
 // Tasks
 task('build:assets', function () {

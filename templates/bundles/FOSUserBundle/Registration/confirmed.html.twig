@@ -4,8 +4,9 @@
 
 {% block fos_user_content %}
 <div class="registration-Area">
+    <h1 class="registration-Area_Title">メールアドレス確認完了</h1>
     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    <a href="{{ path('default_index') }}">イベントを探す</a>
+    <a href="{{ path('default_index') }}">トップに戻る</a>
 </div>
    
 {% endblock fos_user_content %}

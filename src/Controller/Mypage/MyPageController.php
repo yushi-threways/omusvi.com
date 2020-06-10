@@ -28,12 +28,7 @@ class MyPageController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $detail = $user->getUserDetail();
-        if (empty($detail)) {
-            $this->addFlash('warning', '詳細情報の登録してください。');
-            return $this->redirectToRoute('mypage_detail_edit');
-        }
-
+        
         $paiedForm = $this->createForm(PaiedFormType::class);
         $paiedForm->handleRequest($request);
 
@@ -52,9 +47,9 @@ class MyPageController extends AbstractController
             'user' => $user,
             'paiedForm' => $paiedForm->createView(),
             'canceledForm' => $canceledForm->createView(),
-            'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
-            'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
-            'pastedEvents' => $myEventApplicationRepository->getPastedEventQuery($user)->setMaxResults(5)->getQuery()->getResult(),
+            'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->getQuery()->getResult(),
+            'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->getQuery()->getResult(),
+            'pastedEvents' => $myEventApplicationRepository->getPastedEventQuery($user)->getQuery()->getResult(),
         ]);
     }
 

@@ -7,7 +7,7 @@
 
 {% block og %}
     <meta property="og:site_name" content="OMUSVi">
-    <meta property="og:title" content="{{ my_event.name }}|OMUSVi">
+    <meta property="og:title" content="{{ my_event.name }}|OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中">
     <meta property="og:description" content="{{ my_event.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
@@ -17,7 +17,7 @@
 {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="">
-    <meta name="twitter:title" content="{{ my_event.name }}|OMUSVi">
+    <meta name="twitter:title" content="{{ my_event.name }}|OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中">
     <meta name="twitter:description" content="{{ my_event.description }}"/>
     <meta name="twitter:image" content="{{ absolute_url(vich_uploader_asset(my_event, 'imageFile')) }}">
 {% endblock %}

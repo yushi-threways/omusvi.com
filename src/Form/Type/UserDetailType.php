@@ -40,7 +40,9 @@ class UserDetailType extends AbstractType
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => '生年月日',
-            ])
+                'input' => 'datetime_immutable',
+                'years' => range(1940, date('Y') - 17),
+                ])
             ->add('telNumber', null, [
                 'label' => '電話番号',
                 'help' => 'ハイフンなしで入力してください',

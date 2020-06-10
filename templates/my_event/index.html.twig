@@ -7,7 +7,7 @@
 
 {% block og %}
     <meta property="og:site_name" content="OMUSVi">
-    <meta property="og:title" content="開催イベント一覧|OMUSVi">
+    <meta property="og:title" content="開催イベント一覧|OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中">
     <meta property="og:description" content="オムスビ開催のイベント一覧。愛知県名古屋・栄を中心に出会える合コン街コンを開催しています！イベントで名古屋を活性化！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ app.request.uri }}">
@@ -16,6 +16,7 @@
     
 {% block twitter %}
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="開催イベント一覧|OMUSVi - 愛知県名古屋を中心にイベント・街コンを開催中">
     <meta name="twitter:site" content="{{ app.request.uri }}">
     <meta name="twitter:description" content="オムスビ開催のイベント一覧。愛知県名古屋・栄を中心に出会える合コン街コンを開催しています！イベントで名古屋を活性化！"/>
     <meta name="twitter:image" content="ogpのURL貼る">
@@ -28,13 +29,11 @@
     {% for my_event in pagination %}
         {% include '/_parts/event_list.html.twig' with {myEvent: my_event} %}
 
-
-        <div class="sw-Event_Pagination">
-            {{ knp_pagination_render(pagination, null, {}, {align: "center"}) }}
-        </div>
-
         {% else %}
         <p style="padding: 0 5px;">現在開催中のイベントはございません。</p>
         {% endfor %}
+        <div class="sw-Event_Pagination">
+            {{ knp_pagination_render(pagination, null, {}, {align: "center"}) }}
+        </div>
 </section>
 {% endblock %}
