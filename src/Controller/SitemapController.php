@@ -31,7 +31,7 @@ class SitemapController extends AbstractController
 
         foreach ($this->getDoctrine()->getRepository(MyEvent::class)->findAll() as $myEvent) {
             $images = [
-                'loc' => '/public/images/my_events/' . $myEvent->getImageName(),
+                'loc' => 'https://omusvi.com/images/my_events/' . $myEvent->getImageName(),
                 'title' => $myEvent->getName()
             ];
 
