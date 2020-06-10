@@ -8,64 +8,42 @@
     <div class="sw-Content_Top container">
         <header class="sw-Content_Header">
             <h1>お問い合わせ</h1>
+            <p class="contact-Detail">お名前、メールアドレス、お問い合わせ内容をご入力の上、「確認する」ボタンを押してください。</p>
         </header>
         <main class="sw-PageBody">
             <section class="sw-Section">
-                <h3 class="sw-Section_Title"><b>お問い合わせフォーム</b></h3>
-                <div class="sw-Section_Body">
-                    <div class="contact-Detail">
-                        <p>お名前、メールアドレス、お問い合わせ内容をご入力の上、「確認する」ボタンを押してください。</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="sw-Section">
-                <div class="contact-Form bg-light mb-3">
+                <div class="contact-Form mb-3">
                     <div class="contact-Form_Body">
                         {{ form_start(form, {'method': 'post', 'action': path('contact_index'), 'attr': {'class': 'app_contact'}}) }}
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-12">
                                 {{ form_row(form.name, {label: "お名前"}) }}
                             </div>
-                            <div class="col-sm-4 form-example  align-self-end pb-5 pb-sm-3">
-                                例）山田 太郎
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-12">
                                 {{ form_row(form.email.first, {label: "メールアドレス"}) }}
                             </div>
-                            <div class="col-sm-4 form-example  align-self-end  pb-5 pb-sm-3">
-                                例）test@example.com
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-12">
                                 {{ form_row(form.email.second, {label: "(再入力)"}) }}
                             </div>
-                            <div class="col-sm-4 form-example  align-self-end  pb-5 pb-sm-3">
-                                確認のためメールアドレスを再入力<br>して下さい
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-12">
                                 {{ form_row(form.telNumber, {label: "お電話番号", attr:{placeholder: 'ハイフンなしの半角英数字で入力してください'}}) }}
                             </div>
-                            <div class="col-sm-4 form-example  align-self-end  pb-5 pb-sm-3">
-                                例)0521234567
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-8">
+                        <div class="row mb-4">
+                            <div class="col-12">
                                 {{ form_row(form.body, {label: "お問い合わせ内容", attr: {rows:10}}) }}
-                            </div>
-                            <div class="col-sm-4 form-example  align-self-end">
                             </div>
                         </div>
                         {{ form_rest(form) }}
 
                         <p class="text-center contact-Form_Button">
-                            <button class="btn btn-primary contact-Form_ButtonCkeck" type="submit">確認する</button>
+                            <button class="sw-Btn btn-block contact-Form_ButtonCkeck" type="submit">確認する</button>
                         </p>
 
                         {{ form_end(form) }}

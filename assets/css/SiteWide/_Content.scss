@@ -17,10 +17,11 @@
 
 .sw-Content_Header {
     h1 {
-        @include font-size(33px);
-        margin: 0 auto 1s0px;
-        @include media-breakpoint-down(sm) {
-            @include font-size(28px);
-        }
+        padding: 5px 0;
+        margin: 0 auto 10px;
+        font-weight: bold;
+        color: $color__sex-woman;
+        @include font-size(20px);
+        border-bottom: 3px solid $color__sex-woman;
     }
 }

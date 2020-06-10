@@ -1,14 +1,14 @@
 {% use '_email/base.txt.twig' %}
 
 {% block subject %}お問い合わせありがとうございます{% endblock %}
-{% block to %}{{ user.email }}{% endblock %}
+{% block to %}{{ data.email }}{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
 
 ※このメールはシステムからの自動返信です
 
-{{ detail.firstName }} {{ detail.lastName }} 様
+{{ data.name }} 様
 
 お世話になっております。
 OMUSVi事務局へのお問い合わせありがとうございました。

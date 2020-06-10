@@ -26,6 +26,7 @@ class ContactController extends Controller
     {
         $session = $request->getSession();
         $data = $session->get(self::SESSION_KEY);
+
         $form = $this->createForm(ContactFormType::class, $data);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -51,12 +52,12 @@ class ContactController extends Controller
         }
 
         $form = $this->createFormBuilder()->getForm();
+        $form->setData($data);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-
-                $mailer->sendMessage('_email/contact.txt', [
+                $mailer->sendMessage('_email/contact.txt.twig', [
                     'data' => $data,
                 ]);
                 $session->remove(self::SESSION_KEY);
@@ -74,9 +75,9 @@ class ContactController extends Controller
      * @Route("/complete", name="contact_complete")
      * @Template()
      */
-    public function completeAction()
+    public function completeAction(Request $request)
     {
-        return array(
+            return array(
             // ...
         );
     }

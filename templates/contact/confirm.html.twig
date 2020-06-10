@@ -7,15 +7,14 @@
 {% block main_outer %}
     <div class="sw-Content_Top container">
         <header class="sw-Content_Header">
-            <h1>お問い合わせ</h1>
+            <h1>お問い合わせ確認</h1>
+            <p class="contact-Detail">入力内容を確認の上、「送信する」ボタンを押してください。</p>
         </header>
         <main class="sw-PageBody">
             <section class="sw-Section">
-                <h3 class="sw-Section_Title">お問い合わせフォーム</h3>
                 <div class="sw-Section_Body">
-                    <p>入力内容を確認の上、「送信する」ボタンを押してください。</p>
                     {{ form_start(form, {'method': 'post', 'action': path('contact_confirm'), 'attr': {'class': 'app_contact'}}) }}
-                    <table class="table table-bordered">
+                    <table class="table table-bordered contact-Table">
                         <tr>
                             <th>
                                 お名前
@@ -40,15 +39,11 @@
                                 {{ data.telNumber }}
                             </td>
                         </tr>
-                        <tr>
-                            <th>
-                                お問い合わせ内容
-                            </th>
-                            <td>
-                                {{ data.body|nl2br }}
-                            </td>
-                        </tr>
                     </table>
+                    <div class="contact-Confirm_Body">
+                        <p>お問い合わせ内容</p>
+                        <div>{{ data.body|nl2br }}</div>
+                    </div>
                             {{ form_rest(form) }}
 
                     <p class="text-center">
