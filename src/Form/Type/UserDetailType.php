@@ -19,6 +19,7 @@ class UserDetailType extends AbstractType
         $builder
             ->add('firstName', null, [
                 'label' => '氏名(性)',
+
             ])
             ->add('lastName', null, [
                 'label' => '氏名（名）',

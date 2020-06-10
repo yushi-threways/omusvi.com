@@ -1,11 +1,53 @@
 .registration-Area {
-    max-width: 500px;
     width: 100%;
     margin: 0 auto 30px;
     padding: 15px;
-    p {
-        @include font-size(20px);
-        font-weight: bold;
-        margin: 0 auto 10px;
+}
+
+.registration-Area_Title {
+    padding: 5px 0;
+    margin: 0 auto 10px;
+    font-weight: bold;
+    color: $color__sex-woman;
+    @include font-size(20px);
+    border-bottom: 3px solid $color__sex-woman;
+}
+.registration-Area_Form {
+
+}
+.registration-Form_Label {
+    @include font-size(15px);
+    font-weight: bold;
+    padding: 0 0 0 30px;
+    margin: 0 0 0.5rem;
+}
+.registration-Form_Label.required {
+    position: relative;
+    &:before {
+        content: '必須';
+        position: absolute;
+        height: 5px;
+        left: 0;
+        top: 5px;
+        bottom: 0;
+        margin: 0;
+        color: $color__sex-woman;
+        @include font-size(13px);
     }
+}
+.registration-Area_SubTitle {
+    @include font-size(16px);
+    font-weight: bold;
+}
+.registration-Area_Desc {
+    @include font-size(14px);
+    font-weight: normal;
+    color: #a9a9a9;
+}
+.registration-Area_LoginLink {
+    @include font-size(15px);
+    color: $color__sex-woman;
+    text-decoration: underline;
+    display: inline-block;
+    margin: 10px 0 0;
 }

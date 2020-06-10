@@ -3,7 +3,6 @@
 {% block head %}
 <title>無料会員登録|OMUSVi</title>
 <link rel="canonical" href="{{ absolute_url(path('default_index')) }}"> 
-<meta name=”robots” content=”noindex” />
 {% endblock %}
 
 {% block og %}
@@ -23,11 +22,15 @@
     {% endblock %}
 
 {% block fos_user_content %}
-<div class=" mypage-Login">
-    <h1 class="mypage-Login_Title">会員登録</h1>
-    <div class="mypage-Login_Form">
+<div class="registration-Area">
+    <h1 class="registration-Area_Title">会員登録</h1>
+    <h2 class="registration-Area_SubTitle">OMUSVi会員でない方は会員になろう!!</h2>
+    <p class="registration-Area_Desc">
+        オムスビ会員になると、街コンの申し込みがスムーズにできる、おすすめイベント・新規イベントの通知などができてとても便利です
+    </p>
+    <div class="registration-Area_Form">
 {% include "@FOSUser/Registration/register_content.html.twig" %}
     </div>
-    <a href="{{ path("fos_user_security_login") }}" class="mypage-Login_InfoText">ログインはこちら</a>
+    <a href="{{ path("fos_user_security_login") }}" class="registration-Area_LoginLink">ログインはこちら</a>
 </div>
 {% endblock fos_user_content %}
