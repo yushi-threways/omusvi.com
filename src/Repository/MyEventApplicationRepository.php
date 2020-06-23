@@ -30,8 +30,9 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     public function getAppliedEventQuery(User $user)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->innerJoin('ma.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+        $qb->innerJoin('ma.myEventTicket', 'mt')
+            ->innerJoin('mt.myEvent', 'mtm')
+            ->where('mtm.startAt >= :now')
             ->andWhere('ma.user = :user')
             ->andWhere(
                 $qb->expr()->orX(
@@ -47,7 +48,7 @@ class MyEventApplicationRepository extends ServiceEntityRepository
             ])
         ;
         
-        return $qb;
+        return $qb ??= $qb;
     }
 
     /**
@@ -57,8 +58,9 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     public function getAcceptedEventQuery(User $user)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->innerJoin('ma.myEventSchedule', 'ms')
-            ->where('ms.eventDay >= :now')
+        $qb->innerJoin('ma.myEventTicket', 'mt')
+            ->innerJoin('mt.myEvent', 'mtm')
+            ->where('mtm.startAt >= :now')
             ->andWhere('ma.user = :user')
             ->andWhere(
                 $qb->expr()->eq('ma.status', ':ACCEPTED')
@@ -69,6 +71,10 @@ class MyEventApplicationRepository extends ServiceEntityRepository
                 'ACCEPTED' => MyEventApplicationStatusEnumType::ACCEPTED,
             ])
         ;
+
+        if ($qb == []) {
+            $qb = [];
+        }
         
         return $qb;
     }
@@ -80,8 +86,9 @@ class MyEventApplicationRepository extends ServiceEntityRepository
     public function getPastedEventQuery(User $user)
     {
         $qb = $this->createQueryBuilder('ma');
-        $qb->innerJoin('ma.myEventSchedule', 'ms')
-            ->where('ms.eventDay <= :now')
+        $qb->innerJoin('ma.myEventTicket', 'mt')
+            ->innerJoin('mt.myEvent', 'mtm')
+            ->where('mtm.startAt <= :now')
             ->andWhere('ma.user = :user')
             ->andWhere(
                 $qb->expr()->eq('ma.status', ':ACCEPTED')
@@ -93,6 +100,9 @@ class MyEventApplicationRepository extends ServiceEntityRepository
             ])
         ;
         
+        if ($qb == null) {
+            $qb = [];
+        }
         return $qb;
     }
 

@@ -180,22 +180,6 @@ class MyEventController extends AbstractController
         return $this->redirectToRoute('my_event_show', ['id' => $myEvent->getId()]);
     }
 
-    /**
-     * @Route("/{id}/tickets/{myEventTicket}/purchases/secret", name="my_event_purchases_secret", methods={"POST"})
-     */
-    public function purchasesSecret(MyEvent $myEvent, MyEventTicket $myEventTicket)
-    {
-        \Stripe\Stripe::setApiKey('sk_test_51GrddrLMZDJdSAX608ugtvN4qIt47s7zYipkIYGV6lEwSLSTcVVVhttFyZI0v5a4tN0i02jLJ8sRV15PrfHXeTcy00RAcJ0ftT');
-
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $myEventTicket->getPrice(),
-            'currency' => 'jpy',
-            'payment_method_types' => ['card'],
-        ]);
-
-        return new JsonResponse(['client_secret' => $intent->client_secret]);
-    }
-
     public function calcStart(PaginationInterface $pagination): int
     {
         $total = $pagination->getTotalItemCount();

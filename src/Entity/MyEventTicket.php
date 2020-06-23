@@ -238,4 +238,10 @@ class MyEventTicket
     {
         return !$this->isExpired() && !$this->isApplied($user);
     }
+
+    public function addSales(): self
+    {
+        $this->sales += 1;
+        return $this;
+    }
 }

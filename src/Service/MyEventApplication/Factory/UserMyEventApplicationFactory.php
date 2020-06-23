@@ -25,9 +25,12 @@ class UserMyEventApplicationFactory extends MyEventApplicationFactory
         $application->setUser($user);
         $application->setMyEventTicket($myEventTicket);
         
+        
         if ($this->isBanktransfer($paymentType)) {
             $application->setStatus(MyEventApplicationStatusEnumType::APPLIED);
         }
+
+        $this->addTicketSales($myEventTicket);
 
         $this->entityManager->persist($application);
         $this->entityManager->flush();
@@ -42,5 +45,11 @@ class UserMyEventApplicationFactory extends MyEventApplicationFactory
     public function isBanktransfer($paymentType): bool
     {
         return $paymentType == MyEventApplicationPayMentEnumType::BANKTRANSFER;
+    }
+
+    public function addTicketSales(MyEventTicket $myEventTicket)
+    {
+        $myEventTicket = $myEventTicket->addSales();
+        $this->entityManager->persist($myEventTicket);
     }
 }

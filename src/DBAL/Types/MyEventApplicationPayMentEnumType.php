@@ -9,12 +9,12 @@ class MyEventApplicationPayMentEnumType extends AbstractEnumType
 {
     public const BANKTRANSFER = 'bt';
     public const LOCALPAYMENT = 'lp';
-    public const CREDITCARD = 'cc';
+    // public const CREDITCARD = 'cc';
 
     
     protected static $choices = [
         self::BANKTRANSFER => '銀行振込',
         self::LOCALPAYMENT => '現地払い',
-        self::CREDITCARD => 'クレジットカード',
+        // self::CREDITCARD => 'クレジットカード',
     ];
 }

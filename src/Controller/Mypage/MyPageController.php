@@ -43,13 +43,18 @@ class MyPageController extends AbstractController
             return $this->redirectToRoute('mypage_event_application_canceled');
         }
 
+        dump($myEventApplicationRepository->getAppliedEventQuery($user)->getQuery()->getResult());
+        
         return $this->render('my_page/index.html.twig', [
             'user' => $user,
             'paiedForm' => $paiedForm->createView(),
             'canceledForm' => $canceledForm->createView(),
-            'appliedEvents' => $myEventApplicationRepository->getAppliedEventQuery($user)->getQuery()->getResult(),
-            'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->getQuery()->getResult(),
-            'pastedEvents' => $myEventApplicationRepository->getPastedEventQuery($user)->getQuery()->getResult(),
+            // 'appliedEvents' => $appliedEvents,
+            // 'acceptedEvents' => $myEventApplicationRepository->getAcceptedEventQuery($user)->getQuery()->getResult(),
+            // 'pastedEvents' => $myEventApplicationRepository->getPastedEventQuery($user)->getQuery()->getResult(),
+            'appliedEvents' => [],
+            'acceptedEvents' => [],
+            'pastedEvents' => [],
         ]);
     }
 

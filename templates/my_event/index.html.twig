@@ -26,9 +26,8 @@
 {% block main %}
 <section class="sw-Section">
     <div class="sw-Event_Counter"><span>{{ total }}</span>件中 {{ start }}~{{ end }}件</div>
-    {% for my_event in pagination %}
-        {% include '/_parts/event_list.html.twig' with {myEvent: my_event} %}
-
+        {% for my_event in pagination %}
+            {% include '/_parts/event_list.html.twig' with {myEvent: my_event} %}
         {% else %}
         <p style="padding: 0 5px;">現在開催中のイベントはございません。</p>
         {% endfor %}

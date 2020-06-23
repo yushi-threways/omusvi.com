@@ -41,9 +41,9 @@ class ApplicationPayMentExtension extends AbstractExtension
             case MyEventApplicationPayMentEnumType::LOCALPAYMENT:
                 echo "現地払い";
                 break;
-            case MyEventApplicationPayMentEnumType::CREDITCARD:
-                echo "クレジットカード";
-                break;
+            // case MyEventApplicationPayMentEnumType::CREDITCARD:
+            //     echo "クレジットカード";
+            //     break;
             default:
                 echo "";
         }
